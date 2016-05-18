@@ -1,0 +1,100 @@
+#tainacan-breadcrumbs {
+  padding: 10px 0 10px 20px;
+  background: $collections-bg-color;
+
+  a {
+    color: $brand-medium-blue;
+    font-weight: bolder;
+
+    &:hover {
+      font-weight: normal;
+    }
+  }
+}
+
+.navbar-toggle {
+ margin-top: 15px;
+}
+.navbar-form {
+  margin-top: 10px;
+}
+
+.logo-container {
+  width: 50%;
+}
+
+.header-navbar {
+  padding: 5px 0 5px 0;
+
+  a.logo-tainacan {
+    padding: 0;
+    margin: -10px 2% 0 0 !important;
+  }
+
+  .input-group-btn {
+    width: auto;
+    color: whitesmoke !important;
+  }
+
+  .search-tainacan-collection {
+    width: 45%;
+    margin-left: 4%;
+    border: none !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    padding-right: 0;
+    padding-left: 0;
+
+    input#search_collections, button {
+      height: 35px;
+      color: whitesmoke;
+    }
+
+  }
+} // .header-navbar
+
+.user-actions {
+
+  ul {
+    span.glyphicon {
+      font-size: 10px;
+      top: 0;
+    }
+  }
+
+  button {
+    padding: 5px;
+  }
+
+} // .user-actions
+
+li.admin-config-menu {
+  a.config {
+    font-weight: bolder;
+    font-size: 13px;
+  }
+  ul.admin-config-submenu {
+    padding: 10px;
+    margin: 0;
+    font-size: 12px;
+
+    li {
+      padding: 5px 0 5px 20px;
+      margin: 0;
+
+      &:hover {
+       background: $collections-bg-color;
+      }
+      a {
+        color: black;
+      }
+    }
+  }
+}
+button#iframebutton {
+  background: transparent;
+  border: none;
+}
+.collection-author {
+  margin-top: 10px;
+}
