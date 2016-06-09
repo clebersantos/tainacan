@@ -23,11 +23,32 @@
             }).done(function (result) {
                 elem = jQuery.parseJSON(result);
                 hide_modal_main();
-                $('#show-results-advanced-search').html(elem.page);
-                $('html, body').animate({
-                    scrollTop: parseInt($("#show-results-advanced-search").offset().top)
-                }, 1000);
-                $('#advanced_search_wp_query_args').val(elem.args);
+                if(elem.not_found){
+                   swal({
+                            title: '<?php _e("Attention!", 'tainacan') ?>',
+                            text: '<?php _e("No results found!", 'tainacan') ?>',
+                            type: "warning",
+                            cancelButtonText: '<?php _e("Cancel", 'tainacan') ?>',
+                            showCancelButton: true,
+                            confirmButtonClass: 'btn-success',
+                            closeOnConfirm: true,
+                            closeOnCancel: true
+                        });
+                }else{
+                    $('#container_filtros').hide();
+                    $('#resultados_advanced_search').show();
+                    $('#container_resultados_advanced_search').html(elem.page); 
+                }
+               
+//                $('html, body').animate({
+//                    scrollTop: parseInt($("#show-results-advanced-search").offset().top)
+//                }, 1000);
+               if(elem.args_collection){
+                  $('#advanced_search_wp_query_args_collection').val(elem.args_collection);
+               }
+               if(elem.args_item){
+                    $('#advanced_search_wp_query_args_item').val(elem.args_item);
+               }
 
             });
             e.preventDefault();
@@ -90,12 +111,18 @@
 
     // monta o select com todas as colecoes do repositorio
     function select_collection() {
+         $("#advanced_search_collection").attr('disabled','disabled');
+         $("#advanced_search_collection").addClass('ui-autocomplete-loading');
+         $("#advanced_search_collection").html("<option  value='' ><?php _e('Loading Collections','tainacan') ?>");
         $.ajax({
             url: $('#src').val() + '/controllers/advanced_search/advanced_search_controller.php',
             type: 'POST',
             data: {operation: 'select_collection'}
         }).done(function (result) {
             elem = JSON.parse(result);
+            $("#advanced_search_collection").removeAttr('disabled');
+            $("#advanced_search_collection").removeClass('ui-autocomplete-loading');
+            $("#advanced_search_collection").html('');
             var collection_root_id = '<?php echo get_option('collection_root_id'); ?>';
             $("#advanced_search_collection").append("<option  value='" + collection_root_id + "' ><?php _e('All Colections', 'tainacan') ?></option>");
             $.each(elem, function (idx, collection) {

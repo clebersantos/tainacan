@@ -319,6 +319,10 @@ class ObjectController extends Controller {
                 $data = $object_model->show_collection_licenses($data);
                 return $this->render(dirname(__FILE__) . '../../../views/object/show_insert_object_licenses.php', $data);
                 break;
+            case 'show_collection_licenses_search':
+                $data = $object_model->show_collection_licenses($data);
+                return $this->render(dirname(__FILE__) . '../../../views/object/show_insert_object_licenses_search.php', $data);
+                break;
             case 'help_choosing_license':
                 $data = $object_model->help_choosing_license($data);
                 return json_encode($data);

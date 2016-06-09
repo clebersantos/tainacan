@@ -401,6 +401,7 @@
             e.preventDefault();
             var current_data = $(el).serialize();
             var path = src + '/controllers/property/property_controller.php';
+            $('.modal').modal('hide');		
             $('#modalImportMain').modal('show');		
 
             $.ajax({
@@ -779,6 +780,7 @@
      **/
     $('#submit_form_property_object').submit(function (e) {
         e.preventDefault();
+         $('.modal').modal('hide');
         $('#modalImportMain').modal('show');
 
         $.ajax({
@@ -952,6 +954,7 @@
      **/
     $('#submit_form_property_term').submit(function (e) {
         e.preventDefault();
+         $('.modal').modal('hide');
         $('#modalImportMain').modal('show');
         $.ajax({
             url: src + '/controllers/property/property_controller.php',
@@ -1452,9 +1455,13 @@
              for(var j = 0; j<$items.length;j++){
                  if($($items.get(j)).attr('id')===array_ids[i]){
                      $ul.append($($items.get(j)));
+                     $items.splice(j, 1);
                  }
              }
 //            //$ul.prepend( $items.get(arrValuesForOrder[i] - 1));
+      }
+      for(var j = 0; j<$items.length;j++){
+            $ul.append($($items.get(j)));
       }
     }
     

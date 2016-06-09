@@ -289,7 +289,7 @@ function tainacan_comments($comment, $args, $depth) {
             <div id="div-comment-<?php comment_ID() ?>" class="comment-body">
         <?php endif; ?>
 
-        <div class="col-md-1">
+        <div class="col-md-1 no-padding">
             <?php if ($args['avatar_size'] != 0) echo get_avatar($comment, $args['avatar_size']); ?>
         </div>
 

@@ -40,48 +40,79 @@ class AdvancedSearchController extends Controller {
             case 'do_advanced_search':
                 $wpquery_model = new WPQueryModel();
                 $return = array();
-                if(empty($wpquery_model->get_collection_posts($data['collection_id']))){
-                    $return['empty_collection'] = true;
+                if($data['advanced_search_collection']==get_option('collection_root_id')){//se estiver buscando em todas as colecoes
+                    if($data['advanced_search_general']!==''){//se utilizar a busca generalizada
+                        $args_object = $wpquery_model->keyword_filter(['value'=>$data['advanced_search_general']]);
+                        $args_object['collection_id'] = 'all_items';
+                        $args_object['category_root_id'] = 'all_items';
+                        $paramters_object = $wpquery_model->do_filter($args_object); 
+                        $args_collection = $wpquery_model->keyword_filter(['value'=>$data['advanced_search_general']]);
+                        $args_collection['collection_id'] = $data['advanced_search_collection'];
+                        $paramters_collection = $wpquery_model->do_filter($args_collection);
+                        $loop_objects = new WP_Query($paramters_object);
+                        $loop_collections = new WP_Query($paramters_collection);
+                       // var_dump($loop_collections);
+                    }else{
+                        $args_object = $wpquery_model->advanced_searched_filter($data);
+                        $paramters_object = $wpquery_model->do_filter($args_object);
+                        $args_collection = $wpquery_model->advanced_searched_filter($data);
+                        $args_collection['collection_id'] = $data['advanced_search_collection'];
+                        $paramters_collection = $wpquery_model->do_filter($args_collection);
+                        $loop_objects = new WP_Query($paramters_object);
+                        $loop_collections = new WP_Query($paramters_collection);
+                    }
                 }else{
-                    $return['empty_collection'] = false;
+                    if($data['advanced_search_general']!==''){//se utilizar a busca generalizada
+                        $args_object = $wpquery_model->keyword_filter(['value'=>$data['advanced_search_general']]);
+                        $args_object['collection_id'] = $data['advanced_search_collection'];
+                        $args_object['category_root_id'] = $wpquery_model->get_category_root_of($data['advanced_search_collection']);
+                        $paramters_object = $wpquery_model->do_filter($args_object); 
+                        $loop_objects = new WP_Query($paramters_object);
+                    }else{
+                        $args_object = $wpquery_model->advanced_searched_filter($data);
+                        $paramters_object = $wpquery_model->do_filter($args_object);
+                        $loop_objects = new WP_Query($paramters_object);
+                    }
                 }
-                $collection_model = new CollectionModel;
-                $args = $wpquery_model->advanced_searched_filter($data);
-                $paramters = $wpquery_model->do_filter($args);
-                $data['loop'] =  new WP_Query($paramters);
-                $data['data'] = $advanced_search_model->get_data_wpquery($data['loop']);
-                if($args['collection_id']):
-                    $data['collection_data'] = $collection_model->get_collection_data($args['collection_id']);
-                    $data['listed_by'] = $wpquery_model->get_ordered_name($args['collection_id'], $args['ordenation_id'], $args['order_by']);
-                    $data['is_moderator'] = CollectionModel::is_moderator($args['collection_id'], get_current_user_id());
+                
+                if ($loop_objects&&$loop_objects->have_posts()) : 
+                    $data['loop_objects'] =  $loop_objects;
+                    $return['args_item'] = serialize($args_object);
                 endif;
-                $return['page'] = $this->render(dirname(__FILE__) . '../../../views/object/list_advanced_search.php', $data);
+                if ($loop_collections&&$loop_collections->have_posts()) : 
+                    $data['loop_collections'] = $loop_collections;
+                    $return['args_collection'] =  serialize($args_collection);
+                endif;
+                if(!isset($data['loop_objects'])&&!isset($data['loop_collections'])){
+                    $return['not_found'] = true;
+                }
+                
+                $return['page'] = $this->render(dirname(__FILE__) . '../../../views/advanced_search/list_advanced_search.php', $data);
+                $return['data'] =  $data['data'];
+                return json_encode($return);
+             case "wpquery_page_advanced_collection":
+                $wpquery_model = new WPQueryModel();
+                $return = array();
+                $args = unserialize(stripslashes($data['wp_query_args']));
+                $args['pagid'] = $data['value'];
+                $args['posts_per_page'] = $data['posts_per_page'];
+                $paramters = $wpquery_model->do_filter($args);
+                $data['pagid'] = $data['value'];
+                $data['loop_collections'] =  new WP_Query($paramters);
+                $return['page'] = $this->render(dirname(__FILE__) . '../../../views/advanced_search/loops_page/list_collection_search.php', $data);
                 $return['args'] = serialize($args);
                 $return['data'] =  $data['data'];
                 return json_encode($return);
-            
-             case "wpquery_page_advanced":
+             case "wpquery_page_advanced_item":
                 $wpquery_model = new WPQueryModel();
                 $return = array();
-                $recover_data = unserialize(stripslashes($data['wp_query_args']));
-                if(empty($wpquery_model->get_collection_posts($recover_data['collection_id']))){
-                    $return['empty_collection'] = true;
-                }else{
-                    $return['empty_collection'] = false;
-                    $data['collection_id'] = $recover_data['collection_id'];
-                }
-                $collection_model = new CollectionModel;
-                $args = $wpquery_model->advanced_searched_filter($data);
+                $args = unserialize(stripslashes($data['wp_query_args']));
+                $args['pagid'] = $data['value'];
+                $args['posts_per_page'] = $data['posts_per_page'];
                 $paramters = $wpquery_model->do_filter($args);
                 $data['pagid'] = $data['value'];
-                $data['loop'] =  new WP_Query($paramters);
-                $data['data'] = $advanced_search_model->get_data_wpquery($data['loop']);
-                if($args['collection_id']):
-                    $data['collection_data'] = $collection_model->get_collection_data($args['collection_id']);
-                    $data['listed_by'] = $wpquery_model->get_ordered_name($args['collection_id'], $args['ordenation_id'], $args['order_by']);
-                    $data['is_moderator'] = CollectionModel::is_moderator($args['collection_id'], get_current_user_id());
-                endif;
-                $return['page'] = $this->render(dirname(__FILE__) . '../../../views/object/list_advanced_search.php', $data);
+                $data['loop_objects'] =  new WP_Query($paramters);
+                $return['page'] = $this->render(dirname(__FILE__) . '../../../views/advanced_search/loops_page/list_items_search.php', $data);
                 $return['args'] = serialize($args);
                 $return['data'] =  $data['data'];
                 return json_encode($return);

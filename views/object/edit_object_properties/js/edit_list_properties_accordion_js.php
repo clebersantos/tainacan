@@ -70,6 +70,9 @@
                         }
                     });
                     if(!already_selected){
+                        if($('#cardinality_'+property_id + "_" + object_id).val()=='1'){
+                             $("#property_value_" + property_id + "_" + object_id + "_edit").html('');
+                        }
                         $("#property_value_" + property_id + "_" + object_id+"_edit").append("<option class='selected' value='" + ui.item.value + "' selected='selected' >" + ui.item.label + "</option>");
                         //hook para validacao do campo ao selecionar
                         if(Hook.is_register( 'tainacan_validate_cardinality_onselect')){

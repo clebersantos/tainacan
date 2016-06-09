@@ -41,7 +41,9 @@ $selected_view_mode = $ordenation['collection_metas']['socialdb_collection_list_
                                 <option value="cards"><?php _e('Cards', 'tainacan'); ?></option>
                                 <option value="gallery"><?php _e('Gallery', 'tainacan'); ?></option>
                                 <option value="list"><?php _e('List', 'tainacan'); ?></option>
+                                <?php /*
                                 <option value="slideshow"><?php _e('Slideshow', 'tainacan'); ?></option>
+                                */ ?>
                             </select>
                         </div>
 
@@ -74,7 +76,7 @@ $selected_view_mode = $ordenation['collection_metas']['socialdb_collection_list_
                         </div>
                         <input type="hidden" id="collection_id_order_form" name="collection_id" value="<?php echo $collection_id; ?>">
                         <input type="hidden" id="operation" name="operation" value="update_ordenation">
-                        <button type="submit" id="submit_ordenation_form" class="btn btn-primary pull-right"><?php _e('Go to collection','tainacan') ?></button>
+                        <button type="submit" id="submit_ordenation_form" class="btn btn-primary pull-right"><?php _e('Save and Go to collection','tainacan') ?></button>
                     </form>
                 </div>
             </div>

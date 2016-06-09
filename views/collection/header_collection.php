@@ -205,8 +205,8 @@ $cover_url = wp_get_attachment_url( get_post_meta( $root_category_cover_id , 'so
 
 if ( has_nav_menu('menu-ibram') ) { ?>
     <div class="ibram-header" <?php if($root_category_cover_id != "") { ?> style="background-image: url(<?php echo $cover_url ?>)" <?php } ?> >
-        <div class="col-md-12">
-            <div class="col-md-10">
+        <div class="col-md-12 no-padding">
+            <div class="col-md-10 no-padding">
                 <h3> <?php echo bloginfo('name'); ?> </h3>
                 <h5> <?php echo bloginfo('description'); ?> </h5>
             </div>

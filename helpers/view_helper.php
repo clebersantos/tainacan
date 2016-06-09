@@ -31,6 +31,7 @@ class ViewHelper {
         return $this->default_metadata = [
             //'socialdb_object_dc_type' => 'Type',
             //'socialdb_object_from' => 'Format',
+            'item_name'  => 'Item Title',
             'thumbnail_id' => 'Item Thumbnail',
             'post_content' => 'Item Description',
             'socialdb_object_dc_source' => 'Source',
@@ -93,5 +94,10 @@ class ViewHelper {
             return 1;
         endif;
     }
+
+    public static function render_icon($icon) { ?>
+        <img alt="<?php echo $icon ?>" title="<?php echo __( ucfirst( $icon ), 'tainacan'); ?>"
+            src="<?php echo get_template_directory_uri() ?>/libraries/images/icons/icon-<?php echo $icon ?>.svg" />
+    <?php }
 
 }

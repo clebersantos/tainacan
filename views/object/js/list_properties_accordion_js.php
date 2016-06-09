@@ -68,6 +68,9 @@
                         }
                     });
                     if (!already_selected) {
+                        if($('#cardinality_'+property_id + "_" + object_id).val()=='1'){
+                             $("#property_value_" + property_id + "_" + object_id + "_add").html('');
+                        }
                         $("#property_value_" + property_id + "_" + object_id + "_add").append("<option class='selected' value='" + ui.item.value + "' selected='selected' >" + ui.item.label + "</option>");
                         if (Hook.is_register('tainacan_validate_cardinality_onselect')) {
                             Hook.call('tainacan_validate_cardinality_onselect', ['select[name="socialdb_property_' + property_id + '[]"]', property_id]);

@@ -245,12 +245,13 @@ $options = get_option('socialdb_theme_options');
                                     <button onclick="asc_ordenation()" type="button" id="sort_list" class="btn btn-default pull-right"><span class="glyphicon glyphicon-sort-by-attributes"></span></button>
                                     <button onclick="desc_ordenation()" type="button" id="sort_list" class="btn btn-default pull-right"><span class="glyphicon glyphicon-sort-by-attributes-alt"></span></button>
                                 </div>
-                                <?php /*
+
                                 <div class="col-md-3 viewMode-control">
                                     <div> <?php _e('Show:', 'tainacan') ?> </div>
                                     <ul>
                                         <?php
-                                        $viewModes = [ 'card', 'gallery', 'list',  'slideshow' ];
+                                        // $viewModes = [ 'cards', 'gallery', 'list',  'slideshow' ];
+                                        $viewModes = [ 'cards', 'gallery', 'list' ];
                                         foreach($viewModes as $mode): ?>
                                             <li class="<?php echo $mode ?>">
                                                 <a href="javascript:void(0)" onclick="changeViewMode('<?php echo $mode ?>')">
@@ -260,7 +261,7 @@ $options = get_option('socialdb_theme_options');
                                             </li>
                                         <?php endforeach; ?>
                                     </ul>
-                                </div> */ ?>
+                                </div>
                             </div>
                         </div>
 

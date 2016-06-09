@@ -71,7 +71,7 @@ if (isset($_GET['info_messages'])) {
 </header>
 
 <!-- TAINACAN: esta div (AJAX) recebe html E esta presente tanto na index quanto no single, pois algumas views da administracao sao carregadas aqui -->
-<div id="configuration"></div>
+<div id="configuration"  style="margin-left: 15px;margin-right: 15px;"></div>
 <input type="hidden" id="max_collection_showed" name="max_collection_showed" value="20">
 <input type="hidden" id="total_collections" name="total_collections" value="">
 <input type="hidden" id="last_index" name="last_index" value="0">
@@ -87,5 +87,16 @@ if (isset($_GET['info_messages'])) {
     <img src="<?php echo get_template_directory_uri() . '/libraries/images/new_loader.gif' ?>" width="64px" height="64px" />
     <h3> <?php _e('Loading Collections...', 'tainacan') ?> </h3>
 </div>
+<!-- TAINACAN: modal padrao bootstrap para demonstracao de execucao de processos, utilizado em varias partes do socialdb   -->
+    <div class="modal fade" id="modalImportMain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <center>
+                    <img src="<?php echo get_template_directory_uri() . '/libraries/images/catalogo_loader_725.gif' ?>">
+                    <h3><?php _e('Please wait...', 'tainacan') ?></h3>
+                </center>
+            </div>
+        </div>
+    </div>
 </body>
 <?php get_footer(); ?>

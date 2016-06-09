@@ -3,6 +3,9 @@ include_once ('../../../../../wp-config.php');
 include_once ('../../../../../wp-load.php');
 include_once ('../../../../../wp-includes/wp-db.php');
 include_once ('js/editor_items_js.php');
+include_once(dirname(__FILE__).'/../../../helpers/view_helper.php');
+
+$view_helper = new ViewHelper();
 
 $properties_terms_radio = [];
 $properties_terms_tree = [];
@@ -155,6 +158,9 @@ $filesOther= [];
                             <?php 
                                 endif; 
                             ?>
+                             <input type="hidden" 
+                                    id="cardinality_<?php echo $property['id']; ?>_<?php echo $object_id; ?>"  
+                                    value="<?php echo $view_helper->render_cardinality_property($property);   ?>">        
                             <input type="text" 
                                    onkeyup="multiple_autocomplete_object_property_add('<?php echo $property['id']; ?>', '<?php echo $object_id; ?>');" 
                                    id="multiple_autocomplete_value_<?php echo $property['id']; ?>_<?php echo $object_id; ?>" 
@@ -186,53 +192,65 @@ $filesOther= [];
                 $all_properties[] = $property['id']; ?>
                 <div id="meta-item-<?php echo $property['id']; ?>">
                     <h2> <?php echo $property['name']; ?> </h2> 
-                    <div class="form-group">                    
-                        <?php if($property['type']=='text'){ ?>     
-                                <input onblur="setPropertyData(this,'<?php echo $property['id']  ?>')" 
-                                       type="text" 
-                                       id='multiple_socialdb_property_<?php echo $property['id']; ?>'
-                                       class="form-control" 
-                                       value="<?php if($property['metas']['socialdb_property_default_value']): echo $property['metas']['socialdb_property_default_value']; endif; ?>" 
-                                       name="socialdb_property_<?php echo $property['id']; ?>"
-                                       <?php if($property['metas']['socialdb_property_required']=='true'): echo 'required="required"'; endif; ?>>
-                        <?php }elseif($property['type']=='textarea') { ?>   
-                              <textarea onblur="setPropertyData(this,'<?php echo $property['id']  ?>')"
-                                        class="form-control" 
+                    <?php $cardinality = $view_helper->render_cardinality_property($property);   ?>
+                    <div class="form-group">
+                        <?php for($i = 0; $i<$cardinality;$i++):   ?>           
+                            <div id="container_field_<?php echo $property['id']; ?>_<?php echo $i; ?>" 
+                                 style="padding-bottom: 10px;<?php echo ($i===0||(is_array($property['metas']['value'])&&$i<count($property['metas']['value']))) ? 'display:block': 'display:none'; ?>">
+                            <?php if($property['type']=='text'){ ?>     
+                                    <input onblur="setPropertyData(this,'<?php echo $property['id']  ?>')" 
+                                           onchange="setPropertyData(this,'<?php echo $property['id']  ?>')"
+                                           type="text" 
+                                           id='multiple_socialdb_property_<?php echo $property['id']; ?>'
+                                           class="form-control multiple_socialdb_property_<?php echo $property['id']; ?>" 
+                                           value="<?php if($property['metas']['socialdb_property_default_value']): echo $property['metas']['socialdb_property_default_value']; endif; ?>" 
+                                           name="socialdb_property_<?php echo $property['id']; ?>"
+                                           <?php if($property['metas']['socialdb_property_required']=='true'): echo 'required="required"'; endif; ?>>
+                            <?php }elseif($property['type']=='textarea') { ?>   
+                                  <textarea onblur="setPropertyData(this,'<?php echo $property['id']  ?>')"
+                                            onchange="setPropertyData(this,'<?php echo $property['id']  ?>')"
+                                            class="form-control multiple_socialdb_property_<?php echo $property['id']; ?>" 
+                                             id='multiple_socialdb_property_<?php echo $property['id']; ?>'
+                                            name="socialdb_property_<?php echo $property['id']; ?>"
+                                            <?php if($property['metas']['socialdb_property_required']=='true'): echo 'required="required"'; endif; ?>><?php if($property['metas']['socialdb_property_default_value']): echo $property['metas']['socialdb_property_default_value']; endif; ?>
+                                  </textarea>
+                             <?php }elseif($property['type']=='numeric') { ?>   
+                                  <input onblur="setPropertyData(this,'<?php echo $property['id']  ?>')"
+                                         onchange="setPropertyData(this,'<?php echo $property['id']  ?>')"
+                                         type="number" 
                                          id='multiple_socialdb_property_<?php echo $property['id']; ?>'
-                                        name="socialdb_property_<?php echo $property['id']; ?>"
-                                        <?php if($property['metas']['socialdb_property_required']=='true'): echo 'required="required"'; endif; ?>><?php if($property['metas']['socialdb_property_default_value']): echo $property['metas']['socialdb_property_default_value']; endif; ?>
-                              </textarea>
-                         <?php }elseif($property['type']=='numeric') { ?>   
-                              <input onblur="setPropertyData(this,'<?php echo $property['id']  ?>')"
-                                     type="number" 
-                                      id='multiple_socialdb_property_<?php echo $property['id']; ?>'
-                                     value="<?php if($property['metas']['socialdb_property_default_value']): echo $property['metas']['socialdb_property_default_value']; endif; ?>" 
-                                     class="form-control"
-                                     name="socialdb_property_<?php echo $property['id']; ?>" 
-                                     <?php if($property['metas']['socialdb_property_required']=='true'): echo 'required="required"'; endif; ?>>
-                         <?php }elseif($property['type']=='autoincrement') {  ?>   
-                              <input onblur="setPropertyData(this,'<?php echo $property['id']  ?>')"
-                                     disabled="disabled"  
-                                     onkeypress='return onlyNumbers(event)'
-                                     id='multiple_socialdb_property_<?php echo $property['id']; ?>'
-                                     type="number" 
-                                     class="form-control" 
-                                     name="only_showed_<?php echo $property['id']; ?>" value="<?php if(is_numeric($property['metas']['socialdb_property_data_value_increment'])): echo $property['metas']['socialdb_property_data_value_increment']+1; endif; ?>">
-                              <!--input type="hidden"  name="socialdb_property_<?php echo $property['id']; ?>" value="<?php if($property['metas']['socialdb_property_data_value_increment']): echo $property['metas']['socialdb_property_data_value_increment']+1; endif; ?>" -->
-                        <?php }else{ ?>
-                              <input onblur="setPropertyData(this,'<?php echo $property['id']  ?>')"
-                                     type="date" 
-                                      id='multiple_socialdb_property_<?php echo $property['id']; ?>'
-                                     value="<?php if($property['metas']['socialdb_property_default_value']): echo $property['metas']['socialdb_property_default_value']; endif; ?>" 
-                                     class="form-control" 
-                                     name="socialdb_property_<?php echo $property['id']; ?>" <?php if($property['metas']['socialdb_property_required']=='true'): echo 'required="required"'; endif; ?>>
-                        <?php } ?> 
+                                         value="<?php if($property['metas']['socialdb_property_default_value']): echo $property['metas']['socialdb_property_default_value']; endif; ?>" 
+                                         class="form-control multiple_socialdb_property_<?php echo $property['id']; ?>"
+                                         name="socialdb_property_<?php echo $property['id']; ?>" 
+                                         <?php if($property['metas']['socialdb_property_required']=='true'): echo 'required="required"'; endif; ?>>
+                             <?php }elseif($property['type']=='autoincrement') {  ?>   
+                                  <input onblur="setPropertyData(this,'<?php echo $property['id']  ?>')"
+                                         onchange="setPropertyData(this,'<?php echo $property['id']  ?>')"
+                                         disabled="disabled"  
+                                         onkeypress='return onlyNumbers(event)'
+                                         id='multiple_socialdb_property_<?php echo $property['id']; ?>'
+                                         type="number" 
+                                         class="form-control multiple_socialdb_property_<?php echo $property['id']; ?>" 
+                                         name="only_showed_<?php echo $property['id']; ?>" value="<?php if(is_numeric($property['metas']['socialdb_property_data_value_increment'])): echo $property['metas']['socialdb_property_data_value_increment']+1; endif; ?>">
+                                  <!--input type="hidden"  name="socialdb_property_<?php echo $property['id']; ?>" value="<?php if($property['metas']['socialdb_property_data_value_increment']): echo $property['metas']['socialdb_property_data_value_increment']+1; endif; ?>" -->
+                            <?php }else{ ?>
+                                  <input onblur="setPropertyData(this,'<?php echo $property['id']  ?>')"
+                                         onchange="setPropertyData(this,'<?php echo $property['id']  ?>')"
+                                         type="date" 
+                                          id='multiple_socialdb_property_<?php echo $property['id']; ?>'
+                                         value="<?php if($property['metas']['socialdb_property_default_value']): echo $property['metas']['socialdb_property_default_value']; endif; ?>" 
+                                         class="form-control multiple_socialdb_property_<?php echo $property['id']; ?>" 
+                                         name="socialdb_property_<?php echo $property['id']; ?>" <?php if($property['metas']['socialdb_property_required']=='true'): echo 'required="required"'; endif; ?>>
+                            <?php } ?> 
+                            <?php echo $view_helper->render_button_cardinality($property,$i) ?>    
+                            </div>         
+                    <?php endfor;  ?>            
                     </div>       
                 </div>    
              <?php  } ?>
         <?php endif; 
         //lista as propriedades de dados
-         if((isset($properties['property_term'])&&count($properties['property_term'])>1)||(count($properties['property_term'])==1&&!empty($properties['property_term'][0]['has_children']))): ?>
+         if((isset($properties['property_term']))): ?>
             <!--h4><?php _e('Term properties','tainacan'); ?></h4-->
             <?php foreach ( $properties['property_term'] as $property ) { 
 //                if(!isset($property['has_children'])||empty($property['has_children'])){

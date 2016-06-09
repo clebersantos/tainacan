@@ -18,12 +18,21 @@ include_once ('js/advanced_search_js.php');
     .padding-left-space{
         padding-left: 15px;
     }
+    .center_pagination {
+    width: 100%;
+    margin: 20px auto 10px auto;
+    background: white;
+    border: 3px solid #E8E8E8;
+    padding: 5px 0 5px 0;
+    color: #929497;
+}
 </style>    
 <form id="advanced_search_submit" style="min-height: 500px;">
     <input type="hidden" id="advanced_search_operation" name="operation" value="do_advanced_search">   
-    <input type="hidden" id="advanced_search_wp_query_args" name="wp_query_args" value="do_advanced_search">
+    <input type="hidden" id="advanced_search_wp_query_args_collection" name="advanced_search_wp_query_args_collection" value="">
+    <input type="hidden" id="advanced_search_wp_query_args_item" name="advanced_search_wp_query_args_collection" value="">
     <input type="hidden" id="advanced_search_collection_id" name="collection_id" value="<?php echo $collection_id; ?>">
-    <div style="margin-left: 5px;margin-right: 5px;" class="row">
+    <div id="container_filtros" style="margin-left: 5px;margin-right: 5px;" class="row">
         <ol class="breadcrumb" style="margin-top: -15px; padding-left: 0; background: #f2f2f2;">
             <li><a href="<?php echo get_permalink(get_option('collection_root_id')); ?>"> <?php _e('Repository', 'tainacan') ?> </a></li>
             <li><a href="#" onclick="backToMainPageSingleItem()"><?php echo get_post($collection_id)->post_title; ?></a></li>
@@ -34,7 +43,7 @@ include_once ('js/advanced_search_js.php');
                     <a class="btn btn-default pull-right" onclick="redirect_collection($('#advanced_search_collection_id').val())" ><?php _e('Back to the collection page', 'tainacan'); ?></a> 
                 </h3>
                 <hr>
-                <?php if ($collection_id != get_option('collection_root_id')): ?>
+                <?php //if ($collection_id != get_option('collection_root_id')): ?>
                 <div >
                     <h5>
                        <b><?php _e('Select the Collection', 'tainacan'); ?></b>
@@ -46,7 +55,7 @@ include_once ('js/advanced_search_js.php');
 
                     </select>
                 </div>   
-                <?php endif; ?>
+                <?php //endif; ?>
         </div>
         <div class="quadrante">
             <h5>
@@ -58,9 +67,9 @@ include_once ('js/advanced_search_js.php');
                 <div class="col-md-10">
                     <input type="text" 
                             class="form-control" 
-                            name="advanced_search_title" 
-                            id="advanced_search_title" 
-                            placeholder="<?php if ($collection_id != get_option('collection_root_id')) _e('Type the item title or its description', 'tainacan'); ?>">
+                            name="advanced_search_general" 
+                            id="advanced_search_general" 
+                            placeholder="<?php _e('Search in all metadata', 'tainacan'); ?>">
                 </div>  
                 <button type="submit" class="col-md-2 btn btn-success pull-right">
                     <?php _e('Find', 'tainacan') ?>
@@ -99,6 +108,15 @@ include_once ('js/advanced_search_js.php');
         
             
     </div> 
+    <div id="resultados_advanced_search" style="display: none;min-height: 500px;margin-left: 5px;margin-right: 5px;">
+        <ol class="breadcrumb" style="margin-top: -15px; padding-left: 0; background: #f2f2f2;">
+            <li><a href="<?php echo get_permalink(get_option('collection_root_id')); ?>"> <?php _e('Repository', 'tainacan') ?> </a></li>
+            <li><a href="#" onclick="backToMainPageSingleItem()"><?php echo get_post($collection_id)->post_title; ?></a></li>
+            <li class="active"><?php echo __('Advanced Search','tainacan'); ?></li>
+        </ol>
+        <div id="container_resultados_advanced_search" class="quadrante"></div>
+            
+    </div>
 </form>
 <div class="row">
     <div class="col-md-1"></div>

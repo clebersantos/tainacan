@@ -3,47 +3,40 @@
  * View responsavel em mostrar o menu mais opcoes com as votacoes, propriedades e arquivos anexos
  *
  */
+include_once('./../../helpers/view_helper.php');
 include_once ('js/list_js.php');
-?>
-<!-- TAINACAN: hidden utilizados para execucao de processos desta view (list.php)  -->
-<input type="hidden" id="keyword_pagination" name="keyword_pagination" value="<?php if (isset($keyword)) echo $keyword; ?>" />
-<input type="hidden" id="sorted_form" name="sorted_form" value="<?php echo $sorted_by; ?>" />
 
-<?php
 $countLine = 0;
 $classColumn = 12;
 $show_string = is_root_category($collection_id) ?  __('Showing collections:','tainacan') : __('Showing Items:', 'tainacan');
 $collection_list_mode = $collection_data['collection_metas']['socialdb_collection_list_mode'];
 
-if ( $loop->have_posts() ):
+if( !$collection_list_mode ) {
+    $collection_list_mode = "cards";
+}
+?>
+
+<!-- TAINACAN: hidden utilizados para execucao de processos desta view (list.php)  -->
+<input type="hidden" id="keyword_pagination" name="keyword_pagination" value="<?php if (isset($keyword)) echo $keyword; ?>" />
+<input type="hidden" id="sorted_form" name="sorted_form" value="<?php echo $sorted_by; ?>" />
+<input type="hidden" id="default-viewMode" value="<?php echo $collection_list_mode; ?>">
+
+<?php if ( $loop->have_posts() ):
     // Determina # de colunas;
     if ($collection_data['collection_metas']['socialdb_collection_columns'] != '')
         $classColumn = 12 / $collection_data['collection_metas']['socialdb_collection_columns'];
     ?>
     <div id="collection-view-mode">
-        <?php
-        switch ($collection_list_mode):
-            case "list":
-                include_once("list_modes/list.php");
-                break;
-            case "gallery":
-                include_once("list_modes/gallery.php");
-                break;
-            case "slideshow":
-                include_once("list_modes/slideshow.php");
-                break;
-            default:
-                include_once "list_modes/cards.php";
-                break;
-        endswitch;
-
-        /*
-        include_once("list_modes/cards.php");
-        include_once("list_modes/list.php");
-        include_once("list_modes/gallery.php");
-        include_once("list_modes/slideshow.php");
-        */
-        ?>
+        <div id='<?php echo $collection_list_mode; ?>-viewMode' class='col-md-12 no-padding list-mode-set'>
+            <?php
+            while ( $loop->have_posts() ) : $loop->the_post(); $countLine++;
+                include "list_modes/cards.php";
+                include "list_modes/list.php";
+                include "list_modes/gallery.php";
+                //include "list_modes/slideshow.php";
+                endwhile;
+            ?>
+        </div>
     </div>
 <?php else: ?>
     <!-- TAINACAN: se a pesquisa nao encontrou nenhum item -->

@@ -472,7 +472,7 @@ class WPQueryModel extends Model {
                 $args = array(
                     'post_type' => 'socialdb_collection',
                     'paged' => (int)$page,
-                 // 'posts_per_page' => 10,
+                    'posts_per_page' => (isset($recover_data['posts_per_page']))?$recover_data['posts_per_page']:10,
                     'orderby' => $orderby,
                     'order' => $order,
                     //'no_found_rows' => true, // counts posts, remove if pagination required
@@ -510,7 +510,7 @@ class WPQueryModel extends Model {
             $args = array(
                 'post_type' => $post_type,
                 'paged' => (int)$page,
-               // 'posts_per_page' => 10,
+                'posts_per_page' => (isset($recover_data['posts_per_page']))?$recover_data['posts_per_page']:10,
                 'tax_query' => $tax_query,
                 'orderby' => $orderby,
                 'order' => $order,

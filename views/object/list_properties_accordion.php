@@ -100,6 +100,9 @@ if (isset($property_object)):
                 <?php 
                     endif; 
                 ?>
+                 <input type="hidden" 
+                        id="cardinality_<?php echo $property['id']; ?>_<?php echo $object_id; ?>"  
+                        value="<?php echo $view_helper->render_cardinality_property($property);   ?>">
                 <input type="text" 
                        onkeyup="autocomplete_object_property_add('<?php echo $property['id']; ?>', '<?php echo $object_id; ?>');" 
                        id="autocomplete_value_<?php echo $property['id']; ?>_<?php echo $object_id; ?>" 

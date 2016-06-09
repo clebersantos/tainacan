@@ -1119,7 +1119,6 @@ function showFormCreateURLFile(url, type){
  * @returns {void} Insere o html com os comentarios da colecao
  */
 function showPageCollectionPage() {
-    console.log('clickeded');
     $("#menu_object").hide();
     $("#container_socialdb").hide('slow');
     $("#form").hide('slow');
@@ -1942,10 +1941,11 @@ function bytesToSize(bytes) {
 // apenas numeros no input
 function onlyNumbers(e){
     var tecla=(window.event)?event.keyCode:e.which;
+    console.log(tecla);
     if((tecla>47 && tecla<58)) 
         return true;
     else{
-       if (tecla==8 || tecla==0) 
+       if (tecla==8 || tecla==0 ||tecla==46 || tecla==190 || tecla==110) 
            return true;
        else  
            return false;
@@ -2096,17 +2096,12 @@ $(window).on('resize', function(ev) {
 
 
 function changeViewMode(viewMode) {
-    var concurrents = $("#collection-view-mode > div");
+    // var concurrents = $("#collection-view-mode > div");
+    $('.viewMode-control li').removeClass('selected-viewMode');
     $('.viewMode-control li.'+viewMode).addClass('selected-viewMode');
-
-    $(concurrents).each(function(idx, el) {
-        var cur_id = "#" + $(el).attr("id");
-        if( cur_id == "#" + viewMode + "-viewMode" ) {
-            $(this).fadeIn();
-        } else {
-            $(this).fadeOut();
-        }
-    });
+    $('.list-mode-set').attr('id', viewMode+'-viewMode');
+    $('.top-div').hide();
+    $('.'+viewMode+'-view-container').show();
 }
 
 //********************************** FUNCIONALIDADE ACORDEON *********************/

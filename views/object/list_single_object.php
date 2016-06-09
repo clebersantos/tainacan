@@ -5,7 +5,10 @@
  *
  *
  */
+include_once('./../../helpers/view_helper.php');
 include_once ('js/list_single_js.php');
+
+// $viewHelper = new ViewHelper();
 
 $create_perm_object = verify_allowed_action($collection_id, 'socialdb_collection_permission_create_property_object');
 $edit_perm_object = verify_allowed_action($collection_id, 'socialdb_collection_permission_edit_property_object');
@@ -37,21 +40,24 @@ $meta_source = $metas['socialdb_object_dc_source'][0];
             <div class="col-md-10">
                 <h3 id="text_title"><?php echo $object->post_title; ?></h3>
                 <span id="event_title" style="display:none;">
-                    <input type="text" value="<?php echo $object->post_title; ?>" id="title_field">
+                    <input type="text" value="<?php echo $object->post_title; ?>" id="title_field" class="form-control">
                 </span>
                 <small>
                     <?php if (verify_allowed_action($collection_id, 'socialdb_collection_permission_edit_property_data_value', $object_id)): ?>
                         <button type="button" alt="<?php _e('Cancel modification', 'tainacan') ?>" onclick="cancel_title()" id="cancel_title" class="btn btn-default btn-xs" style="display: none;" >
                             <span class="glyphicon glyphicon-arrow-left" ></span>
                         </button>
-                        <button type="button" onclick="edit_title()" id="edit_title" class="btn btn-default btn-xs" ><span class="glyphicon glyphicon-edit"></span></button>
+                        <button type="button" onclick="edit_title()" id="edit_title" class="btn btn-default btn-xs">
+                            <!--  <span class="glyphicon glyphicon-edit"></span>-->
+                            <?php viewHelper::render_icon("edit_object"); ?>
+                        </button>
                         <button type="button" onclick="save_title('<?php echo $object->ID ?>')" id="save_title" class="btn btn-default btn-xs" style="display: none;"><span class="glyphicon glyphicon-floppy-disk"></span></button>
                     <?php endif; ?>
                 </small>
 
             </div>
 
-            <div class="col-md-2 no-padding right">
+            <div class="col-md-2 right">
                 <ul class="item-funcs">
                     <?php
                     if ($collection_metas == 'allowed' || ($collection_metas == 'moderate' && is_user_logged_in()) || ($collection_metas == 'controlled' && ($is_moderator || $object->post_author == get_current_user_id()))) {
@@ -61,7 +67,6 @@ $meta_source = $metas['socialdb_object_dc_source'][0];
                             ?>
                             <li>
                                 <a class="btn btn-default btn-primary" href="<?php echo $url_image; ?>" download="<?php echo $object->post_title; ?>.jpg" onclick="downloadItem('<?php echo $thumbail_id; ?>');"><?php _e('Download', 'tainacan') ?></a>
-                                <!--button type="button" onclick="" id="download_item" class="btn btn-default btn-primary"><?php _e('Download', 'tainacan') ?></button-->
                             </li>
                             <?php
                         }
@@ -70,12 +75,14 @@ $meta_source = $metas['socialdb_object_dc_source'][0];
                     <?php if ($is_moderator || $object->post_author == get_current_user_id()): ?>
                         <li>
                             <a onclick="single_delete_object('<?= __('Delete Object', 'tainacan') ?>', '<?= __('Are you sure to remove the object: ', 'tainacan') . $object->post_title ?>', '<?php echo $object->ID ?>', '<?= mktime() ?>')" href="#" class="remove">
-                                <span class="glyphicon glyphicon-trash"></span>
+                                <!-- <span class="glyphicon glyphicon-trash"></span>-->
+                                <?php viewHelper::render_icon("remove"); ?>
                             </a>
                         </li>
                         <li>
                             <a href="#" onclick="show_edit_object('<?php echo $object->ID ?>')" class="edit">
-                                <span class="glyphicon glyphicon-edit"></span>
+                                <!-- <span class="glyphicon glyphicon-edit"></span>-->
+                                <?php viewHelper::render_icon("edit_type"); ?>
                             </a>
                         </li>
                         <?php
@@ -273,7 +280,7 @@ $meta_source = $metas['socialdb_object_dc_source'][0];
                         </div>
                     </div>
                     <div class="item-thumb box-item-paddings" style="border-top: none; border-bottom: none">
-                        <div class="content-thumb" style="padding-left: 10px; ">
+                        <div class="content-thumb" style="padding-left: 15px; ">
                             <h4 class="title-pipe single-title"> <?php _e('Thumbnail', 'tainacan'); ?></h4>
                             <div class="edit-field-btn">
                                 <?php
@@ -367,10 +374,12 @@ $meta_source = $metas['socialdb_object_dc_source'][0];
                     <?php endif; ?>
                 </div>
                 <div id="text_description"><p><?php echo $object->post_content; ?></p></div>
-                <div id="event_description" style="display:none"><textarea class="col-md-12" id="description_field"><?php echo $object->post_content; ?></textarea></div>
+                <div id="event_description" style="display:none; min-height: 80px;">
+                    <textarea class="col-md-12 form-control" id="description_field"><?php echo $object->post_content; ?></textarea>
+                </div>
             </div>
 
-            <div class="col-md-6 left-container no-padding" style="border-right: 3px solid #e8e8e8">
+            <div class="col-md-6 left-container" style="border-right: 3px solid #e8e8e8">
                 <!-- Licencas do item -->
                 <div class="box-item-paddings item-license" <?php if (has_action('home_item_license_div')) do_action('home_item_license_div') ?> style="border: none;">
                     <h4 class="title-pipe single-title"> <?php _e('License', 'tainacan'); ?></h4>
@@ -441,7 +450,7 @@ $meta_source = $metas['socialdb_object_dc_source'][0];
                                 <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" id="btnGroupVerticalDrop1" style="font-size:11px;">
                                     <span class="glyphicon glyphicon-plus grayleft" ></span> <span class="caret"></span>
                                 </button>
-                                <ul aria-labelledby="btnGroupVerticalDrop1" role="menu" class="dropdown-menu" style="width: 200px;">
+                                <ul aria-labelledby="btnGroupVerticalDrop1" role="menu" class="dropdown-menu add-metadata">
                                     <?php if ($create_perm_data): ?>
                                         <li>&nbsp;<span class="glyphicon glyphicon-th-list graydrop"></span>&nbsp;<span><a class="add_property_data" onclick="show_form_data_property_single('<?php echo $object->ID ?>')" href="#property_form_<?php echo $object->ID ?>"><?php _e('Add new data property', 'tainacan'); ?></a></span></li>
                                     <?php endif; ?>
@@ -457,12 +466,11 @@ $meta_source = $metas['socialdb_object_dc_source'][0];
                                     <span class="glyphicon glyphicon-pencil grayleft"></span>
                                     <span class="caret"></span>
                                 </button>
-                                <ul id="single_list_properties_edit_remove" style="width:225px;" aria-labelledby="btnGroupVerticalDrop1" role="menu" class="dropdown-menu">
+                                <ul id="single_list_properties_edit_remove" aria-labelledby="btnGroupVerticalDrop1" role="menu" class="dropdown-menu">
                                 </ul>
                             <?php endif; ?>
                         </div>
                     </div>
-
 
                     <div>
                         <div id="single_list_all_properties_<?php echo $object->ID ?>" class="single_list_properties"> </div>
@@ -476,7 +484,7 @@ $meta_source = $metas['socialdb_object_dc_source'][0];
 
         </div>
 
-        <div class="col-md-12 item-comments" style="padding: 0">
+        <div class="col-md-12 item-comments no-padding">
             <div>
                 <div id="comments_object"></div>
             </div>

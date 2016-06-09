@@ -3,8 +3,10 @@
  *
  * View responsavel em listar todas propriedades do objeto em questao, utilizada para pegar os valores para edicao dos eventos
  */
-
 include_once ('js/show_list_event_properties_js.php');
+include_once('./../../helpers/view_helper.php');
+// $viewHelper = new ViewHelper();
+
 $ids = [];
 
 if (!isset($property_object) && !isset($property_data)):
@@ -20,7 +22,7 @@ endif;
     ?>
         <div class="col-md-6 property-root no-padding">
             <div class="box-item-paddings">
-            <h4 class="title-pipe single-title"> <?php echo $property['name']; ?></h4>
+                <h4 class="title-pipe single-title"> <?php echo $property['name']; ?></h4>
             <div class="edit-field-btn">
             <button type="button" onclick="cancel_object_property('<?php echo $property['id']; ?>', '<?php echo $object_id; ?>')" id="single_cancel_<?php echo $property['id']; ?>_<?php echo $object_id; ?>" class="btn btn-default btn-xs" style="display: none;" ><span class="glyphicon glyphicon-arrow-left" ></span></button>
             <?php
@@ -103,7 +105,7 @@ if (isset($property_data)):
                 <?php echo $property['name']; ?>
                 <span class="help-block" style="display: inline-block; font-size: 12px;">
                     <a href="javascript:void(0)" data-toggle="tooltip" title="<?php echo $tooltip_text ?>" style="color: black">
-                        <span class="glyphicon glyphicon-question-sign"></span>
+                        <?php ViewHelper::render_icon("help"); ?>
                     </a>
                 </span>
             </h4>
@@ -179,7 +181,7 @@ if (isset($property_data)):
 endif;
 
 if (isset($property_term)): ?>
-    <!--h4><?php _e('Term properties', 'tainacan'); ?></h4-->
+    <!--h4> <?php _e('Term properties', 'tainacan'); ?></h4-->
     <?php foreach ($property_term as $property) {
         if (count($property['has_children']) > 0): ?>
             <div class="col-md-6 property-term no-padding">

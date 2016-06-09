@@ -143,12 +143,11 @@
             url: $('#src').val() + "/controllers/object/objectsingle_controller.php",
             data: {collection_id: $('#collection_id').val(), operation: 'show_form_data_property', object_id: object_id}
         }).done(function (result) {
-            $('#single_data_property_form_' + object_id).html(result);
             $('#single_list_all_properties_' + object_id).hide();
             $('#single_object_property_form_' + object_id).hide();
             $('#single_edit_data_property_form_' + object_id).hide();
             $('#single_edit_object_property_form_' + object_id).hide();
-            $('#single_data_property_form_' + object_id).show();
+            $('#single_data_property_form_' + object_id).html(result).css('padding', 20).show();
             $('.dropdown-toggle').dropdown();
         });
     }
@@ -159,12 +158,11 @@
             url: $('#src').val() + "/controllers/object/objectsingle_controller.php",
             data: {collection_id: $('#collection_id').val(), operation: 'show_form_object_property', object_id: object_id}
         }).done(function (result) {
-            $('#single_object_property_form_' + object_id).html(result);
             $('#single_list_all_properties_' + object_id).hide();
             $('#single_data_property_form_' + object_id).hide();
             $('#single_edit_data_property_form_' + object_id).hide();
             $('#single_edit_object_property_form_' + object_id).hide();
-            $('#single_object_property_form_' + object_id).show();
+            $('#single_object_property_form_' + object_id).html(result).css('padding', 20).show();
             $('.dropdown-toggle').dropdown();
             $('.nav-tabs').tab();
         });

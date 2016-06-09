@@ -241,6 +241,11 @@
              }
              for(var j = 0; j<$items.length;j++){
                  if($($rankings.get(j)).attr('id')===array_ids[i]){
+                     for(var k = 0; k<$items.length;k++){
+                        if($($items.get(k)).attr('id')===$($rankings.get(j)).attr('id')){
+                             $( $items.get(k) ).remove();
+                        }
+                     }
                      $( $rankings.get(j) ).appendTo( $ul);
                  }
              }
@@ -457,7 +462,17 @@
             });
             //console.log($("#multiple_properties_data_id").val());
             for (var i = 0; i < dataProperties.length; i++) {
-                $('#multiple_socialdb_property_' + dataProperties[i]).val($("#socialdb_property_" + dataProperties[i] + "_" + item_id).val());
+                $('.multiple_socialdb_property_' + dataProperties[i]).each(function(index,value){
+                    $(this).val('');
+                });
+                var value_property = $("#socialdb_property_" + dataProperties[i] + "_" + item_id).val().split('||').filter(Boolean); // TORNA O VALOR DO hidden em array
+                $('.multiple_socialdb_property_' + dataProperties[i]).each(function(index,value){
+                    if(value_property[index]){
+                        $(this).val(value_property[index]);
+                    }
+                });
+                //$("#multiple_property_value_" + objectProperties[i] + "_<?php echo $object_id ?>_add").append("<option class='selected' value='" + value_property[j] + "' selected='selected' >" + value_property[j].split('_')[1] + "</option>");
+                // $('#multiple_socialdb_property_' + dataProperties[i]).val($("#socialdb_property_" + dataProperties[i] + "_" + item_id).val());
             }
             //BUSCANDO VALORES das **propriedades de termos** para o item selecionado
             //checkbox
@@ -619,7 +634,9 @@
                 return v !== ''
             });
             for (var i = 0; i < dataProperties.length; i++) {
-                $('#multiple_socialdb_property_' + dataProperties[i]).val('');
+                $('.multiple_socialdb_property_' + dataProperties[i]).each(function(index,value){
+                     $(this).val('');
+                });
             }
             //BUSCANDO VALORES das **propriedades de termos** para o item selecionado
             //checkbox
@@ -784,10 +801,17 @@
     // atribui os metadados de dados para todos os itens selecionados
     function setPropertyData(data, property_id) {
         var counter = 0;
+        var values = [];
         if ($(data).val() != '') {
             $.each($("input:checkbox[name='selected_items']:checked"), function () {
                 counter++;
-                $("#socialdb_property_" + property_id + "_" + $(this).val()).val($(data).val());
+                $('.multiple_socialdb_property_'+ property_id).each(function(index,value){
+                    if($(this).val()!=''){
+                        values.push($(this).val());
+                    }
+                });
+                $("#socialdb_property_" + property_id + "_" + $(this).val()).val(values.join('||'));
+                //$("#socialdb_property_" + property_id + "_" + $(this).val()).val($(data).val());
             });
             toastr.success(counter + '<?php _e(' items/item updated successfully!', 'tainacan') ?>', '<?php _e('Success', 'tainacan') ?>', set_toastr_class());
         }
@@ -1037,14 +1061,23 @@
             minLength: 2,
             select: function (event, ui) {
                 //console.log(event);
+                var already_selected = false;
+                $("#multiple_property_value_" + property_id + "_" + object_id+"_add option").each(function(){
+                        if($(this).val()==ui.item.value){
+                            already_selected = true;
+                        }
+                });
                 $("#multiple_autocomplete_value_" + property_id + "_" + object_id).html('');
                 $("#multiple_autocomplete_value_" + property_id + "_" + object_id).val('');
                 //var temp = $("#chosen-selected2 [value='" + ui.item.value + "']").val();
-                var temp = $("#property_value_" + property_id + "_" + object_id + " [value='" + ui.item.value + "']").val();
-                if (typeof temp == "undefined") {
-                    $("#multiple_property_value_" + property_id + "_" + object_id + "_add").append("<option class='selected' value='" + ui.item.value + '_' + ui.item.label + "' selected='selected' >" + ui.item.label + "</option>");
-                    setPropertyObject(ui.item.value + '_' + ui.item.label, property_id);
+                if(!already_selected){
+                        if($('#cardinality_'+property_id + "_" + object_id).val()=='1'){
+                             $("#property_value_" + property_id + "_" + object_id + "_edit").html('');
+                        }
+                        $("#multiple_property_value_" + property_id + "_" + object_id + "_add").append("<option class='selected' value='" + ui.item.value + '_' + ui.item.label + "' selected='selected' >" + ui.item.label + "</option>");
+                        setPropertyObject(ui.item.value + '_' + ui.item.label, property_id);
                 }
+                
                 setTimeout(function () {
                     $("#multiple_autocomplete_value_" + property_id + "_" + object_id).val('');
                 }, 100);
@@ -1405,4 +1438,9 @@
             });
         }
     }   
+   //################################ Cardinalidade #################################//    
+    function show_fields_metadata_cardinality(property_id,id){
+        $('#button_property_'+property_id+'_'+id).hide();
+        $('#container_field_'+property_id+'_'+(id+1)).show();         
+    } 
 </script>

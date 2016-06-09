@@ -4,6 +4,8 @@
         search_list_properties_term_insert_objects();
         var search_properties_autocomplete = search_get_val($("#search_properties_autocomplete").val());
         autocomplete_object_property_add(search_properties_autocomplete);
+        
+        show_collection_licenses();
         //# - inicializa os tooltips
         $('[data-toggle="tooltip"]').tooltip();
     });
@@ -285,7 +287,18 @@
         }
     }
     
-    
+    function show_collection_licenses(){
+        $.ajax( {
+            url: $('#src').val()+'/controllers/object/object_controller.php',
+            type: 'POST',
+            data: {operation: 'show_collection_licenses_search',collection_id:$("#collection_id").val()}
+          } ).done(function( result ) {
+            //$('html, body').animate({
+               ///  scrollTop: parseInt($("#wpadminbar").offset().top)
+               // }, 900);       
+            $('#show_form_licenses').html(result); 
+        });
+    }
 
 
 </script>

@@ -679,104 +679,6 @@ body.home .ibram-home-container .col-md-3 .ibram-box p:nth-child(4) {
   margin-right: 0;
 }
 
-.item-colecao {
-  border: 3px solid #E8E8E8;
-  background: white;
-  border-radius: 2px;
-  margin: 1.5% 1.5% 0.2% 0;
-  height: 190px;
-  padding: 10px;
-}
-.item-colecao .item-info .colFoto {
-  min-height: 150px;
-}
-.item-colecao .item-info .item-meta {
-  color: #929497;
-  font-size: 12px;
-}
-.item-colecao .item-info .item-meta-box {
-  padding-left: 0;
-  margin-left: 0;
-}
-.item-colecao .item-info .item-meta-box a {
-  font-weight: bolder;
-  color: black;
-}
-.item-colecao .item-info .item-meta-box h4 {
-  margin: 0 0 3px 0;
-}
-.item-colecao .editing-item {
-  width: 100%;
-}
-.item-colecao .editing-item .rankings-container {
-  float: left;
-}
-.item-colecao .editing-item .item-funcs {
-  padding: 0;
-}
-.item-colecao .editing-item .item-funcs li {
-  float: right;
-  margin: 4px !important;
-}
-.item-colecao .editing-item .item-funcs li a {
-  color: #79a6ce;
-}
-.item-colecao .editing-item .item-funcs li a:hover {
-  color: #929497;
-}
-.item-colecao .editing-item .item-funcs li a {
-  font-size: 1.3em;
-}
-.item-colecao .editing-item .item-redesocial {
-  position: relative;
-  float: right;
-  margin-top: -5px;
-}
-.item-colecao .editing-item .item-redesocial div {
-  font-size: 1.2em;
-  text-indent: 5px;
-}
-.item-colecao .editing-item .item-redesocial a {
-  color: #79a6ce;
-}
-.item-colecao .editing-item .item-redesocial a:hover {
-  color: #929497;
-}
-.item-colecao .editing-item .item-redesocial span {
-  font-size: 2.7em;
-  color: #CCCCCC;
-  line-height: 1.2;
-  text-align: center;
-}
-.item-colecao .editing-item .item-redesocial span:last-child {
-  font-size: 2.3em;
-}
-.item-colecao .close-metadata-box {
-  position: absolute;
-  top: 4%;
-  right: 2%;
-  font-size: 1.3em;
-}
-.item-colecao .close-metadata-box span {
-  color: #aaa;
-}
-.item-colecao .class-meta-box {
-  overflow: scroll;
-  overflow-x: hidden;
-  height: 50px;
-  display: none;
-}
-.item-colecao .shown-classifications {
-  position: absolute;
-  padding: 15px;
-  z-index: 4;
-  background: white;
-  width: 100%;
-  height: 150px;
-  border-radius: 4px;
-  border: 1px solid #aaa;
-}
-
 .single_stars .star-on-png, .single_stars .star-half-png, .single_stars .star-off-png {
   font-size: 1.5em;
   color: darkgoldenrod;
@@ -819,6 +721,109 @@ a.collection-thumb img {
 
 /*
 ****************************************
+**************** CARD MODE *************
+****************************************
+*/
+#cards-viewMode .item-colecao {
+  border: 3px solid #E8E8E8;
+  background: white;
+  border-radius: 2px;
+  margin: 1.5% 1.5% 0.2% 0;
+  height: 190px;
+  padding: 10px;
+}
+#cards-viewMode .item-colecao .item-info .colFoto {
+  min-height: 150px;
+}
+#cards-viewMode .item-colecao .item-info .item-meta {
+  color: #929497;
+  font-size: 12px;
+}
+#cards-viewMode .item-colecao .item-info .item-meta-box {
+  padding-left: 0;
+  margin-left: 0;
+}
+#cards-viewMode .item-colecao .item-info .item-meta-box a {
+  font-weight: bolder;
+  color: black;
+}
+#cards-viewMode .item-colecao .item-info .item-meta-box h4 {
+  margin: 0 0 3px 0;
+}
+#cards-viewMode .item-colecao .editing-item {
+  width: 100%;
+}
+#cards-viewMode .item-colecao .editing-item .rankings-container {
+  float: left;
+}
+#cards-viewMode .item-colecao .editing-item .item-funcs {
+  padding: 0;
+}
+#cards-viewMode .item-colecao .editing-item .item-funcs li {
+  float: right;
+  margin: 4px !important;
+}
+#cards-viewMode .item-colecao .editing-item .item-funcs li a {
+  color: #79a6ce;
+}
+#cards-viewMode .item-colecao .editing-item .item-funcs li a:hover {
+  color: #929497;
+}
+#cards-viewMode .item-colecao .editing-item .item-funcs li a {
+  font-size: 1.3em;
+}
+#cards-viewMode .item-colecao .editing-item .item-redesocial {
+  position: relative;
+  float: right;
+  margin-top: -5px;
+}
+#cards-viewMode .item-colecao .editing-item .item-redesocial div {
+  font-size: 1.2em;
+  text-indent: 5px;
+}
+#cards-viewMode .item-colecao .editing-item .item-redesocial a {
+  color: #79a6ce;
+}
+#cards-viewMode .item-colecao .editing-item .item-redesocial a:hover {
+  color: #929497;
+}
+#cards-viewMode .item-colecao .editing-item .item-redesocial span {
+  font-size: 2.7em;
+  color: #CCCCCC;
+  line-height: 1.2;
+  text-align: center;
+}
+#cards-viewMode .item-colecao .editing-item .item-redesocial span:last-child {
+  font-size: 2.3em;
+}
+#cards-viewMode .item-colecao .close-metadata-box {
+  position: absolute;
+  top: 4%;
+  right: 2%;
+  font-size: 1.3em;
+}
+#cards-viewMode .item-colecao .close-metadata-box span {
+  color: #aaa;
+}
+#cards-viewMode .item-colecao .class-meta-box {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 50px;
+  display: none;
+}
+#cards-viewMode .item-colecao .shown-classifications {
+  position: absolute;
+  padding: 15px;
+  z-index: 4;
+  background: white;
+  width: 100%;
+  height: 150px;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+}
+
+/*
+****************************************
 **************** LIST MODE *************
 ****************************************
 */
@@ -851,7 +856,7 @@ a.collection-thumb img {
 
 /*
 ****************************************
-**************** LIST MODE *************
+**************** GALLERY MODE *************
 ****************************************
 */
 #gallery-viewMode {
@@ -868,12 +873,12 @@ a.collection-thumb img {
   width: 24%;
   overflow: hidden;
 }
+#gallery-viewMode .gallery-view-container.first-el {
+  margin-left: 0 !important;
+}
 #gallery-viewMode .gallery-view-container img {
   display: inline-block !important;
   max-width: 170px !important;
-}
-#gallery-viewMode .gallery-view-container:nth-child(4n+1) {
-  margin-left: 0 !important;
 }
 #gallery-viewMode .gallery-view-container .item-thumb {
   height: 170px;
@@ -1271,7 +1276,7 @@ h4.modal-title {
 }
 #single_item_tainacan .left-container > div {
   margin-left: 0;
-  padding-left: 20px !important;
+  padding-left: 7px !important;
 }
 #single_item_tainacan .right-container > div, #single_item_tainacan .single_list_properties > div {
   margin-left: 0;
@@ -1281,17 +1286,42 @@ h4.modal-title {
 #single_item_tainacan .all-metadata {
   border-top: 3px solid #E8E8E8;
 }
+#single_item_tainacan .all-metadata .single_list_properties > div:last-child {
+  border-right: 3px solid #e8e8e8 !important;
+  margin-right: 13px;
+  margin-left: 3px;
+  border-left: 0;
+  background: orangered !important;
+}
+#single_item_tainacan .all-metadata ul.add-metadata {
+  width: 270px;
+  padding: 10px;
+}
+#single_item_tainacan .all-metadata ul.add-metadata li:first-child {
+  padding-bottom: 10px;
+}
+#single_item_tainacan .all-metadata ul#single_list_properties_edit_remove {
+  width: 350px;
+}
+#single_item_tainacan .all-metadata ul#single_list_properties_edit_remove li {
+  padding: 10px;
+  border-bottom: 1px solid #E8E8E8;
+}
+#single_item_tainacan .all-metadata ul#single_list_properties_edit_remove li:last-child {
+  border: none;
+}
 #single_item_tainacan .all-metadata .col-md-6 {
   border: 3px solid #E8E8E8;
-  min-height: 118px;
 }
 #single_item_tainacan .all-metadata .col-md-6:nth-child(2n) {
   border-bottom: none;
-  border-left: none;
   border-right: 4px solid #E8E8E8;
 }
 #single_item_tainacan .all-metadata .col-md-6:nth-child(2n+1) {
   border-bottom: none;
+}
+#single_item_tainacan .all-metadata .col-md-6:last-child {
+  background: beige !important;
 }
 #single_item_tainacan .all-metadata .box-item-paddings {
   margin-left: -20px;
@@ -1316,7 +1346,8 @@ h4.modal-title {
   padding-top: 0.7%;
   padding-left: 15px;
   margin-bottom: 20px;
-  padding-top: 2%;
+  padding-top: 1.2%;
+  padding-left: 8px;
 }
 #single_item_tainacan .item-main-data .tainacan-fixed-metas {
   border: 3px solid #E8E8E8;
@@ -1347,7 +1378,7 @@ h4.modal-title {
 #single_item_tainacan .item-main-data .item-metadata .item-description {
   border: none;
   border-bottom: 3px solid #E8E8E8;
-  padding: 20px;
+  padding: 10px 10px 20px 20px;
   text-align: justify;
 }
 #single_item_tainacan .item-main-data .item-comments {
@@ -1357,6 +1388,7 @@ h4.modal-title {
   margin: 0 0 0 0;
   padding-top: 0.7%;
   padding-left: 15px;
+  padding-left: 0;
 }
 #single_item_tainacan .item-main-data .item-comments #resources_collection_dropdown li {
   width: 30%;
@@ -1400,7 +1432,6 @@ h4.modal-title {
 }
 #single_item_tainacan .item-main-data .item-comments #respond {
   margin-bottom: 20px;
-  padding-left: 20px;
   border-bottom: 2px solid #E8E8E8;
 }
 #single_item_tainacan .item-main-data #text_title {
@@ -1409,10 +1440,11 @@ h4.modal-title {
   margin: 5px 10px 0 0;
 }
 #single_item_tainacan .item-main-data ul.item-funcs {
-  padding-top: 10px;
+  padding: 0;
+  margin-right: 5px;
+  text-align: right;
 }
 #single_item_tainacan .item-main-data ul.item-funcs li {
-  margin-right: 10px;
   display: inline;
 }
 #single_item_tainacan .item-main-data .box-item-paddings {

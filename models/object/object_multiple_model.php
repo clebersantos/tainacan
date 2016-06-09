@@ -185,9 +185,17 @@ class ObjectMultipleModel extends Model {
         if($properties_data&&$properties_data!=''&&  is_array($properties_data)){
               $properties_id = array_filter(array_unique($properties_data));
               foreach ($properties_id as $property_id) {
-                  if(isset($data['socialdb_property_'.$property_id.'_'.$item_id])){
-                       update_post_meta($post_id, 'socialdb_property_' .$property_id,$data['socialdb_property_'.$property_id.'_'.$item_id]);
-                        $this->set_common_field_values($post_id, "socialdb_property_$property_id",$data['socialdb_property_'.$property_id.'_'.$item_id]);
+                  if(isset($data['socialdb_property_'.$property_id.'_'.$item_id])&&$this->getArray(trim($data['socialdb_property_'.$property_id.'_'.$item_id]))){
+                       //update_post_meta($post_id, 'socialdb_property_' .$property_id,$data['socialdb_property_'.$property_id.'_'.$item_id]);
+                        //$this->set_common_field_values($post_id, "socialdb_property_$property_id",$data['socialdb_property_'.$property_id.'_'.$item_id]);
+                    $array = $this->getArray(trim($data['socialdb_property_'.$property_id.'_'.$item_id]));
+                    foreach ($array as $value) {
+                        if(trim($value)!=''){
+                           add_post_meta($post_id, 'socialdb_property_' .$property_id,  $value);
+                           $this->set_common_field_values($post_id, "socialdb_property_$property_id",$value);
+                        }
+                    }
+                      
                   }
               }
         }

@@ -577,3 +577,5 @@ table.sorting-table tbody tr:not(.sorting-row) td {opacity: 0.2;}
   font-size: 11px;
 }
 /*************** WATERMARK SYLES *************************/
+.ui-autocomplete-loading { background:url('../images/ajaxLoader.gif')  no-repeat right center;background-size: 25px 25px; }
+/*************** WATERMARK SYLES *************************/
