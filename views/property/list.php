@@ -30,12 +30,12 @@ include_once ('js/list_js.php');
     </div>
     <div class="col-md-10">
         <?php if ($is_root): ?>
-            <h3>Metadados
+            <h3> <?php _e('Properties','tainacan') ?>
                 <button onclick="backToMainPage();" id="btn_back_collection" class="btn btn-default pull-right"><?php _e('Back to collection','tainacan') ?></button>
             </h3>
             <hr>
         <?php else: ?>
-            <h3>Metadados de <?php echo $category->name; ?>
+            <h3> <?php _e('Properties','tainacan') ?><?php _e(' of ','tainacan') ?> <?php echo $category->name; ?>
                 <button onclick="backToMainPage();" id="btn_back_collection" class="btn btn-default pull-right"><?php _e('Back to collection','tainacan') ?></button>
              <hr>
         <?php endif; ?>

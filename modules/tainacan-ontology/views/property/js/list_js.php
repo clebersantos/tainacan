@@ -2,6 +2,7 @@
     $(function () {
        
         var src = $('#src').val();
+        showDynatreesDomains(src);
         showPropertyCategoryDynatree(src);
         showTermsDynatree(src);//mostra o dynatree
         //lots of code
@@ -14,7 +15,7 @@
              <?php }else if($type=='socialdb_property_term'){ ?>      
                   edit_term(<?php echo $property->term_id; ?>); 
              <?php } ?>      
-        },500);  // put the timeout here
+        },700);  // put the timeout here
         $('#property_term_collection_id').val($('#collection_id').val());
         $('#property_data_collection_id').val($('#collection_id').val());// setando o valor da colecao no formulario
         $('#property_object_collection_id').val($('#collection_id').val());// setando o valor da colecao no formulario
@@ -61,12 +62,6 @@
 <?php // Submissao do form de property object     ?>
         $('#submit_form_property_object').submit(function (e) {
             e.preventDefault();
-            if($('#property_object_category_id').val()===''){
-                 showAlertGeneral('<?php _e('Attention!','tainacan') ?>', 
-                 '<?php _e('Please,select at least one relation','tainacan') ?>',
-                 'info');
-                return false;
-            }
             $('#modalImportMain').modal('show');//mostra o modal de carregamento
             $.ajax({
                 url: src + '/controllers/property/property_controller.php',
@@ -265,6 +260,30 @@
             $("#property_data_title").html(''+'<?php _e('Edit property','tainacan') ?>'+'');
             $("#property_data_id").val(elem.id);
             $("#property_data_name").val(elem.name);
+            //dominio da propriedade
+            var created_categories = elem.metas.socialdb_property_created_category;
+            var used_by_categories = elem.metas.socialdb_property_used_by_categories;
+            if(created_categories||used_by_categories){
+                if($("#property_category_dynatree_data_domain")){
+                       $("#property_category_dynatree_data_domain").dynatree("getRoot").visit(function (node) {
+                               node.select(false);
+                       });
+                       $('#property_data_domain_category_id').val('');
+                       $("#property_category_dynatree_data_domain").dynatree("getRoot").visit(function (node) {
+                           if((created_categories&&created_categories.constructor === Array&&created_categories.indexOf(node.data.key)>-1)||
+                                   (created_categories&&created_categories==node.data.key)||
+                                   (used_by_categories&&used_by_categories.constructor=== Array&&used_by_categories.indexOf(node.data.key)>-1)){
+                                    node.select(true);
+                                    ids = $('#property_data_domain_category_id').val().split(',');
+                                    index = ids.indexOf(node.data.key);
+                                    if(index<0){
+                                        ids.push(node.data.key);
+                                       $('#property_data_domain_category_id').val(ids.join(','));
+                                    }
+                               }
+                       });
+                }
+            }
             $("#property_data_widget").val(elem.metas.socialdb_property_data_widget);
             $("#socialdb_property_data_help").val(elem.metas.socialdb_property_help);
             $("#socialdb_property_data_default_value").val(elem.metas.socialdb_property_default_value);
@@ -301,7 +320,31 @@
             $("#property_object_title").html(''+'<?php _e('Edit property','tainacan') ?>'+'');
             $("#property_object_id").val(elem.id);
             $("#property_object_name").val(elem.name);
-            //relacionamento da propriedade de objeto
+            //dominio da propriedade
+            var created_categories = elem.metas.socialdb_property_created_category;
+            var used_by_categories = elem.metas.socialdb_property_used_by_categories;
+            if(created_categories||used_by_categories){
+                if($("#property_category_dynatree_object_domain")){
+                       $("#property_category_dynatree_object_domain").dynatree("getRoot").visit(function (node) {
+                               node.select(false);
+                       });
+                       $('#property_object_domain_category_id').val('');
+                       $("#property_category_dynatree_object_domain").dynatree("getRoot").visit(function (node) {
+                           if((created_categories&&created_categories.constructor === Array&&created_categories.indexOf(node.data.key)>-1)||
+                                   (created_categories&&created_categories==node.data.key)||
+                                   (used_by_categories&&used_by_categories.constructor=== Array&&used_by_categories.indexOf(node.data.key)>-1)){
+                                    node.select(true);
+                                    ids = $('#property_object_domain_category_id').val().split(',');
+                                    index = ids.indexOf(node.data.key);
+                                    if(index<0){
+                                        ids.push(node.data.key);
+                                       $('#property_object_domain_category_id').val(ids.join(','));
+                                    }
+                               }
+                       });
+                }
+            }
+           //relacionamento da propriedade de objeto
            // console.log(elem.metas.socialdb_property_object_category_id.constructor ===Array);
             if(elem.metas.socialdb_property_object_category_id.constructor === Array){
                //  console.log('first');
@@ -376,6 +419,32 @@
             $("#property_term_title").text('<?php _e('Edit property','tainacan') ?>');
             $("#property_term_id").val(elem.id);
             $("#property_term_name").val(elem.name);
+             //dominio da propriedade
+             console.log(elem);
+            var created_categories = elem.metas.socialdb_property_created_category;
+            var used_by_categories = elem.metas.socialdb_property_used_by_categories;
+            if(created_categories||used_by_categories){
+                if($("#property_category_dynatree_term_domain")){
+                       $("#property_category_dynatree_term_domain").dynatree("getRoot").visit(function (node) {
+                               node.select(false);
+                       });
+                       $('#property_term_domain_category_id').val('');
+                       $("#property_category_dynatree_term_domain").dynatree("getRoot").visit(function (node) {
+                           if((created_categories&&created_categories.constructor === Array&&created_categories.indexOf(node.data.key)>-1)||
+                                   (created_categories&&created_categories==node.data.key)||
+                                   (used_by_categories&&used_by_categories.constructor=== Array&&used_by_categories.indexOf(node.data.key)>-1)){
+                                    node.select(true);
+                                    ids = $('#property_term_domain_category_id').val().split(',');
+                                    index = ids.indexOf(node.data.key);
+                                    if(index<0){
+                                        ids.push(node.data.key);
+                                       $('#property_term_domain_category_id').val(ids.join(','));
+                                    }
+                               }
+                       });
+                }
+            }
+            //cardinalidade
             if (elem.metas.socialdb_property_term_cardinality === '1') {
                 $('#socialdb_property_term_cardinality_1').trigger('click');
             } else {
@@ -514,142 +583,8 @@
             }
         });
     }
-<?php //listar propriedades de dados       ?>
-    function list_property_data() {
-        $('#loader_data').show();
-        $('#list_properties_data').hide();
-        $.ajax({
-            type: "POST",
-            url: $('#src').val() + "/controllers/property/property_controller.php",
-            data: {collection_id: $('#collection_id').val(), operation: 'list_property_data', category_id: $('#property_category_id').val()}
-        }).done(function (result) {
-            elem = jQuery.parseJSON(result);
-             $('#loader_data').hide();
-            if (elem.no_properties !== true) {
-                $('#no_properties_data').hide();
-                $('#table_property_data').html('');
-                 <?php if ($is_root): ?>
-                $('#table_property_data').append('<tr><td><?php _e('Title','tainacan') ?></td><td><?php _e('text','tainacan') ?></td><td></td><td></td></tr>');
-                $('#table_property_data').append('<tr><td><?php _e('Type','tainacan') ?></td><td><?php _e('radio','tainacan') ?></td><td></td><td></td></tr>');
-                $('#table_property_data').append('<tr><td><?php _e('Format','tainacan') ?></td><td><?php _e('radio','tainacan') ?></td><td></td><td></td></tr>');
-                $('#table_property_data').append('<tr><td><?php _e('Content','tainacan') ?></td><td><?php _e('textarea','tainacan') ?></td><td></td><td></td></tr>');
-                $('#table_property_data').append('<tr><td><?php _e('Source','tainacan') ?></td><td><?php _e('text','tainacan') ?></td><td></td><td></td></tr>');
-                $('#table_property_data').append('<tr><td><?php _e('Description','tainacan') ?></td><td><?php _e('textarea','tainacan') ?></td><td></td><td></td></tr>');
-                $('#table_property_data').append('<tr><td><?php _e('Licenses','tainacan') ?></td><td><?php _e('radio','tainacan') ?></td><td></td><td></td></tr>');
-                 <?php endif; ?>
-                $.each(elem.property_data, function (idx, property) {
-                    var is_used_by = (property.metas.socialdb_property_used_by_categories&&property.metas.socialdb_property_used_by_categories.indexOf($('#property_category_id').val())>=0)? true : false;
-                    if(is_used_by){
-                        $('#table_property_data').append('<tr><td>' + property.name + '</td><td>' + property.type + '</td><td><input type="hidden" class="property_data_id" value="' + property.id + '"><a onclick="edit_data(this)" class="edit_property_data" href="#submit_form_property_data"><span class="glyphicon glyphicon-edit"><span></a></td><td><input type="hidden" class="property_id" value="' + property.id + '"><input type="hidden" class="property_name" value="' + property.name + '"><a onclick="delete_property(this,1)" class="delete_property" href="#"><span class="glyphicon glyphicon-remove"><span></a></td></tr>');
-                    }
-                    else if (property.metas.is_repository_property && property.metas.is_repository_property === true ||
-                          (property.metas.socialdb_property_created_category && $('#property_category_id').val() !== property.metas.socialdb_property_created_category)) {
-                        $('#table_property_data').append('<tr><td>' + property.name + '</td><td>' + property.type + '</td><td></td><td></td></tr>');
-                    } else {
-                        $('#table_property_data').append('<tr><td>' + property.name + '</td><td>' + property.type + '</td><td><input type="hidden" class="property_data_id" value="' + property.id + '"><a onclick="edit_data(this)" class="edit_property_data" href="#submit_form_property_data"><span class="glyphicon glyphicon-edit"><span></a></td><td><input type="hidden" class="property_id" value="' + property.id + '"><input type="hidden" class="property_name" value="' + property.name + '"><a onclick="delete_property(this,1)" class="delete_property" href="#"><span class="glyphicon glyphicon-remove"><span></a></td></tr>');
-                    }
 
-                });
-                $('#list_properties_data').show();
-            } else {
-                <?php if ($is_root): ?>
-                $('#no_properties_data').hide();
-                $('#table_property_data').html('');
-                $('#table_property_data').append('<tr><td><?php _e('Title','tainacan') ?></td><td><?php _e('text','tainacan') ?></td><td></td><td></td></tr>');
-                $('#table_property_data').append('<tr><td><?php _e('Type','tainacan') ?></td><td><?php _e('radio','tainacan') ?></td><td></td><td></td></tr>');
-                $('#table_property_data').append('<tr><td><?php _e('Format','tainacan') ?></td><td><?php _e('radio','tainacan') ?></td><td></td><td></td></tr>');
-                $('#table_property_data').append('<tr><td><?php _e('Content','tainacan') ?></td><td><?php _e('textarea','tainacan') ?></td><td></td><td></td></tr>');
-                $('#table_property_data').append('<tr><td><?php _e('Source','tainacan') ?></td><td><?php _e('text','tainacan') ?></td><td></td><td></td></tr>');
-                $('#table_property_data').append('<tr><td><?php _e('Description','tainacan') ?></td><td><?php _e('textarea','tainacan') ?></td><td></td><td></td></tr>');
-                $('#table_property_data').append('<tr><td><?php _e('Licenses','tainacan') ?></td><td><?php _e('radio','tainacan') ?></td><td></td><td></td></tr>');
-                $('#list_properties_data').show();  
-                 <?php else: ?>   
-                 $('#no_properties_data').show();    
-                <?php endif; ?>        
-            }
-           // $('#submit_form_property_data').hide();  
-            $('.dropdown-toggle').dropdown();
-            $('.nav-tabs').tab();
-        });
-    }
-<?php //listar propriedades de objeto       ?>
-    function list_property_object() {
-        $('#loader_object').show();
-        $('#list_properties_object').hide();
-        $.ajax({
-            type: "POST",
-            url: $('#src').val() + "/controllers/property/property_controller.php",
-            data: {collection_id: $('#collection_id').val(), operation: 'list_property_object', category_id: $('#property_category_id').val()}
-        }).done(function (result) {
-             $('#loader_object').hide();
-            elem = jQuery.parseJSON(result);
-            console.log(elem);
-            if (elem.no_properties !== true) {
-                $('#no_properties_object').hide();
-                $('#list_properties_object').show();
-                $('#table_property_object').html('');
-                $.each(elem.property_object, function (idx, property) {
-                    var is_used_by = (property.metas.socialdb_property_used_by_categories&&property.metas.socialdb_property_used_by_categories.indexOf($('#property_category_id').val())>=0)? true : false;
-                    if(is_used_by){
-                         $('#table_property_object').append('<tr><td>' + property.name + '</td><td>' + property.type + '</td><td><input type="hidden" class="property_object_id" value="' + property.id + '"><a onclick="edit_object(this)" class="edit_property_object" href="#submit_form_property_object"><span class="glyphicon glyphicon-edit"><span></a></td><td><input type="hidden" class="property_id" value="' + property.id + '"><input type="hidden" class="property_name" value="' + property.name + '"><a onclick="delete_property(this,2)" class="delete_property" href="#"><span class="glyphicon glyphicon-remove"><span></a></td></tr>');
-                     }
-                    else if (property.metas.is_repository_property && property.metas.is_repository_property === true ||
-                            (property.metas.socialdb_property_created_category && $('#property_category_id').val() !== property.metas.socialdb_property_created_category)) {
-                        $('#table_property_object').append('<tr><td>' + property.name + '</td><td>' + property.type + '</td><td></td></tr>');
-                    } else {
-                        $('#table_property_object').append('<tr><td>' + property.name + '</td><td>' + property.type + '</td><td><input type="hidden" class="property_object_id" value="' + property.id + '"><a onclick="edit_object(this)" class="edit_property_object" href="#submit_form_property_object"><span class="glyphicon glyphicon-edit"><span></a></td><td><input type="hidden" class="property_id" value="' + property.id + '"><input type="hidden" class="property_name" value="' + property.name + '"><a onclick="delete_property(this,2)" class="delete_property" href="#"><span class="glyphicon glyphicon-remove"><span></a></td></tr>');
-                    }
-                });
-            } else {
-                $('#table_property_object').html('');
-                $('#list_properties_object').hide();
-                $('#no_properties_object').show();
-                $('#alert_properties_object').show();
-            }
-             //$('#submit_form_property_object').hide();  
-            $('.dropdown-toggle').dropdown();
-        });
-    }
-<?php //listar propriedades de objeto       ?>
-    function list_property_terms() {
-        $('#loader_term').show();
-        $('#list_properties_term').hide();
-        $.ajax({
-            type: "POST",
-            url: $('#src').val() + "/controllers/property/property_controller.php",
-            data: {collection_id: $('#collection_id').val(), operation: 'list_property_terms', category_id: $('#property_category_id').val()}
-        }).done(function (result) {
-             $('#loader_term').hide();
-            elem = jQuery.parseJSON(result);
-            if (elem && elem.no_properties !== true) {
-                $('#no_properties_term').hide();
-                $('#table_property_term').html('');
-                <?php if ($is_root): ?>
-                $('#table_property_term').append('<tr><td><?php _e('Tags','tainacan') ?></td><td><?php _e('tree','tainacan') ?></td><td></td><td></td></tr>');
-                <?php endif; ?>
-                $.each(elem.property_terms, function (idx, property) {
-                    var is_used_by = (property.metas.socialdb_property_used_by_categories&&property.metas.socialdb_property_used_by_categories.indexOf($('#property_category_id').val())>=0)? true : false;
-                    if(is_used_by){
-                        $('#table_property_term').append('<tr><td>' + property.name + '</td><td>' + property.type + '</td><td><input type="hidden" class="property_term_id" value="' + property.id + '"><a onclick="edit_term(this)" class="edit_property_term" href="#submit_form_property_term"><span class="glyphicon glyphicon-edit"><span></a></td><td><input type="hidden" class="property_id" value="' + property.id + '"><input type="hidden" class="property_name" value="' + property.name + '"><a onclick="delete_property(this,3)" class="delete_property" href="#"><span class="glyphicon glyphicon-remove"><span></a></td></tr>');
-                    }
-                    else if (property.metas.is_repository_property && property.metas.is_repository_property === true ||
-                            is_used_by||
-                             (property.metas.socialdb_property_created_category && $('#property_category_id').val() !== property.metas.socialdb_property_created_category)) {
-                        $('#table_property_term').append('<tr><td>' + property.name + '</td><td>' + property.type + '</td><td></td></tr>');
-                    } else {
-                        $('#table_property_term').append('<tr><td>' + property.name + '</td><td>' + property.type + '</td><td><input type="hidden" class="property_term_id" value="' + property.id + '"><a onclick="edit_term(this)" class="edit_property_term" href="#submit_form_property_term"><span class="glyphicon glyphicon-edit"><span></a></td><td><input type="hidden" class="property_id" value="' + property.id + '"><input type="hidden" class="property_name" value="' + property.name + '"><a onclick="delete_property(this,3)" class="delete_property" href="#"><span class="glyphicon glyphicon-remove"><span></a></td></tr>');
-                    }
-                });
-                $('#list_properties_term').show();
-            } else {
-                $('#table_property_term').html('');
-                $('#list_properties_term').hide();
-                $('#no_properties_term').show();
-            }
-            
-            $('.dropdown-toggle').dropdown();
-        });
-    }
+
     function showTermsDynatree(src) {
         $("#terms_dynatree").dynatree({
             checkbox: true,
@@ -997,4 +932,81 @@ function toggleSlideProperties(target,reverse){
         }
     }
 }  
+//dynatree para os domains
+ function showDynatreesDomains(src) {
+        $.ajax({
+            type: "POST",
+            url: src + '/controllers/collection/collection_controller.php',
+            data: {
+                   collection_id: $("#collection_id").val(),
+                    operation: 'initDynatreeSingleEdit',
+                    hideCheckbox: 'false'
+                }
+        }).done(function (result) {
+            var json_propriedades = jQuery.parseJSON(result);
+            //domain propriedade de objeto
+            $("#property_category_dynatree_object_domain").empty();
+            $("#property_category_dynatree_object_domain").dynatree({
+                checkbox: true,
+                // Override class name for checkbox icon:
+                children: json_propriedades,
+                onLazyRead: function (node) {
+                    node.appendAjax({
+                        url: src + '/controllers/category/category_controller.php',
+                        data: {
+                            collection_id: $("#collection_id").val(),
+                            category_id: node.data.key,
+                            operation: 'findDynatreeChild'
+                        }
+                    });
+                },
+                onSelect: function (flag, node) {
+                    concatenate_in_array(node.data.key,'#property_object_domain_category_id');
+                }
+            });
+            //domain propriedade de dados
+            $("#property_category_dynatree_data_domain").empty();
+            $("#property_category_dynatree_data_domain").dynatree({
+                checkbox: true,
+                // Override class name for checkbox icon:
+                children: json_propriedades,
+                onLazyRead: function (node) {
+                    node.appendAjax({
+                        url: src + '/controllers/category/category_controller.php',
+                        data: {
+                            collection_id: $("#collection_id").val(),
+                            category_id: node.data.key,
+                            operation: 'findDynatreeChild'
+                        }
+                    });
+                },
+                onSelect: function (flag, node) {
+                    concatenate_in_array(node.data.key,'#property_data_domain_category_id');
+                }
+            });
+            //domain propriedade de dados
+            $("#property_category_dynatree_term_domain").empty();
+            $("#property_category_dynatree_term_domain").dynatree({
+                checkbox: true,
+                // Override class name for checkbox icon:
+                children: json_propriedades,
+                onLazyRead: function (node) {
+                    node.appendAjax({
+                        url: src + '/controllers/category/category_controller.php',
+                        data: {
+                            collection_id: $("#collection_id").val(),
+                            category_id: node.data.key,
+                            operation: 'findDynatreeChild'
+                        }
+                    });
+                },
+                onSelect: function (flag, node) {
+                    concatenate_in_array(node.data.key,'#property_term_domain_category_id');
+                }
+            });
+        });
+    }
+
+
+
 </script>

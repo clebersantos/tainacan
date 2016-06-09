@@ -170,5 +170,5 @@ include_once ('js/create_js.php');
     <input type="hidden" id="create_object_collection_id" name="collection_id" value="">
     <input type="hidden" id="operation" name="operation" value="add">
     <!--button onclick="back_main_list();" style="margin-bottom: 20px;"  class="btn btn-default btn-lg pull-left"><b><?php _e('Back','tainacan') ?></b></button-->
-    <button type="submit" id="submit" style="margin-bottom: 20px;" class="btn btn-primary btn-lg pull-right"><?php _e('Submit','tainacan'); ?></button>
+    <button type="submit" id="submit" style="margin-bottom: 20px;" class="btn btn-primary btn-lg pull-right send-button"><?php _e('Submit','tainacan'); ?></button>
 </form>

@@ -1,8 +1,8 @@
 <?php
 
-include_once ('../../../../../wp-config.php');
-include_once ('../../../../../wp-load.php');
-include_once ('../../../../../wp-includes/wp-db.php');
+include_once (dirname(__FILE__) . '/../../../../../../wp-config.php');
+include_once (dirname(__FILE__) . '/../../../../../../wp-load.php');
+include_once (dirname(__FILE__) . '/../../../../../../wp-includes/wp-db.php');
 require_once(dirname(__FILE__) . '../../../event/event_model.php');
 require_once(dirname(__FILE__) . '../../../property/property_model.php');
 
@@ -77,6 +77,9 @@ class EventPropertyTermEdit extends EventModel {
         $data['property_category_id'] = get_term_meta($data['property_term_id'], 'socialdb_property_created_category',true) ;
         // chamo a funcao do model de propriedade para fazer a insercao
          $result = json_decode($propertyModel->update_property_term($data));
+        if(isset($result->property_term_id)){
+                do_action('after_event_update_property_term',$result->property_term_id,$event_id);
+        }
         // verifying if is everything all right
         if (get_term_by('id', $data['property_term_id'], 'socialdb_property_type')&&$result->success!='false') {
             $this->set_approval_metas($data['event_id'], $data['socialdb_event_observation'], $automatically_verified);

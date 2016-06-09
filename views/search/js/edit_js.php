@@ -47,9 +47,7 @@
         $('#submit_form_search_data').submit(function (e) {
             // cl($("#search_add_facet").val());
             var form_data = $(this).serialize();
-
             cl(form_data);
-
 
             e.preventDefault();
             $.ajax({
@@ -405,7 +403,6 @@
                         $('#search_data_widget').append('<option value="' + key + '">' + value + '</option>');
                     }
                 });
-
             }
         });
     }
@@ -555,7 +552,6 @@
             data: {collection_id: $('#collection_id').val(), operation: 'list_property_data', category_id: $('#property_category_id').val()}
         }).done(function (result) {
             elem = jQuery.parseJSON(result);
-            cl('DEALING PROPERLY');
             cl(elem);
             if (elem.no_properties !== true) {
                 $('#collection_order_properties').html('');
@@ -565,10 +561,6 @@
                     //if(!property.metas.is_repository_property){ 
                     $('#collection_order_properties').append('<option value="'+property.id+'">' + property.name + ' (<?php _e('Type','tainacan') ?>:'+property.type+')</option>');
                     //}
-                    cl("Adicionando mais um!");
-                    cl("Meu nome é " + property.name  + " e meu ID é " + property.id );
-                    cl(" Olha isso " + $('#collection_order_properties').val() );
-                    cl("E isso " + $('#collection_id').val());
                 });
 
             } else {

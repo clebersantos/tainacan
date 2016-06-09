@@ -1,7 +1,7 @@
 <?php
 	$ano = date("Y");
 	$mes = date("m");
-	$imagePath = dirname(dirname(dirname(dirname(dirname(__FILE__))))).DIRECTORY_SEPARATOR . "uploads" .DIRECTORY_SEPARATOR . $ano .DIRECTORY_SEPARATOR . $mes .DIRECTORY_SEPARATOR;
+	$imagePath = dirname(dirname(dirname(dirname(dirname(__FILE__))))).DIRECTORY_SEPARATOR . "uploads" .DIRECTORY_SEPARATOR . $ano .DIRECTORY_SEPARATOR . $mes . DIRECTORY_SEPARATOR;
 	$imageURL =  "http://".$_SERVER['HTTP_HOST'].dirname(dirname(dirname(dirname(dirname($_SERVER['REQUEST_URI'])))))."/uploads/$ano/$mes/";
 
 	$allowedExts = array("gif", "jpeg", "jpg", "png", "GIF", "JPEG", "JPG", "PNG");

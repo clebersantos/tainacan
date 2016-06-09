@@ -1,8 +1,8 @@
 <?php
 
-include_once ('../../../../../wp-config.php');
-include_once ('../../../../../wp-load.php');
-include_once ('../../../../../wp-includes/wp-db.php');
+include_once (dirname(__FILE__) . '/../../../../../../wp-config.php');
+include_once (dirname(__FILE__) . '/../../../../../../wp-load.php');
+include_once (dirname(__FILE__) . '/../../../../../../wp-includes/wp-db.php');
 require_once(dirname(__FILE__) . '../../../event/event_model.php');
 require_once(dirname(__FILE__) . '../../../property/property_model.php');
 
@@ -76,8 +76,12 @@ class EventPropertyTermDelete extends EventModel {
                     (is_array($categories_used)&&!in_array($data['property_category_id'], $categories_used))
                 ){
             $propertyModel->delete($data);
+            if(isset($verify->term_id)){
+                do_action('after_event_delete_property_term',$verify,$event_id);
+            }
         }else{
              delete_term_meta($data['property_category_id'], 'socialdb_category_property_id', $data['property_delete_id']);
+             delete_term_meta($data['property_delete_id'], 'socialdb_property_used_by_categories',$data['property_category_id']); // e entao removo do array de categorias que utilizam esta propriedade
         }
         // verifying if is everything all right
         if ($verify){

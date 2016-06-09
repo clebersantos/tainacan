@@ -61,12 +61,18 @@ class EventCollectionDeleteModel extends EventModel {
      * Autor: Eduardo Humberto 
      */
     public function update_post_status($collection_delete_id,$data,$automatically_verified) {
-         $collection_id = get_post_meta($data['event_id'],'socialdb_event_collection_id',true);
+         // $collection_id = get_post_meta($data['event_id'],'socialdb_event_collection_id',true);
         // Update the post
         $object = array(
             'ID' => $collection_delete_id,
             'post_status' => 'draft'
         );
+
+        $collection_items = $this->get_collection_posts($collection_delete_id, "ID");
+        foreach ( $collection_items as $item) {
+            wp_update_post( ['ID' => $item->ID, 'post_status' => 'trash'] );
+        }
+
         // Update the post into the database
         $value = wp_update_post($object);
         if ($value>0) {

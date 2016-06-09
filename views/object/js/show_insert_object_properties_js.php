@@ -24,8 +24,18 @@
                 //var temp = $("#chosen-selected2 [value='" + ui.item.value + "']").val();
                 var temp = $("#property_value_" + property_id + "_" + object_id + " [value='" + ui.item.value + "']").val();
                 if (typeof temp == "undefined") {
-                    $("#property_value_" + property_id + "_" + object_id + "_add").append("<option class='selected' value='" + ui.item.value + "' selected='selected' >" + ui.item.label + "</option>");
-
+                    var already_selected = false;
+                    $("#property_value_" + property_id + "_" + object_id+"_add option").each(function(){
+                        if($(this).val()==ui.item.value){
+                            already_selected = true;
+                        }
+                    });
+                    if(!already_selected){
+                        $("#property_value_" + property_id + "_" + object_id + "_add").append("<option class='selected' value='" + ui.item.value + "' selected='selected' >" + ui.item.label + "</option>");
+                        if(Hook.is_register( 'tainacan_validate_cardinality_onselect')){
+                            Hook.call( 'tainacan_validate_cardinality_onselect', [ 'select[name="socialdb_property_'+property_id+'[]"]',property_id ] );
+                        }
+                    }
                 }
                 setTimeout(function () {
                     $("#autocomplete_value_" + property_id + "_" + object_id).val('');
@@ -62,8 +72,15 @@
                 }
     }
 
-    function clear_select_object_property(e) {
+    function clear_select_object_property(e,property_id,object_id) {
         $('option:selected', e).remove();
+        $("#property_value_" + property_id + "_" + object_id+"_add option").each(function()
+        {
+           $(this).attr('selected','selected');
+        });
+        if(Hook.is_register( 'tainacan_validate_cardinality_onselect')){
+            Hook.call( 'tainacan_validate_cardinality_onselect', [ 'select[name="socialdb_property_'+property_id+'[]"]',property_id ] );
+        }
         //$('.chosen-selected2 option').prop('selected', 'selected');
     }
 

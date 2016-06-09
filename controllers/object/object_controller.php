@@ -1,10 +1,13 @@
 <?php
 
+/**
+ * #1 - ADICIONAR ITEMS TIPO TEXTO
+ * #2 - ADICIONAR ITEMS DEFAULT
+ */
 require_once(dirname(__FILE__) . '../../../models/object/object_model.php');
 require_once(dirname(__FILE__) . '../../../models/collection/collection_model.php');
 require_once(dirname(__FILE__) . '../../../controllers/general/general_controller.php');
 require_once(dirname(__FILE__) . '../../../models/user/user_model.php');
-
 require_once(dirname(__FILE__) . '../../../models/object/objectfile_model.php');
 
 class ObjectController extends Controller {
@@ -13,57 +16,96 @@ class ObjectController extends Controller {
         $object_model = new ObjectModel();
         $objectfile_model = new ObjectFileModel;
         switch ($operation) {
+            // #1 ADICIONAR ITEMS TIPO TEXTO
+            case "create_item_text":
+                $data['object_name'] = get_post_meta($data['collection_id'], 'socialdb_collection_object_name', true);
+                $data['socialdb_collection_attachment'] = get_post_meta($data['collection_id'], 'socialdb_collection_attachment', true);
+                $data['object_id'] = $object_model->create();
+                return $this->render(dirname(__FILE__) . '../../../views/object/create_item_text.php', $data);
+                break;
+            // FIM : ADICIONAR ITEMS TIPO TEXTO
+            // #1 ADICIONAR ITEMS TIPO URL
+            case "create_item_url":
+                $data['object_name'] = get_post_meta($data['collection_id'], 'socialdb_collection_object_name', true);
+                $data['socialdb_collection_attachment'] = get_post_meta($data['collection_id'], 'socialdb_collection_attachment', true);
+                $data['object_id'] = $object_model->create();
+                return $this->render(dirname(__FILE__) . '../../../views/object/create_item_url.php', $data);
+                break;
+            // FIM : ADICIONAR ITEMS TIPO TEXTO 
+            // #2 - ADICIONAR ITEMS DEFAULT
             case "create":
-                $data['object_name'] =  get_post_meta($data['collection_id'], 'socialdb_collection_object_name', true);
+                $data['object_name'] = get_post_meta($data['collection_id'], 'socialdb_collection_object_name', true);
                 $data['socialdb_collection_attachment'] = get_post_meta($data['collection_id'], 'socialdb_collection_attachment', true);
                 $data['object_id'] = $object_model->create();
                 return $this->render(dirname(__FILE__) . '../../../views/object/create.php', $data);
                 break;
+            // FIM : ADICIONAR ITEMS DEFAULT
+            // adiciona um item simples
             case "add":
                 return $object_model->add($data);
                 break;
-            //BEGIN: EDITOR DE ITEMS MULTIPLOS
-             case "showViewMultipleItems":
+            case "add_item_not_published":
+                return $object_model->add_item_not_published($data);
+                break;
+            //#4 EDITOR DE ITEMS MULTIPLOS
+            case "showViewMultipleItems":
                 $data['object_id'] = $object_model->create();
                 return $this->render(dirname(__FILE__) . '../../../views/object/multiple_items/create.php', $data);
                 break;
             case "editor_items":
                 $data['properties'] = $object_model->show_object_properties($data);
                 $data['items'] = $objectfile_model->get_files($data);
-                if($data['items']&&empty(!$data['items'])){
+                if ($data['items'] && empty(!$data['items'])) {
                     return $this->render(dirname(__FILE__) . '../../../views/object/multiple_items/editor_items.php', $data);
-                }else{
+                } else {
                     return 0;
                 }
                 break;
-           //END: EDITOR DE ITEMS MULTIPLOS
-           //BEGIN: EDITOR DE ITENS PARA REDES SOCIAIS
+            //END: EDITOR DE ITEMS MULTIPLOS
+            //# EDITOR DE ITENS PARA REDES SOCIAIS
+            case "showAddItemURL":
+                return $this->render(dirname(__FILE__) . '../../../views/object/multiple_social_network/create.php', $data);
+                break;
             case "showViewMultipleItemsSocialNetwork":
                 $data['properties'] = $object_model->show_object_properties($data);
                 $data['items'] = $objectfile_model->get_inserted_items_social_network($data);
-                if($data['items']&&empty(!$data['items'])){
+                if ($data['items'] && empty(!$data['items'])) {
                     return $this->render(dirname(__FILE__) . '../../../views/object/multiple_social_network/editor_items.php', $data);
-                }else{
+                } else {
                     return 0;
                 }
-                break; 
-           //END: EDITOR DE ITENS PARA REDES SOCIAIS
+                break;
+            //END: EDITOR DE ITENS PARA REDES SOCIAIS
             case 'insert_fast':// apenas com o titulo
                 return $object_model->fast_insert($data);
                 break;
             case 'insert_fast_url':// atraves da url
                 return $object_model->fast_insert_url($data);
-            case "edit":
-                $object_name =  get_post_meta($data['collection_id'], 'socialdb_collection_object_name', true);
+            // # - PAGINA DE EDICAO DEFAULT
+            case "edit_default":
+                $object_name = get_post_meta($data['collection_id'], 'socialdb_collection_object_name', true);
                 $socialdb_collection_attachment = get_post_meta($data['collection_id'], 'socialdb_collection_attachment', true);
                 $data = $object_model->edit($data['object_id'], $data['collection_id']);
-               $data['object_name'] = $object_name;
+                $data['object_name'] = $object_name;
                 $data['socialdb_collection_attachment'] = $socialdb_collection_attachment;
                 $data['socialdb_object_from'] = get_post_meta($data['object']->ID, 'socialdb_object_from', true);
                 $data['socialdb_object_dc_source'] = get_post_meta($data['object']->ID, 'socialdb_object_dc_source', true);
                 $data['socialdb_object_content'] = get_post_meta($data['object']->ID, 'socialdb_object_content', true);
                 $data['socialdb_object_dc_type'] = get_post_meta($data['object']->ID, 'socialdb_object_dc_type', true);
                 return $this->render(dirname(__FILE__) . '../../../views/object/edit.php', $data);
+                break;
+            // # - PAGINA DE EDICAO PARA TEXTOS
+            case "edit":
+                $object_name = get_post_meta($data['collection_id'], 'socialdb_collection_object_name', true);
+                $socialdb_collection_attachment = get_post_meta($data['collection_id'], 'socialdb_collection_attachment', true);
+                $data = $object_model->edit($data['object_id'], $data['collection_id']);
+                $data['object_name'] = $object_name;
+                $data['socialdb_collection_attachment'] = $socialdb_collection_attachment;
+                $data['socialdb_object_from'] = get_post_meta($data['object']->ID, 'socialdb_object_from', true);
+                $data['socialdb_object_dc_source'] = get_post_meta($data['object']->ID, 'socialdb_object_dc_source', true);
+                $data['socialdb_object_content'] = get_post_meta($data['object']->ID, 'socialdb_object_content', true);
+                $data['socialdb_object_dc_type'] = get_post_meta($data['object']->ID, 'socialdb_object_dc_type', true);
+                return $this->render(dirname(__FILE__) . '../../../views/object/edit_item_text.php', $data);
                 break;
             case "update":
                 return $object_model->update($data);
@@ -81,15 +123,15 @@ class ObjectController extends Controller {
                 $collection_id = $data['collection_id'];
                 $recover_wpquery = $object_model->get_args($data);
                 $args = $object_model->list_all($data);
-                $data['loop'] =  new WP_Query($args);
+                $data['loop'] = new WP_Query($args);
                 $data['collection_data'] = $collection_model->get_collection_data($collection_id);
-                   
+
                 $view_count = get_post_meta($collection_id, 'collection_view_count', true);
-                if ( empty( $view_count ) ):
-                    add_post_meta( $collection_id, 'collection_view_count', 1, true );
+                if (empty($view_count)):
+                    add_post_meta($collection_id, 'collection_view_count', 1, true);
                 else:
                     $updated = $view_count + 1;
-                    update_post_meta( $collection_id, 'collection_view_count', $updated, $view_count );
+                    update_post_meta($collection_id, 'collection_view_count', $updated, $view_count);
                 endif;
 
                 if (!$data['sorted_by']) {
@@ -99,13 +141,13 @@ class ObjectController extends Controller {
                 $data['is_moderator'] = CollectionModel::is_moderator($data['collection_id'], get_current_user_id());
                 $return['page'] = $this->render(dirname(__FILE__) . '../../../views/object/list.php', $data);
                 $return['args'] = serialize($recover_wpquery);
-                if(empty($object_model->get_collection_posts($data['collection_id']))){
+                if (empty($object_model->get_collection_posts($data['collection_id']))) {
                     $return['empty_collection'] = true;
-                }else{
+                } else {
                     $return['empty_collection'] = false;
                 }
-                if(mb_detect_encoding($return['page'], 'auto')=='UTF-8'){
-                     $return['page'] = iconv('ISO-8859-1', 'UTF-8',  utf8_decode($return['page']));
+                if (mb_detect_encoding($return['page'], 'auto') == 'UTF-8') {
+                    $return['page'] = iconv('ISO-8859-1', 'UTF-8', utf8_decode($return['page']));
                 }
                 return json_encode($return);
                 break;
@@ -129,16 +171,26 @@ class ObjectController extends Controller {
             case 'show_object_properties'://
                 $data = $object_model->show_object_properties($data);
                 return $this->render(dirname(__FILE__) . '../../../views/object/show_insert_object_properties.php', $data);
+            // propriedades na insercao do objeto com o ACCORDION
+            case 'show_object_properties_accordion'://
+                $data = $object_model->show_object_properties($data);
+                return $this->render(dirname(__FILE__) . '../../../views/object/list_properties_accordion.php', $data);
             // propriedades na EDICAO do objeto
             case 'show_object_properties_edit'://
                 $data = $object_model->show_object_properties($data);
-                $data['categories_id'] = wp_get_object_terms($data['object_id'], 'socialdb_category_type',array('fields'=>'ids'));
+                $data['categories_id'] = wp_get_object_terms($data['object_id'], 'socialdb_category_type', array('fields' => 'ids'));
                 return $this->render(dirname(__FILE__) . '../../../views/object/edit_object_properties/list_properties.php', $data);
+                break;
+            // propriedades na EDICAO do objeto
+            case 'list_properties_edit_accordeon'://
+                $data = $object_model->show_object_properties($data);
+                $data['categories_id'] = wp_get_object_terms($data['object_id'], 'socialdb_category_type', array('fields' => 'ids'));
+                return $this->render(dirname(__FILE__) . '../../../views/object/edit_object_properties/edit_list_properties_accordion.php', $data);
                 break;
             // mostra propriedades preparando para um evento
             case 'list_properties':// mostra todas as propriedades com seus respectivos valores (aparece por default)
                 $data = $object_model->list_properties($data);
-                 $data['categories_id'] = wp_get_object_terms($data['object_id'], 'socialdb_category_type',array('fields'=>'ids'));
+                $data['categories_id'] = wp_get_object_terms($data['object_id'], 'socialdb_category_type', array('fields' => 'ids'));
                 return $this->render(dirname(__FILE__) . '../../../views/object/show_list_event_properties.php', $data);
                 break;
             case 'list_properties_edit_remove':// pega todas as propriedade para serem mostradas no formulario de edicao e remocao
@@ -173,6 +225,15 @@ class ObjectController extends Controller {
                 $data['object'] = get_post($object_id);
                 $data["username"] = $user_model->get_user($data['object']->post_author)['name'];
                 $data['metas'] = get_post_meta($object_id);
+                $data['collection_metas'] = get_post_meta($data['collection_id'], 'socialdb_collection_download_control', true);
+                $data['collection_metas'] = ($data['collection_metas'] ? $data['collection_metas'] : 'allowed');
+                $data['has_watermark'] = get_post_meta($data['collection_id'], 'socialdb_collection_add_watermark', true);
+                $watermark_id = get_post_meta($data['collection_id'], 'socialdb_collection_watermark_id', true);
+                if ($watermark_id) {
+                    $data['url_watermark'] = wp_get_attachment_url($watermark_id);
+                } else {
+                    $data['url_watermark'] = get_template_directory_uri() . '/libraries/images/icone.png';
+                }
                 return $this->render(dirname(__FILE__) . '../../../views/object/list_single_object.php', $data);
                 break;
             case "list_single_object_by_name":
@@ -185,7 +246,7 @@ class ObjectController extends Controller {
                     'numberposts' => 1
                 );
                 $result = get_posts($args);
-                if(empty($result)||!isset($result)){
+                if (empty($result) || !isset($result)) {
                     $args = array(
                         'name' => $object_name,
                         'post_type' => 'socialdb_object',
@@ -194,13 +255,22 @@ class ObjectController extends Controller {
                     );
                     $result = get_posts($args);
                 }
-                if (count($result) > 0&&isset($result[0])&&in_array($result[0]->post_status, array('publish','inherit'))) {
+                if (count($result) > 0 && isset($result[0]) && in_array($result[0]->post_status, array('publish', 'inherit'))) {
                     $data['object'] = $result[0];
                     $data["username"] = $user_model->get_user($data['object']->post_author)['name'];
                     $data['metas'] = get_post_meta($data['object']->ID);
+                    $data['collection_metas'] = get_post_meta($data['collection_id'], 'socialdb_collection_download_control', true);
+                    $data['collection_metas'] = ($data['collection_metas'] ? $data['collection_metas'] : 'allowed');
+                    $data['has_watermark'] = get_post_meta($data['collection_id'], 'socialdb_collection_add_watermark', true);
+                    $watermark_id = get_post_meta($data['collection_id'], 'socialdb_collection_watermark_id', true);
+                    if ($watermark_id) {
+                        $data['url_watermark'] = wp_get_attachment_url($watermark_id);
+                    } else {
+                        $data['url_watermark'] = get_template_directory_uri() . '/libraries/images/icone.png';
+                    }
                     $array_json['html'] = $this->render(dirname(__FILE__) . '../../../views/object/list_single_object.php', $data);
                     return json_encode($array_json);
-                }else{
+                } else {
                     $array_json['redirect'] = get_the_permalink($data['collection_id']);
                     return json_encode($array_json);
                 }
@@ -237,7 +307,7 @@ class ObjectController extends Controller {
                 return $this->render(dirname(__FILE__) . '../../../views/object/file/list_file.php', $data);
             case 'redirect_facebook':
                 return json_encode($object_model->redirect_facebook($data));
-             // acoes para listagem de comentarios
+            // acoes para listagem de comentarios
             case 'list_comments':
                 $data['permissions'] = $object_model->verify_comment_permissions($data['collection_id']);
                 return $this->render(dirname(__FILE__) . '../../../views/object/comments/view_comments.php', $data);
@@ -262,7 +332,7 @@ class ObjectController extends Controller {
                 $data = $object_model->delete_items_socialnetwork($data);
                 return json_encode($data);
             case 'remove_ids_socialnetwork':
-                $data['items_id'] = explode(',',$data['items_id']);
+                $data['items_id'] = explode(',', $data['items_id']);
                 $data = $object_model->delete_items_socialnetwork($data);
                 return json_encode($data);
             case 'get_last_attachment':
@@ -270,6 +340,12 @@ class ObjectController extends Controller {
                 break;
             case 'update_attachment_legend':
                 $object_model->update_attachment_legend($data['item_id'], $data['item_legend']);
+                break;
+            case 'insertUserDownload':
+                if (is_user_logged_in()) {
+                    add_post_meta($data['thumb_id'], 'socialdb_user_download_' . time(), get_current_user_id());
+                }
+                return true;
                 break;
         }
     }

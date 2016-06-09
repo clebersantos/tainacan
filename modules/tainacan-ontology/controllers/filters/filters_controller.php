@@ -8,11 +8,10 @@ include_once(dirname(__FILE__).'/../../../../controllers/general/general_control
 		switch ($operation) {
                     case 'initDynatreePropertiesFilter':
                         return $model->initDynatreePropertiesFilter($data['collection_id']);
-                    case 'childrenDynatreePropertiesFilter':
-                        $posts = $archival_management_model->get_collection_posts($data['collection_id']);
-                        return $archival_management_model->get_items_to_eliminate($data, $posts);
                     case 'restrictionsDynatreeProperties':
                         return $model->initDynatreePropertiesFilter($data['collection_id'],false); 
+                    case 'restrictionsDynatreeIndividues':
+                        return $model->initDynatreeIndividues($data['collection_id']); 
                         
                 }
 	}

@@ -16,7 +16,10 @@
                 });
             });
         }
-
+       
+       if($('.hide_rankings')&&$('.hide_rankings').val()==='true'){
+            $('#list_ranking_items').hide();
+        }
 
     });
     function create_save_vote_stars(score, property_id, object_id) {

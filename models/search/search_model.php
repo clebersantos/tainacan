@@ -37,7 +37,13 @@ public function add($data) {
             
         } elseif ($data['search_data_widget'] == 'range') {
             $options_range = array();
-            $max_range = $data['counter_range'];
+
+            if ( $data['counter_range'] ) {
+                $max_range = $data['counter_range'];
+            } else if ( $data['counter_data_range'] ){
+                $max_range = $data['counter_data_range'];
+            }
+
             for ($i = 0; $i <= $max_range; $i++):
                 if ((isset($data['range_' . $i . '_1']) && $data['range_' . $i . '_1']!='') && (isset($data['range_' . $i . '_2']) && $data['range_' . $i . '_1']!='')) {
                     $options_range[] = array('value_1' => $data['range_' . $i . '_1'], 'value_2' => $data['range_' . $i . '_2']);
@@ -60,6 +66,8 @@ public function add($data) {
         $result['msg'] = __('Facet successfully saved.','tainacan');
         $result['type'] = 'success';
         $result['result'] = 'true';
+        $result['pipa'] = $max_range;
+        $result['ue'] = $options_range;
     }
     return $result;
 }
@@ -107,6 +115,7 @@ public function add($data) {
             } elseif ($data['search_data_widget'] == 'range') {
                 $options_range = array();
                 $max_range = $data['counter_range'];
+
                 for ($i = 0; $i <= $max_range; $i++):
                     if ((isset($data['range_' . $i . '_1']) && $data['range_' . $i . '_1']!='') && (isset($data['range_' . $i . '_2']) &&$data['range_' . $i . '_2']!='')) {
                         $options_range[] = array('value_1' => $data['range_' . $i . '_1'], 'value_2' => $data['range_' . $i . '_2']);
@@ -357,8 +366,14 @@ public function add($data) {
         return $data;
     }
 
+    function get_range_options($data) {
+        $data['range_options'] = unserialize(get_post_meta($data['collection_id'], 'socialdb_collection_facet_' . $data['property_id'] . '_range_options', true));
+        return $data;
+    }
+
     function update_ordenation($data) {
         $post_id = $data['collection_id'];
+        update_post_meta($post_id, 'socialdb_collection_list_mode', $data['collection_list_mode']);
         update_post_meta($post_id, 'socialdb_collection_ordenation_form', $data['socialdb_collection_ordenation_form']);
         update_post_meta($post_id, 'socialdb_collection_default_ordering', $data['collection_order']);
 

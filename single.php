@@ -148,7 +148,7 @@ $options = get_option('socialdb_theme_options');
             <div class="row">
 
                 <!-- TAINACAN: esta div (AJAX) mostra os widgets para pesquisa que estao setadas na esquerda  -->
-                <div  id="div_left" class="col-md-3"></div>
+                <div  id="div_left" class="col-md-3" style="height: 1300px;min-height: 500px;overflow-y:  auto;"></div>
 
                 <!-- TAINACAN: esta div agrupa a listagem de itens ,submissao de novos itens e ordencao -->
                 <div  id="div_central" class="col-md-9">
@@ -157,27 +157,27 @@ $options = get_option('socialdb_theme_options');
                     <div id="menu_object" class="row col-md-12">
                         <div class="col-lg-12 no-padding">
 
-                            <div style="width: 80%; display: inline-block" class="col-lg-10 no-padding">
-                                <div class="search-colecao">
-                                    <div class="input-group">
-                                        <input style="font-size: 13px;" class="form-control input-medium placeholder ui-autocomplete-input" id="search_objects"
-                                               onkeyup="set_value(this)" onkeydown="if (event.keyCode === 13)
-                                                           document.getElementById('search_main').click();"
-                                               type="text" placeholder="<?php _e('Find', 'tainacan') ?>" autocomplete="off">
-                                        <span class="input-group-btn">
-                                            <button id="search_main" type="button" onclick="search_objects('#search_objects')" class="btn btn-default">
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
-                                        </span>
+                            <div class="col-md-12 no-padding">
+                                <div class="row search-top-container">
+                                    <div class="col-md-10 box-left">
+                                        <div class="search-colecao">
+                                            <div class="input-group">
+                                                <input style="font-size: 13px;" class="form-control input-medium placeholder ui-autocomplete-input" id="search_objects"
+                                                       onkeyup="set_value(this)" onkeydown="if (event.keyCode === 13) document.getElementById('search_main').click();"
+                                                       type="text" placeholder="<?php _e('Find', 'tainacan') ?>" autocomplete="off">
+                                                <span class="input-group-btn">
+                                                    <button id="search_main" type="button" onclick="search_objects('#search_objects')" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-search"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div >
-
-                            <div style="float: right; width: 18%; display: inline-block" class="col-lg-2 no-padding">
-                                <div class="text-center" style="padding-top: 7px;">
-                                    <a onclick="showAdvancedSearch('<?php echo get_template_directory_uri() ?>');" href="#">
-                                        <span><?php _e('Advanced Search', 'tainacan'); ?></span> <span class="glyphicon glyphicon-triangle-bottom"></span>
-                                    </a>
+                                    <div class="col-md-2 box-right">
+                                        <button class="btn btn-default" onclick="showAdvancedSearch('<?php echo get_template_directory_uri() ?>');">
+                                            <?php _e('Advanced Search', 'tainacan'); ?>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -220,10 +220,14 @@ $options = get_option('socialdb_theme_options');
                                                         <?php _e('Add', 'tainacan') ?> <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu">
-                                                        <li><a  id="create_button" style="cursor: pointer;"><?php echo (get_post_meta(get_the_ID(), 'socialdb_collection_object_name', true)) ? get_post_meta(get_the_ID(), 'socialdb_collection_object_name', true) : _e('Item', 'tainacan') //_e('Item', 'tainacan')                ?></a></li>
+                                                        <!--li><a  id="create_button" style="cursor: pointer;"><?php echo (get_post_meta(get_the_ID(), 'socialdb_collection_object_name', true)) ? get_post_meta(get_the_ID(), 'socialdb_collection_object_name', true) : _e('Item', 'tainacan') //_e('Item', 'tainacan')                ?></a></li>
                                                         <li><a onclick="showViewMultipleItems()" style="cursor: pointer;" ><?php _e('Multiple Files', 'tainacan') ?></a></li>
-                                                        <!--li><a style="cursor: pointer;" onclick="showModalImportSocialNetwork();" ><?php _e('Social Media', 'tainacan') ?></a></li-->
+                                                        <!--li><a style="cursor: pointer;" onclick="showModalImportSocialNetwork();" ><?php _e('Social Media', 'tainacan') ?></a></li>
                                                         <li><a style="cursor: pointer;" onclick="showModalImportAll();" ><?php _e('Web Resource URL', 'tainacan') ?></a></li>
+                                                        <li class="divider" -->
+                                                        <li><a onclick="showAddItemText()"  style="cursor: pointer;"><?php  _e('Write text', 'tainacan') ?> </a></li>
+                                                        <li><a onclick="showViewMultipleItems()" style="cursor: pointer;" ><?php _e('Send file(s)', 'tainacan') ?>  </a></li>
+                                                        <li><a onclick="showAddItemURL();" style="cursor: pointer;" ><?php _e('Insert URL', 'tainacan') ?>  </a></li>    
                                                     </ul>
                                                 </div>
                                             </div>
@@ -231,7 +235,6 @@ $options = get_option('socialdb_theme_options');
                                     </div>
                                 <?php endif; ?>
                                 <div class="col-md-4 flex-box">
-
                                     <select onchange="getOrder(this)"
                                             class="form-control white"
                                             name="collection_single_ordenation"
@@ -242,6 +245,22 @@ $options = get_option('socialdb_theme_options');
                                     <button onclick="asc_ordenation()" type="button" id="sort_list" class="btn btn-default pull-right"><span class="glyphicon glyphicon-sort-by-attributes"></span></button>
                                     <button onclick="desc_ordenation()" type="button" id="sort_list" class="btn btn-default pull-right"><span class="glyphicon glyphicon-sort-by-attributes-alt"></span></button>
                                 </div>
+                                <?php /*
+                                <div class="col-md-3 viewMode-control">
+                                    <div> <?php _e('Show:', 'tainacan') ?> </div>
+                                    <ul>
+                                        <?php
+                                        $viewModes = [ 'card', 'gallery', 'list',  'slideshow' ];
+                                        foreach($viewModes as $mode): ?>
+                                            <li class="<?php echo $mode ?>">
+                                                <a href="javascript:void(0)" onclick="changeViewMode('<?php echo $mode ?>')">
+                                                    <img alt="<?php echo ucfirst( __($mode, 'tainacan') ); ?>"
+                                                        src="<?php echo get_template_directory_uri() . '/libraries/images/icons/collection/icon-' . $mode . '.png' ?>" />
+                                                </a>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div> */ ?>
                             </div>
                         </div>
 
@@ -249,8 +268,9 @@ $options = get_option('socialdb_theme_options');
 
                     <!--div id="remove"> view removida </div> -->
                     <!-- TAINACAN: esta div (AJAX)recebe o formulario para criacao e edicao de itens  -->
-                    <div id="form">
+                    <div id="form" >
                     </div>
+
                     <!-- TAINACAN: esta div apenas 'envelopa' a que recebe a listagem nenhum estilo e associado  -->
                     <div id="container_socialdb" class="row col-md-12">
                         <!-- TAINACAN: esta div (AJAX)recebe a listagem de itens  -->
@@ -277,7 +297,9 @@ $options = get_option('socialdb_theme_options');
     <ul id="myMenuSingle" class="contextMenu" style="display:none;">
         <?php if (verify_allowed_action(get_the_ID(), 'socialdb_collection_permission_create_category')): ?>
             <li class="add">
-                <a href="#add"><?php echo __('Add', 'tainacan'); ?></a>
+                <a href="#add" style="background-position: 6px 50%;padding:1px 5px 1px 28px;background-repeat:no-repeat;background-image:url('<?php echo get_template_directory_uri() ?>/libraries/css/images/1462491942_page_white_add.png')">
+                    <?php echo __('Add', 'tainacan'); ?>
+                </a>
             </li>
         <?php endif; ?>
         <?php if (verify_allowed_action(get_the_ID(), 'socialdb_collection_permission_edit_category')): ?>
@@ -291,10 +313,33 @@ $options = get_option('socialdb_theme_options');
             </li>
         <?php endif; ?>
         <?php //if (verify_collection_moderators(get_the_ID(), get_current_user_id())): ?>
-        <li class="delete">
-            <a href="#metadata"><?php echo __('Metadata', 'tainacan'); ?></a>
+        <li class="list" id="list_meta_single">
+            <a href="#metadata" style="background-position: 6px 50%;padding:1px 5px 1px 28px;background-repeat:no-repeat;background-image:url('<?php echo get_template_directory_uri() ?>/libraries/css/images/properties.png')">
+                <?php echo __('Metadata', 'tainacan'); ?>
+            </a>
         </li>
-        <?php // endif; ?>    
+        <?php // endif; ?>
+    </ul>
+    <ul id="myMenuNoList" class="contextMenu" style="display:none;">
+        <?php if (verify_allowed_action(get_the_ID(), 'socialdb_collection_permission_create_category')): ?>
+            <li class="add">
+                <a href="#add" style="background-position: 6px 50%;padding:1px 5px 1px 28px;background-repeat:no-repeat;background-image:url('<?php echo get_template_directory_uri() ?>/libraries/css/images/1462491942_page_white_add.png')">
+                    <?php echo __('Add', 'tainacan'); ?>
+                </a>
+            </li>
+        <?php endif; ?>
+        <?php if (verify_allowed_action(get_the_ID(), 'socialdb_collection_permission_edit_category')): ?>
+            <li class="edit">
+                <a href="#edit"><?php echo __('Edit', 'tainacan'); ?></a>
+            </li>
+        <?php endif; ?>
+        <?php if (verify_allowed_action(get_the_ID(), 'socialdb_collection_permission_delete_category')): ?>
+            <li class="delete">
+                <a href="#delete"><?php echo __('Remove', 'tainacan'); ?></a>
+            </li>
+        <?php endif; ?>
+        <?php //if (verify_collection_moderators(get_the_ID(), get_current_user_id())): ?>
+        <?php // endif; ?>
     </ul>
     <!-- TAINACAN: esta div eh mostrada quando eh clicado com o botao direito sobre categorias e tags no dynatree  -->
     <ul id="myMenuSingleTag" class="contextMenu" style="display:none;">
@@ -315,14 +360,14 @@ $options = get_option('socialdb_theme_options');
         <?php endif; ?>
     </ul>
     <!-- TAINACAN: esta div (AJAX) mostra as configuracoes da colecao  -->
-    <div class="container-fluid">
+    <div id='container-fluid-configuration' class="container-fluid" style="background-color: #f1f2f2">
 
         <?php /*
         <div class="tainacan-breadcrumbs"> </div>
         <div class="tainacan-steps" style=""></div>
         */ ?>
 
-        <div id="configuration" class="col-md-12" >
+        <div id="configuration" class="col-md-12"  >
         </div>
     </div>
     <!-- TAINACAN: scripts utilizados para criacao e monagem dos widgets de pesquisa  -->
@@ -338,7 +383,7 @@ $options = get_option('socialdb_theme_options');
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
                         <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-plus"></span>
                            <?php _e('Add Category', 'tainacan'); ?>
-                           <?php do_action('add_option_in_add_category'); ?> 
+                           <?php do_action('add_option_in_add_category'); ?>
                         </h4>
                     </div>
                     <div id="form_add_category">
@@ -355,23 +400,24 @@ $options = get_option('socialdb_theme_options');
                             </div>
                              <div class="form-group">
                                    <label for="category_add_description"><?php _e('Category description', 'tainacan'); ?>&nbsp;<span style="font-size: 10px;">(<?php _e('Optional', 'tainacan'); ?>)</span></label>
-                                   <textarea class="form-control" 
-                                             id="category_add_description" 
-                                             placeholder="<?php _e('Describe your category', 'tainacan'); ?>" 
-                                             name="socialdb_event_term_description" ></textarea>    
+                                   <textarea class="form-control"
+                                             id="category_add_description"
+                                             placeholder="<?php _e('Describe your category', 'tainacan'); ?>"
+                                             name="socialdb_event_term_description" ></textarea>
                                 </div>
                             <input type="hidden" id="category_single_add_collection_id" name="socialdb_event_collection_id" value="<?php echo get_the_ID(); ?>">
                             <input type="hidden" id="category_single_add_create_time" name="socialdb_event_create_date" value="<?php echo mktime(); ?>">
                             <input type="hidden" id="category_single_add_user_id" name="socialdb_event_user_id" value="<?php echo get_current_user_id(); ?>">
+                            <input type="hidden" id="category_single_add_dynatree_id" name="dynatree_id" value="">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __('Close', 'tainacan'); ?></button>
                             <button type="submit" class="btn btn-primary"><?php echo __('Save', 'tainacan'); ?></button>
                         </div>
-                   </div>  
+                   </div>
                     <div id="another_option_category" style="display: none;">
-                   <?php do_action('show_option_in_add_category'); ?>  
-                    </div>     
+                   <?php do_action('show_option_in_add_category'); ?>
+                    </div>
                 </form>
             </div>
         </div>
@@ -409,10 +455,10 @@ $options = get_option('socialdb_theme_options');
                                 </div>
                                 <div class="form-group">
                                    <label for="category_parent_name"><?php _e('Category description', 'tainacan'); ?>&nbsp;<span style="font-size: 10px;">(<?php _e('Optional', 'tainacan'); ?>)</span></label>
-                                   <textarea class="form-control" 
-                                             id="category_edit_description" 
-                                             placeholder="<?php _e('Describe your category', 'tainacan'); ?>" 
-                                             name="socialdb_event_term_description" ></textarea>    
+                                   <textarea class="form-control"
+                                             id="category_edit_description"
+                                             placeholder="<?php _e('Describe your category', 'tainacan'); ?>"
+                                             name="socialdb_event_term_description" ></textarea>
                                 </div>
                             </div>
                              <?php do_action('insert_fields_edit_modal_category') ?>
@@ -421,6 +467,7 @@ $options = get_option('socialdb_theme_options');
                             <input type="hidden" id="category_single_edit_collection_id" name="socialdb_event_collection_id" value="<?php echo get_the_ID(); ?>">
                             <input type="hidden" id="category_single_edit_time" name="socialdb_event_create_date" value="<?php echo mktime(); ?>">
                             <input type="hidden" id="category_single_edit_user_id" name="socialdb_event_user_id" value="<?php echo get_current_user_id(); ?>">
+                            <input type="hidden" id="category_single_edit_dynatree_id" name="dynatree_id" value="">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -459,6 +506,7 @@ $options = get_option('socialdb_theme_options');
                     <input type="hidden" id="category_single_delete_collection_id" name="socialdb_event_collection_id" value="<?php echo get_the_ID(); ?>">
                     <input type="hidden" id="category_single_delete_time" name="socialdb_event_create_date" value="<?php echo mktime(); ?>">
                     <input type="hidden" id="category_single_delete_user_id" name="socialdb_event_user_id" value="<?php echo get_current_user_id(); ?>">
+                    <input type="hidden" id="category_single_delete_dynatree_id" name="dynatree_id" value="">
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __('Close', 'tainacan'); ?></button>
@@ -523,10 +571,10 @@ $options = get_option('socialdb_theme_options');
                         </div>
                         <div class="form-group">
                                <label for="category_parent_name"><?php _e('Tag description', 'tainacan'); ?>&nbsp;<span style="font-size: 10px;">(<?php _e('Optional', 'tainacan'); ?>)</span></label>
-                               <textarea class="form-control" 
-                                         id="tag_add_description" 
-                                         placeholder="<?php _e('Describe your tag', 'tainacan'); ?>" 
-                                         name="socialdb_event_tag_description" ></textarea>    
+                               <textarea class="form-control"
+                                         id="tag_add_description"
+                                         placeholder="<?php _e('Describe your tag', 'tainacan'); ?>"
+                                         name="socialdb_event_tag_description" ></textarea>
                         </div>
                         <input type="hidden" id="tag_single_add_collection_id" name="socialdb_event_collection_id" value="<?php echo get_the_ID(); ?>">
                         <input type="hidden" id="tag_single_add_create_time" name="socialdb_event_create_date" value="<?php echo mktime(); ?>">
@@ -560,10 +608,10 @@ $options = get_option('socialdb_theme_options');
                             </div>
                             <div class="form-group">
                                <label for="category_parent_name"><?php _e('Tag description', 'tainacan'); ?>&nbsp;<span style="font-size: 10px;">(<?php _e('Optional', 'tainacan'); ?>)</span></label>
-                               <textarea class="form-control" 
-                                         id="tag_edit_description" 
-                                         placeholder="<?php _e('Describe your tag', 'tainacan'); ?>" 
-                                         name="socialdb_event_tag_description" ></textarea>    
+                               <textarea class="form-control"
+                                         id="tag_edit_description"
+                                         placeholder="<?php _e('Describe your tag', 'tainacan'); ?>"
+                                         name="socialdb_event_tag_description" ></textarea>
                            </div>
                             <input type="hidden" id="tag_single_edit_collection_id" name="socialdb_event_collection_id" value="<?php echo get_the_ID(); ?>">
                             <input type="hidden" id="tag_single_edit_time" name="socialdb_event_create_date" value="<?php echo mktime(); ?>">
@@ -771,7 +819,7 @@ $options = get_option('socialdb_theme_options');
                                     $collection_id = get_the_ID();
                                     $loginUrl = $helper->getLoginUrl(get_bloginfo(template_directory) . '/controllers/social_network/facebook_controller.php?collection_id=' . $collection_id . '&operation=getAccessToken', $permissions);
                                 } catch (Exception $e) {
-                                    
+
                                 }
 
                                 //echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
@@ -865,7 +913,7 @@ $options = get_option('socialdb_theme_options');
                             $collection_id = get_the_ID();
                             $loginUrl = $helper->getLoginUrl(get_bloginfo(template_directory) . '/controllers/social_network/facebook_controller.php?collection_id=' . $collection_id . '&operation=getAccessToken', $permissions);
                         } catch (Exception $e) {
-                            
+
                         }
 
                         //echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';

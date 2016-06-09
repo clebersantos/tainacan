@@ -1,5 +1,5 @@
 #tainacan-breadcrumbs {
-  padding: 10px 0 10px 20px;
+  padding: 10px 0 10px 15px;
   background: $collections-bg-color;
 
   a {
@@ -97,4 +97,58 @@ button#iframebutton {
 }
 .collection-author {
   margin-top: 10px;
+}
+
+.menu-ibram {
+  background: $dark-gray !important;
+  margin-bottom: 0;
+  min-height: 40px !important;
+  padding-left: 15px;
+
+  li {
+    display: inline-table;
+    padding: 10px 20px 0 20px;
+
+    &:first-child {
+      padding-left: 0 !important;
+    }
+
+    &.open {
+      background: #404040;
+    }
+
+    ul {
+      background: $dark-gray;
+      li {
+        padding-top: 0 !important;
+
+        a {
+          &:hover {
+            background: transparent;
+          }
+        }
+      }
+    }
+
+    a {
+      color: white !important;
+    }
+  }
+} // .menu-ibram
+
+.ibram-header {
+  padding: 5px 10px 10px 10px;
+  background: $brand-medium-blue;
+  height: 80px;
+
+  h3 {
+    margin-top: 10px;
+    font-weight: bolder;
+  }
+  h3, h5 {
+    padding-left: 5px;
+    color: white;
+  }
+  h5 {
+    margin-bottom: 5px; }
 }

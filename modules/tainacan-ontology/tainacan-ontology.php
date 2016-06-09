@@ -19,6 +19,8 @@
  * #14 - ALTERACAO DO FORMULARIO DE ADICAO DE PROPRIEDADE DE OBJETO
  * #15 - ALTERACAO DA PAGINA DO ITEM PARA PROPRIEDADE DE DADOS
  * #16 - ADICIONA O BOTAO DE EDITAR PROPRIEDADE NA PAGINA DA PROPRIEDADE
+ * #17 - ADICIONA NO MENU DA COLECAO A OPCAO DE FILTROS
+ * #18 - ALTERA O THUMBNAIL DOS ITEMS/COLECAO
  * 
  * @author: EDUARDO HUMBERTO
  */
@@ -34,10 +36,21 @@ add_action('wp_enqueue_scripts', 'tainacan_ontology_js');
 function tainacan_ontology_js() {
     wp_register_script('tainacan-ontology', 
             get_template_directory_uri() . '/modules/' . MODULE_ONTOLOGY . '/libraries/js/tainacan-ontology.js', array('jquery'), '1.11');
-    $js_files = ['tainacan-ontology'];
+   $js_files = ['tainacan-ontology'];
     foreach ($js_files as $js_file):
         wp_enqueue_script($js_file);
     endforeach;
+}
+
+add_action('wp_enqueue_scripts', 'tainacan_ontology_css');
+function tainacan_ontology_css() {
+    $registered_css = [
+          'tainacan-ontology' => '/libraries/css/tainacan-ontology.css'
+      ];
+    foreach ($registered_css as $css_file => $css_path) {
+         wp_register_style($css_file, get_template_directory_uri() . '/modules/' . MODULE_ONTOLOGY  . $css_path);
+         wp_enqueue_style($css_file);
+    }
 }
 ################################################################################
 ######################### #2 ALTERACOES HOME DO ITEM ##############################
@@ -160,13 +173,37 @@ add_filter( 'show_custom_add_item_button', 'alter_button_add_item_ontology', 10,
  */
 add_action('before_tree', 'insert_button_facets');
 function insert_button_facets() {
-   // echo '<center>';
-    echo '<button style="margin-left:15px;margin-top:-30px;" class="btn btn-default btn-xs" onclick="';
-    echo "showModalFilters('add_category','".__('Category','tainacan')."');";
-    echo '">';
-    echo '<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span style="font-size: 12px;text-indent: 5%;font-weight: normal;">';
-    echo __('Add Category','tainacan');
-    echo '</span></button><!--/center-->';                               
+   $link = "'" . get_template_directory_uri() . '/modules/' . MODULE_ONTOLOGY . "'";
+    ?>
+    <div class="btn-group" role="group" aria-label="...">
+        <div class="btn-group tainacan-add-wrapper">
+            <button style="margin-left:15px;margin-top:-30px;font-size: 14px;text-indent: 5%;font-weight: normal;" 
+                    type="button" 
+                    class="btn btn-default dropdown-toggle" 
+                    data-toggle="dropdown" 
+                    aria-haspopup="true" 
+                    aria-expanded="false">
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
+                <?php _e('Add', 'tainacan') ?> <span class="caret"></span>
+            </button>
+            <ul style="margin-left:15px;" class="dropdown-menu">
+                <li><a onclick="showModalFilters('add_category','<?php echo __('Category','tainacan') ?>');" style="cursor: pointer;"><?php echo __('Category','tainacan')  ?></a></li>
+                <li><a onclick="showPageCreateProperty(0,<?php echo $link; ?>)" style="cursor: pointer;" ><?php _e('Property', 'tainacan') ?></a></li>
+           </ul>
+        </div>
+    </div>
+    
+    
+    <?php
+    
+    
+    
+//    echo '<button style="margin-left:15px;margin-top:-30px;" class="btn btn-default btn-xs" onclick="';
+//    echo "showModalFilters('add_category','".__('Category','tainacan')."');";
+//    echo '">';
+//    echo '<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span style="font-size: 12px;text-indent: 5%;font-weight: normal;">';
+//    echo __('Add Category','tainacan');
+//    echo '</span></button><!--/center-->';                               
 }
 
 /**
@@ -243,7 +280,8 @@ function ontology_add_widget(array $facet) {
         </script>
         <div class="form-group">
             <label for="notifications" class="title-pipe"> <?php echo $facet['name']; ?></label>
-            <div id="dynatree_properties_filter"></div>
+            <div id="dynatree_properties_filter" style="max-height: 300px;overflow-y: scroll;">
+            </div>
         </div>   
     <?php endif;                             
 }
@@ -334,24 +372,34 @@ add_action('insert_new_contextmenu_dynatree', 'ontology_insert_new_contextmenu_d
 function ontology_insert_new_contextmenu_dynatree() {
     ?>
     <ul id="PropertyMenu" class="contextMenu" style="display:none;">
-        <li class="delete">
+        <li class="add" >
+            <a href="#add" style="background-position: 6px 50%;padding:1px 5px 1px 28px;background-repeat:no-repeat;background-image:url('<?php echo get_template_directory_uri() ?>/libraries/css/images/1462491942_page_white_add.png')">
+                <?php echo __('Add', 'tainacan'); ?>
+            </a>
+        </li> 
+        <li class="edit">
             <a href="#edit"><?php echo __('Edit', 'tainacan'); ?></a>
+        </li>  
+        <li class="delete">
+            <input type="hidden" id="title_delete_property" value="<?php _e('Attention!','tainacan')?>">
+            <input type="hidden" id="msg_delete_property" value="<?php _e('Delete the property:','tainacan')?>">
+            <a href="#delete"><?php echo __('Delete', 'tainacan'); ?></a>
         </li>  
     </ul>
     <ul id="ontologyMenu" class="contextMenu" style="display:none;">
-        <li class="delete">
+        <li class="equivalent">
             <a href="#equivalentclassAdd"><?php echo __('Add as Equivalent', 'tainacan'); ?></a>
         </li>  
-        <li class="delete">
+        <li class="disjoint">
             <a href="#disjointwithAdd"><?php echo __('Add as Disjoint', 'tainacan'); ?></a>
         </li>
-        <li class="delete">
+        <li class="unionof">
             <a href="#unionof"><?php echo __('Add as UnionOf', 'tainacan'); ?></a>
         </li>
-        <li class="delete">
+        <li class="intersection">
             <a href="#intersectionof"><?php echo __('Add as Intersection Of', 'tainacan'); ?></a>
         </li>
-        <li class="delete">
+        <li class="complementof">
             <a href="#complementof"><?php echo __('Add as Complement Of', 'tainacan'); ?></a>
         </li>
     </ul>
@@ -906,6 +954,40 @@ function ontology_after_event_add_property_data($property_id,$event_id) {
                 'description' => ($description&&trim($description)!='')? $description :'',
                 'parent'=> ($parent&&trim($parent)!=''&&  is_numeric($parent))? trim($parent) :  get_term_by('slug', 'socialdb_property_data','socialdb_property_type')->term_id,
             ));
+    //DOMAINS
+    $property_used_by_categories = get_post_meta($event_id, 'socialdb_event_property_used_by_categories',true) ;// os dados vindo do evento
+    $categories = get_term_meta($property_id, 'socialdb_property_used_by_categories'); //as categorias atuais vinculadas a essa prorpiedade
+    if($categories  &&  is_array($categories)): // se existir atuais ele vai tentar remover apenas as que nao estiverem setadas
+        foreach ($categories as $category) :// percorro todas elas
+             if($property_used_by_categories&&!empty(trim($property_used_by_categories))):// verifico se esta tentando inserir novos valores
+                    $new_categories = explode(',', $property_used_by_categories);
+                    if(in_array($category, $new_categories)): // se a categoria antiga estiver nas novas posicoes pula para a proxima execucao
+                        continue;
+                    endif; 
+             endif; 
+             // se nao continua o processo 
+            $properties = get_term_meta($category, 'socialdb_category_property_id'); // busco os metas da categoria
+            if($properties&&( is_array($properties)&&in_array($property_id, $properties))): // verifico se a propriedade ainda esta presente
+                delete_term_meta($category, 'socialdb_category_property_id', $property_id); // removo de suas propriedades
+            endif;
+            delete_term_meta($property_id, 'socialdb_property_used_by_categories',$category); // e entao removo do array de classes que utilizam esta propriedade
+         endforeach;
+         
+    endif; 
+    if($property_used_by_categories&&!empty(trim($property_used_by_categories))){ // SE EXISTIR NOVOS VALORES
+        $new_categories = explode(',', $property_used_by_categories);// coloco em um array
+        foreach ($new_categories as $new_category) {
+            if(is_array($categories)&&in_array($new_category, $categories)){
+                continue;
+            }
+            add_term_meta($property_id, 'socialdb_property_used_by_categories', $new_category);
+            $properties = get_term_meta($new_category, 'socialdb_category_property_id');
+            if(!$properties||( is_array($properties)&&!in_array($property_id, $properties))):
+                add_term_meta($new_category, 'socialdb_category_property_id', $property_id);
+            endif; 
+        }
+
+    }
     //cardinalidality
     $cardinalidality = get_post_meta($event_id, 'socialdb_event_property_cardinalidality',true) ;
     if($cardinalidality&&trim($cardinalidality)!=''){
@@ -947,6 +1029,29 @@ function ontology_after_event_add_property_data($property_id,$event_id) {
     }
 }
 
+add_action( 'after_event_delete_property_data', 'ontology_after_event_delete_property', 10, 2 );
+add_action( 'after_event_delete_property_object', 'ontology_after_event_delete_property', 10, 2 );
+add_action( 'after_event_delete_property_term', 'ontology_after_event_delete_property', 10, 2 );
+function ontology_after_event_delete_property($property,$event_id) {
+    global $wpdb;
+    $wp_term_taxonomy = $wpdb->prefix . "term_taxonomy";
+    $wp_terms = $wpdb->prefix . "terms";
+    $query = "
+                    SELECT * FROM $wp_terms t
+                    INNER JOIN $wp_term_taxonomy tt ON t.term_id = tt.term_id
+                            WHERE tt.parent = {$property->term_id} 
+            ";
+    $children = $wpdb->get_results($query);
+    if($children&&is_array($children)){
+        foreach ($children as $child) {
+            $query = "
+                    UPDATE $wp_term_taxonomy tt SET tt.parent = {$property->parent} 
+                            WHERE tt.term_id = {$child->term_id} 
+            ";
+            $wpdb->get_results($query);                
+        }
+    }
+}
 /**
  * OBJECT
  * @uses property_controller
@@ -1036,6 +1141,40 @@ function ontology_after_event_add_property_object($property_id,$event_id) {
                 'description' => ($description&&trim($description)!='')? $description :'',
                 'parent'=> ($parent&&trim($parent)!=''&&  is_numeric($parent))? trim($parent) :  get_term_by('slug', 'socialdb_property_object','socialdb_property_type')->term_id,
             ));
+    //DOMAINS
+    $property_used_by_categories = get_post_meta($event_id, 'socialdb_event_property_used_by_categories',true) ;// os dados vindo do evento
+    $categories = get_term_meta($property_id, 'socialdb_property_used_by_categories'); //as categorias atuais vinculadas a essa prorpiedade
+    if($categories  &&  is_array($categories)): // se existir atuais ele vai tentar remover apenas as que nao estiverem setadas
+        foreach ($categories as $category) :// percorro todas elas
+             if($property_used_by_categories&&!empty(trim($property_used_by_categories))):// verifico se esta tentando inserir novos valores
+                    $new_categories = explode(',', $property_used_by_categories);
+                    if(in_array($category, $new_categories)): // se a categoria antiga estiver nas novas posicoes pula para a proxima execucao
+                        continue;
+                    endif; 
+             endif; 
+             // se nao continua o processo 
+            $properties = get_term_meta($category, 'socialdb_category_property_id'); // busco os metas da categoria
+            if($properties&&( is_array($properties)&&in_array($property_id, $properties))): // verifico se a propriedade ainda esta presente
+                delete_term_meta($category, 'socialdb_category_property_id', $property_id); // removo de suas propriedades
+            endif;
+            delete_term_meta($property_id, 'socialdb_property_used_by_categories',$category); // e entao removo do array de classes que utilizam esta propriedade
+         endforeach;
+         
+    endif; 
+    if($property_used_by_categories&&!empty(trim($property_used_by_categories))){ // SE EXISTIR NOVOS VALORES
+        $new_categories = explode(',', $property_used_by_categories);// coloco em um array
+        foreach ($new_categories as $new_category) {
+            if(is_array($categories)&&in_array($new_category, $categories)){
+                continue;
+            }
+            add_term_meta($property_id, 'socialdb_property_used_by_categories', $new_category);
+            $properties = get_term_meta($new_category, 'socialdb_category_property_id');
+            if(!$properties||( is_array($properties)&&!in_array($property_id, $properties))):
+                add_term_meta($new_category, 'socialdb_category_property_id', $property_id);
+            endif; 
+        }
+
+    }
     //cardinalidality
     $cardinalidality = get_post_meta($event_id, 'socialdb_event_property_cardinalidality',true) ;
     if($cardinalidality&&trim($cardinalidality)!=''){
@@ -1133,7 +1272,52 @@ function ontology_after_event_add_property_object($property_id,$event_id) {
         update_term_meta($property_id, 'socialdb_property_hasvalue', '');
     }
 }
+/**
+ * TERM
+ * 
+ * @uses event_property_term_create_model
+ * 
+ * acao disparada apos a insercao de uma propriedade de termo
+ * 
+ */
+add_action( 'after_event_add_property_term', 'ontology_after_event_add_property_term', 10, 2 );
+add_action( 'after_event_update_property_term', 'ontology_after_event_add_property_term', 10, 2 );
+function ontology_after_event_add_property_term($property_id,$event_id) {
+    //DOMAINS
+    $property_used_by_categories = get_post_meta($event_id, 'socialdb_event_property_used_by_categories',true) ;// os dados vindo do evento
+    $categories = get_term_meta($property_id, 'socialdb_property_used_by_categories'); //as categorias atuais vinculadas a essa prorpiedade
+    if($categories  &&  is_array($categories)): // se existir atuais ele vai tentar remover apenas as que nao estiverem setadas
+        foreach ($categories as $category) :// percorro todas elas
+             if($property_used_by_categories&&!empty(trim($property_used_by_categories))):// verifico se esta tentando inserir novos valores
+                    $new_categories = explode(',', $property_used_by_categories);
+                    if(in_array($category, $new_categories)): // se a categoria antiga estiver nas novas posicoes pula para a proxima execucao
+                        continue;
+                    endif; 
+             endif; 
+             // se nao continua o processo 
+            $properties = get_term_meta($category, 'socialdb_category_property_id'); // busco os metas da categoria
+            if($properties&&( is_array($properties)&&in_array($property_id, $properties))): // verifico se a propriedade ainda esta presente
+                delete_term_meta($category, 'socialdb_category_property_id', $property_id); // removo de suas propriedades
+            endif;
+            delete_term_meta($property_id, 'socialdb_property_used_by_categories',$category); // e entao removo do array de classes que utilizam esta propriedade
+         endforeach;
+         
+    endif; 
+    if($property_used_by_categories&&!empty(trim($property_used_by_categories))){ // SE EXISTIR NOVOS VALORES
+        $new_categories = explode(',', $property_used_by_categories);// coloco em um array
+        foreach ($new_categories as $new_category) {
+            if(is_array($categories)&&in_array($new_category, $categories)){
+                continue;
+            }
+            add_term_meta($property_id, 'socialdb_property_used_by_categories', $new_category);
+            $properties = get_term_meta($new_category, 'socialdb_category_property_id');
+            if(!$properties||( is_array($properties)&&!in_array($property_id, $properties))):
+                add_term_meta($new_category, 'socialdb_category_property_id', $property_id);
+            endif; 
+        }
 
+    }
+}
 /** ALL TYPES
  * @uses property_model
  * 
@@ -1292,16 +1476,18 @@ add_filter( 'personal_export_property_rdf', 'ontology_personal_export_property_r
 ################ FIM: FILTROS PARA A EXPORTACAO DE ONTOLOGIAS ##################
 
 #### #13 -  ALTERACAO DO FORMULARIO DE ADICAO/EDICAO DE PROPRIEDADE DE DADOS ###
-
-add_action( 'modificate_insert_item_properties_data', 'ontology_modificate_insert_item_properties_data', 10, 1 );
-add_action( 'modificate_edit_item_properties_data', 'ontology_modificate_insert_item_properties_data', 10, 1 );
-function ontology_modificate_insert_item_properties_data($property) {
-    //cardinalidade
-    $cont = 0;
-    $ontology_max_cardinality_fields = 1;
-    $ontology_min_cardinality_fields = 1;
+/**
+ * 
+ * @param type $property
+ * @return type
+ * 
+ */
+function get_property_cardinality($property){
+    $ontology_max_cardinality_fields = 40;
+    $ontology_min_cardinality_fields = 0;
     if($property['metas']['socialdb_property_cardinalidality']&&!empty($property['metas']['socialdb_property_cardinalidality'])){
         $fixed = true;
+        $ontology_min_cardinality_fields = $property['metas']['socialdb_property_cardinalidality'];
         $ontology_max_cardinality_fields = $property['metas']['socialdb_property_cardinalidality'];
     }else{
         if($property['metas']['socialdb_property_maxcardinalidality']&&!empty($property['metas']['socialdb_property_maxcardinalidality'])){
@@ -1318,15 +1504,84 @@ function ontology_modificate_insert_item_properties_data($property) {
             $ontology_min_cardinality_fields = $property['metas']['socialdb_property_mincardinalidality'];
             if($property['metas']['socialdb_property_maxcardinalidality']&&!empty($property['metas']['socialdb_property_maxcardinalidality'])){
                 $ontology_max_cardinality_fields = $property['metas']['socialdb_property_maxcardinalidality'];
-            }else{
-                $ontology_max_cardinality_fields = 20;
             }
         }
-        
     }
+    return ['max'=>$ontology_max_cardinality_fields,'min'=>$ontology_min_cardinality_fields,'fixed'=>$fixed];
+}
+
+//altera o label para todas as propriedades 
+add_action( 'modificate_label_insert_item_properties', 'ontology_modificate_label_insert_item_properties', 10, 1 );
+add_action( 'modificate_label_edit_item_properties', 'ontology_modificate_label_insert_item_properties', 10, 1 );
+function ontology_modificate_label_insert_item_properties($property) {
+    $array_cardinality = get_property_cardinality($property);
+    $ontology_max_cardinality_fields = $array_cardinality['max'];
+    $ontology_min_cardinality_fields = $array_cardinality['min'];
+    $fixed = $array_cardinality['fixed'];
+    //html
+    $path_image = get_template_directory_uri() . '/libraries/images/danger-sing.png';
+    ?>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#cardinality-obrigation-<?php echo $property['id'] ?>").tooltip({
+            title: '<?php echo sprintf( __('Minimum of items neccessary: %s Maximun of items neccessary: %s','tainacan'), $ontology_min_cardinality_fields,($ontology_max_cardinality_fields==40)?'*':$ontology_max_cardinality_fields) ?>',
+            delay: 100
+        });
+        $("#correct-<?php echo $property['id'] ?>").tooltip({
+            title: '<?php echo __('Field filled correctly!','tainacan') ?>',
+            delay: 100
+        });
+        $("#error-<?php echo $property['id'] ?>").tooltip({
+            title: '<?php echo __('This field does not match its cardinality!','tainacan') ?>',
+            delay: 100
+        });
+    });
+    </script>
+    <?php if($ontology_min_cardinality_fields>0): ?> 
+         <a id="cardinality-obrigation-<?php echo $property['id'] ?>" data-toggle="tooltip" data-placement="right" ><img src="<?php echo $path_image ?>"></a>
+    <?php else: ?> 
+          <a style="display:none" id="cardinality-obrigation-<?php echo $property['id'] ?>" data-toggle="tooltip" data-placement="right" ><img src="<?php echo $path_image ?>"></a>
+    <?php endif; ?> 
+    <a style="display:none" id="correct-<?php echo $property['id'] ?>" data-toggle="tooltip" data-placement="right" >
+        <span class="glyphicon glyphicon-ok-sign text-success"></span>
+    </a> 
+    <a style="display:none" id="error-<?php echo $property['id'] ?>" data-toggle="tooltip" data-placement="right" >
+        <span class="glyphicon glyphicon-remove-sign text-danger"></span>
+    </a>     
+    <?php if($property['metas']['socialdb_property_help']&&!empty(trim($property['metas']['socialdb_property_help']))): ?> 
+          <script type="text/javascript">
+                $(document).ready(function(){
+                    $("#help-<?php echo $property['id'] ?>").tooltip({
+                        title: '<?php echo $property['metas']['socialdb_property_help'] ?>',
+                        delay: 100
+                    });
+                });
+         </script>
+         <a id="help-<?php echo $property['id'] ?>" data-toggle="tooltip" data-placement="right" >
+             <span class="glyphicon glyphicon-question-sign"></span>
+         </a>
+    <?php endif; ?>      
+    <?php
+}
+
+
+
+add_action( 'modificate_insert_item_properties_data', 'ontology_modificate_insert_item_properties_data', 10, 1 );
+add_action( 'modificate_edit_item_properties_data', 'ontology_modificate_insert_item_properties_data', 10, 1 );
+function ontology_modificate_insert_item_properties_data($property) {
+    //cardinalidade
+    $cont = 0;
+    $array_cardinality = get_property_cardinality($property);
+    $ontology_max_cardinality_fields = $array_cardinality['max'];
+    $ontology_min_cardinality_fields = $array_cardinality['min'];
+    $fixed = $array_cardinality['fixed'];
     //html
     ?>  
-           <input type="hidden" name="socialdb_property_<?php echo $property['id']; ?>_total_fields" value="<?php echo $ontology_max_cardinality_fields ?>" >
+           <input type="hidden" id="property_<?php echo $property['id']; ?>_max" name="socialdb_property_<?php echo $property['id']; ?>_total_fields" value="<?php echo $ontology_max_cardinality_fields ?>" >
+           <input type="hidden" id="property_<?php echo $property['id']; ?>_min" value="<?php echo $ontology_min_cardinality_fields ?>" >
+           <input type="hidden" id="property_validation_<?php echo $property['id']; ?>" class="validation_properties_cardinality" value="" >
+           <input type="hidden" class="obrigation-message-<?php echo $property['id']; ?>" value="<?php echo __('This field is required!','tainacan') ?>" >
+           <input type="hidden" class="optional-message-<?php echo $property['id']; ?>" value="<?php echo sprintf(__('At least, fill %s field in this property!','tainacan'),$ontology_min_cardinality_fields); ?>" >
            <?php for($i=0;$i<$ontology_max_cardinality_fields;$i++):  ?>
             <div id="field_property_<?php echo $property['id']; ?>_<?php echo $i; ?>" 
                  class="row" 
@@ -1334,11 +1589,17 @@ function ontology_modificate_insert_item_properties_data($property) {
                         &&(!isset($property['metas']['value'])||!is_array($property['metas']['value'])||count($property['metas']['value'])-1<$i))
                             ? 'style="display:none;"':'style="margin-bottom:15px;"' ?> >
                 <div id="field_container_<?php echo $property['id']; ?>_<?php echo $i; ?>" class="col-md-11">
-                    <?php get_html_property_data_types($property,$i,$fixed); ?>
+                    <div id="form_group_<?php echo $property['id']; ?>_<?php echo $i; ?>"  
+                         class="form-group has-feedback"> 
+                        <?php get_html_property_data_types($property,$i,$fixed); ?>
+                        <span id="icon_<?php echo $property['id']; ?>_<?php echo $i; ?>" class="glyphicon" aria-hidden="true"></span>
+                        <span id="status_field_<?php echo $property['id']; ?>_<?php echo $i; ?>" class="sr-only"></span>
+                        <input type="hidden" value="false" id="is_valid_<?php echo $property['id']; ?>_<?php echo $i; ?>" class="is_valid_<?php echo $property['id']; ?>">
+                    </div>  
                 </div>    
                 <div class="col-md-1">    
                     <?php 
-                    //se nao fora cardinalidade fixa, se o maximo de campos for maior que um , se nao for o ultimo campo e se ja e maior que o minimo de campos
+                    //se nao for a cardinalidade fixa, se o maximo de campos for maior que um , se nao for o ultimo campo e se ja e maior que o minimo de campos
                     if(!$fixed&&$ontology_max_cardinality_fields>1&&$ontology_max_cardinality_fields-1!=$i&&$i>=$ontology_min_cardinality_fields-1
                             ):  $cont++; ?>
                     <button type="button" 
@@ -1357,17 +1618,26 @@ function ontology_modificate_insert_item_properties_data($property) {
 
 //funcao que gera o input dependendo do tipo da propriedade
 function get_html_property_data_types($property,$i,$fixed){
-     if ($property['type'] == 'string') {  ?> 
-                <input type="text" 
-                           id="form_autocomplete_value_<?php echo $property['id']; ?>" 
-                           class="form-control"
-                           value="<?php echo (isset($property['metas']['value'][$i]))? $property['metas']['value'][$i]:'' ?>"
-                           <?php echo ($fixed)? 'required="required"':'' ?>
-                           name="socialdb_property_<?php echo $property['id']; ?>[]"  > 
+     if ($property['type'] == 'string') {  
+       $seletor = 'form_autocomplete_value_'.$property['id'].'_'.$i;
+         ?> 
+                        <input     type="text" 
+                                   aria-describedby="inputStatus"
+                                   id="form_autocomplete_value_<?php echo $property['id']; ?>_<?php echo $i; ?>" 
+                                   class="form-control form_autocomplete_value_<?php echo $property['id']; ?>"
+                                   value="<?php echo (isset($property['metas']['value'][$i]))? $property['metas']['value'][$i]:'' ?>"
+                                   <?php echo ($fixed)? 'required="required"':'' ?>
+                                   name="socialdb_property_<?php echo $property['id']; ?>[]" 
+                                   autocomplete="off"
+                                   onkeyup="validation_cardinality_property_data('<?php echo $seletor ?>','<?php echo $property['id'] ?>','<?php echo $i ?>');"
+                                   > 
                  <?php
-    }else if ($property['type'] == 'boolean') { ?>     
-                    <select class="form-control" 
-                            id="form_autocomplete_value_<?php echo $property['id']; ?>"
+    }else if ($property['type'] == 'boolean') { 
+        $seletor = 'form_autocomplete_value_'.$property['id'].'_'.$i;
+        ?>     
+                    <select id="form_autocomplete_value_<?php echo $property['id']; ?>_<?php echo $i; ?>" 
+                            class="form-control form_autocomplete_value_<?php echo $property['id']; ?>"
+                            onchange="validation_cardinality_property_data('<?php echo $seletor ?>','<?php echo $property['id'] ?>','<?php echo $i ?>');"
                              <?php echo ($fixed)? 'required="required"':'' ?>
                             name="socialdb_property_<?php echo $property['id']; ?>[]">
                         <option value=""><?php _e('Select','tainacan') ?></option>
@@ -1375,28 +1645,39 @@ function get_html_property_data_types($property,$i,$fixed){
                         <option <?php echo (isset($property['metas']['value'][$i])&&$property['metas']['value'][$i]=='false')? 'selected="selected"':'' ?> value="false"><?php _e('False','tainacan') ?></option>
                     </select>  
         <?php
-    }else if ($property['type'] == 'float') { ?>    
+    }else if ($property['type'] == 'float') {
+        
+        $seletor = 'form_autocomplete_value_'.$property['id'].'_'.$i;
+        ?>    
             <input type="text" 
-                   id="form_autocomplete_value_<?php echo $property['id']; ?>" 
-                   class="form-control" 
+                    id="form_autocomplete_value_<?php echo $property['id']; ?>_<?php echo $i; ?>" 
+                   class="form-control form_autocomplete_value_<?php echo $property['id']; ?>"
                    value="<?php echo (isset($property['metas']['value'][$i]))? $property['metas']['value'][$i]:'' ?>"
                    onkeypress='return  isFloat(event)'
+                   autocomplete="off"
+                   onkeyup="validation_cardinality_property_data('<?php echo $seletor ?>','<?php echo $property['id'] ?>','<?php echo $i ?>');"
                     <?php echo ($fixed)? 'required="required"':'' ?>
                    name="socialdb_property_<?php echo $property['id']; ?>[]"  >
         <?php
-    }else if ($property['type'] == 'int') { ?>     
+    }else if ($property['type'] == 'int') { 
+        $seletor = 'form_autocomplete_value_'.$property['id'].'_'.$i;
+        ?>     
                 <input type="text" 
-                   id="form_autocomplete_value_<?php echo $property['id']; ?>" 
-                   class="form-control" 
+                    id="form_autocomplete_value_<?php echo $property['id']; ?>_<?php echo $i; ?>" 
+                    class="form-control form_autocomplete_value_<?php echo $property['id']; ?>"
                    value="<?php echo (isset($property['metas']['value'][$i]))? $property['metas']['value'][$i]:'' ?>"
                    onkeypress='return onlyNumbers(event)'
+                   autocomplete="off"
+                   onkeyup="validation_cardinality_property_data('<?php echo $seletor ?>','<?php echo $property['id'] ?>','<?php echo $i ?>');"
                     <?php echo ($fixed)? 'required="required"':'' ?>
                    name="socialdb_property_<?php echo $property['id']; ?>[]"  >
         <?php
-    }else if ($property['type'] == 'date') { ?>     
+    }else if ($property['type'] == 'date') { 
+        $seletor = 'socialdb_property_'.$property['id'].'_field_'.$i;
+        ?>     
                  <script>
                     $(function() {
-                        $('#field_container_<?php echo $property['id']; ?>_<?php echo $i; ?>').attr('class','col-md-3');
+                        $('#field_container_<?php echo $property['id']; ?>_<?php echo $i; ?>').attr('class','col-md-4');
                         $( "#socialdb_property_<?php echo $property['id']; ?>_field_<?php echo $i; ?>" ).datepicker({
                             dateFormat: 'dd/mm/yy',
                             dayNames: ['<?php _e('Sunday','tainacan') ?>','<?php _e('Monday','tainacan') ?>','<?php _e('Tuesday','tainacan') ?>','<?php _e('Wednesday','tainacan') ?>','<?php _e('Thursday','tainacan') ?>','<?php _e('Friday','tainacan') ?>','<?php _e('Saturday','tainacan') ?>'],
@@ -1412,16 +1693,21 @@ function get_html_property_data_types($property,$i,$fixed){
                         });
                     });
                 </script>    
-                <input style="margin-right: 5px;" 
-                       size="13" 
+                  <input style="margin-right: 5px;" 
+                        aria-describedby="inputSuccess2Status"
                         value="<?php echo (isset($property['metas']['value'][$i]))? $property['metas']['value'][$i]:'' ?>"
-                       class="input_date" 
+                       class="form-control input_date " 
+                       autocomplete="off"
+                       onchange="validation_cardinality_property_data('<?php echo $seletor ?>','<?php echo $property['id'] ?>','<?php echo $i ?>');"
+                       onkeyup="validation_cardinality_property_data('<?php echo $seletor ?>','<?php echo $property['id'] ?>','<?php echo $i ?>');"
                         <?php echo ($fixed)? 'required="required"':'' ?>
                        id="socialdb_property_<?php echo $property['id']; ?>_field_<?php echo $i; ?>" 
                        name="socialdb_property_<?php echo $property['id']; ?>[]" 
                        type="text" >
         <?php
-    }else if ($property['type'] == 'datetime') { ?>     
+    }else if ($property['type'] == 'datetime') { 
+        $seletor = 'socialdb_property_'.$property['id'].'_field_'.$i;
+        ?>     
                  <script>
                     $(function() {
                         $('#field_container_<?php echo $property['id']; ?>_<?php echo $i; ?>').attr('class','col-md-3');
@@ -1449,13 +1735,17 @@ function get_html_property_data_types($property,$i,$fixed){
                 </script>    
                 <input style="margin-right: 5px;" 
                        size="20" 
+                       autocomplete="off"
+                       onchange="validation_cardinality_property_data('<?php echo $seletor ?>','<?php echo $property['id'] ?>','<?php echo $i ?>');"
                         value="<?php echo (isset($property['metas']['value'][$i]))? $property['metas']['value'][$i]:'' ?>"
                         <?php echo ($fixed)? 'required="required"':'' ?>
                        id="socialdb_property_<?php echo $property['id']; ?>_field_<?php echo $i; ?>" 
                        name="socialdb_property_<?php echo $property['id']; ?>[]" 
                        type="text" >
         <?php
-    }else if ($property['type'] == 'time') { ?>     
+    }else if ($property['type'] == 'time') { 
+        $seletor = 'socialdb_property_'.$property['id'].'_field_'.$i;
+        ?>     
                  <script>
                     $(function() {
                         $('#field_container_<?php echo $property['id']; ?>_<?php echo $i; ?>').attr('class','col-md-3');
@@ -1476,13 +1766,23 @@ function get_html_property_data_types($property,$i,$fixed){
                 </script>    
                 <input style="margin-right: 5px;" 
                        size="13" 
+                       autocomplete="off"
+                        onchange="validation_cardinality_property_data('<?php echo $seletor ?>','<?php echo $property['id'] ?>','<?php echo $i ?>');"
                         value="<?php echo (isset($property['metas']['value'][$i]))? $property['metas']['value'][$i]:'' ?>"
                         <?php echo ($fixed)? 'required="required"':'' ?>
                       id="socialdb_property_<?php echo $property['id']; ?>_field_<?php echo $i; ?>" 
                        name="socialdb_property_<?php echo $property['id']; ?>[]" 
                        type="text" >
         <?php
-    }
+    } 
+    // valida a cardinalidade dos campos
+    ?>
+    <script> 
+         $(function() {
+             validation_cardinality_property_data('<?php echo $seletor ?>','<?php echo $property['id'] ?>','<?php echo $i ?>');
+         });
+    </script>
+    <?php
  }
 
 
@@ -1497,8 +1797,8 @@ add_action( 'modificate_edit_item_properties_object', 'ontology_modificate_inser
 add_action( 'modificate_single_item_properties_object', 'ontology_modificate_insert_item_properties_object', 10,1 );
 
 function ontology_modificate_insert_item_properties_object($property) {
-     $ontology_max_cardinality_fields = 1;
-    $ontology_min_cardinality_fields = 1;
+     $ontology_max_cardinality_fields = 40;
+    $ontology_min_cardinality_fields = 0;
     if($property['metas']['socialdb_property_cardinalidality']&&!empty($property['metas']['socialdb_property_cardinalidality'])){
         $fixed = true;
         $ontology_max_cardinality_fields = $property['metas']['socialdb_property_cardinalidality'];
@@ -1518,8 +1818,6 @@ function ontology_modificate_insert_item_properties_object($property) {
             $ontology_min_cardinality_fields = $property['metas']['socialdb_property_mincardinalidality'];
             if($property['metas']['socialdb_property_maxcardinalidality']&&!empty($property['metas']['socialdb_property_maxcardinalidality'])){
                 $ontology_max_cardinality_fields = $property['metas']['socialdb_property_maxcardinalidality'];
-            }else{
-                $ontology_max_cardinality_fields = 999999;
             }
         }
         
@@ -1539,8 +1837,17 @@ function ontology_modificate_insert_item_properties_object($property) {
                        value="<?php echo sprintf(__('The field ( %s ) is not matching its cardinality!','tainacan'), $property['name'])   ?>">        
         <input type="hidden" id="property_<?php echo $property['id']  ?>_is_fixed" name="property_<?php echo $property['id']  ?>_is_fixed" value="<?php echo ($fixed)? 'true':'false'  ?>">
         <input type="hidden" id="property_<?php echo $property['id']  ?>_min_cardinality" name="property_<?php echo $property['id']  ?>_min_cardinality" value="<?php echo $ontology_min_cardinality_fields  ?>">
+        <input type="hidden" id="property_<?php echo $property['id']  ?>_max" name="property_<?php echo $property['id']  ?>_max" value="<?php echo ($ontology_max_cardinality_fields==='*') ? 60 : $ontology_max_cardinality_fields  ?>">
         <input type="hidden" id="property_<?php echo $property['id']  ?>_max_cardinality" name="property_<?php echo $property['id']  ?>_max_cardinality" value="<?php echo $ontology_max_cardinality_fields  ?>">
-    <?php            
+        <input type="hidden" id="property_validation_<?php echo $property['id']; ?>" class="validation_properties_cardinality" value="" >
+        <input type="hidden" class="obrigation-message-<?php echo $property['id']; ?>" value="<?php echo __('This field is required!','tainacan') ?>" >
+        <input type="hidden" class="optional-message-<?php echo $property['id']; ?>" value="<?php echo sprintf(__('At least, fill %s field in this property!','tainacan'),$ontology_min_cardinality_fields); ?>" >
+        <script> 
+         $(function() {
+             verify_cardinality_property_object_field('<?php echo 'select[name="socialdb_property_'.$property['id'].'[]"]' ?>','<?php echo $property['id'] ?>');
+         });
+        </script>
+    <?php         
 }
 
 
@@ -1553,46 +1860,42 @@ add_action( 'modificate_single_item_properties_data', 'ontology_modificate_singl
 function ontology_modificate_single_item_properties_data($property,$object_id) {
      //cardinalidade
     $cont = 0;
-    $ontology_max_cardinality_fields = 1;
-    $ontology_min_cardinality_fields = 1;
-    if($property['metas']['socialdb_property_cardinalidality']&&!empty($property['metas']['socialdb_property_cardinalidality'])){
-        $fixed = true;
-        $ontology_max_cardinality_fields = $property['metas']['socialdb_property_cardinalidality'];
-        $ontology_min_cardinality_fields = $property['metas']['socialdb_property_cardinalidality'];
-    }else{
-         if($property['metas']['socialdb_property_maxcardinalidality']&&!empty($property['metas']['socialdb_property_maxcardinalidality'])){
-            $fixed = false;
-            $ontology_max_cardinality_fields = $property['metas']['socialdb_property_maxcardinalidality'];
-            if($property['metas']['socialdb_property_mincardinalidality']&&!empty($property['metas']['socialdb_property_mincardinalidality'])){
-                $ontology_min_cardinality_fields = $property['metas']['socialdb_property_mincardinalidality'];
-            }else{
-                $ontology_min_cardinality_fields = 0;
-            }
-        }
-        if($property['metas']['socialdb_property_mincardinalidality']&&!empty($property['metas']['socialdb_property_mincardinalidality'])){
-             $fixed = false;
-            $ontology_min_cardinality_fields = $property['metas']['socialdb_property_mincardinalidality'];
-            if($property['metas']['socialdb_property_maxcardinalidality']&&!empty($property['metas']['socialdb_property_maxcardinalidality'])){
-                $ontology_max_cardinality_fields = $property['metas']['socialdb_property_maxcardinalidality'];
-            }else{
-                $ontology_max_cardinality_fields = 999999;
-            }
-        }
-    } ?>  
+    $array_cardinality = get_property_cardinality($property);
+    $ontology_max_cardinality_fields = $array_cardinality['max'];
+    $ontology_min_cardinality_fields = $array_cardinality['min'];
+    $fixed = $array_cardinality['fixed'];
+    ?>  
     <div style="display: none;" id="single_property_value_<?php echo $property['id']; ?>_<?php echo $object_id; ?>">
+        <?php 
+            if(has_action('modificate_label_insert_item_properties')):
+                do_action('modificate_label_insert_item_properties', $property);
+            endif;
+            ?>
         <input type="hidden" id="property_<?php echo $property['id']  ?>_error_cardinality_message"  
                        value="<?php echo sprintf(__('The field ( %s ) is not matching its cardinality!','tainacan'), $property['name'])   ?>">        
         <input type="hidden" id="property_<?php echo $property['id']  ?>_is_fixed" name="property_<?php echo $property['id']  ?>_is_fixed" value="<?php echo ($fixed)? 'true':'false'  ?>">
         <input type="hidden" id="property_<?php echo $property['id']  ?>_min_cardinality" name="property_<?php echo $property['id']  ?>_min_cardinality" value="<?php echo $ontology_min_cardinality_fields  ?>">
         <input type="hidden" id="property_<?php echo $property['id']  ?>_max_cardinality" name="property_<?php echo $property['id']  ?>_max_cardinality" value="<?php echo $ontology_max_cardinality_fields  ?>">
+       <!-- Hiddens para validacao inline -->
+       <input type="hidden" id="property_<?php echo $property['id']; ?>_max" name="socialdb_property_<?php echo $property['id']; ?>_total_fields" value="<?php echo $ontology_max_cardinality_fields ?>" >
+        <input type="hidden" id="property_<?php echo $property['id']; ?>_min" value="<?php echo $ontology_min_cardinality_fields ?>" >
+        <input type="hidden" id="property_validation_<?php echo $property['id']; ?>" class="validation_properties_cardinality" value="" >
+        <input type="hidden" class="obrigation-message-<?php echo $property['id']; ?>" value="<?php echo __('This field is required!','tainacan') ?>" >
+        <input type="hidden" class="optional-message-<?php echo $property['id']; ?>" value="<?php echo sprintf(__('At least, fill %s field in this property!','tainacan'),$ontology_min_cardinality_fields); ?>" >
        <?php for($i=0;$i<$ontology_max_cardinality_fields;$i++): ?>
         <div id="field_property_<?php echo $property['id']; ?>_<?php echo $i; ?>" 
              class="row" <?php echo ($i>=1&&!$fixed&&$i>=$ontology_min_cardinality_fields
                         &&(!isset($property['metas']['value'])||!is_array($property['metas']['value'])||count($property['metas']['value'])-1<$i))
              ? 'style="display:none;"':'style="margin-bottom:15px;"' ?> >
             <div id="field_container_<?php echo $property['id']; ?>_<?php echo $i; ?>" class="col-md-11">
-               <?php get_html_property_data_types($property,$i,$fixed); ?>
-            </div>    
+                    <div id="form_group_<?php echo $property['id']; ?>_<?php echo $i; ?>"  
+                         class="form-group has-feedback"> 
+                        <?php get_html_property_data_types($property,$i,$fixed); ?>
+                        <span id="icon_<?php echo $property['id']; ?>_<?php echo $i; ?>" class="glyphicon" aria-hidden="true"></span>
+                        <span id="status_field_<?php echo $property['id']; ?>_<?php echo $i; ?>" class="sr-only"></span>
+                        <input type="hidden" value="false" id="is_valid_<?php echo $property['id']; ?>_<?php echo $i; ?>" class="is_valid_<?php echo $property['id']; ?>">
+                    </div>  
+            </div>      
             <div class="col-md-1">    
             <?php  if(!$fixed&&$ontology_max_cardinality_fields>1&&$ontology_max_cardinality_fields-1!=$i&&$i>=$ontology_min_cardinality_fields-1
                             ):  $cont++; ?>
@@ -1624,3 +1927,38 @@ function ontology_add_button_edit_property($property_id){
     <?php    
 }
 #### FIM -  ALTERACAO DA PAGINA DO ITEM PARA PROPRIEDADE DE DADOS ##############
+
+#### #17 -  ADICIONA NO MENU DA COLECAO A OPCAO DE FILTROS #####################
+add_action('add_configuration_menu_tainacan', 'add_filter_ontology_menu');
+function add_filter_ontology_menu() {
+    $link = "'" . get_template_directory_uri(). "'";
+    echo '<li>
+                           <a style="cursor: pointer;" 
+                              onclick="showSearchConfiguration(' . $link . ');" >
+                               <span class="glyphicon glyphicon-folder-open"></span>&nbsp;
+                                   ' . __('Filters', 'tainacan')
+    . '</a>'
+    . '</li>';
+    echo '<li>
+                           <a style="cursor: pointer;" 
+                              onclick="showRankingConfiguration(' . $link . ');" >
+                               <span class="glyphicon glyphicon-star"></span>&nbsp;
+                                   ' . __('Rankings', 'tainacan')
+    . '</a>'
+    . '</li>';
+}
+#### FIM -  ADICIONA NO MENU DA COLECAO A OPCAO DE FILTROS #####################
+
+############ #18 - ALTERA O THUMBNAIL DOS ITEMS/COLEÇÕES ################################
+function ontology_alter_thumbnail_items($type) {
+     $link =  get_template_directory_uri() . '/modules/' . MODULE_ONTOLOGY . "/libraries/images/thumbnail.png"; 
+    return $link;
+}
+add_filter( 'alter_thumbnail_items', 'ontology_alter_thumbnail_items', 10, 3 );
+
+function ontology_alter_thumbnail_collection($type) {
+     $link =  get_template_directory_uri() . '/modules/' . MODULE_ONTOLOGY . "/libraries/images/ontology.png"; 
+    return $link;
+}
+add_filter( 'alter_thumbnail_collections', 'ontology_alter_thumbnail_collection', 10, 3 );
+################################################################################

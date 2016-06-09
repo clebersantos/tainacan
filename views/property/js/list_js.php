@@ -1,16 +1,16 @@
 <script>
     $(function () {
-        if ($('#open_wizard').val() == 'true') {
-            $('#btn_back_collection').hide();
-            $('#submit_configuration').hide();
-            $('#properties_tabs').hide();
-        }
-        else {
+//        if ($('#open_wizard').val() == 'true') {
+//            $('#btn_back_collection').hide();
+//            $('#submit_configuration').hide();
+//            $('#properties_tabs').hide();
+//        }
+//        else {
             $('#MyWizard').hide();
             $('#properties_create_opt').hide();
             $('#save_and_next').hide();
             $('#properties_tabs').show();
-        }
+      //  }
         var src = $('#src').val();
         showPropertyCategoryDynatree(src);
         showTermsDynatree(src);//mostra o dynatree

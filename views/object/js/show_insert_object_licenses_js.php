@@ -19,7 +19,11 @@
                 showAlertGeneral(elem.title, elem.msg, elem.type);
             });
         });
-
+        
+        if($('.hide_license')&&$('.hide_license').val()==='true'){
+            $('#list_licenses_items').hide();
+            $('#core_validation_license').val('true');
+        }
     });
   
 </script>

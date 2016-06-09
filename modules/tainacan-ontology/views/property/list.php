@@ -43,6 +43,14 @@ include_once ('js/list_js.php');
                             <div id="autocomplete_property_data"></div>
                         </div>
                         <br>
+                        <!-- Domain -->
+                        <div class="form-group">
+                            <label for="property_category_dynatree_data_domain"><?php _e('Domain','tainacan'); ?></label>
+                            <div id="property_category_dynatree_data_domain" style="height: 300px;overflow-y: scroll;" >
+                            </div>
+                              <input required="required" type="hidden"  id="property_data_domain_category_id"  name="socialdb_event_property_used_by_categories" value="<?php echo $category->term_id; ?>" >
+                        </div>
+                        <br>
                         <div class="form-group">
                             <label for="property_data_widget"><?php _e('Property data widget','tainacan'); ?></label>
                             <select onchange="hide_fields(this)" class="form-control" id="property_data_widget" name="property_data_widget">
@@ -85,6 +93,15 @@ include_once ('js/list_js.php');
                             <label for="property_object_name"><?php _e('Property object name','tainacan'); ?></label>
                             <input type="text" class="form-control" id="property_object_name" name="property_object_name" required="required" placeholder="<?php _e('Property Object name','tainacan'); ?>">
                              <div id="autocomplete_property_object"></div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="property_category_dynatree_object_domain"><?php _e('Domain','tainacan'); ?></label>
+                            <?php if (!$is_root): ?>
+                                <div id="property_category_dynatree_object_domain" style="height: 300px;overflow-y: scroll;" >
+                                </div>
+                            <?php endif; ?>
+                              <input required="required" type="hidden"  id="property_object_domain_category_id"  name="socialdb_event_property_used_by_categories" value="<?php echo $category->term_id; ?>" >
                         </div>
                         <div class="form-group">
                             <?php if (isset($is_root) && $is_root): ?>
@@ -141,6 +158,14 @@ include_once ('js/list_js.php');
                             <label for="property_term_name"><?php _e('Property term name','tainacan'); ?></label>
                             <input type="text" class="form-control" id="property_term_name" name="property_term_name" required="required" placeholder="<?php _e('Property Term name','tainacan'); ?>">
                             <div id="autocomplete_property_term"></div>
+                        </div>
+                        <br>
+                        <!-- Domain -->
+                        <div class="form-group">
+                            <label for="property_category_dynatree_term_domain"><?php _e('Domain','tainacan'); ?></label>
+                            <div id="property_category_dynatree_term_domain" style="height: 300px;overflow-y: scroll;" >
+                            </div>
+                              <input required="required" type="hidden"  id="property_term_domain_category_id"  name="socialdb_event_property_used_by_categories" value="<?php echo $category->term_id; ?>" >
                         </div>
                         <br>
                         <div class="form-group">

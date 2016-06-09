@@ -44,6 +44,7 @@ class RankingModel extends Model {
         }
 
         if (!is_wp_error($new_ranking) && $ranking_id) {
+            $this->add_property_position_ordenation($data['collection_id'], $ranking_id);
             $result[] = update_term_meta($ranking_id, 'socialdb_property_created_category', $this->get_category_root_of($data['collection_id']));
             instantiate_metas($ranking_id, $type->name, 'socialdb_property_type', true);
             $result[] = $this->vinculate_property($this->get_category_root_of($data['collection_id']), $ranking_id);
@@ -144,7 +145,8 @@ class RankingModel extends Model {
     public function delete($data) {
         $categogy_root_of_collection_id = $this->get_category_root_of($data['collection_id']);
        if (isset($data['ranking_delete_id']) && delete_term_meta($categogy_root_of_collection_id, 'socialdb_category_property_id', $data['ranking_delete_id']) && $this->delete_property_meta_data($data['ranking_delete_id']) && wp_delete_term($data['ranking_delete_id'], 'socialdb_property_type')) {
-            $data['success'] = 'true';
+            $this->remove_property_position_ordenation($data['collection_id'],$data['ranking_delete_id']); 
+           $data['success'] = 'true';
             delete_post_meta($data['collection_id'], 'socialdb_collection_facets',$data['ranking_delete_id']);
             // se for ordenacao padrao do repositorio
             if($data['ranking_delete_id']==get_post_meta($data['collection_id'], 'socialdb_collection_default_ordering', true)){
@@ -355,7 +357,6 @@ class RankingModel extends Model {
                 update_post_meta($is_voted, 'socialdb_property_ranking_vote', $data['score']);
             }
             return false; 
-            
         }
     }
 

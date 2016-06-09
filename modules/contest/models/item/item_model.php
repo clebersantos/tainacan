@@ -18,41 +18,39 @@ require_once(dirname(__FILE__) . '/../../../../models/tag/tag_model.php');
  */
 class ItemModel extends Model {
 
-    public function create() {
-        $user_id = get_current_user_id();
-        if ($user_id == 0 || is_wp_error($user_id)) {
-            $user_id = get_option('anonimous_user');
-        }
-        $post = array(
-            'post_title' => 'Temporary_post',
-            'post_status' => 'inherit',
-            'post_author' => $user_id,
-            'post_type' => 'socialdb_object'
-        );
-        $object_id = wp_insert_post($post);
-        return $object_id;
-    }
-
-    public function add_argument($title,$collection_id,$classification) {
-        $category_root_id = $this->collection_model->get_category_root_of($data['collection_id']);
+    /**
+     * 
+     * @param type $title
+     * @param type $collection_id
+     * @param type $classification
+     * @param type $parent
+     * @param type $position
+     * @return type
+     */
+    public function add($title,$collection_id,$classification,$type,$parent = 0,$position = false) {
+        $category_root_id = $this->get_category_root_of($collection_id);
         $user_id = get_current_user_id();
         $post = array(
-            'post_title' => $data['object_name'],
+            'post_title' => $title,
             'post_status' => 'inherit',
             'post_author' => $user_id,
-            'post_parent' => $user_id,
+            'post_parent' => $parent,
             'post_type' => 'socialdb_object'
         );
         $post_id = wp_insert_post($post);
         //categoria raiz da colecao
-        wp_set_object_terms($post_id, array((int) $category_root_id), 'socialdb_category_type');
+        if($parent===0){
+             wp_set_object_terms($post_id, array((int) $category_root_id), 'socialdb_category_type');
+        }
         //inserindo as classificacoes
-        $this->insert_classifications($data['object_classifications'], $data['ID']);
-        //inserindo tags
-        $this->insert_tags($data['object_tags'], $data['collection_id'], $data['ID']);
-       
+        $this->insert_classifications($classification, $post_id);
+        //postmetas
+        update_post_meta($post_id, 'socialdb_object_contest_type', $type);
+        if($position){
+           update_post_meta($post_id, 'socialdb_object_contest_position', $position);  
+        }
         // inserindo o evento
-        $data = $this->insert_item_event($data['ID'], $data);
+        $data = $this->insert_item_event($post_id, $collection_id);
 
         return $data;
     }
@@ -100,6 +98,30 @@ class ItemModel extends Model {
                 }
             } else {
                 wp_set_object_terms($object_id, array((int) $classification), 'socialdb_category_type', true);
+            }
+        }
+    }
+    
+    /**
+     * @signature - function insert_tags($string_tags, $collection_id, $object_id)
+     * @param string $string_tags A string que veio do formulario com todas as tags
+     * @param int $collection_id O id da colecao
+     * @param int $object_id O id do Objeto
+     * @return void
+     * @description - Insere os valores das tags colocadas pelo usuario
+     * @author: Eduardo 
+     */
+    public function insert_tags($string_tags, $collection_id, $object_id) {
+        $tagModel = new TagModel();
+        $this->concatenate_commom_field_value( $object_id, "socialdb_propertyterm_tag", '');
+        $tags = explode(',', $string_tags);
+        if (is_array($tags) && !empty($tags)) {
+            foreach ($tags as $tag) {
+                if ($tag !== ''):
+                    $tag_array = $tagModel->add($tag, $collection_id);
+                    $tagModel->add_tag_object($tag_array['term_id'], $object_id);
+                    $this->concatenate_commom_field_value( $object_id, "socialdb_propertyterm_tag", $tag_array['term_id']);
+                endif;
             }
         }
     }

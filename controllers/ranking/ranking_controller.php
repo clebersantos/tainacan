@@ -47,6 +47,10 @@ class RankingController extends Controller {
                 $data = $ranking_model->list_ranking_object($data);
                 return $this->render(dirname(__FILE__) . '../../../views/object/ranking/list_ranking_update.php', $data);
                 break;
+            case "multiple_list_ranking_object":
+                $data = $ranking_model->list_ranking_object($data);
+                return $this->render(dirname(__FILE__) . '../../../views/object/ranking/list_ranking_multiple.php', $data);
+                break;
 
             case "edit_ranking":
                 $ranking = $ranking_model->edit_ranking($data);
@@ -61,7 +65,7 @@ class RankingController extends Controller {
             case "add_new":
                 return $this->render(dirname(__FILE__) . '../../../views/ranking/add.php');
                 break;
-
+            // # - SALVANDO VOTOS DAS VOTACOES   
             case "save_vote_stars":
                 if (is_user_logged_in()) {
                     $data['is_user_logged_in'] = true;
@@ -98,7 +102,62 @@ class RankingController extends Controller {
                 }
                 return json_encode($data);
                 break;
-
+            // para multiplos itens    
+            case "save_vote_stars_multiple":
+                $ids = explode(',', $data['object_id']);
+                if($ids  &&  is_array($ids)):
+                    foreach ($ids as $id) {
+                        if (is_user_logged_in()) {
+                            $data['object_id'] = $id;
+                            $data['is_user_logged_in'] = true;
+                            $data['is_new'] = $ranking_model->save_vote($data);
+                            $data['results'] = $ranking_model->calculate_vote_stars($data['property_id'], $data['object_id']);
+                            $score = ceil(($data['score']))/2;
+                            $final_score =  ceil(($data['results']['final_score'])*2)/2;
+                            $data['msg'] = __('Your vote was ','tainacan').$score.__(', the average is ','tainacan').$final_score;
+                        } else {
+                            $data['results'] = $ranking_model->calculate_vote_stars($data['property_id'], $data['object_id']);
+                            $data['is_user_logged_in'] = false;
+                        }
+                    }    
+                endif;    
+                return json_encode($data);
+                break;
+            case "save_vote_like_multiple":
+                $ids = explode(',', $data['object_id']);
+                if($ids  &&  is_array($ids)):
+                    foreach ($ids as $id) {
+                        if (is_user_logged_in()) {
+                            $data['object_id'] = $id;
+                            $data['is_user_logged_in'] = true;
+                            $data['is_new'] = $ranking_model->save_vote($data, false);
+                            $data['results'] = $ranking_model->calculate_vote_like($data['property_id'], $data['object_id']);
+                        } else {
+                            $data['results'] = $ranking_model->calculate_vote_like($data['property_id'], $data['object_id']);
+                            $data['is_user_logged_in'] = false;
+                        }
+                    }    
+                endif;        
+                return json_encode($data);
+                break;
+            case "save_vote_binary_multiple":
+                $ids = explode(',', $data['object_id']);
+                if($ids  &&  is_array($ids)):
+                    foreach ($ids as $id) {
+                        if (is_user_logged_in()) {
+                             $data['object_id'] = $id;
+                            $data['is_user_logged_in'] = true;
+                            $data['is_new'] = $ranking_model->save_vote($data,true,true);
+                            $data['results'] = $ranking_model->calculate_vote_binary($data['property_id'], $data['object_id']);
+                        } else {
+                            $data['results'] = $ranking_model->calculate_vote_binary($data['property_id'], $data['object_id']);
+                            $data['is_user_logged_in'] = false;
+                        }
+                    }    
+                endif; 
+                return json_encode($data);
+                break;    
+            ####################################################################       
             case 'redirect_facebook':
                 return json_encode($ranking_model->redirect_facebook($data));
             case 'next_step':

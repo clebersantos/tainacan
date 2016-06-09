@@ -4,7 +4,8 @@
         search_list_properties_term_insert_objects();
         var search_properties_autocomplete = search_get_val($("#search_properties_autocomplete").val());
         autocomplete_object_property_add(search_properties_autocomplete);
-   
+        //# - inicializa os tooltips
+        $('[data-toggle="tooltip"]').tooltip();
     });
    
     function autocomplete_object_property_add(search_properties_autocomplete) {
@@ -189,12 +190,14 @@
                     onActivate: function (node, event) {
                     },
                     onSelect: function (flag, node) {
+                        var cont = 0;
                         var selKeys = $.map(node.tree.getSelectedNodes(), function (node) {
                             return node;
                         });
-                        $("#search_socialdb_propertyterm_"+treecheckbox).html('');
-                        $.each(selKeys,function(index,key){
-                            $("#search_socialdb_propertyterm_"+treecheckbox).append('<option selected="selected" value="'+key.data.key+'" >'+key.data.title+'</option>')
+                        $("#socialdb_propertyterm_" + treecheckbox).html('');
+                        $.each(selKeys, function (index, key) {
+                            cont++;
+                            $("#socialdb_propertyterm_" + treecheckbox).append('<input type="hidden" name="socialdb_propertyterm_'+treecheckbox+'[]" value="' + key.data.key + '" >');
                         });
                     },
                     dnd: {
@@ -209,14 +212,17 @@
         if (trees) {
             $.each(trees, function (idx, tree) {
                 $("#search_field_property_term_"+tree).dynatree({
-                    selectionVisible: true, // Make sure, selected nodes are visible (expanded).  
                     checkbox: true,
+                    // Override class name for checkbox icon:
+                    classNames: {checkbox: "dynatree-radio"},
+                    selectMode: 1,
+                    selectionVisible: true, // Make sure, selected nodes are visible (expanded). 
                    initAjax: {
                         url: $('#src').val() + '/controllers/category/category_controller.php',
                         data: {
                             collection_id: $("#collection_id").val(),
                             property_id: tree,
-                            hide_checkbox: 'true',
+                           // hide_checkbox: 'true',
                             operation: 'initDynatreeDynamic'
                         }
                         , addActiveKey: true
@@ -251,13 +257,13 @@
                     onActivate: function (node, event) {
                     },
                     onSelect: function (flag, node) {
-                        var selKeys = $.map(node.tree.getSelectedNodes(), function (node) {
-                            return node;
-                        });
-                        $("#search_socialdb_propertyterm_"+tree).html('');
-                        $.each(selKeys,function(index,key){
-                            $("#search_socialdb_propertyterm_"+tree).append('<option selected="selected" value="'+key.data.key+'" >'+key.data.title+'</option>')
-                        });
+                        if ($("#socialdb_propertyterm_" + tree).val() === node.data.key) {
+                            $("#socialdb_propertyterm_" + tree).val("");
+                             $('#core_validation_'+tree).val('false');
+                        } else {
+                            $("#socialdb_propertyterm_" + tree).val(node.data.key);
+                            $('#core_validation_'+tree).val('true');
+                        }
                     },
                     dnd: {
                     }

@@ -251,6 +251,14 @@ class ObjectFileModel extends Model {
                     $result['videos'][] = $obj;   
                 }elseif($type=='image'){
                     $result['image'][] = $obj;     
+                }elseif($type=='text'){
+                     $result['text'][] = $obj;   
+                }elseif($type=='pdf'){
+                     $result['text'][] = $obj;   
+                }elseif($type=='other'||$type=='others'){
+                     $result['text'][] = $obj;   
+                }elseif($type=='audio'){
+                     $result['text'][] = $obj;   
                 }
                 $result['items'][] = $obj;
             }

@@ -26,7 +26,12 @@ $view_helper = new ViewHelper();
                 </li>
             </ul>
 
-            <button onclick="showLayout('<?php echo get_template_directory_uri() ?>')" class="btn btn-primary right" style="margin: 15px 15px 0 0"><?php _e('Save & Next', 'tainacan'); ?></button>
+            <div class="col-md-2 no-padding">
+                <button onclick="showLayout('<?php echo get_template_directory_uri() ?>')"
+                        class="btn btn-primary right" style="margin: 15px 15px 0 0">
+                    <?php _e('Save & Next', 'tainacan'); ?>
+                </button>
+            </div>
 
         <?php else: ?>
 
@@ -43,13 +48,13 @@ $view_helper = new ViewHelper();
 </div>
 
 <input type="hidden" name="property_category_id" id="property_category_id" value="<?php echo $category->term_id; ?>"/>
-<div class="categories_menu row col-md-12"  id="properties_tabs">
+<div class="categories_menu row col-md-12 no-padding"  id="properties_tabs">
 
     <div id="preset-filters" class="col-md-4 preset-filters ui-widget-header no-padding">
         <ul id="filters-accordion" class="connectedSortable"></ul>
     </div>
 
-    <div class="col-md-8 ui-widget-content metadata-actions">
+    <div class="col-md-8 ui-widget-content metadata-actions" style="padding-right: 0;">
 
         <div class="col-md-12 no-padding action-messages">
             <div id="alert_success_properties" class="alert alert-success" style="display: none; margin-top: 20px;">
@@ -72,7 +77,7 @@ $view_helper = new ViewHelper();
 
             <?php /*
             <div class="alert alert-info" style="float: left; margin-left: 20px; padding: 13px 20px 13px 20px; font-size: 12px;">
-                <i> * Arraste um metadado para o lado esquerdo para utilizá-lo como filtro </i>
+                <i> * Arraste um metadado para o lado esquerdo para utiliza-lo como filtro </i>
             </div>
             */ ?>
 
@@ -90,6 +95,8 @@ $view_helper = new ViewHelper();
                 <button onclick="backToMainPage();" id="btn_back_collection" class="btn btn-default pull-right white"><?php _e('Back to collection','tainacan') ?></button>
             </div>
         </div>
+
+        <?php $selected_menu_style_id = get_post_meta( $collection_id, 'socialdb_collection_facet_' . $f_id . '_menu_style', true); ?>
 
         <div class="ui-widget ui-helper-clearfix col-md-12" style="background: white">
             <ul id="metadata-container" class="gallery ui-helper-reset ui-helper-clearfix connectedSortable">
@@ -114,6 +121,12 @@ $view_helper = new ViewHelper();
                     </div>
                 </li>
             </ul>
+            <div id="loader_metadados_page" style="display: none;font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 11px; line-height: normal; font-family: Arial;">
+                <center>
+                    <img src="<?php echo get_template_directory_uri() . '/libraries/images/catalogo_loader_725.gif' ?>">
+                    <h4><?php _e('Loading metadata...', 'tainacan') ?></h4>
+               </center>
+            </div>
         </div>
 
         <?php include_once "metadata_forms.php"; ?>

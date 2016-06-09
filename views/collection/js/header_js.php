@@ -35,6 +35,11 @@
     $("#tainacan-breadcrumbs span.collection-title").text(collection_data.name);
 
     $(function () {
+
+        if ( $(".ibram-header").is(":visible") ) {
+            $(".collection_header_img").hide();
+        }
+
         $('.dropdown-toggle').dropdown();
         $("#search_objects").catcomplete({
             delay: 0,

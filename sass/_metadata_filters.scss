@@ -37,7 +37,7 @@
 }
 
 #properties_tabs {
-  margin-top: 10px;
+  //margin-top: 10px;
 
   .action-icons {
     text-align: right;
@@ -69,7 +69,6 @@
   }
 
   .add-property-btn {
-    margin-top: 15px;
     padding: 20px 0 20px 20px;
     background: white;
     font-size: 16px;
@@ -160,6 +159,8 @@
 
 #preset-filters {
   min-height: 18em;
+  margin-left: -15px;
+
 
   .action-icons {
     float: right;
@@ -176,8 +177,7 @@
   }
 
   #filters-accordion {
-    margin-left: -31px;
-    padding: 0 5% 0 0;
+    padding: 0 0 0 0;
     height: 600px;
 
     .form-group {
@@ -204,7 +204,7 @@
       border: 1px solid $lightest-gray;
       @include accordion_label_style();
       padding-right: 5px;
-      text-indent: 4%;
+      text-indent: 2.5%;
 
       &:hover {
         cursor: n-resize;
@@ -223,6 +223,11 @@
 
 #filters-accordion.receiving-metadata {
  //  background: rosybrown !important;
+}
+
+.select-meta-filter {
+  border: 2px dashed $brand-light-blue;
+  padding: 15px;
 }
 
 #table_property_term, #table_property_object, #table_ranking {
@@ -259,4 +264,32 @@
 
 li.fixed-meta {
   border-bottom: 1px solid #e3e3e3;
+}
+
+.hr-style {
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+h4.modal-title {
+  font-weight: bolder;
+  color: black;
+}
+
+.edit-metadata-type {
+  display: inline-block !important;
+  width: auto;
+  margin-left: 15px;
+}
+
+#color_field_property_search {
+  .radio-inline {
+    padding-left: 15px !important;
+  }
+}
+
+.sweet-alert {
+  border: 2px solid #DADADA;
 }

@@ -202,65 +202,91 @@
                     </select>
                 </div>
 
+                <!-- Downloads Control -->
                 <div class="form-group">
-                    <label for="collection_attachments"><?php _e('You allow attachments to objects from the collection?', 'tainacan'); ?></label> 
-                    <select name="collection_attachments" class="form-control">
-                        <option value="yes" <?php
-                        if ($collection_metas['socialdb_collection_attachment'] == 'yes' || empty($collection_metas['socialdb_collection_attachment'])) {
+                    <label for="socialdb_collection_download_control"><?php _e('Downloads Control', 'tainacan'); ?></label> 
+                    <select name="socialdb_collection_download_control" class="form-control">
+                        <option value="allowed" <?php
+                        if ($collection_metas['socialdb_collection_download_control'] == 'allowed' || empty($collection_metas['socialdb_collection_download_control'])) {
                             echo 'selected = "selected"';
                         }
                         ?>>
-                                    <?php _e('Yes', 'tainacan'); ?>
+                                    <?php _e('Allowed - Everyone can download the original images', 'tainacan'); ?>
                         </option>
-                        <option value="no" <?php
-                        if ($collection_metas['socialdb_collection_attachment'] == 'no') {
+                        <option value="moderate" <?php
+                        if ($collection_metas['socialdb_collection_download_control'] == 'moderate') {
                             echo 'selected = "selected"';
                         }
                         ?>>
-                                    <?php _e('No', 'tainacan'); ?>
+                                    <?php _e('Moderate - Allowed by login', 'tainacan'); ?>
+                        </option>
+                        <option value="controlled" <?php
+                        if ($collection_metas['socialdb_collection_download_control'] == 'controlled') {
+                            echo 'selected = "selected"';
+                        }
+                        ?>>
+                                    <?php _e('Controlled - Only admins of the collection and the owners of the items can make downloads. Thumbnails of images are displayed.', 'tainacan'); ?>
                         </option>
                     </select>
+                    <input type="checkbox" id="add_watermark" name="add_watermark" value="true" <?php if($collection_metas['socialdb_collection_add_watermark']){ echo 'checked="checked"';}?>> <?php _e('Generate thumbnail with watermark', 'tainacan'); ?>
+                </div>
+
+                <div id="uploadWatermark" style="<?php if($collection_metas['socialdb_collection_add_watermark']){ echo 'display:block;';}else{echo 'display:none;';}?>">
+                    <div id="socialdb_watermark" class="form-group">
+                        <?php
+                        $image_watermark_url = wp_get_attachment_url(get_post_meta($collection_post->ID, 'socialdb_collection_watermark_id', true));
+                        if ($image_watermark_url) {
+                            ?>
+                            <label for="socialdb_collection_watermark"><?php _e('Watermark', 'tainacan'); ?></label> <br />
+                            <img src="<?= $image_watermark_url ?>" style='max-height:190px;' />
+                            <br /><br />
+                            <label for="remove_watermark"><?php _e('Remove Watermark', 'tainacan'); ?></label>
+                            <input type="checkbox"  id="remove_watermark" name="remove_watermark" value="true">
+                            <br /><br />
+                        <?php } ?>
+                    </div>
+                    <input type="file" size="50" id="socialdb_collection_watermark" name="socialdb_collection_watermark" class="btn btn-default btn-sm">
                 </div>
 
                 <!--div class="form-group">
-                     <label for="collection_show_labels"><?php _e('You want to show labels?', 'tainacan'); ?></label> 
-                     <select name="collection_show_labels" class="form-control">
-                         <option value="yes"  <?php
-                if ($collection_metas['socialdb_collection_show_labels'] == 'yes' || empty($collection_metas['socialdb_collection_show_labels'])) {
+                    <label for="collection_attachments"><?php _e('You allow attachments to objects from the collection?', 'tainacan'); ?></label> 
+                    <select name="collection_attachments" class="form-control">
+                        <option value="yes" <?php
+                if ($collection_metas['socialdb_collection_attachment'] == 'yes' || empty($collection_metas['socialdb_collection_attachment'])) {
                     echo 'selected = "selected"';
                 }
                 ?>>
                 <?php _e('Yes', 'tainacan'); ?>
-                         </option>
-                         <option value="no" <?php
-                if ($collection_metas['socialdb_collection_show_labels'] == 'no') {
+                        </option>
+                        <option value="no" <?php
+                if ($collection_metas['socialdb_collection_attachment'] == 'no') {
                     echo 'selected = "selected"';
                 }
                 ?>>
                 <?php _e('No', 'tainacan'); ?>
-                         </option>
-                     </select>
-                 </div -->
+                        </option>
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label for="collection_most_participatory"><?php _e('You want to show the ranking of the most participatory authors?', 'tainacan'); ?></label> 
                     <select name="collection_most_participatory" class="form-control">
                         <option value="yes"  <?php
-                        if ($collection_metas['socialdb_collection_most_participatory'] == 'yes' || empty($collection_metas['socialdb_collection_most_participatory'])) {
-                            echo 'selected = "selected"';
-                        }
-                        ?>>
-                                    <?php _e('Yes', 'tainacan'); ?>
+                if ($collection_metas['socialdb_collection_most_participatory'] == 'yes' || empty($collection_metas['socialdb_collection_most_participatory'])) {
+                    echo 'selected = "selected"';
+                }
+                ?>>
+                <?php _e('Yes', 'tainacan'); ?>
                         </option>
                         <option value="no" <?php
-                        if ($collection_metas['socialdb_collection_most_participatory'] == 'no') {
-                            echo 'selected = "selected"';
-                        }
-                        ?>>
-                                    <?php _e('No', 'tainacan'); ?>
+                if ($collection_metas['socialdb_collection_most_participatory'] == 'no') {
+                    echo 'selected = "selected"';
+                }
+                ?>>
+                <?php _e('No', 'tainacan'); ?>
                         </option>
                     </select>
-                </div>
+                </div-->
 
                 <div class="form-group">
                     <label for="collection_moderation_type"><?php _e('Type of Moderation', 'tainacan'); ?></label> 

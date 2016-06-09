@@ -20,7 +20,7 @@ require_once(dirname(__FILE__).'../../general/general_controller.php');
                 if ($term) {
                     $data['term'] = $term;
                     $data['parent'] = get_term_by('id', $term->parent, 'socialdb_property_type') ;
-                    $data['metadata']['type'] = $property_model->get_property_type($term->term_id); // pego o tipo da propriedade
+                    $data['metadata']['type'] = $property_model->get_property_type_hierachy($term->term_id); // pego o tipo da propriedade
                     $data['metadata']['data'] = $property_model->get_all_property($term->term_id,true); // pego todos os dados possiveis da propriedade
                     $array_json['html'] = $this->render(dirname(__FILE__) . '../../../views/property/page.php', $data);
                     return json_encode($array_json);
@@ -49,6 +49,7 @@ require_once(dirname(__FILE__).'../../general/general_controller.php');
                 return $property_model->edit_property($data);
                 break;
             case 'edit_property_term':
+
                 return $property_model->edit_property($data);
                 break;
             case "update_property_data":

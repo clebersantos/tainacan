@@ -44,6 +44,9 @@ class SearchController extends Controller {
             case "get_menu_ids":
                 return json_encode( $data['menu_style_ids'] = $this->get_menu_styles_ids());
                 break;
+            case "get_menu_style_id":
+                return json_encode( $data['selected_menu_style_id'] = $this->get_selected_menu_style( $data['collection_id'] ) );
+                break;
             case 'get_widgets':
                 return json_encode($search_model->get_widgets($data));
             case 'append_range':
@@ -63,6 +66,9 @@ class SearchController extends Controller {
                 $data = $search_model->get_widget_edit($data);
                 return json_encode($data);
                 break;
+            case 'get_range_options':
+                $data = $search_model->get_range_options($data);
+                return json_encode($data);
             case 'delete_facet':
                 return json_encode($search_model->delete($data));
                 break;

@@ -17,7 +17,12 @@ class YoutubeController extends Controller {
                 if ($videoID[1]) {
                     $youtube = new youtubeModel($videoID[1], $config, false, true);
                     $object_model = new ObjectModel();
-                    return $youtube->insertVideoItem($data, $object_model);
+                    $id = $youtube->insertVideoItem($data, $object_model,'draft');
+                    if($id):
+                        return json_encode([$id]);
+                    else:
+                        return false;
+                    endif;
                 } else {
                     return false;
                 }

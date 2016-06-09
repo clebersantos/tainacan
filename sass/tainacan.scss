@@ -6,6 +6,7 @@
 @import "collections";
 @import "responsive_home";
 @import "metadata_filters";
+@import "single_item";
 @import "general";
 
 @font-face {font-family: 'Oscine';font-weight: normal;font-style: normal;src: url(../fonts/Oscine_Trial_Rg.ttf) format('truetype');} 
@@ -580,7 +581,7 @@ span.dynatree-icon{
 
 
 .item-redesocial, .item-redesocial-more{
-    max-width: 45px;
+    //max-width: 45px;
 }
 .item-redesocial-more{
     background-color:#AAAAAA;
@@ -619,18 +620,17 @@ ol.breadcrumb a{
     background-color: #88A6CC;
 }
 .content-title, .content-title h2 small{
-    color: #88A6CC;
+    //color: #88A6CC;
+    color: $brand-medium-blue;
 }
 .content-title h2 small{
     font-size: 12px;
 }
-/*.content-thumb {
-  padding: 0 2px 0 28px;
-}*/
+
 .content-wrapper{
     border-radius: 0;
     padding: 10px;
-    background-color: #ccc;
+    //background-color: #ccc;
     margin-bottom: 20px;
     display: flex;
 }
@@ -707,11 +707,11 @@ ol.breadcrumb a{
 }
 
 .tainacan-comment-fields {
-    margin: 20px 0 10px 0;
+    margin: 10px 0 10px 0;
 }
 
 .tainacan-comment-msg {
-    margin: 20px 0 10px 0;
+    margin: 5px 0 10px 0;
 }
 
 button.tainacan-filter-range {

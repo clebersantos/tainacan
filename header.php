@@ -15,7 +15,7 @@ $socialdb_title = get_option('blogname');
 <html <?php language_attributes(); ?> xmlns:fb="http://www.facebook.com/2008/fbml" class="no-js"><!--<![endif]-->
     <head>
         <meta charset="<?php bloginfo('charset'); ?>"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="google-site-verification" content="29Uww0bx9McdeJom1CDiXyGUZwK5mtoSuF5tA_i59F4" />         
+        <meta name="google-site-verification" content="29Uww0bx9McdeJom1CDiXyGUZwK5mtoSuF5tA_i59F4" />
         <link rel="icon" type="image/png" href="<?php echo get_template_directory_uri().'/libraries/images/icone.png' ?>">
         <title> <?php echo repository_page_title() ?> </title>
         <?php if(is_front_page()) { ?>
@@ -27,15 +27,15 @@ $socialdb_title = get_option('blogname');
             <link rel="alternate" type="application/rdf+xml" href="<?php echo get_the_permalink(); ?>?<?php echo get_page_tainacan() ?>=<?php echo trim($_GET[get_page_tainacan()]) ?>.rdf">
             <?php if(is_restful_active()){ ?>
             <link rel="alternate" type="application/json" href="<?php echo site_url() . '/wp-json/posts/' . get_post_by_name($_GET[get_page_tainacan()],OBJECT,'socialdb_object')->ID.'/?type=socialdb_object' ?>">
-            <?php } ?>    
+            <?php } ?>
         <?php }else if(is_single()){ ?>
             <link rel="alternate" type="application/rdf+xml" href="<?php echo get_the_permalink(); ?>?.rdf">
             <?php if(is_restful_active()){ ?>
                  <link rel="alternate" type="application/json" href="<?php echo site_url() . '/wp-json/posts/' . get_the_ID().'/?type=socialdb_collection' ?>">
             <?php } ?>
-        <?php }?>    
-            
-            
+        <?php }?>
+
+
         <?php echo set_config_return_button(is_front_page()); ?>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php wp_head(); ?>
@@ -73,7 +73,7 @@ $socialdb_title = get_option('blogname');
                     <?php if( $socialdb_logo != '' && get_the_post_thumbnail($socialdb_logo, 'thumbnail') ): ?>
                         <a class="navbar-brand" href="<?php echo site_url(); ?>">
                             <?php if(get_the_post_thumbnail($socialdb_logo, 'thumbnail')){ ?>
-                                <img src="<?php echo wp_get_attachment_url(get_post_thumbnail_id($socialdb_logo)); ?>" style="max-width: 150px; max-height: 30px;" />
+                                <img src="<?php echo wp_get_attachment_url(get_post_thumbnail_id($socialdb_logo)); ?>" style="max-width: 150px; max-height: 43px;" />
                             <?php } elseif($socialdb_title!='') {
                                 echo $socialdb_title;
                             } else { _e('Tainacan','tainacan'); } ?>
@@ -87,7 +87,7 @@ $socialdb_title = get_option('blogname');
                      if(!is_front_page()): ?>
                         <form id="formSearchCollections" class="navbar-form navbar-left search-tainacan-collection" role="search">
                             <div class="input-group search-collection search-home">
-                                <input type="text" class="form-control" name="search_collections" id="search_collections" placeholder="<?php _e('Search Collection', 'tainacan') ?>"/>
+                                <input type="text" class="form-control" name="search_collections" id="search_collections" placeholder="<?php _e('Find', 'tainacan') ?>"/>
                                 <span class="input-group-btn">
                                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
                             </span>
@@ -112,6 +112,11 @@ $socialdb_title = get_option('blogname');
                                     <li>
                                         <a href="<?= get_the_permalink(get_option('collection_root_id')) . '?mycollections=true' ?>"><?php _e('My collections','tainacan'); ?></a>
                                     </li>
+                                    <li>
+                                        <a style="cursor: pointer;" onclick="showCategoriesConfiguration('<?php echo get_template_directory_uri(); ?>', '<?php echo is_front_page(); ?>');" >
+                                            <?php _e('My Categories', 'tainacan'); ?>
+                                        </a>
+                                    </li>
                                     <?php if ( current_user_can( 'manage_options' ) ): ?>
                                         <li class="divider"></li>
                                         <!-- TAINACAN: mostra acoes do repositorio dentro da tag <div id="configuration"> localizado no arquivo single.php -->
@@ -120,11 +125,12 @@ $socialdb_title = get_option('blogname');
                                             <ul class="admin-config-submenu" aria-expanded="false">
                                                 <li><a onclick="showRepositoryConfiguration('<?php echo get_template_directory_uri() ?>');" href="#"><span class="glyphicon glyphicon-wrench"></span> <?php _e('Configuration','tainacan'); ?></a></li>
                                                 <li><a onclick="showPropertiesRepository('<?php echo get_template_directory_uri() ?>');" href="#"><span class="glyphicon glyphicon-list-alt"></span> <?php _e('Metadata','tainacan'); ?></a></li>
+                                                <li><a href="<?php echo get_bloginfo('url') ?>/wp-admin/users.php"> <span class="glyphicon glyphicon-user"></span> <?php _e('Users','tainacan'); ?> </a></li>
                                                 <li <?php do_action('menu_repository_social_api') ?>><a onclick="showAPIConfiguration('<?php echo get_template_directory_uri() ?>');" href="#"><span class="glyphicon glyphicon-picture"></span>  <?php _e('Social / API Keys','tainacan'); ?></a></li>
                                                 <li <?php do_action('menu_repository_license') ?>><a onclick="showLicensesRepository('<?php echo get_template_directory_uri() ?>');" href="#"><span class="glyphicon glyphicon-picture"></span> <?php _e('Licenses','tainacan'); ?></a></li>
                                                 <li><a onclick="showEventsRepository('<?php echo get_template_directory_uri() ?>','<?php echo get_option('collection_root_id') ?>');"  href="#"> <span class="glyphicon glyphicon-flash"></span>&nbsp;<?php _e('Events','tainacan'); ?>&nbsp;&nbsp;<span id="notification_events_repository" style="background-color:red;color:white;font-size:13px;"></span></a></li>
                                                 <li><a onclick="showWelcomeEmail('<?php echo get_template_directory_uri() ?>');"  href="#"><span  class="glyphicon glyphicon-envelope"></span> <?php _e('Welcome Email','tainacan'); ?></a></li>
-                                                <li><a onclick="showTools('<?php echo get_template_directory_uri() ?>');"  href="#"><span  class="glyphicon glyphicon-asterisk"></span> <?php _e('Tools','tainacan'); ?></a></li>
+                                                <li><a onclick="showTools('<?php echo get_template_directory_uri() ?>');" onmouseover="" href="#"><span  class="glyphicon glyphicon-asterisk"></span> <?php _e('Tools','tainacan'); ?></a></li>
                                             </ul>
                                         </li>
                                     <?php endif; ?>
@@ -149,20 +155,20 @@ $socialdb_title = get_option('blogname');
                         <!--li><a onclick="showAdvancedSearch('<?php echo get_template_directory_uri() ?>');" href="#"><span class="glyphicon glyphicon-search"></span>&nbsp;<?php _e('Advanced Search','tainacan'); ?></a></li -->
                             <!--button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>
                             <!--a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a-->
-                        <!-- TAINACAN: abre o modal id="myModal" localizado neste arquivo -->   
+                        <!-- TAINACAN: abre o modal id="myModal" localizado neste arquivo -->
                         <li class="click_new_collection"><a href="#" id="click_new_collection"><span class="glyphicon glyphicon-plus"></span> <?php _e('Create Collection','tainacan'); ?></a></li>
-                         <!-- TAINACAN: sai da pagina e vai para a colecao raiz -->   
+                         <!-- TAINACAN: sai da pagina e vai para a colecao raiz -->
                         <li><a href="<?php echo get_permalink(get_option('collection_root_id')); ?>"><span class="glyphicon glyphicon-book"></span>&nbsp;<?php _e('Collections','tainacan'); ?></a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
-        </nav> 
+        </nav>
 
          <!-- TAINACAN: modal padrao bootstrap aberto via javascript pelo seu id, formulario inicial para criacao de colecao -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form onsubmit="$('#myModal').modal('hide');show_modal_main();" action="<?php echo get_template_directory_uri() ?>/controllers/collection/collection_controller.php" method="POST">  
+                    <form onsubmit="$('#myModal').modal('hide');show_modal_main();" action="<?php echo get_template_directory_uri() ?>/controllers/collection/collection_controller.php" method="POST">
                         <input type="hidden" name="operation" value="simple_add">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -173,7 +179,7 @@ $socialdb_title = get_option('blogname');
                                 <?php _e('Create Collection','tainacan'); ?>
                             </h4>
                         </div>
-                        <div id="form_new_collection" style="display: none;"> 
+                        <div id="form_new_collection" style="display: none;">
                             <div class="modal-body">
 
                                 <div class="form-group">
@@ -193,27 +199,27 @@ $socialdb_title = get_option('blogname');
                                 <button onclick="backTemplates()" type="button" class="btn btn-default"><?php _e('Back','tainacan'); ?></button>
                                 <button  type="submit" class="btn btn-primary"><?php _e('Save'); ?></button>
                             </div>
-                        </div> 
+                        </div>
                         <div id="list_templates" style="margin-left: 25px;margin-right: 10px;margin-bottom: 20px;height: 50%;overflow-y: scroll;">
                             <div onclick="onClickDefaultTemplate()" class="row templates-collections" id="default_collection">
                                 <div class="col-sm-3" >
                                     <img class="img-responsive" src="<?php echo get_template_directory_uri() ?>/libraries/images/default_thumbnail.png">
-                                </div>   
+                                </div>
                                  <div class="col-sm-9">
                                      <h2><?php _e('Empty Collection', 'tainacan') ?></h2>
                                      <p><?php _e('Create a default collection, extend default metadata from repository and no items inserted','tainacan') ?></p>
-                                </div>   
+                                </div>
                             </div>
                         </div>
-                    </form>    
+                    </form>
                 </div>
             </div>
-        </div>     
+        </div>
          <!-- TAINACAN: modal padrao bootstrap, aberto pelo id, responsavel pelo o cadastro de usuario -->
         <div class="modal fade" id="myModalRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form  id="formUserRegister" name="formUserRegister" >  
+                    <form  id="formUserRegister" name="formUserRegister" >
                         <input type="hidden" name="operation" value="add">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -251,7 +257,7 @@ $socialdb_title = get_option('blogname');
                             <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close','tainacan'); ?></button>
                             <button type="submit" class="btn btn-primary" onclick="check_register_fields(); return false;"><?php _e('Register','tainacan'); ?></button>
                         </div>
-                    </form>    
+                    </form>
                 </div>
             </div>
         </div>
@@ -259,7 +265,7 @@ $socialdb_title = get_option('blogname');
         <div class="modal fade" id="modalImportCollection" tabindex="-1" role="dialog" aria-labelledby="modalImportCollectionLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form id="importCollection">  
+                    <form id="importCollection">
                         <input type="hidden" name="operation" value="importCollection">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -275,7 +281,8 @@ $socialdb_title = get_option('blogname');
                             <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close','tainacan'); ?></button>
                             <button type="submit" class="btn btn-primary"><?php _e('Import','tainacan'); ?></button>
                         </div>
-                    </form>    
+                    </form>
                 </div>
             </div>
         </div>
+

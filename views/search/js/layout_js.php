@@ -10,10 +10,12 @@
             $("#layout-config").hide();
         }
 
+        var selected_view_mode = $('.selected_view_mode').val();
+        $("#collection_list_mode").val(selected_view_mode);
+
         list_ordenation();
         // list_properties_data_ordenation();
         // list_properties_data_selected_ordenation();
-
         var src = $('#src').val();
 
         $('#form_ordenation_search').submit(function (e)  {

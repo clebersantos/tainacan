@@ -1,4 +1,7 @@
-<?php include_once ('js/layout_js.php'); ?>
+<?php
+include_once ('js/layout_js.php');
+$selected_view_mode = $ordenation['collection_metas']['socialdb_collection_list_mode'];
+?>
 
 <div class="col-md-12 no-padding" id="layout-config">
     <ul class="col-md-10 no-padding">
@@ -20,14 +23,27 @@
     </ul>
 </div>
 
-<div class="categories_menu row col-md-12" id="properties_tabs">
-    <div class="col-md-2"></div>
-    <div id="preset-filters" class="col-md-10 preset-filters ui-widget-header no-padding">
+<div class="categories_menu row col-md-12 no-padding" id="properties_tabs">
+    <div class="col-md-12 preset-filters no-padding" style="background: white; padding-bottom: 20px;">
         <div class="categories_menu" class="row" id="personalize_search">
+
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-10" style="float: none; margin: 0 auto; padding-top: 20px;">
                     <form method="POST" name="form_ordenation_search" id="form_ordenation_search">
                         <input type="hidden" name="property_category_id"  value="<?php echo $category_root_id; ?>">
+
+                        <input type="hidden" name="selected_view_mode" class="selected_view_mode" value="<?php echo $selected_view_mode ?>"/>
+
+                        <!------------------- Modo de exibição dos itens -------------------------->
+                        <div class="form-group">
+                            <label for="collection_list_mode"><?php _e('Default list mode','tainacan'); ?></label>
+                            <select name="collection_list_mode" id="collection_list_mode" class="form-control">
+                                <option value="cards"><?php _e('Cards', 'tainacan'); ?></option>
+                                <option value="gallery"><?php _e('Gallery', 'tainacan'); ?></option>
+                                <option value="list"><?php _e('List', 'tainacan'); ?></option>
+                                <option value="slideshow"><?php _e('Slideshow', 'tainacan'); ?></option>
+                            </select>
+                        </div>
 
                         <!------------------- Ordenacao-------------------------->
                         <div class="form-group">
@@ -36,7 +52,7 @@
                             </select>
                         </div>
 
-                        <!------------------- Forma de ordenacao-------------------------->
+                        <!------------------- Forma de ordenacao -------------------------->
                         <div class="form-group">
                             <label for="collection_ordenation_form"><?php _e('Select the ordination form','tainacan'); ?></label>
                             <select name="socialdb_collection_ordenation_form" class="form-control">

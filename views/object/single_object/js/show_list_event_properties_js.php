@@ -1,6 +1,7 @@
 <script>
     $(function () {
         event_single_list_properties_term_insert_objects();
+        $('[data-toggle="tooltip"]').tooltip();
     });
 
     function edit_term_property(property_id, object_id) {
@@ -222,8 +223,18 @@
                 //var temp = $("#chosen-selected2 [value='" + ui.item.value + "']").val();
                 var temp = $("#single_property_value_" + property_id + "_" + object_id + " [value='" + ui.item.value + "']").val();
                 if (typeof temp == "undefined") {
-                    $("#single_property_value_" + property_id + "_" + object_id).append("<option class='selected' value='" + ui.item.value + "' selected='selected' >" + ui.item.label + "</option>");
-
+                    var already_selected = false;
+                    $("#single_property_value_" + property_id + "_" + object_id+" option").each(function(){
+                        if($(this).val()==ui.item.value){
+                            already_selected = true;
+                        }
+                    });
+                    if(!already_selected){
+                        $("#single_property_value_" + property_id + "_" + object_id).append("<option class='selected' value='" + ui.item.value + "' selected='selected' >" + ui.item.label + "</option>");
+                        if(Hook.is_register( 'tainacan_validate_cardinality_onselect')){
+                            Hook.call( 'tainacan_validate_cardinality_onselect', [ 'select[name="socialdb_property_'+property_id+'[]"]',property_id ] );
+                        }
+                    }
                 }
                 setTimeout(function () {
                     $("#single_autocomplete_value_" + property_id + "_" + object_id).val('');
@@ -237,6 +248,9 @@
         {
            $(this).attr('selected','selected');
         });
+        if(Hook.is_register( 'tainacan_validate_cardinality_onselect')){
+            Hook.call( 'tainacan_validate_cardinality_onselect', [ 'select[name="socialdb_property_'+property_id+'[]"]',property_id ] );
+        }
         //$('.chosen-selected2 option').prop('selected', 'selected');
     }
 ///////////////////////////// TERM PROPERTIES FUNCTIONS ////////////////////////

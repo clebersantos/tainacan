@@ -56,7 +56,7 @@ if (isset($_GET['info_messages'])) {
         <div id="searchBoxIndex" class="col-md-3 col-sm-12 center">
                <form id="formSearchCollections" role="search">
                    <div class="input-group search-collection search-home">
-                       <input type="text" class="form-control" name="search_collections" id="search_collections" onfocus="changeBoxWidth(this)" placeholder="<?php _e('Search Collection', 'tainacan') ?>"/>
+                       <input type="text" class="form-control" name="search_collections" id="search_collections" onfocus="changeBoxWidth(this)" placeholder="<?php _e('Find', 'tainacan') ?>"/>
                        <span class="input-group-btn">
                            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                         </span>
@@ -75,7 +75,13 @@ if (isset($_GET['info_messages'])) {
 <input type="hidden" id="max_collection_showed" name="max_collection_showed" value="20">
 <input type="hidden" id="total_collections" name="total_collections" value="">
 <input type="hidden" id="last_index" name="last_index" value="0">
-<div id="display_view_main_page" class="container-fluid"></div>
+
+<?php if ( has_nav_menu("menu-ibram") ):
+     include_once ("views/home/home_ibram.php");
+    else: ?>
+    <div id="display_view_main_page" class="container-fluid"></div>
+<?php endif; ?>
+
 <!-- TAINACAN: esta div possui um gif que e colocada como none quando a listagem de recents e populares  -->
 <div id="loader_collections">
     <img src="<?php echo get_template_directory_uri() . '/libraries/images/new_loader.gif' ?>" width="64px" height="64px" />

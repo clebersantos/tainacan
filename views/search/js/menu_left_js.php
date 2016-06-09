@@ -124,6 +124,7 @@
                     return node.data.key;
                 });
                 //get_categories_properties_ordenation();
+                console.log($('#flag_dynatree_ajax').val());
                 if($('#flag_dynatree_ajax').val()==='true') {
                     var node_values = selKeys.join(", ");
                     wpquery_filter_by_facet( node_values, "", "wpquery_dynatree");
@@ -199,7 +200,6 @@
     }
     
     /*********************************************************************/
-
     function findCSSTags( css_source ) {
         var tagPattern = /\[\[.+?\]\]/gi;
         var tagsFound = {};
@@ -241,6 +241,7 @@
     $('.expand-all').toggle(function() {
         setMenuContainerHeight();
 
+        $(this).find("div.action-text").text( '<?php _e('Expand all', 'tainacan') ?>' );
         $('#accordion .ui-accordion-content').fadeOut();
         $('.prepend-filter-label').switchClass('glyphicon-triangle-bottom','glyphicon-triangle-right');
         $(this).find('span').switchClass('glyphicon-triangle-bottom','glyphicon-triangle-right');
@@ -250,8 +251,8 @@
         $('.prepend-filter-label').switchClass('glyphicon-triangle-right', 'glyphicon-triangle-bottom');
         $(this).find('span').switchClass('glyphicon-triangle-right', 'glyphicon-triangle-bottom');
         $('.cloud_label').click();
+        $(this).find("div.action-text").text( '<?php _e('Collapse all', 'tainacan') ?>' );
     });
-
 
     var icon_html = "<span class='prepend-filter-label glyphicon-triangle-bottom blue glyphicon'></span>";
     $('label.title-pipe').each(function(idx, el) {

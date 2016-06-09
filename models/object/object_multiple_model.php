@@ -5,6 +5,7 @@ include_once ('../../../../../wp-load.php');
 include_once ('../../../../../wp-includes/wp-db.php');
 include_once (dirname(__FILE__) . '../../../models/collection/collection_model.php');
 include_once (dirname(__FILE__) . '../../../models/property/property_model.php');
+include_once (dirname(__FILE__) . '../../../models/ranking/ranking_model.php');
 include_once (dirname(__FILE__) . '../../../models/category/category_model.php');
 include_once (dirname(__FILE__) . '../../../models/event/event_object/event_object_create_model.php');
 require_once(dirname(__FILE__) . '../../general/general_model.php');
@@ -38,7 +39,8 @@ class ObjectMultipleModel extends Model {
                     $this->item_property_data($data, $item_id, $post_id);
                     $this->item_property_object($data, $item_id, $post_id);
                     $this->item_property_term($data, $item_id, $post_id);
-                    $this->insert_rankings($data,$post_id);
+                    $this->insert_rankings($data,$post_id,$item_id);
+                    $this->insert_license($data,$post_id,$item_id);
                     $result['ids'][] =$post_id;
                 }
             }
@@ -125,16 +127,24 @@ class ObjectMultipleModel extends Model {
      * @author: Eduardo 
      */
     public function item_attachments($data,$item_id,$post_id) {
-        if($data['attachments_'.$item_id]!=''&&!empty($data['attachments_'.$item_id])){
-            $attachemnts = explode(',', $data['attachments_'.$item_id]);
-            if(is_array($attachemnts)){
-                $attachemnts = array_filter(array_unique($attachemnts));
-                foreach ($attachemnts as $attachemnt) {
+//        if($data['attachments_'.$item_id]!=''&&!empty($data['attachments_'.$item_id])){
+//            $attachemnts = explode(',', $data['attachments_'.$item_id]);
+//            if(is_array($attachemnts)){
+//                $attachemnts = array_filter(array_unique($attachemnts));
+//                foreach ($attachemnts as $attachemnt) {
+//                    add_post_meta($post_id, '_file_id', $attachemnt);
+//                    wp_update_post(['ID'=> trim($attachemnt),'post_parent'=>$post_id]);
+//                }
+//            }
+//        }
+        $attachemnts = get_post_meta($item_id, '_file_id');
+        if($attachemnts&&  is_array($attachemnts)){
+            foreach ($attachemnts as $attachemnt) {
                     add_post_meta($post_id, '_file_id', $attachemnt);
                     wp_update_post(['ID'=> trim($attachemnt),'post_parent'=>$post_id]);
                 }
-            }
         }
+        
     }
     /**
      * @signature - item_tags($data)
@@ -273,8 +283,9 @@ class ObjectMultipleModel extends Model {
         }
     }
     
-    public function insert_rankings($data,$post_id) {
+    public function insert_rankings($data,$post_id,$item_id) {
         $property_model = new PropertyModel;
+        $ranking_model = new RankingModel;
         $category_model = new CategoryModel;
         if($data['properties_id']){
             $properties = $category_model->get_properties($data['collection_id'], []);
@@ -282,10 +293,26 @@ class ObjectMultipleModel extends Model {
                 foreach ($properties as $property) {
                     $dados = json_decode($property_model->edit_property(array('property_id' => $property)));
                     if ($dados->type && in_array($dados->type, ['stars', 'like', 'binary'])) {
-                        add_post_meta($post_id, 'socialdb_property_'.$dados->id, 0);
+                       $result = get_post_meta($item_id, 'socialdb_property_'.$dados->id, true);
+                       if(!empty($result)){
+                          $vote_id = $ranking_model->is_already_voted(get_current_user_id(), $dados->id, $item_id);
+                          if($vote_id){
+                            $row = $this->sdb_get_post_meta_by_value($vote_id, 'socialdb_property_ranking_object_id', $item_id);
+                            $this->sdb_update_post_meta($row->meta_id, $post_id);
+                          }
+                          add_post_meta($post_id, 'socialdb_property_'.$dados->id, $result); 
+                       }else{
+                          add_post_meta($post_id, 'socialdb_property_'.$dados->id, 0);  
+                       }
                     }
                 }
             }
+        }
+    }
+    
+    public function insert_license($data,$post_id,$item_id) {
+        if($data['license_'.$item_id]){
+            update_post_meta($post_id, 'socialdb_license_id', $data['license_'.$item_id]);
         }
     }
     ############################################################################
@@ -317,12 +344,13 @@ class ObjectMultipleModel extends Model {
                     if($post_id){
                         $this->vinculate_collection($data, $post_id);
                         //$this->item_resource($data, $item_id, $post_id);
-                        $this->item_attachments($data, $item_id, $post_id);
+                        //$this->item_attachments($data, $item_id, $post_id);
                         $this->item_tags($data, $item_id, $post_id);
                         $this->item_property_data($data, $item_id, $post_id);
                         $this->item_property_object($data, $item_id, $post_id);
                         $this->item_property_term($data, $item_id, $post_id);
-                        $this->insert_rankings($data,$post_id);
+                       // $this->insert_rankings($data,$post_id);
+                        $this->insert_license($data,$post_id,$item_id);
                         $result['ids'][] =$post_id;
                     }
 //                }else{

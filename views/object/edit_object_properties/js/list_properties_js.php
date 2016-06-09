@@ -3,7 +3,7 @@
         var src = $('#src').val();
         edit_list_properties_term_insert_objects();
         var properties_autocomplete = edit_get_val($("#edit_properties_autocomplete").val());
-        autocomplete_edit_item_property_data(properties_autocomplete);  
+        autocomplete_edit_item_property_data(properties_autocomplete); 
     });
 
    
@@ -17,15 +17,24 @@
             },
             minLength: 2,
             select: function (event, ui) {
-                console.log(event);
-                
                 $("#autocomplete_value_" + property_id + "_" + object_id).html('');
                 $("#autocomplete_value_" + property_id + "_" + object_id).val('');
                 //var temp = $("#chosen-selected2 [value='" + ui.item.value + "']").val();
                 var temp = $("#property_value_" + property_id + "_" + object_id + " [value='" + ui.item.value + "']").val();
                 if (typeof temp == "undefined") {
-                    $("#property_value_" + property_id + "_" + object_id+"_edit").append("<option class='selected' value='" + ui.item.value + "' selected='selected' >" + ui.item.label + "</option>");
-
+                     var already_selected = false;
+                    $("#property_value_" + property_id + "_" + object_id+"_edit option").each(function(){
+                        if($(this).val()==ui.item.value){
+                            already_selected = true;
+                        }
+                    });
+                    if(!already_selected){
+                        $("#property_value_" + property_id + "_" + object_id+"_edit").append("<option class='selected' value='" + ui.item.value + "' selected='selected' >" + ui.item.label + "</option>");
+                        //hook para validacao do campo ao selecionar
+                        if(Hook.is_register( 'tainacan_validate_cardinality_onselect')){
+                            Hook.call( 'tainacan_validate_cardinality_onselect', [ 'select[name="socialdb_property_'+property_id+'[]"]',property_id ] );
+                        }
+                    }
                 }
                 setTimeout(function () {
                     $("#autocomplete_value_" + property_id + "_" + object_id).val('');
@@ -69,6 +78,9 @@
         {
            $(this).attr('selected','selected');
         });
+        if(Hook.is_register( 'tainacan_validate_cardinality_onselect')){
+            Hook.call( 'tainacan_validate_cardinality_onselect', [ 'select[name="socialdb_property_'+property_id+'[]"]',property_id ] );
+        }
         //$('.chosen-selected2 option').prop('selected', 'selected');
     }
     

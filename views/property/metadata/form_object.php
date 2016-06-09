@@ -28,7 +28,11 @@
                                 <input type="hidden"  id="property_object_category_id"  name="property_object_category_id" value="<?php echo $category->term_id; ?>" >
                             <?php endif; ?>
                         </div>
-
+                         <div class="form-group category-fit-column" style="display: inline-block; width: 59%">
+                            <label for="property_term_required" style="display: block"><?php _e('Elements Quantity:','tainacan'); ?></label>
+                            <input type="radio" name="socialdb_property_object_cardinality" id="socialdb_property_object_cardinality_1"  value="1">&nbsp;<?php _e('Unic value','tainacan') ?>
+                            <input type="radio" name="socialdb_property_object_cardinality" id="socialdb_property_object_cardinality_n" checked="checked" value="n">&nbsp;<?php _e('Multiple values','tainacan') ?>
+                        </div>
                         <div class="form-group">
                             <label for="property_object_required"><?php _e('Property object required','tainacan'); ?></label>
                             <input type="radio" name="property_object_required" id="property_object_required_true" value="true">&nbsp;<?php _e('Yes','tainacan'); ?>
@@ -53,7 +57,7 @@
                         </div>
                         */ ?>
 
-                        <hr style="border: 0; height: 1px; background: #333; background-image: linear-gradient(to right, #ccc, #333, #ccc);">
+                        <hr class="hr-style">
                     </div>
                     <div class="form-group">
                         <label for="use-filter"><?php _e('Use as a filter','tainacan'); ?></label>
@@ -62,18 +66,13 @@
 
                     <div class="form-group data-widget" style="display: none;">
                         <label for="search_data_widget"><?php _e('Filter type','tainacan'); ?></label>
-                        <select name="search_data_widget" id="search_data_widget" onchange="select_tree_color('#meta-relationship')" class="form-control" onfocus="get_metadata_widgets('socialdb_property_object');">
-                            <option value="select"><?php _e('Select','tainacan') ?></option>
+                        <select name="search_data_widget" id="search_data_widget" class="form-control"  data-type="socialdb_property_object"
+                                onchange="select_tree_color('#meta-relationship')" >
+                            <option value="tree"><?php _e('Tree','tainacan') ?></option>
                         </select>
-                        <div id="color_field_property_search" style="display: none;">
-                            <h5><strong><?php _e('Set the facet color','tainacan'); ?></strong></h5>
-                            <div class="form-group">
-                                <?php for ($i = 1; $i < 14; $i++) {
-                                    echo '<label class="radio-inline"> <input type="radio" class="color_property" name="color_facet" id="color_property' . $i . '" value="color_property' . $i . '" ';
-                                    echo '><img src="' . get_template_directory_uri() . '/libraries/images/cor' . $i . '.png">  </label>';
-                                }; ?>
-                            </div>
-                        </div>
+
+                        <?php echo $view_helper->render_tree_colors(); ?>
+
                     </div>
 
                     <input type="hidden" id="property_object_collection_id" name="collection_id" value="">

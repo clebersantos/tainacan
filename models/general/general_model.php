@@ -35,6 +35,22 @@ class Model {
             }
         }
     }
+    /**
+     * function add_thumbnail()
+     * @param int o id do objeto
+     * @return void 
+     * Metodo responsavel em adcionar a capa da colecao
+     * Autor: Eduardo Humberto 
+     */
+    public function add_watermark($post_id) {
+        foreach ($_FILES as $file => $array) {
+            if (!empty($_FILES[$file]["name"]) && $file == 'socialdb_collection_watermark') {
+                $_FILES[$file]["name"] = remove_accents($_FILES[$file]["name"]);
+                $newupload = $this->insert_attachment($file, $post_id);
+                return $newupload;
+            }
+        }
+    }
 
     public function add_thumbnail_item($post_id) {
         foreach ($_FILES as $file => $array) {
@@ -71,7 +87,7 @@ class Model {
         require_once(ABSPATH . "wp-admin" . '/includes/media.php');
         $attach_id = media_handle_upload($file_handler, $post_id);
         if ($setthumb) {
-            if ($file_handler != "socialdb_collection_cover" && $file_handler != "object_file" && $file_handler != "arquivo" && $file_handler != "file") {
+            if ($file_handler != "socialdb_collection_cover" && $file_handler != "socialdb_collection_watermark" && $file_handler != "object_file" && $file_handler != "arquivo" && $file_handler != "file") {
                 $array = get_post_meta($post_id, '_thumbnail_id');
                 if (empty($array) || !$array) {
                     add_post_meta($post_id, '_thumbnail_id', $attach_id);
@@ -86,6 +102,7 @@ class Model {
                     add_post_meta($post_id, '_file_id', $attach_id);
                 }
             }
+            update_post_meta($attach_id, 'md5_inicial', md5_file(get_post($attach_id)->guid));
         }
         return $attach_id;
     }
@@ -132,11 +149,15 @@ class Model {
             $tmp = download_url($thumb_url);
             // Set variables for storage
             // fix file filename for query strings
-            preg_match('/[^\?]+\.(jpg|JPG|jpe|JPE|jpeg|JPEG|gif|GIF|png|PNG)/', $thumb_url, $matches);
-
+            //preg_match('/[^\?]+\.(jpg|JPG|jpe|JPE|jpeg|JPEG|gif|GIF|png|PNG)/', $thumb_url, $matches);
+            preg_match('/\b(\.jpg|\.JPG|\.jpeg|\.JPEG|\.png|\.PNG|\.gif|\.GIF)\b/', $thumb_url, $matches);
             if (isset($matches[0])) {
-                $removing_extension = str_replace('.' . $ext, '', basename($matches[0]));
-                $file_array['name'] = str_replace(' ', '', remove_accent($removing_extension)) . '.' . $ext;
+                if(in_array(str_replace('.' , '', $matches[0]), ['jpg','JPG','jpeg','JPEG','png','PNG','gif','GIF'])){
+                    $file_array['name'] = remove_accents($matches[0]); 
+                }else{
+                   $removing_extension = str_replace('.' . $ext, '', basename($matches[0]));
+                   $file_array['name'] = str_replace(' ', '', remove_accent($removing_extension)) . '.' . $ext; 
+                }
             } else {
                 $file_array['name'] = 'image.gif';
             }
@@ -464,7 +485,8 @@ class Model {
         $roots_parents = [
             get_term_by('name', 'socialdb_property_data', 'socialdb_property_type')->term_id,
             get_term_by('name', 'socialdb_property_object', 'socialdb_property_type')->term_id,
-            get_term_by('name', 'socialdb_property_term', 'socialdb_property_type')->term_id];
+            get_term_by('name', 'socialdb_property_term', 'socialdb_property_type')->term_id,
+            get_term_by('name', 'socialdb_property_ranking', 'socialdb_property_type')->term_id];
 
         $term = get_term_by('id', $property_id, 'socialdb_property_type');
         if (!$term) {
@@ -543,10 +565,11 @@ class Model {
                 } else if (isset($metas['socialdb_property_object_category_id'])) {
                     if(is_array($metas['socialdb_property_object_category_id'])){
                         $data['type'] = __('Multiple','tainacan');
-                    }else{
+                    }else if($metas['socialdb_property_object_category_id']){
                         $data['type'] = $this->get_type_property_object($metas['socialdb_property_object_category_id']);
+                    }else{
+                         $data['type'] = __('No relations','tainacan');
                     }
-                   
                 } else {
                     $type = $this->get_ranking_type($property->parent);
                     $data['type'] = $type;
@@ -566,8 +589,8 @@ class Model {
                 }
             }
         endif;
-        if(has_filter('modificate_values_get_all_property')){
-            $data = apply_filters( 'modificate_values_get_all_property', $data);
+        if (has_filter('modificate_values_get_all_property')) {
+            $data = apply_filters('modificate_values_get_all_property', $data);
         }
         return $data;
     }
@@ -709,17 +732,15 @@ class Model {
         $property_datas = $wpdb->get_results($query);
         if ($property_datas && is_array($property_datas)) {
             foreach ($property_datas as $property_data) {
-                if ($property_data->meta_key == 'socialdb_property_used_by_categories'||$property_data->meta_key == 'socialdb_property_object_category_id') {
+                if ($property_data->meta_key == 'socialdb_property_used_by_categories' || $property_data->meta_key == 'socialdb_property_object_category_id') {
                     $config[$property_data->meta_key][] = $property_data->meta_value;
                 } else {
                     $config[$property_data->meta_key] = $property_data->meta_value;
                 }
             }
         }
-        
-        if($config['socialdb_property_object_category_id']
-                &&is_array($config['socialdb_property_object_category_id'])
-                    &&count($config['socialdb_property_object_category_id'])==1){
+
+        if ($config['socialdb_property_object_category_id'] && is_array($config['socialdb_property_object_category_id']) && count($config['socialdb_property_object_category_id']) == 1) {
             $config['socialdb_property_object_category_id'] = $config['socialdb_property_object_category_id'][0];
         }
         return $config;
@@ -734,6 +755,9 @@ class Model {
      * @author: Eduardo Humberto 
      */
     public function vinculate_property($category_id, $property_id) {
+        if ($category_id == 0) {
+            return true;
+        }
         $metas = get_term_meta($category_id, 'socialdb_category_property_id');
         if ($metas) {
             if (in_array('', $metas)) {
@@ -754,35 +778,36 @@ class Model {
      */
     public function get_category_root_posts($category_root_id, $field = '*') {
         global $wpdb;
-        $ancestors= [];
-        if(is_array($category_root_id)){
-            $array = array_filter( array_unique($category_root_id));
+        $ancestors = [];
+        if (is_array($category_root_id)) {
+            $array = array_filter(array_unique($category_root_id));
             foreach ($array as $category) {
                 $ancestors[] = $category;
                 $parents = get_term_children($category, 'socialdb_category_type');
-                if(is_array($parents)){
+                if (is_array($parents)) {
                     $ancestors = array_merge($parents, $ancestors);
                 }
             }
-        }else{
+        } else {
             $ancestors[] = $category_root_id;
             $parents = get_term_children($category_root_id, 'socialdb_category_type');
-            if(is_array($parents)){
+            if (is_array($parents)) {
                 $ancestors = array_merge($parents, $ancestors);
             }
             $query = " = $category_root_id ";
         }
-        $array = implode(',', array_filter( array_unique($ancestors)));
-        $query = ' IN ('.$array.') ';
+        $array = implode(',', array_filter(array_unique($ancestors)));
+        $query = ' IN (' . $array . ') ';
         $wp_posts = $wpdb->prefix . "posts";
         $wp_term_taxonomy = $wpdb->prefix . "term_taxonomy";
         $term_relationships = $wpdb->prefix . "term_relationships";
         $query = "
-                    SELECT p.$field FROM $wp_posts p
+                    SELECT DISTINCT p.ID , p.$field FROM $wp_posts p
                     INNER JOIN $term_relationships tr ON p.ID = tr.object_id    
                     INNER JOIN $wp_term_taxonomy tt ON tt.term_taxonomy_id = tr.term_taxonomy_id    
                     WHERE tt.term_id {$query}
                     AND p.post_type like 'socialdb_object' AND p.post_status LIKE 'publish'
+                    ORDER BY p.post_title
             ";
         $result = $wpdb->get_results($query);
         if ($result && is_array($result) && count($result) > 0) {
@@ -1048,12 +1073,12 @@ class Model {
         }
     }
 
-    /* function verify_collection_category_root() */
-    /* @param int $owner_id o dono das categorias
-      /* @param $parent(optional) a categoria pai que sera utilizada como base na pesquisa
-      /* @return boolean */
-    /* Funcao que verifica se a categoria e uma categoria raiz de uma colecao, verdadeiro se for e falso caso nao
-      /* Author: Eduardo */
+    /** function verify_collection_category_root() 
+    * @param int $owner_id o dono das categorias
+    * @param $parent(optional) a categoria pai que sera utilizada como base na pesquisa
+    * @return boolean 
+    * Funcao que verifica se a categoria e uma categoria raiz de uma colecao, verdadeiro se for e falso caso nao
+     * Author: Eduardo */
 
     public function verify_collection_category_root($category_id) {
         if (strpos($category_id, '_') !== false):
@@ -1143,7 +1168,7 @@ class Model {
      * @author: Eduardo */
     public function get_category_facet_parent($category_id, $collection_id) {
         $facets = CollectionModel::get_facets($collection_id);
-        if ($facets && is_array($facets)&&!empty($facets)) {
+        if ($facets && is_array($facets) && !empty($facets)) {
             $parents = get_ancestors($category_id, 'socialdb_category_type');
             foreach ($facets as $facet) {
                 if ((is_array($parents) && in_array($facet, $parents)) || $facet == $category_id) {
@@ -1811,6 +1836,21 @@ class Model {
             return false;
         }
     }
+    /**
+     * funcao que busca o postmeta e retorna seu valor
+     */
+    public function sdb_get_post_meta_by_value($post_id,$key,$value) {
+        global $wpdb;
+        $query = "SELECT * FROM $wpdb->postmeta WHERE post_id = $post_id AND meta_key LIKE '$key' AND meta_value LIKE '$value' ";
+        $result = $wpdb->get_results($query);
+        if ($result && is_array($result)) {
+            return $result[0];
+        } elseif ($result && isset($result->ID)) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * funcao que atualizo o postmeta pelo seu id
@@ -1913,6 +1953,88 @@ class Model {
                 }
             }
         }
+    }
+
+    /**
+     * Metodo  responsavel em retornar todas as propriedades de uma colecao, nao importando
+     * se sao propriedades ou sub-propriedades, diferentemente do metodo <i> get_collection_properties</i>
+     * ele busca inclusive as propriedades criadas fora de uma categoria
+     * 
+     * @param int $collection_id O id da categorias de onde esta sendo criado a propriedade
+     * @return array
+     */
+    public function list_properties_by_collection($collection_id) {
+        global $wpdb;
+        $wp_terms = $wpdb->prefix . "terms";
+        $wp_taxonomymeta = $wpdb->prefix . "termmeta";
+        $query = "
+			SELECT * FROM $wp_terms t
+			INNER JOIN $wp_taxonomymeta tt ON t.term_id = tt.term_id
+			WHERE tt.meta_key = 'socialdb_property_collection_id' and tt.meta_value LIKE '{$collection_id}'  ORDER BY t.name ASC  
+		";
+        $result = $wpdb->get_results($query);
+        if ($result) {
+            return $result;
+        } else {
+            return [];
+        }
+    }
+    /**
+     * metodo que organiza alfabaticamente um dynatree
+     * @param array $dynatree
+     */
+    public function sortDynatree(&$dynatree) {
+        usort($dynatree, function($a, $b) {
+	  $a1 = $a["title"]; //get the name string value
+          $b1 = $b["title"];
+          
+          $out = strcasecmp($a1,$b1);
+          if($out == 0){ return 0;} //they are the same string, return 0
+          if($out > 0){ return 1;} // $a1 is lower in the alphabet, return 1
+          if($out < 0){ return -1;} //$a1 is higher in the alphabet, return -1
+        });
+    }
+    
+    /**
+      * @signature add_property_ordenation($id)
+      * @param int $id O id da propriedade a ser inserido na ordenacao das prorpeidades
+      * @return array com os metadados com as mesmas iniciais
+      * @author: Eduardo Humberto  
+      */
+    public function add_property_position_ordenation($collection_id,$id) {
+        $array = [];
+        $meta =  get_post_meta($collection_id, 'socialdb_collection_properties_ordenation', true);
+        if(!$meta||$meta==''){
+            $array[] = $id;
+        }else{
+            $array = explode(',', $meta); 
+            if(is_array($array)){
+                $array[] = $id;
+            }
+        }
+        update_post_meta($collection_id, 'socialdb_collection_properties_ordenation', implode(',', $array));
+    }
+    /**
+      * @signature remove_property_ordenation($id)
+      * @param int $id O id da propriedade a ser removido na ordenacao das prorpeidades
+      * @author: Eduardo Humberto  
+      */
+    public function remove_property_position_ordenation($collection_id,$id) {
+        $array = [];
+        $meta =  get_post_meta($collection_id, 'socialdb_collection_properties_ordenation', true);
+        if(!$meta||$meta==''){
+            
+        }else{
+            $array = explode(',', $meta); 
+            if(is_array($array)){
+                foreach ($array as $index => $value) {
+                    if($value==$id){
+                        unset($array[$index]);
+                    }
+                }
+            }
+        }
+        update_post_meta($collection_id, 'socialdb_collection_properties_ordenation', implode(',', $array));
     }
 
     /**

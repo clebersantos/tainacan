@@ -47,8 +47,9 @@ class PropertyModel extends Model {
         }
         //apos a insercao
         if (!is_wp_error($new_property)&&isset($new_property['term_id'])) {// se a propriedade foi inserida com sucesso
-            
             instantiate_metas($new_property['term_id'], 'socialdb_property_term', 'socialdb_property_type', true);
+            $this->add_property_position_ordenation($data['collection_id'], $new_property['term_id']);
+            $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_collection_id', $data['collection_id']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_required', $data['property_term_required']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_term_cardinality', $data['socialdb_property_term_cardinality']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_term_widget', $data['socialdb_property_term_widget']);
@@ -112,8 +113,11 @@ class PropertyModel extends Model {
         //apos a insercao
         if (!is_wp_error($new_property)&&isset($new_property['term_id'])) { // se a propriedade foi inserida com sucesso
             instantiate_metas($new_property['term_id'], 'socialdb_property_data', 'socialdb_property_type', true);
+            $this->add_property_position_ordenation($data['collection_id'], $new_property['term_id']);
+            $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_collection_id', $data['collection_id']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_required', $data['property_data_required']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_data_widget', $data['property_data_widget']);
+            $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_data_cardinality', $data['socialdb_property_data_cardinality']);
             if($data['socialdb_property_data_help']!=''):
                 $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_help', $data['socialdb_property_data_help']);
             else:
@@ -212,7 +216,10 @@ class PropertyModel extends Model {
         //apos a insercao
         if (!is_wp_error($new_property)&&isset($new_property['term_id'])) {// se a propriedade foi inserida com sucesso
             instantiate_metas($new_property['term_id'], 'socialdb_property_object', 'socialdb_property_type', true);
+            $this->add_property_position_ordenation($data['collection_id'], $new_property['term_id']);
+            $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_collection_id', $data['collection_id']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_required', $data['property_object_required']);
+            $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_object_cardinality', $data['socialdb_property_object_cardinality']);
             //selecionando varios relacionamentos ao mesmo tempo
             if(strpos($data['property_object_category_id'], ',')!==false){
                 $categories = array_filter(explode(',', $data['property_object_category_id']));
@@ -249,26 +256,26 @@ class PropertyModel extends Model {
                 }
             }
             // se for propriedades do repositorio ()
-            if($this->is_repository_property($data['property_category_id'])){
-                if($data['property_object_facet'] == 'true'){
-                    $this->insert_property_repository($new_property['term_id'],true);
-                }else{
-                     $this->insert_property_repository($new_property['term_id']);
-                }
-            }else{// se possuir colecoes filhas
-                if($data['property_object_facet'] == 'true'){
-                     $this->insert_properties_hierarchy($data['property_category_id'], $new_property['term_id'],true);
-                }else{
-                      $this->insert_properties_hierarchy($data['property_category_id'],$new_property['term_id']);
-                }
-               
-            }
+//            if($this->is_repository_property($data['property_category_id'])){
+//                if($data['property_object_facet'] == 'true'){
+//                    $this->insert_property_repository($new_property['term_id'],true);
+//                }else{
+//                     $this->insert_property_repository($new_property['term_id']);
+//                }
+//            }else{// se possuir colecoes filhas
+//                if($data['property_object_facet'] == 'true'){
+//                     $this->insert_properties_hierarchy($data['property_category_id'], $new_property['term_id'],true);
+//                }else{
+//                      $this->insert_properties_hierarchy($data['property_category_id'],$new_property['term_id']);
+//                }
+//               
+//            }
             //validacao
-            if (!in_array(false, $result)) {
+            //if (!in_array(false, $result)) {
                 $data['success'] = 'true';
-            } else {
-                $data['success'] = 'false';
-            }
+            //} else {
+              //  $data['success'] = 'false';
+            //}
         } else {
             $data['success'] = 'false';
             if($is_new){
@@ -325,10 +332,12 @@ class PropertyModel extends Model {
         }
         //apos a atualizacao
        if (!is_wp_error($new_property)&&isset($new_property['term_id'])) {// se a propriedade foi inserida com sucesso
+            $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_collection_id', $data['collection_id']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_required', $data['property_data_required']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_data_widget', $data['property_data_widget']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_help', $data['property_data_help']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_data_column_ordenation', $data['property_data_column_ordenation']);
+            $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_data_cardinality', $data['socialdb_property_data_cardinality']);
             if($data['socialdb_property_default_value']){
                  $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_default_value', $data['socialdb_property_default_value']);
             }
@@ -371,17 +380,20 @@ class PropertyModel extends Model {
         }
         //apos a atualizacao
         if (!is_wp_error($new_property)&&isset($new_property['term_id'])) {// se a propriedade foi inserida com sucesso
+            $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_collection_id', $data['collection_id']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_required', $data['property_object_required']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_object_is_reverse', $data['property_object_is_reverse']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_object_is_facet', $data['property_object_facet']);
-             //selecionando varios relacionamentos ao mesmo tempo
+            $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_object_cardinality', $data['socialdb_property_object_cardinality']);
+            //selecionando varios relacionamentos ao mesmo tempo
             if(strpos($data['property_object_category_id'], ',')!==false){
                 delete_term_meta($new_property['term_id'], 'socialdb_property_object_category_id');
-                $categories = array_filter(explode(',', $data['property_object_category_id']));
+                $categories = array_unique(array_filter(explode(',', $data['property_object_category_id'])));
                 foreach ($categories as $category) {
                      $result[] = add_term_meta($new_property['term_id'], 'socialdb_property_object_category_id', $category);
                 }
             }else{
+              delete_term_meta($new_property['term_id'], 'socialdb_property_object_category_id');
               $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_object_category_id', $data['property_object_category_id']);
             }
             //atualizando a cor no dynatree
@@ -430,6 +442,7 @@ class PropertyModel extends Model {
         }
         //apos a atualizacao
        if (!is_wp_error($new_property)&&isset($new_property['term_id'])) {// se a propriedade foi inserida com sucesso
+            $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_collection_id', $data['collection_id']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_required', $data['property_term_required']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_term_cardinality', $data['socialdb_property_term_cardinality']);
             $result[] = update_term_meta($new_property['term_id'], 'socialdb_property_term_widget', $data['socialdb_property_term_widget']);
@@ -493,9 +506,10 @@ class PropertyModel extends Model {
      */
     public function edit_property($data) {
         $data = $this->get_all_property($data['property_id'], true); // pego todos os dados possiveis da propriedade
-        $data['chosen_menu_style_id'] = get_post_meta( $data['collection_id'], "socialdb_collection_facet_" . $data['property_id'] . '_menu_style', true );
+        // $data['selected_menu_style_id'] = $this->get_selected_menu_style( $data['collection_id'] );
         return json_encode($data);
     }
+
 
     /** function delete() 
     * @param array $data Os dados vindos do evento
@@ -537,6 +551,7 @@ class PropertyModel extends Model {
         //se estiver excluindo um metadado de uma colecao
         if (isset($data['property_delete_id']) && delete_term_meta($categogy_root_of_collection_id, 'socialdb_category_property_id', $data['property_delete_id']) && $this->delete_property_meta_data($data['property_delete_id']) && wp_delete_term($data['property_delete_id'], 'socialdb_property_type')) {
             $data['success'] = 'true';
+            $this->remove_property_position_ordenation($data['collection_id'],$data['property_delete_id']);
             // se for ordenacao padrao do repositorio
             if($data['property_delete_id']==get_post_meta($data['collection_id'], 'socialdb_collection_default_ordering', true)){
                  $recent_property = get_term_by('slug', 'socialdb_ordenation_recent', 'socialdb_property_type');
@@ -943,10 +958,18 @@ class PropertyModel extends Model {
         $facets_id = array_filter(array_unique((get_post_meta($collection_id, 'socialdb_collection_facets'))?get_post_meta($collection_id, 'socialdb_collection_facets'):[]));
         $array = [];
         $this->get_collection_properties($array,$term_actual->term_id,$facets_id);
-        //var_dump();
+        //busco as propriedades sem categoria
+        $properties_with_no_domain = $this->list_properties_by_collection($collection_id);
+        if($properties_with_no_domain&&is_array($properties_with_no_domain)){
+            foreach ($properties_with_no_domain as $property_with_no_domain) {
+                if(!in_array($property_with_no_domain->term_id, $array)){
+                    $array[] = $property_with_no_domain->term_id;
+                }
+            }
+        }
          if(!empty($array)){
              foreach ($array as $id) {
-                 $type = $this->get_property_type($id); // pego o tipo da propriedade
+                 $type = $this->get_property_type_hierachy($id); // pego o tipo da propriedade
                  $all_data = $this->get_all_property($id,true); // pego todos os dados possiveis da propriedade
                  if(!$all_data['slug']){
                      continue;
@@ -960,10 +983,9 @@ class PropertyModel extends Model {
                  }
              }
          }
-            
          return json_encode($this->search_in_array('label', $all_properties, $search));
      }
-     
+    
      
 
 }

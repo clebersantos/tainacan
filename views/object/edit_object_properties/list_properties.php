@@ -19,26 +19,48 @@ if (isset($property_object)):
         <div class="form-group">
             <label for="object_tags"><?php echo $property['name']; ?></label>
             <?php
-            //acao para modificaco da propriedade de objeto na edicao do item
-            if(has_action('modificate_edit_item_properties_object')): 
-                     do_action('modificate_edit_item_properties_object',$property); 
-            endif;
+                if(has_action('modificate_label_edit_item_properties')):
+                        do_action('modificate_label_insert_item_properties', $property);
+                endif;
+                //acao para modificaco da propriedade de objeto na edicao do item
+                if(has_action('modificate_edit_item_properties_object')): 
+                         do_action('modificate_edit_item_properties_object',$property); 
+                endif;
             ?>
-            <a class="btn btn-primary btn-xs" href="<?php echo get_permalink($property['metas']['collection_data'][0]->ID); ?>"><?php _e('Add new', 'tainacan'); ?><?php echo ' ' . $property['metas']['collection_data'][0]->post_title; ?></a>
-            <input type="text" onkeyup="autocomplete_object_property_edit('<?php echo $property['id']; ?>', '<?php echo $object_id; ?>');" id="autocomplete_value_<?php echo $property['id']; ?>_<?php echo $object_id; ?>" placeholder="<?php _e('Type the three first letters of the object of this collection ', 'tainacan'); ?>"  class="chosen-selected form-control"  />    
-            <select onclick="clear_select_object_property(this,'<?php echo $property['id']; ?>', '<?php echo $object_id; ?>');" id="property_value_<?php echo $property['id']; ?>_<?php echo $object_id; ?>_edit" multiple class="chosen-selected2 form-control" style="height: auto;" name="socialdb_property_<?php echo $property['id']; ?>[]" <?php
-            if ($property['metas']['socialdb_property_required'] == 'true'): echo 'required="required"';
-            endif;
-            ?> >
-                        <?php if (!empty($property['metas']['objects'])) { ?>     
+            <a class="btn btn-primary btn-xs" 
+               href="<?php echo get_permalink($property['metas']['collection_data'][0]->ID); ?>">
+                   <?php _e('Add new', 'tainacan'); ?><?php echo ' ' . $property['metas']['collection_data'][0]->post_title; ?>
+            </a>
+            <input type="text" 
+                   onkeyup="autocomplete_object_property_edit('<?php echo $property['id']; ?>', '<?php echo $object_id; ?>');" 
+                   id="autocomplete_value_<?php echo $property['id']; ?>_<?php echo $object_id; ?>" 
+                   placeholder="<?php _e('Type the three first letters of the object of this collection ', 'tainacan'); ?>"  
+                   class="chosen-selected form-control"  />    
+            
+            <select onclick="clear_select_object_property(this,'<?php echo $property['id']; ?>', '<?php echo $object_id; ?>');" 
+                    id="property_value_<?php echo $property['id']; ?>_<?php echo $object_id; ?>_edit" 
+                    multiple class="chosen-selected2 form-control" 
+                    style="height: auto;" 
+                    name="socialdb_property_<?php echo $property['id']; ?>[]"
+                    <?php 
+                        if ($property['metas']['socialdb_property_required'] == 'true'): 
+                            echo 'required="required"';
+                        endif;
+                    ?> >
+                    <?php 
+                        if (!empty($property['metas']['objects'])) { ?>     
                             <?php foreach ($property['metas']['objects'] as $object) { ?>
                                 <?php if (isset($property['metas']['value']) && !empty($property['metas']['value']) && in_array($object->ID, $property['metas']['value'])): // verifico se ele esta na lista de objetos da colecao   ?>    
-                            <option selected='selected' value="<?php echo $object->ID ?>"><?php echo $object->post_title ?></span>
+                                     <option selected='selected' value="<?php echo $object->ID ?>"><?php echo $object->post_title ?></span>
                             <?php endif; ?>
                         <?php } ?> 
-                    <?php }else { ?>   
-                    <option value=""><?php _e('No objects added in this collection', 'tainacan'); ?></option>
-                <?php } ?>       
+                    <?php 
+                        }else { 
+                    ?>   
+                        <option value=""><?php _e('No objects added in this collection', 'tainacan'); ?></option>
+                    <?php 
+                        } 
+                    ?>       
             </select>
         </div>  
         <?php // endif; ?>
@@ -52,6 +74,11 @@ if (isset($property_object)):
         ?>
         <div class="form-group">
             <label ><?php echo $property['name']; ?></label> 
+            <?php 
+            if(has_action('modificate_label_insert_item_properties')):
+                do_action('modificate_label_insert_item_properties', $property);
+            endif;
+            ?>
             <p class="help-block"><?php
                 
                 if ($property['metas']['socialdb_property_help']) {

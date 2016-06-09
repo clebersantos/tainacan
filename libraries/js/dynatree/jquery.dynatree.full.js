@@ -3293,6 +3293,8 @@ function _initDragAndDrop(tree) {
 		tree.$tree.draggable({
 			addClasses: false,
 			appendTo: "body",
+                        zIndex: 99999,
+                        stack: "body",
 			containment: false,
 			delay: 0,
 			distance: 4,
@@ -3315,7 +3317,7 @@ function _initDragAndDrop(tree) {
 				var isRejected = helper && helper.hasClass("dynatree-drop-reject");
 				return isRejected;
 				},
-			scroll: true, // issue 244: enable scrolling (if ul.dynatree-container)
+			scroll: false, // issue 244: enable scrolling (if ul.dynatree-container)
 			scrollSpeed: 7,
 			scrollSensitivity: 10,
 			// Delegate draggable.start, drag, and stop events to our handler

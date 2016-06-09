@@ -4,7 +4,7 @@
 ?>
 
 <div class="expand-all btn white tainacan-default-tags">
-    <?php _e('Collapse all', 'tainacan') ?>
+    <div class="action-text" style="display: inline-block"><?php _e('Collapse all', 'tainacan') ?></div>
     &nbsp;&nbsp;<span class="glyphicon-triangle-bottom white glyphicon"></span>
 </div>
 
@@ -166,14 +166,14 @@ foreach ($facets as $facet):
             </div>
         </div>
 
-    <?php elseif ($facet['widget'] == 'cloud'):  ?>
-        <div class="form-group">
-            <label id="cloud_click_<?php echo $facet['id']; ?>" class="title-pipe cloud_label"> <?php echo $facet['name']; ?></label>
+    <?php elseif ($facet['widget'] == 'cloud'): ?>
+        <div id="cloud_click_<?php echo $facet['id']; ?>" class="form-group">
+            <label  class="title-pipe cloud_label"> <?php echo $facet['name']; ?></label>
             <div id="cloud_<?php echo $facet['id']; ?>" style="height: 150px;overflow: scroll;"></div>
         </div>
 
         <script type="text/javascript">
-            $('#cloud_click_<?php echo $facet['id']; ?>').click(function() {
+           // $('#cloud_click_<?php echo $facet['id']; ?>').click(function() {
                 var words = [];
                 var array = JSON.parse('<?php echo str_replace('\\','',Utf8_ansi($facet['json'])); ?>');
                 $.each(array,function(index,value) {
@@ -184,7 +184,7 @@ foreach ($facets as $facet):
                     });
                 });
                $('#cloud_<?php echo $facet['id']; ?>').jQCloud( words, { height: 120 } );
-            });
+          //  });
         </script>
 
     <?php 

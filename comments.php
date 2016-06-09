@@ -1,9 +1,4 @@
 <?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 // Do not delete these lines
 global $global_collection_id;
 global $global_data_permissions;
@@ -11,27 +6,83 @@ global $global_term_id;
 if (!empty($_SERVER['SCRIPT_FILENAME']) && 'comments.php' == basename($_SERVER['SCRIPT_FILENAME']))
     die('Please do not load this page directly. Thanks!');
 
-if (post_password_required()) {
-    ?>
-    <p class="nocomments">Este artigo está protegido por password. Insira-a para ver os comentários.</p>
+if (post_password_required()) { ?>
+    <p class="nocomments"> <?php _e('This post is password protected. To view it please enter your password below:', 'tainacan'); ?> </p>
     <?php
     return;
 }
 ?>
 
+<?php
+$verify_permission = 0;
+if ($global_data_permissions['create'] == 'anonymous') {
+    $verify_permission = 1;
+} elseif ($global_data_permissions['create'] == 'members') {
+    if ($user_ID):
+        $verify_permission = 1;
+    endif;
+} else { $verify_permission = 1; }
+?>
+
 <div id="comments">
-    <?php if(!isset($global_term_id)||empty($global_term_id)): ?>
-        <h4 style="margin-left: 15px;"><?php comments_number('0 Comentários', '1 Comentário', '% Comentários'); ?></h4>
+
+    <?php if (comments_open() && $verify_permission&&verify_allowed_action($global_collection_id,'socialdb_collection_permission_create_comment')): ?>
+        <div id="respond">
+            <h3 style="margin-bottom: 10px;">
+                <?php _e( 'Leave your comment', 'tainacan'); ?>
+                <?php if($user_ID): ?>
+                    <span style="margin-left: 15px; font-size: 12px">
+                        <?php _e('Logged in as', 'tainacan'); ?> <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"> <?php echo $user_identity; ?></a>.
+                    </span>
+                <?php endif; ?>
+            </h3>
+
+            <fieldset>
+                <?php if( !$user_ID ) : ?>
+                    <div class="col-md-12 tainacan-comment-fields no-padding">
+                        <div class="col-md-3">
+                            <label for="author"><?php _e('Name:', 'tainacan'); ?></label>
+                            <input type="text" class="form-control" name="author" id="author" value="<?php echo $comment_author; ?>" />
+                        </div>
+                        <div class="col-md-3">
+                            <label for="email"><?php _e('Email:', 'tainacan'); ?></label>
+                            <input type="text" class="form-control" name="email" id="email" value="<?php echo $comment_author_email; ?>" />
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="url"><?php _e('Site:', 'tainacan'); ?></label>
+                            <input type="text" class="form-control"  name="url" id="url" value="<?php echo $comment_author_url; ?>" />
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <div class="col-md-12 tainacan-comment-msg">
+                    <div class="">
+                        <div style="float: left;">
+                            <?php echo get_avatar($user_ID, 64); ?>
+                        </div>
+                        <textarea style="float: left" name="comment" id="comment" class="form-control leave-comment"></textarea>
+                        <div style="float: left; margin-left: 10px;">
+                            <input type="button" onclick="submit_comment(<?php echo $post->ID ?>)" class="commentsubmit btn btn-primary" value="<?php _e('Comment', 'tainacan'); ?>" />
+                        </div>
+                    </div>
+                    <input type="hidden" name="redirect_to" value="#" />
+                    <input type="hidden" id="socialdb_event_comment_term_id" name="term_id" value="<?php echo $global_term_id ?>" />
+                </div>
+                <?php comment_id_fields(); ?>
+                <?php do_action('comment_form', $post->ID); ?>
+            </fieldset>
+            <!--/form -->
+            <p class="cancel"><?php cancel_comment_reply_link( __('Cancel', 'tainacan') ); ?></p>
+        </div>
+    <?php else: ?>
+        <h3> <?php _e('Comments are closed', 'tainacan'); ?> </h3>
     <?php endif; ?>
+
     <?php if (have_comments()) : ?>
-
-        <!--        <ol class="commentlist">
-                < ?php wp_list_comments('avatar_size=64&type=comment'); ?>
-            </ol>-->
-
-        <ol class="commentlist">
-            <?php wp_list_comments('avatar_size=64&type=comment&page=&callback=mytheme_comment'); ?>
-        </ol>
+        <ul class="commentlist">
+            <?php wp_list_comments('avatar_size=64&type=comment&page=&callback=tainacan_comments'); ?>
+        </ul>
 
         <?php if ($wp_query->max_num_pages > 1) : ?>
             <div class="pagination">
@@ -44,68 +95,6 @@ if (post_password_required()) {
 
     <?php endif; ?>
 
-    <?php
-    $verify_permission = 0;
-    if ($global_data_permissions['create'] == 'anonymous') {
-        $verify_permission = 1;
-    } elseif ($global_data_permissions['create'] == 'members') {
-        if ($user_ID) :
-            $verify_permission = 1;
-        endif;
-    }
-    else {
-        $verify_permission = 1;
-    }
-    ?>
-
-    <?php if (comments_open() && $verify_permission&&verify_allowed_action($global_collection_id,'socialdb_collection_permission_create_comment')) : ?>
-
-        <div id="respond">
-            <h3>Deixe o seu comentário!</h3>
-            <!--form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform" -->
-            <!--form id="comment_submiteewr" method="POST"  action="#"-->
-            <fieldset>
-                <?php if ($user_ID) : ?>
-
-                <p style="margin-left: 15px;"> Autenticado como <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. </p>
-
-                <?php else : ?>
-                    
-                <div class="col-12 tainacan-comment-fields"> 
-                    <div class="col-md-3">          
-                        <label for="author">Nome:</label>
-                        <input type="text" class="form-control" name="author" id="author" value="<?php echo $comment_author; ?>" />                            
-                    </div>
-                    <div class="col-md-3">
-                        <label for="email">Email:</label>
-                        <input type="text" class="form-control" name="email" id="email" value="<?php echo $comment_author_email; ?>" />
-                    </div>
-
-                    <div class="col-md-3">
-                        <label for="url">Site:</label>
-                        <input type="text" class="form-control"  name="url" id="url" value="<?php echo $comment_author_url; ?>" />
-                    </div>
-                </div>
-
-                <?php endif; ?>
-                    
-                <div class="col-md-9 tainacan-comment-msg">
-                    <label for="comment">Mensagem:</label>
-                    <textarea name="comment" id="comment" class="form-control" rows="" cols=""></textarea>
-                    <input type="hidden" name="redirect_to" value="#" />
-                    <input type="hidden" id="socialdb_event_comment_term_id" name="term_id" value="<?php echo $global_term_id ?>" />
-                    <br />
-                    <input type="button" onclick="submit_comment(<?php echo $post->ID ?>)" class="commentsubmit btn btn-primary" value="Enviar Comentário" />
-                </div>
-                <?php comment_id_fields(); ?>
-                <?php do_action('comment_form', $post->ID); ?>
-            </fieldset>
-            <!--/form -->
-            <p class="cancel"><?php cancel_comment_reply_link('Cancelar Resposta'); ?></p>
-        </div>
-    <?php else : ?>
-        <h3>Os comentários estão fechados.</h3>
-    <?php endif; ?>
 </div>
 
 <!-- modal REPLY COMMENTS -->
@@ -117,12 +106,11 @@ if (post_password_required()) {
                 <input type="hidden" id="edit_socialdb_event_comment_term_id" name="term_id" value="<?php echo $global_term_id ?>" />
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-trash"></span>&nbsp;<?php echo __('Reply Comment','tainacan'); ?></h4>
-                </div>
+                    <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-trash"></span>&nbsp;<?php echo __('Reply Comment','tainacan'); ?></h4> </div>
                 <div class="modal-body">
                     <?php if ($user_ID) : ?>
 
-                        <p>Autentificado como <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. </p>
+                        <p>  <?php _e('Logged in as', 'tainacan'); ?> <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. </p>
 
                     <?php else : ?>
 

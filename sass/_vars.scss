@@ -4,6 +4,7 @@ $brand-light-blue: #79a6ce;
 
 $item-light-gray: #929497;
 $lightest-gray: #ddd;
+$dark-gray: #272727;
 
 $default-link-color: #88A6CC;
 $default-link-hover-color: #1B284F;
@@ -76,6 +77,31 @@ $audios: #7654A0;
   span {
     font-size: 10px;
     text-indent: 0;
+  }
+}
+
+@mixin single_item_container_style() {
+  border: 3px solid $item-border;
+  background: white;
+  border-radius: 2px;
+  margin: 0 0 0 0;
+  padding-top: 0.7%;
+  padding-left: 15px;
+}
+
+@mixin single_item_box_style() {
+  padding: 10px 10px 20px 0;
+  // border-right: 3px solid $item-border;
+  border-bottom: 3px solid $item-border;
+
+  /*
+  &:first-child {
+    border-top: 3px solid $item-border;
+  }
+  */
+
+  .edit-field-btn {
+    float: right;
   }
 }
 

@@ -9,11 +9,29 @@ if(isset($licenses) && !empty($licenses)): ?>
     <?php foreach ($licenses as $license) { ?>
             <?php if(strpos($license['nome'], 'Creative Commons') !== false) $has_cc = 1;?>
             <div class="radio">
-                <label><input type="radio" name="object_license" value="<?php echo $license['id']; ?>" id="radio<?php echo $license['id']; ?>" <?php if($license['id'] == $pattern[0]){ echo "checked='checked'"; } ?> required="required"><?php echo $license['nome']; ?></label>
+                <label><input type="radio" 
+                              class="object_license" 
+                              name="object_license" 
+                              value="<?php echo $license['id']; ?>" 
+                              id="radio<?php echo $license['id']; ?>" 
+                              <?php 
+                              if($license['id'] == $pattern[0]){ 
+                                  $has_checked = true;
+                                  echo "checked='checked'"; 
+                              } 
+                              ?> 
+                              required="required"><?php echo $license['nome']; ?></label>
             </div>
     <?php  } ?>
+<?php else: ?>    
+    <input type="hidden" class='hide_license' value="true">
 <?php endif; ?>
 
+<?php if(isset($has_checked)): ?>    
+    <input type="hidden" class='already_checked_license' value="true">
+<?php endif; ?>    
+    
+    
 <?php if($has_cc){ ?>
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalHelpCC"><?php _e("Help Choosing",'tainacan'); ?></button><br><br>
 <?php } ?>

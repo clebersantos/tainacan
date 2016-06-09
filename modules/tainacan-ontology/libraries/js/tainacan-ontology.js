@@ -1,6 +1,9 @@
 $(window).load(function () {
-//silence is gold
- $('#container_three_columns').css('height','1100px');
+    setTimeout(function () {  //Beginning of code that should run AFTER the timeout  
+        if ($('#open_wizard').val() === 'true') {
+            $('.expand-all').trigger('click');
+        }
+    }, 3000);  // put the timeout here
 });
 
 /******************************* HOME DO ITEM **************************/
@@ -55,7 +58,7 @@ function initDynatreeFilterProperties(src) {
                     showPageProperties(elem.slug, $('#src').val());
                     node.deactivate();
                 });
-        },
+        }, 
         onCreate: function (node, span) {
                bindContextProperty(span,src);
         }
@@ -71,16 +74,22 @@ function initDynatreeFilterProperties(src) {
         $(span).contextMenu({menu: "PropertyMenu"}, function (action, el, pos) {
             var node = $.ui.dynatree.getNode(el);
             switch (action) {
+                case 'add':
+                    showPageCreateProperty(node.data.key,src);
+                     break;
                 case "edit":
                     showPageEditProperty(node.data.key,src);
                     break;
+                 case "delete":
+                     showDeleteProperty(node.data.key,node.data.title,src);
+                    break;    
                 default:
                     alert("Todo: appply action '" + action + "' to node " + node);
             }
         });
     }
 
-/** Show page edit property **/
+/** Show page EDIT property **/
 function showPageEditProperty(id,src){
     show_modal_main();
     $.ajax({
@@ -102,6 +111,71 @@ function showPageEditProperty(id,src){
                         //$('#single_category_property').html(result);
                         //$('#single_modal_category_property').modal('show');
                     });
+}
+
+/** Show page CREATE property **/
+function showPageCreateProperty(parent,src){
+    show_modal_main();
+    $.ajax({
+                        url: src + '/controllers/property/property_controller.php',
+                        type: 'POST',
+                        data: {operation: 'create', property_parent_id: parent, collection_id: $("#collection_id").val()}
+                    }).done(function (result) {
+                        $("#menu_object").hide();
+                        $("#container_socialdb").hide('slow');
+                        $("#list").hide('slow');
+                        $("#loader_objects").hide();            
+                        $("#form").html(result);
+                        $('#form').css('background','white');
+                        $('#form').css('border','3px solid #E8E8E8');
+                        $('#form').css('margin-left','-3px');
+                        $('#form').css('height','2000px');
+                        $('#form').css('border-top','none');
+                        $('#form').show('slow');
+                        //$('#single_category_property').html(result);
+                        //$('#single_modal_category_property').modal('show');
+                    });
+}
+
+function showDeleteProperty(property_id,title,src) {
+    swal({
+        title:  $('#title_delete_property').val(),
+        text: $('#msg_delete_property').val()+' '+title,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: 'btn-danger',
+        closeOnConfirm: true,
+        closeOnCancel: true
+    },
+    function (isConfirm) {
+        if (isConfirm) {
+            $('#modalImportMain').modal('show');//mostro o modal de carregamento
+            $.ajax({
+                type: "POST",
+                url: src + "/controllers/property/property_controller.php",
+                data: {
+                    operation: 'delete',
+                    property_id: property_id,
+                    collection_id: $('#collection_id').val()}
+            }).done(function (result) {
+                $('#modalImportMain').modal('hide');//escondo o modal de carregamento
+                elem_first = jQuery.parseJSON(result);
+                backToMainPage();
+                set_containers_class($('#collection_id').val());
+                showAlertGeneral(elem_first.title, elem_first.msg, elem_first.type);
+            });
+        }
+    });
+}
+
+function ontology_get_property_type(src,property_id){
+    return $.ajax({
+                type: "POST",
+                url: src + "/controllers/property/event_controller.php",
+                data: {
+                    operation: 'get_property_type',
+                    property_id: property_id}
+            });
 }
 
 /*
@@ -503,7 +577,7 @@ function set_fields_edit_property_data(elem){
 function form_property_object_init(src){
     //iniciando as propriedades
     initDynatreesObject(src);
-    initDynatreesObjectRestriction();
+    initDynatreesObjectRestriction(src);
     $('#property_object_reverse').remove();
     $('#show_reverse_properties').remove();
     $('#default_field').remove();
@@ -603,7 +677,7 @@ function initDynatreesObject(src){
         });
     });
 }
-function initDynatreesObjectRestriction(){
+function initDynatreesObjectRestriction(src){
     $.ajax({
         type: "POST",
         url: $('#src').val() + '/controllers/collection/collection_controller.php',
@@ -639,18 +713,40 @@ function initDynatreesObjectRestriction(){
                 
             }
         });
-        //dynatree_restriction_4 
-        $("#dynatree_object_restriction_4").empty();
-        $("#dynatree_object_restriction_4").dynatree({
-            selectionVisible: true, // Make sure, selected nodes are visible (expanded).  
-            checkbox: true,
-            children: json_propriedades,
-            onSelect: function (flag, node) {
-                     if($('#select_restriction_1_object').val()=='hasvalue'){
-                            set_values_restrictions(node.data.key,'#object_hasvalue_ids');
-                     }
+    });
+    
+    //dynatree_restriction_4 HAS VALUE
+    $("#dynatree_object_restriction_4").empty();
+    $("#dynatree_object_restriction_4").dynatree({
+         classNames: {checkbox: "dynatree-radio"},
+            selectMode: 1,
+        selectionVisible: true, // Make sure, selected nodes are visible (expanded).  
+        checkbox: true,
+        initAjax: {
+            url: src + '/controllers/filters/filters_controller.php',
+            data: {
+                collection_id: $("#collection_id").val(),
+                order: 'name',
+                operation: 'restrictionsDynatreeIndividues'
+            },
+            addActiveKey: true
+        },
+        onLazyRead: function (node) {
+            node.appendAjax({
+                url: $('#src').val() + '/controllers/collection/collection_controller.php',
+                data: {
+                    key: node.data.key,
+                    collection: $("#collection_id").val(),
+                    classCss: node.data.addClass,
+                    operation: 'expand_dynatree'
+                }
+            });
+        },
+        onSelect: function (flag, node) {
+            if ($('#select_restriction_1_object').val() == 'hasvalue') {
+                set_values_restrictions(node.data.key, '#object_hasvalue_ids');
             }
-        });
+        }
     });
 }
 
@@ -860,8 +956,146 @@ function ontology_clear_forms(){
 /******************************************************************************/
 
 
-/*********************** #adicao/edicao de individuos *************************/
+/*********************** #adicao/edicao de individuo - validacao de cardinalidade *************************/
+// ## OBJECT
+//VALIDA A PROPRIEDADE DE OBJETO COMPLETA
+function verify_cardinality_property_object_field(seletor,property_id){
+    var count = 0;
+   
+    if((!$("#form_group_"+property_id)||$("#form_group_"+property_id).length==0)
+            &&(parseInt($('#property_'+property_id+'_min_cardinality').val())!==0
+               ||$('#property_'+property_id+'_max_cardinality').val()!=='*') ){
+        $( seletor ).wrap( "<div id='form_group_"+property_id+"'></div>" );
+        $("#form_group_"+property_id).wrap( "<div id='field_container_"+property_id+"'></div>" );
+        $('<span id="icon_'+property_id+'" class="glyphicon" aria-hidden="true"></span>').insertAfter(seletor);
+        $('<span id="status_field_'+property_id+'" class="sr-only"></span>').insertAfter(seletor);
+    }
+    
+    $( seletor+' option:selected' ).each(function( index ) {
+            count++;
+    });
+    
+    if(parseInt($('#property_'+property_id+'_min_cardinality').val())===0&&$('#property_'+property_id+'_max_cardinality').val()==='*'){
+    
+    }else{
+        if(count>=parseInt($('#property_'+property_id+'_min_cardinality').val())&&count<=parseInt($('#property_'+property_id+'_max').val())){
+            $('#form_group_'+property_id).attr('class','form-group has-success has-feedback') ;
+            $('#icon_'+property_id).attr('class','glyphicon glyphicon-ok form-control-feedback') ;
+            $('#status_field_'+property_id).html('(success)') ;
 
+            $('#error-'+property_id).hide();
+            $('#cardinality-obrigation-'+property_id).show();
+            $('#correct-'+property_id).show();
+            $('#property_validation_'+property_id).val('true') ; 
+
+        }else{
+            $('#form_group_'+property_id).attr('class','form-group has-warning has-feedback') ;
+            $('#icon_'+property_id).attr('class','glyphicon glyphicon-warning-sign form-control-feedback') ;
+            $('#status_field_'+property_id).html('(warning)') ;
+
+            $('#error-'+property_id).show();
+            $('#cardinality-obrigation-'+property_id).show();
+            $('#correct-'+property_id).hide();
+            $('#property_validation_'+property_id).val('false') ; 
+        }
+    }
+    validate_all_properties();
+}
+// valida a cardinalidade ao selecionar
+Hook.register(
+  'tainacan_validate_cardinality_onselect',
+  function ( args ) {
+      verify_cardinality_property_object_field(args[0],args[1])
+  });
+
+
+//## DATA
+//validando a cardinalidade na propriedade de dados EM CADA INPUT
+function validation_cardinality_property_data(seletor,property_id,position){
+    // se for cardinalidade fiza
+    if(parseInt(position)<parseInt($('#property_'+property_id+'_min').val())&&parseInt($('#property_'+property_id+'_max').val())===parseInt($('#property_'+property_id+'_min').val())){
+       var has_value= $('#'+seletor).val();
+       if(has_value.trim()===''){
+          $('#form_group_'+property_id+'_'+position).attr('class','form-group has-warning has-feedback') ;
+          $('#icon_'+property_id+'_'+position).attr('class','glyphicon glyphicon-warning-sign form-control-feedback') ;
+          $('#status_field_'+property_id+'_'+position).html('(warning)') ;
+          $('#is_valid_'+property_id+'_'+position).val('false') ;
+          $('#'+seletor).attr('placeholder',$('.obrigation-message-'+property_id).val());
+          verify_cardinality_property_data_field(property_id);
+       }else{
+          $('#form_group_'+property_id+'_'+position).attr('class','form-group has-success has-feedback') ;
+          $('#icon_'+property_id+'_'+position).attr('class','glyphicon glyphicon-ok form-control-feedback') ;
+          $('#status_field_'+property_id+'_'+position).html('(success)') ;
+          $('#is_valid_'+property_id+'_'+position).val('true') ; 
+          verify_cardinality_property_data_field(property_id);
+       }
+   }
+   //se for cardinalidade minima for igual ou maior a um
+   else if(parseInt($('#property_'+property_id+'_min').val())>0&&parseInt($('#property_'+property_id+'_max').val())>parseInt($('#property_'+property_id+'_min').val())){
+        var has_value= $('#'+seletor).val();
+        if(has_value.trim()===''){
+          $('#form_group_'+property_id+'_'+position).attr('class','form-group has-warning has-feedback') ;
+          $('#icon_'+property_id+'_'+position).attr('class','glyphicon glyphicon-warning-sign form-control-feedback') ;
+          $('#status_field_'+property_id+'_'+position).html('(warning)') ;
+          $('#is_valid_'+property_id+'_'+position).val('false') ;
+           $('#'+seletor).attr('placeholder',$('.optional-message-'+property_id).val());
+           verify_cardinality_property_data_field(property_id);
+       }else{
+          $('#form_group_'+property_id+'_'+position).attr('class','form-group has-success has-feedback') ;
+          $('#icon_'+property_id+'_'+position).attr('class','glyphicon glyphicon-ok form-control-feedback') ;
+          $('#status_field_'+property_id+'_'+position).html('(success)') ;
+          $('#is_valid_'+property_id+'_'+position).val('true') ; 
+          verify_cardinality_property_data_field(property_id);
+       }
+   }else{
+       $('#is_valid_'+property_id+'_'+position).val('true') ; 
+       $('#property_validation_'+property_id).val('true') ; 
+   }  
+    validate_all_properties();
+}
+//VALIDA A PROPRIEDADE DE DADOS COMPLETA
+function verify_cardinality_property_data_field(property_id){
+    var count = 0;
+    $( ".is_valid_"+property_id ).each(function( index ) {
+        if($( this ).val()==='true'){
+            count++;
+        }
+    });
+    if(count>=parseInt($('#property_'+property_id+'_min').val())){
+        $('#error-'+property_id).hide();
+        $('#cardinality-obrigation-'+property_id).hide();
+        $('#correct-'+property_id).show();
+        $('#property_validation_'+property_id).val('true') ; 
+    }else{
+        $('#error-'+property_id).show();
+        $('#cardinality-obrigation-'+property_id).show();
+        $('#correct-'+property_id).hide();
+        $('#property_validation_'+property_id).val('false') ; 
+    }
+}
+//valida todas propriedades
+function validate_all_properties(){
+    var count = 0;
+    $( ".validation_properties_cardinality").each(function( index ) {
+        if($( this ).val()==='false'){
+            count++;
+        }
+    });
+    //se algum campo nao estiver validado
+//     $(".send-button").tooltip({
+//            title: 'Complete the form!',
+//             placement : 'left',
+//             trigger: 'click',
+//            delay: 100
+//        });
+    if(count>0){
+        $('.send-button').attr('disabled','disabled');
+    }else{
+       // $(".send-button").tooltip('destroy');
+        $('.send-button').removeAttr('disabled');
+    }
+}
+/*********************** #adicao/edicao de individuos *************************/
 //validando o formulario de insercao de item
 Hook.register(
   'tainacan_validate_create_item_form',
@@ -999,5 +1233,5 @@ Hook.register(
 Hook.register(
   'tainacan_oncreate_main_dynatree',
   function ( args ) {
-      args[0].expand();
+      //args[0].expand();
   });

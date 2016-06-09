@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" style="font-weight: bolder; color: black;">
+                <h4 class="modal-title">
                     <span class="edit"> <?php _e('Add metadata', 'tainacan') ?> </span> - <?php _e('Category', 'tainacan') ?>
                 </h4>
             </div>
@@ -33,8 +33,16 @@
                                     <input type="radio" name="property_term_required" id="property_term_required_true" value="true">&nbsp;<?php _e('Yes','tainacan'); ?>
                                     <input type="radio" name="property_term_required" id="property_term_required_false" checked="checked" value="false">&nbsp;<?php _e('No','tainacan'); ?>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="socialdb_property_term_widget"><?php _e('Property Term Widget','tainacan'); ?></label>
+                                    <select class="form-control" id="socialdb_property_term_widget" name="socialdb_property_term_widget">
+                                    </select>
+                                </div>
+
                                 <hr class="modal-hr-style">
                             </div>
+
                             <div class="form-group">
                                 <label for="use-filter" style="display: inline-block"><?php _e('Use as a filter','tainacan'); ?></label>
                                 <input type="checkbox" onchange="toggle_term_widget(this)" value="use_filter" name="property_data_use_filter" class="property_data_use_filter" />
@@ -43,21 +51,14 @@
                             <div class="term-widget" style="display: none">
 
                                 <div class="form-group">
-                                    <label for="socialdb_property_term_widget"><?php _e('Property Widget','tainacan'); ?></label>
+                                    <label for="property_term_filter_widget"><?php _e('Property Widget','tainacan'); ?></label>
                                     <select class="form-control" onchange="term_widget_options(this)"
-                                            id="socialdb_property_term_widget" name="socialdb_property_term_widget">
+                                            id="property_term_filter_widget" name="property_term_filter_widget">
                                         <option value="select"><?php _e('Select', 'taincan'); ?></option>
                                     </select>
 
-                                    <div id="color_field_property_search" style="display: none;">
-                                        <h5><strong><?php _e('Set the facet color','tainacan'); ?></strong></h5>
-                                        <div class="form-group">
-                                            <?php for ($i = 1; $i < 14; $i++) {
-                                                echo '<label class="radio-inline"> <input type="radio" class="color_property" name="color_facet" id="color_property' . $i . '" value="color_property' . $i . '" ';
-                                                echo '><img src="' . get_template_directory_uri() . '/libraries/images/cor' . $i . '.png">  </label>';
-                                            }; ?>
-                                        </div>
-                                    </div>
+                                    <?php echo $view_helper->render_tree_colors(); ?>
+
                                 </div>
 
                                 <div class="form-group" id="select_menu_style" style="display: none">
@@ -79,10 +80,12 @@
                                 <div style='height: 242px;' id="terms_dynatree">
                                 </div>
                             </div>
+
                             <div class="col-md-12">
                                 <label for="selected_category"><?php _e('Selected category','tainacan'); ?></label><br>
                                 <select required="required" size='2' id="socialdb_property_term_root" class="form-control" name='socialdb_property_term_root'></select>
                             </div>
+
                         </div>
                     </div>
 

@@ -66,13 +66,13 @@ class ThemeOptionsController extends Controller {
                 break;
             case "add_repository_license":
                 if ($data['add_license_url'] == '' && $data['add_license_description'] == ''):
-                    $result['title'] = __('Error','tainacan');
-                    $result['msg'] = __('Please, fill the form correctly!','tainacan');
+                    $result['title'] = __('Error', 'tainacan');
+                    $result['msg'] = __('Please, fill the form correctly!', 'tainacan');
                     $result['type'] = 'error';
                 else:
                     if (!$theme_options_model->verify_equal_license_title($data['add_license_name'])):
-                        $result['title'] = __('Info','tainacan');
-                        $result['msg'] = __('This license is already registered!','tainacan');
+                        $result['title'] = __('Info', 'tainacan');
+                        $result['msg'] = __('This license is already registered!', 'tainacan');
                         $result['type'] = 'info';
                     else:
                         $result = $theme_options_model->insert_custom_license($data);
@@ -97,7 +97,7 @@ class ThemeOptionsController extends Controller {
                 $result = $theme_options_model->change_pattern_license($data['license_id']);
                 return json_encode($result);
                 break;
-            /*************************** POPULAR COLECOES***********************/
+            /*             * ************************* POPULAR COLECOES********************** */
             case "edit_tools":
                 return $this->render(dirname(__FILE__) . '../../../views/theme_options/edit_tools.php', $data);
                 break;
@@ -107,6 +107,47 @@ class ThemeOptionsController extends Controller {
             case 'getProgress':
                 $populateModel = new PopulateModel(0);
                 return $populateModel->getProgress($data);
+            case 'integrity_test':
+                $result = array();
+//                $collections = $theme_options_model->get_all_collections();
+//                foreach ($collections as $collection) {
+//                    $posts = $theme_options_model->get_collection_posts($collection->ID);
+//                    foreach ($posts as $post) {
+//                        $files = $theme_options_model->list_files_attachment($post->ID);
+//                        foreach ($files as $file) {
+//                            $md5_atual = ($theme_options_model->is_url_exist($file["guid"]) ? md5_file($file["guid"]) : 'Not Found!');
+//                            $result_test = ($file["md5_inicial"] == $md5_atual ? 'OK' : 'NOK');
+//                            add_post_meta($file['ID'], 'check_md5_' . time(), $md5_atual);
+//                            $info_file['id'] = $file["ID"];
+//                            $info_file['title'] = $file["name"];
+//                            $info_file['md5_inicial'] = $file["md5_inicial"];
+//                            $info_file['md5_atual'] = $md5_atual;
+//                            $info_file['result'] = $result_test;
+//
+//                            $result[] = $info_file;
+//                        }
+//                    }
+//                }
+
+
+                $files = $theme_options_model->get_all_attachments();
+                if (!empty($files)) {
+                    foreach ($files as $file) {
+                        $file["md5_inicial"] = get_post_meta($file["ID"], 'md5_inicial', true);
+                        
+                        $md5_atual = ($theme_options_model->is_url_exist($file["guid"]) ? md5_file($file["guid"]) : 'Not Found!');
+                        $result_test = ($file["md5_inicial"] == $md5_atual ? 'OK' : 'NOK');
+                        add_post_meta($file['ID'], 'check_md5_' . time(), $md5_atual);
+                        $info_file['id'] = $file["ID"];
+                        $info_file['title'] = $file["post_title"];
+                        $info_file['md5_inicial'] = $file["md5_inicial"];
+                        $info_file['md5_atual'] = $md5_atual;
+                        $info_file['result'] = $result_test;
+
+                        $result[] = $info_file;
+                    }
+                }
+                return json_encode($result);
         }
     }
 

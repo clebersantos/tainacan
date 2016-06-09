@@ -224,17 +224,33 @@ class CollectionModel extends Model {
             wp_delete_attachment($cover_id);
             delete_post_meta($post_id, 'socialdb_collection_cover_id');
         }
+        if ($data['remove_watermark']) {
+            $watermark_id = get_post_meta($post_id, 'socialdb_collection_watermark_id', true);
+            wp_delete_attachment($watermark_id);
+            delete_post_meta($post_id, 'socialdb_collection_watermark_id');
+        }
         if ($data['remove_thumbnail']) {
             delete_post_thumbnail($post_id);
         }
+        
         if ($_FILES) {
             $this->add_thumbnail($post_id);
             $id_cover = $this->add_cover($post_id);
+            $id_watermark = $this->add_watermark($post_id);
 
             if ($id_cover) {
                 update_post_meta($post_id, 'socialdb_collection_cover_id', $id_cover);
             }
+            if ($id_watermark) {
+                update_post_meta($post_id, 'socialdb_collection_watermark_id', $id_watermark);
+            }
         }
+        if ($data['add_watermark']) {
+            update_post_meta($post_id, 'socialdb_collection_add_watermark', true);
+        }else{
+            update_post_meta($post_id, 'socialdb_collection_add_watermark', false);
+        }
+        
         if ($data['collection_moderators'] && is_array($data['collection_moderators'])) {
             delete_post_meta($post_id, 'socialdb_collection_moderator');
             foreach ($data['collection_moderators'] as $moderator) {
@@ -281,6 +297,7 @@ class CollectionModel extends Model {
         update_post_meta($post_id, 'socialdb_collection_most_participatory', $data['collection_most_participatory']);
         update_post_meta($post_id, 'socialdb_collection_address', $data['socialdb_collection_address']);
         update_post_meta($post_id, 'socialdb_collection_allow_hierarchy', $data['socialdb_collection_allow_hierarchy']);
+        update_post_meta($post_id, 'socialdb_collection_download_control', $data['socialdb_collection_download_control']);
 
         //Permissions
         update_post_meta($post_id, 'socialdb_collection_permission_create_category', $data['socialdb_collection_permission_create_category']);

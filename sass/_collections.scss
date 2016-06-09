@@ -12,7 +12,6 @@
 
 #container_three_columns {
 	background: $collections-bg-color;
-	// padding-bottom: 30px;
 
 	#div_central {
 		padding-left: 2%;
@@ -23,7 +22,6 @@
 			background: white;
 			border: 3px solid $item-border;
 			border-top: none;
-			padding-right: 0;
 
 			.header-colecao {
 				margin-top: 10px;
@@ -40,10 +38,25 @@
 				optgroup, option, select, button {
 					color: black;
 				}
-				button:hover {
-
-				}
 			} // .header-colecao
+
+			.search-top-container {
+				.box-left {
+					padding-right: 0;
+					width: 82.5%;
+				}
+				.box-right {
+					padding-right: 6px;
+					padding-left: 5px;
+
+					button {
+						color: $brand-medium-blue;
+						width: 100%;
+						overflow: hidden;
+					}
+				}
+			} // .search-top-container
+
 		} // #menu_object
 
 		#center_pagination {
@@ -101,7 +114,7 @@
 		}
 
 		.item-meta-box {
-			padding-left:0px;
+			padding-left: 0;
 			margin-left: 0;
 			a {
 				font-weight: bolder;
@@ -117,22 +130,19 @@
 		width: 100%;
 
 		.rankings-container {
-			// width: 60%;
 			float: left;
 		}
 
 		.item-funcs {
-			float: right;
+			// float: right;
 			padding: 0;
+
 			li {
 				float:right;
 				margin: 4px !important;
 
 				@include edit-item-button-colors();
-
-				a {
-					font-size: 1.3em;
-				}
+				a {  font-size: 1.3em;  }
 			}
 		}
 
@@ -192,14 +202,14 @@
 		border: 1px solid #aaa;
 	}
 
-	.single_stars {
-		.star-on-png, .star-half-png, .star-off-png {
-			font-size: 1.5em;
-			color: darkgoldenrod;
-		}
-	}
-
 } // item colecao
+
+.single_stars {
+	.star-on-png, .star-half-png, .star-off-png {
+		font-size: 1.5em;
+		color: darkgoldenrod;
+	}
+}
 
 a.collection-thumb {
 	img {
@@ -211,5 +221,162 @@ a.collection-thumb {
 #properties_create_opt {
 	.default-meta-config {
 		margin-left:-45px;
+	}
+}
+
+.selected-viewMode {
+	padding: 3px 2px 5px 5px;
+	border: 2px solid $item-border;
+	border-radius: 2px;
+}
+.viewMode-control {
+	padding-top: 5px;
+
+	div {
+		color: $brand-medium-blue;
+		float: left;
+		font-weight: bolder;
+		padding-top: 3px;
+	}
+	ul {
+		li {
+			display: inline;
+			margin-left: 10px;
+			a {
+				img {
+					width: 15px;
+					&:hover {
+						opacity: 0.7;
+					}
+				}
+			}
+		}
+	}
+} // .viewMode-control
+
+/*
+****************************************
+**************** LIST MODE *************
+****************************************
+*/
+#list-viewMode {
+	margin-top: 15px;
+	border: 3px solid $item-border;
+
+	.list-view-container {
+		background: white;
+		border-top: 3px solid $item-border;
+		padding-top: 15px;
+		padding-bottom: 8px;
+		height: 60px;
+		overflow: hidden;
+
+		.item-thumb {
+			// padding-top: 8px;
+		}
+
+		.item-display-title {
+			margin: 0;
+			font-size: 16px;
+		}
+
+		.item-description {
+			font-size: 12px;
+			overflow: hidden;
+		}
+
+		&:first-child {
+			border-top: none;
+		}
+		&:last-child {
+
+		}
+
+	}
+	.item-thumb {
+		a img {
+			max-width: 30px;
+		}
+	}
+} // list-viewMode
+
+/*
+****************************************
+**************** LIST MODE *************
+****************************************
+*/
+#gallery-viewMode {
+	margin-top: 15px;
+
+	.gallery-view-container {
+		background: white;
+		border: 3px solid $item-border;
+		padding-top: 10px;
+		// padding-bottom: 8px;
+		text-align: center;
+		height: 240px;
+		margin-bottom: 15px;
+		margin-left: 15px;
+		width: 24%;
+		overflow: hidden;
+
+		img {
+			display: inline-block !important;
+			max-width: 170px !important;
+			// width: 92%;
+		}
+
+		&:nth-child(4n+1) {
+			margin-left: 0 !important;
+		}
+
+		.item-thumb {
+			height: 170px;
+		}
+
+		.title-container {
+			margin-top: 10px;
+			border-top: 2px solid $item-border;
+
+			h4 {
+				overflow: hidden;
+
+				a {
+
+					color: black;
+					font-weight: bolder;
+				}
+			}
+		}
+
+	} // .gallery-view-container
+
+} // gallery-viewMode
+
+/*
+****************************************
+**************** SLIDESHOW MODE *************
+****************************************
+*/
+#slideshow-viewMode {
+	margin-top: 15px;
+	// padding-left: 50px;
+
+	.slick-slide img {
+		display: inline-block !important;
+	}
+
+	.main-slide {
+
+	}
+	.collection-slides {
+		.slick-slide img {
+			max-width: 150px;
+		}
+		.slick-current {
+			img {
+				border: 2px solid $brand-medium-blue;
+			}
+		}
 	}
 }

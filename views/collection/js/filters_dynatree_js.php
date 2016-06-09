@@ -13,7 +13,7 @@
     }
     function remove_filter_category(facet,key) {
         $('.remove-link-filters').hide(); 
-         wpquery_remove('facets',facet,key);
+         //wpquery_remove('facets',facet,key);
         $("#dynatree").dynatree("getRoot").visit(function (node) {
             if(node.data.key===key.trim()){
               $('#flag_dynatree_ajax').val('false'); 

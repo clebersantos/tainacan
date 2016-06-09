@@ -259,5 +259,5 @@ $item_attachments = get_posts( ['post_type' => 'attachment', 'exclude' => get_po
     <input type="hidden" id="object_content_edit" name="object_content" value="<?= strip_tags(get_post_meta($object->ID, 'socialdb_object_content', true)) ?>">
     <input type="hidden" id="edit_object_collection_id" name="collection_id" value="<?= $collection_id ?>">
     <input type="hidden" id="operation_edit" name="operation" value="update">
-    <button type="submit" id="submit_edit" class="btn btn-primary btn-lg pull-right"><?php _e('Submit','tainacan'); ?></button>
+    <button type="submit" id="submit_edit" class="btn btn-primary btn-lg pull-right send-button"><?php _e('Submit','tainacan'); ?></button>
 </form>

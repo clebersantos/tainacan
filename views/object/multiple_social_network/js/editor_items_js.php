@@ -1,11 +1,39 @@
 <script>
     var checkbox_values = [];
+    var myDropzone;
+    var noCleaning = false;
     $(function () {
+        $('#modalImportMain').modal('hide');
         var src = $('#src').val();
         var collection_id = $('#collection_id').val();
+        // #1 - breadcrumbs para localizacao da pagina
+        $("#tainacan-breadcrumbs").show();
+        $("#tainacan-breadcrumbs .current-config").text('<?php _e('Add new item - Edit item(s) metadata','tainacan') ?>');
+        // 2# - Dropzone dos arquivos
+        $('.attachment-thumbnail').addClass('img-responsive');
+        var src = $('#src').val();
+         // 3# - se o usuario desejar abrir todos os metadados
+        $('.expand-all-item').toggle(function () {
+            setMenuContainerHeight();
+
+            $(this).find("div.action-text").text('<?php _e('Expand all', 'tainacan') ?>');
+            $('#multiple_accordion .ui-accordion-content').fadeOut();
+            $('.prepend-filter-label').switchClass('glyphicon-triangle-bottom', 'glyphicon-triangle-right');
+            $(this).find('span').switchClass('glyphicon-triangle-bottom', 'glyphicon-triangle-right');
+            $('.cloud_label').click();
+        }, function () {
+            $('#multiple_accordion .ui-accordion-content').fadeIn();
+            $('.prepend-filter-label').switchClass('glyphicon-triangle-right', 'glyphicon-triangle-bottom');
+            $(this).find('span').switchClass('glyphicon-triangle-right', 'glyphicon-triangle-bottom');
+            $('.cloud_label').click();
+            $(this).find("div.action-text").text('<?php _e('Collapse all', 'tainacan') ?>');
+        });
+        $('.expand-all-item').trigger('click');
+         // 4# - inicializa os metadados de termo
         list_properties_term_insert_objects();
         var properties_autocomplete = multiple_get_val($("#multiple_properties_data_id").val());
         multiple_autocomplete_property_data(properties_autocomplete);  
+        show_license_item('multiple');// lista as licencas de um item
         // envia o formulario para o controllador
         $('#sumbit_multiple_items').submit(function (e) {
             e.preventDefault();
@@ -33,6 +61,8 @@
                     $('#modalImportMain').modal('hide');
                     elem_first = jQuery.parseJSON(result);
                     if (elem_first.type && elem_first.type == 'success') {
+                         $('#form').hide();
+                        $("#tainacan-breadcrumbs").hide();
                         $('#main_part').show();
                         $('#collection_post').show();
                         $('#configuration').hide();
@@ -51,8 +81,178 @@
             }
             e.preventDefault();
         });
-
+        $('.nav-tabs').tab();
+        $('.dropdown-toggle').dropdown();
     });
+     //votacoes do item
+    //BEGIN: funcao para mostrar votacoes para um item
+    function list_ranking_create(id) {
+        $('#list_ranking_items').show();
+        $('#create_list_ranking').html('');
+        $.ajax({
+            type: "POST",
+            url: $('#src').val() + "/controllers/ranking/ranking_controller.php",
+            data: {collection_id: $('#collection_id').val(), operation: 'create_list_ranking_object', object_id: id}
+        }).done(function (result) {
+            $('#create_list_ranking').html(result);
+            //verifico se tem ordenacao para os metadados
+            $.ajax({
+                type: "POST",
+                url: $('#src').val() + "/controllers/collection/collection_controller.php",
+                data: { operation: 'get_ordenation_properties',collection_id:$('#collection_id').val() }
+            }).done(function(result) {
+                var json = $.parseJSON(result);
+                if(json&&json.ordenation&&json.ordenation!==''){
+                    reorder_properties_multiple_item(json.ordenation.split(','));
+                }
+            });
+            //inicializo o accordeon
+            $("#accordion_socialnetwork").accordion("destroy");  
+            $("#accordion_socialnetwork").accordion({
+                collapsible: true,
+                header: "h2",
+                animate: 200,
+                heightStyle: "content"
+            });
+            $('.dropdown-toggle').dropdown();
+            $('.nav-tabs').tab(); 
+        });
+    }
+    //END
+    //BEGIN: funcao para mostrar votacoes para varios itens
+    function list_ranking_multiple(ids) {
+        $('#list_ranking_items').show();
+        $('#create_list_ranking').html('');
+        $.ajax({
+            type: "POST",
+            url: $('#src').val() + "/controllers/ranking/ranking_controller.php",
+            data: {collection_id: $('#collection_id').val(), operation: 'multiple_list_ranking_object',ids:ids, object_id: 'multiple'}
+        }).done(function (result) {
+            $('#create_list_ranking').html(result);
+            //verifico se tem ordenacao para os metadados
+            $.ajax({
+                type: "POST",
+                url: $('#src').val() + "/controllers/collection/collection_controller.php",
+                data: { operation: 'get_ordenation_properties',collection_id:$('#collection_id').val() }
+            }).done(function(result) {
+                var json = $.parseJSON(result);
+                if(json&&json.ordenation&&json.ordenation!==''){
+                    reorder_properties_multiple_item(json.ordenation.split(','));
+                }
+            });
+            //inicializo o accordeon
+            $("#accordion_socialnetwork").accordion("destroy");  
+            $("#accordion_socialnetwork").accordion({
+                collapsible: true,
+                header: "h2",
+                animate: 200,
+                heightStyle: "content"
+            });
+            $('.dropdown-toggle').dropdown();
+            $('.nav-tabs').tab(); 
+        });
+    }
+    //END
+    
+    //votacoes do item
+    
+    //BEGIN: funcao para mostrar as licencas para um item
+    function show_license_item(id) {
+        $.ajax({
+            url: $('#src').val() + '/controllers/object/object_controller.php',
+            type: 'POST',
+            data: {operation: 'show_collection_licenses', object_id: id, collection_id: $("#collection_id").val()}
+        }).done(function (result) {
+            $('#show_form_licenses').html(result);
+            
+            //inicaliza as licensas se existir
+            setLicenses();
+        });
+    }
+    
+    //anexos do item
+    function init_dropzone_attachments(id){
+        //dropzone para adicionar anexos
+        destroy_dropzone();
+        $('#dropzone_new').html('');
+        $('#dropzone_new')
+                .append('<div class="dz-message" data-dz-message><span style="text-align: center;vertical-align: middle;line-height: 90px;"><h2><span class="glyphicon glyphicon-upload"></span><b><?php _e('Drop Files','tainacan')  ?></b> <?php _e('to upload','tainacan')  ?></h2><h4>(<?php _e('or click','tainacan')  ?>)</h4>')
+                ;
+        $('#attachments_item_upload').show();
+         myDropzone = new Dropzone("div#dropzone_new", {
+                accept: function(file, done) {
+                      if (file.type === ".exe") {
+                          done("Error! Files of this type are not accepted");
+                      }
+                      else { done(); }
+                },
+                init: function () {
+                    thisDropzone = this;
+                    this.on("removedfile", function (file) {
+                        if(!noCleaning){
+                            //    if (!file.serverId) { return; } // The file hasn't been uploaded
+                            $.get($('#src').val() + '/controllers/object/object_controller.php?operation=delete_file&object_id=' + id + '&file_name=' + file.name, function (data) {
+                                if (data.trim() === 'false') {
+                                    showAlertGeneral('<?php _e("Atention!", 'tainacan') ?>', '<?php _e("An error ocurred, File already removed or corrupted!", 'tainacan') ?>', 'error');
+                                } else {
+                                    showAlertGeneral('<?php _e("Success", 'tainacan') ?>', '<?php _e("File removed!", 'tainacan') ?>', 'success');
+                                }
+                            }); // Send the file id along
+                        }
+                    });
+                    $.get($('#src').val() + '/controllers/object/object_controller.php?operation=list_files&object_id=' + id, function (data) {
+                        try {
+                            //var jsonObject = JSON.parse(data);
+                            $.each(data, function (key, value) {
+                                if (value.name !== undefined && value.name !== 0) {
+                                    var mockFile = {name: value.name, size: value.size};
+                                    thisDropzone.options.addedfile.call(thisDropzone, mockFile);
+                                }
+                            });
+                        }
+                        catch (e)
+                        {
+                            // handle error 
+                        }
+                    });
+                },                
+                url: $('#src').val() + '/controllers/object/object_controller.php?operation=save_file&object_id=' + id,
+                addRemoveLinks: true
+
+            });
+           
+    }
+    function destroy_dropzone(){
+        $('#attachments_item_upload').hide();
+        if(myDropzone){
+           noCleaning = true;
+           myDropzone.destroy();
+           noCleaning = false;
+        }
+    }
+    //funcao que ordena o accordeon
+    function reorder_properties_multiple_item(array_ids){
+        var $ul = $("#accordion_socialnetwork"),
+        $items = $("#accordion_socialnetwork").children();
+        $rankings = $("#create_list_ranking").children();
+       for (var i = 0; i< array_ids.length; i++) {
+           // index is zero-based to you have to remove one from the values in your array
+             for(var j = 0; j<$items.length;j++){
+                 if($($items.get(j)).attr('id')&&$($items.get(j)).attr('id')===array_ids[i]){
+                     $( $items.get(j) ).appendTo( $ul);
+                 }
+                 if(array_ids[i]==='socialdb_license_id'&&$($items.get(j)).attr('id')&&$($items.get(j)).attr('id')==='list_licenses_items'){
+                      $( $items.get(j) ).appendTo( $ul);
+                 }
+             }
+             for(var j = 0; j<$items.length;j++){
+                 if($($rankings.get(j)).attr('id')===array_ids[i]){
+                     $( $rankings.get(j) ).appendTo( $ul);
+                 }
+             }
+      }
+      $('[data-toggle="tooltip"]').tooltip();
+    }
     /******************************** Manipulação das cores ao selecionar itens setando se eh anexo o u nao******************************************/
     function focusItem(id) {
         if ($('#buttonBackItems').is(':visible')) { // eh pq esta selecionando anexos
@@ -243,7 +443,14 @@
         });
         if (selected_items.length == 1) {// quando selecionado um item seus valores vao para o form a esquerda
             item_id = selected_items[0];
-            $("#buttonSelectedAttachments").show();// mostra o botao de anexos
+            //$("#buttonSelectedAttachments").show();// mostra o botao de anexos
+            list_ranking_create(item_id);// lista o ranking de um item
+            if($("input[name='object_license']")){
+                $("input[name='object_license']").removeAttr('checked');
+                if($("#license_"+item_id).val()!==''&&$('#radio'+$("#license_"+item_id).val())){
+                   $('#radio'+$("#license_"+item_id).val()).attr("checked", "checked");
+                }
+            }
             $("#form_properties_items").show(); // mostra o formulario para edicao
             $("#no_properties_items").hide(); // mostra a mensagem que solicita a selecao de itens
             $("#labels_items_selected").show(); // mostra a div q tem as quantidades de itens selecionados
@@ -315,9 +522,11 @@
                 return v !== ''
             });
             for (var i = 0; i < multiple_properties_terms_treecheckbox.length; i++) {
-                var categories = $("#socialdb_property_" + multiple_properties_terms_treecheckbox[i] + "_" + item_id).val().split(',').filter(function (v) {
-                    return v !== ''
-                });
+                if( $("#socialdb_property_" + multiple_properties_terms_treecheckbox[i] + "_" + item_id)){
+                    var categories = $("#socialdb_property_" + multiple_properties_terms_treecheckbox[i] + "_" + item_id).val().split(',').filter(function (v) {
+                        return v !== ''
+                    });
+                }
                 $("#multiple_field_property_term_" + multiple_properties_terms_treecheckbox[i]).dynatree("getRoot").visit(function (node) {
                     node.select(false);
                 });
@@ -374,9 +583,16 @@
                     }
                 });
             }
-
+            //mostra os anexos
+            init_dropzone_attachments(item_id);
         } else if (selected_items.length > 1) {
             $("#buttonSelectedAttachments").hide();// mostra o botao de anexos
+            
+            list_ranking_multiple(selected_items.join(','));// lista o ranking de um item
+            if($("input[name='object_license']")&&$("input[name='object_license']:checked")){
+                $("input[name='object_license']:checked").removeAttr('checked');
+            }
+            
             $("#form_properties_items").show(); // mostra o formulario para edicao
             $("#no_properties_items").hide(); // mostra a mensagem que solicita a selecao de itens
             $("#labels_items_selected").show(); // mostra a div q tem as quantidades de itens selecionados
@@ -512,14 +728,17 @@
                 return v !== ''
             });
             for (var i = 0; i < multiple_properties_terms_tree.length; i++) {
-                var categories = $("#socialdb_property_" + multiple_properties_terms_tree[i] + "_" + item_id).val().split(',').filter(function (v) {
-                    return v !== ''
-                });
+//                if($("#socialdb_property_" + multiple_properties_terms_tree[i] + "_" + item_id)){
+//                    var categories = $("#socialdb_property_" + multiple_properties_terms_tree[i] + "_" + item_id).val().split(',').filter(function (v) {
+//                        return v !== ''
+//                    });
+//                }
                 $("#multiple_field_property_term_" + multiple_properties_terms_tree[i]).dynatree("getRoot").visit(function (node) {
                     node.select(false);
                 });
             }
-
+            //esconde anexos
+            destroy_dropzone();
         } else {
             $("#buttonSelectedAttachments").hide();// mostra o botao de anexos
             $("#no_properties_items").show(); // mostra a mensagem que solicita a selecao de itens
@@ -687,6 +906,9 @@
     //select box multipple
     function setCategoriesSelectMultiple(property_id, field) {
         var counter = 0;
+        if($(field).val()===null){
+            return false;
+        }
         var array = $(field).val().join(',');
         $.each($("input:checkbox[name='selected_items']:checked"), function () {
             counter++;
@@ -695,6 +917,21 @@
             }
         });
         toastr.success(counter + '<?php _e(' items/item updated successfully!', 'tainacan') ?>', '<?php _e('Success', 'tainacan') ?>', set_toastr_class());
+    }
+    // coloca a descricao para todos os items selecionados
+    function setLicenses() {
+        if($("input[name='object_license']")){
+            $("input[name='object_license']").change(function(){ 
+                  var counter = 0;
+                  $.each($("input:checkbox[name='selected_items']:checked"), function () {
+                    counter++;
+                    $("#license_" + $(this).val()).val($("input[name='object_license']:checked").val());
+                  });
+                //$("#multiple_object_description").attr("value", "");
+                //$("#multiple_object_name").val(''); 
+                toastr.success(counter + '<?php _e(' items/item updated successfully!', 'tainacan') ?>', '<?php _e('Success', 'tainacan') ?>', set_toastr_class());
+            });
+        }
     }
     /****************** Selecionar anexos para um item checado **********************************************/
     //mostra os itens para selecao de anexos
@@ -985,6 +1222,7 @@
                     onKeydown: function (node, event) {
                     },
                     onCreate: function (node, span) {
+                         bindContextMenuSingle(span,'multiple_field_property_term_' + treecheckbox);
                     },
                     onPostInit: function (isReloading, isError) {
                     },
@@ -1048,6 +1286,7 @@
                     onKeydown: function (node, event) {
                     },
                     onCreate: function (node, span) {
+                         bindContextMenuSingle(span,'multiple_field_property_term_' + tree);
                     },
                     onPostInit: function (isReloading, isError) {
                     },
@@ -1105,15 +1344,17 @@
     }
     //seta cor selecionado item
     function set_item_selected_colour(id) {
-        $('#panel_' + id).css('background-color', '#c0c0c0');
+       // $('#panel_' + id).css('background-color', '#c0c0c0');
+        $('#wrapper_' + id).addClass('selected-border');
     }
     //seta cor selecionado item
     function set_attachment_selected_colour(id) {
-        $('#panel_' + id).css('background-color', '#c7cadd');
+        //$('#panel_' + id).css('background-color', '#c7cadd');
     }
     //limpa cor selecionado
     function clean_item_selected_colour(id) {
-        $('#panel_' + id).css('background-color', '#e8e8e8');
+       // $('#panel_' + id).css('background-color', '#e8e8e8');
+        $('#wrapper_' + id).removeClass('selected-border');
     }
     //esconde checkboxes dos grupos por tipo
     function hide_group_checkboxes() {
@@ -1137,28 +1378,44 @@
     }
     //voltar para a listagem de itens
     function back_main_list_socialnetwork() {
-        $('#modalImportSocialnetworkClean').modal('show');
-        $('#form').hide();
-        $('#create_button').show();
-        $('#menu_object').show();
-        $("#list").show();
-        $("#container_socialdb").show('fast');
-        $('#main_part').show();
-        $('#collection_post').show();
-        $('#configuration').slideDown();
-        $('#configuration').hide();
-        $.ajax({
-            type: "POST",
-            url: $('#src').val() + "/controllers/object/object_controller.php",
-            data: {
-                operation: 'remove_ids_socialnetwork',
-                items_id: $('#items_id').val(),
-                collection_id: $('#collection_id').val()}
-        }).done(function (result) {
-            elem_first = jQuery.parseJSON(result);
-            showList($('#src').val());
-            $('#modalImportSocialnetworkClean').modal('hide');
+        swal({
+            title: '<?php _e('Attention!','tainacan') ?>',
+            text: '<?php _e('You did not finish your action. Are you sure to leave this page?','tainacan') ?>',
+            type: "error",
+            showCancelButton: true,
+            cancelButtonText: '<?php _e('Cancel','tainacan') ?>',
+            confirmButtonClass: 'btn-success',
+            closeOnConfirm: true,
+            closeOnCancel: true
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+                $('#modalImportSocialnetworkClean').modal('show');
+                $('#form').hide();
+                $("#tainacan-breadcrumbs").hide();
+                $('#create_button').show();
+                $('#menu_object').show();
+                $("#list").show();
+                $("#container_socialdb").show('fast');
+                $('#main_part').show();
+                $('#collection_post').show();
+                $('#configuration').slideDown();
+                $('#configuration').hide();
+                $.ajax({
+                    type: "POST",
+                    url: $('#src').val() + "/controllers/object/object_controller.php",
+                    data: {
+                        operation: 'remove_ids_socialnetwork',
+                        items_id: $('#items_id').val(),
+                        collection_id: $('#collection_id').val()}
+                }).done(function (result) {
+                    elem_first = jQuery.parseJSON(result);
+                    showList($('#src').val());
+                    $('#modalImportSocialnetworkClean').modal('hide');
+                });
+            }
         });
+        
     }
     //accordion para os campos dos metados dos itens
     $("#accordion_socialnetwork").accordion({
@@ -1179,5 +1436,36 @@
             });
         }
     });
+  //######## INSERCAO DE UM ITEM AVULSO EM UMA COLECAO #########################//    
+    function add_new_item_by_title(collection_id,seletor,property_id,object_id){
+        var title = '';
+        $( '.title_'+property_id+'_'+ object_id).each(function( index ) {
+            if($( this ).val()&&$( this ).val().trim()!==''){
+                title = $( this ).val().trim();
+                return;
+            }
+        });
+        if(title===''){
+            showAlertGeneral('<?php _e('Attention!','tainacan') ?>','<?php _e('Item title is empty!','tainacan') ?>','info');
+        }else{
+            $(seletor).trigger('click');
+            $('.title_'+ property_id + "_" + object_id ).val('');
+            show_modal_main();
+            $.ajax({
+                url: $('#src').val() + '/controllers/object/object_controller.php',
+                type: 'POST',
+                data: { operation: 'insert_fast', collection_id: collection_id, title: title}
+            }).done(function (result) {
+                hide_modal_main();
+                wpquery_filter();
+                //list_all_objects(selKeys.join(", "), $("#collection_id").val());
+                elem_first = jQuery.parseJSON(result);
+                showAlertGeneral(elem_first.title, elem_first.msg, elem_first.type);
+                if(elem_first.type==='success'){
+                    $("#multiple_property_value_" + property_id + "_" + object_id + "_add").append("<option class='selected' value='" + elem_first.item.ID + "' selected='selected' >" + elem_first.item.post_title + "</option>");
+                }
+            });
+        }
+    }        
 
 </script>

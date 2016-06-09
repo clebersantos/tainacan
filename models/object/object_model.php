@@ -315,8 +315,12 @@ class ObjectModel extends Model {
             'post_type' => 'socialdb_object'
         );
         $data['ID'] = wp_insert_post($post);
+        $post['ID'] =  $data['ID'];
         //categoria raiz da colecao
         wp_set_object_terms($data['ID'], array((int) $category_root_id), 'socialdb_category_type');
+        
+        update_post_meta( $data['ID'], 'socialdb_object_dc_type', 'text');
+        update_post_meta( $data['ID'], 'socialdb_object_from', 'internal');
         //inserindo as classificacoes
         if (isset($data['classifications']) && $data['classifications']) {
             $this->insert_classifications($data['classifications'], $data['ID']);
@@ -326,9 +330,32 @@ class ObjectModel extends Model {
             add_post_meta($data['ID'], 'socialdb_channel_id', get_post_meta($data['collection_id'], 'socialdb_collection_mapping_exportation_active', true));
         }
         // inserindo o evento
+        $data['item'] = $post;
         $data = $this->insert_object_event($data['ID'], $data);
-
+        
         return $data;
+    }
+    
+    public function add_item_not_published($data) {
+        $object_id = socialdb_insert_object_socialnetwork([$data['title']], 'draft',$data['description']);
+        update_post_meta($object_id, 'socialdb_object_dc_type', $data['type']);
+        update_post_meta($object_id, 'socialdb_uri_imported', $data['url']);
+        update_post_meta($object_id, 'socialdb_object_from', 'external');
+        if($data['type']=='text'){
+            update_post_meta($object_id, 'socialdb_object_dc_source', $data['thumbnail_url']);
+            if (isset($data['thumbnail_url']) && $data['thumbnail_url'] && $data['thumbnail_url'] !== '') {
+                $this->add_thumbnail_url($data['thumbnail_url'], $object_id);
+            }
+        }else{
+            if($data['content']){
+                update_post_meta($object_id, 'socialdb_object_dc_source', $data['content']);
+                 if($data['type']=='image'){
+                    $this->add_thumbnail_url($data['content'],$object_id);
+                 }
+                 update_post_meta($object_id, 'socialdb_object_content',$data['content']);
+            }
+        }
+        return json_encode([$object_id]);
     }
 
     /**
@@ -1331,7 +1358,7 @@ class ObjectModel extends Model {
         $result = $this->get_category_root_posts($all_data['metas']['socialdb_property_object_category_id']);
         if ($result) {
             foreach ($result as $object) {
-                if(strpos($object->post_title, $data['term'])!==false){
+                if(strpos(strtolower($object->post_title), strtolower($data['term']))!==false){
                      $json[] = array('value' => $object->ID, 'label' => $object->post_title);
                 }
             }

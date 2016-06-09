@@ -9,7 +9,6 @@ if (!isset($likes) && !isset($binaries) && !isset($stars)): ?>
     include_once ('js/list_ranking_js.php');
     ?>
  <div class="col-md-12">
-    <h4 class="title-pipe"><?php _e('Ranking', 'tainacan'); ?></h4>        
     <div> 
         <input type="hidden" id="stars_id_<?php echo $object_id; ?>" value="<?php echo $stars_id; ?>">
         <?php if (!isset($likes) && !isset($binaries) && !isset($stars)): ?>

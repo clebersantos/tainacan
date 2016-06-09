@@ -209,6 +209,27 @@ class CollectionController extends Controller {
                 $colectionTemplateModel = new CollectionTemplatesModel;
                 return $colectionTemplateModel->delete_collection_template($data);
                 break;
+            /************************ ordenacao dos metadados *******************/
+            case 'update_ordenation_properties':
+                update_post_meta($data['collection_id'], 'socialdb_collection_properties_ordenation', $data['ordenation']);
+                break;
+            case 'get_ordenation_properties':
+                $meta =  get_post_meta($data['collection_id'], 'socialdb_collection_properties_ordenation', true);
+                if(!$meta||$meta==''){
+                     $data['ordenation'] = '';
+                     return json_encode($data);
+                }
+                $ids = explode(',', $meta);
+                $new_ids = [];
+                foreach ($ids as $id) {
+                   if(is_numeric($id)){
+                       $new_ids[] = 'meta-item-'.$id;
+                   }else{
+                        $new_ids[] =$id;
+                   }
+                }
+                $data['ordenation'] = implode(',', $new_ids);
+                return json_encode($data);
             /************************ Pagina de comentarios *******************/
             case 'comments':
                 return json_encode(['html'=> $this->render(dirname(__FILE__) . '../../../views/collection/comments.php', $data)]);

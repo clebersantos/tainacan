@@ -13,20 +13,7 @@
 
         $("#container_three_columns").removeClass('white-background');
         setMenuContainerHeight();
-        
-//        $('.cat-tag-btn').click(function () {
-//            var item = $(this).closest('.item-colecao');
-//            console.log(item);
-//            var iHeight = item.height();
-//            console.log(iHeight);
-//            var catTag = $(this).closest('.item-colecao').children('.cat-tag');
-//            if (iHeight < 200) {
-//                item.height(iHeight * 2 + 7);
-//            } else {
-//                item.height(188);
-//            }
-//            catTag.toggleClass('in');
-//        });
+
         $(".droppableClassifications").droppable({
                 hoverClass: "drophover",
                 addClasses: true,
@@ -96,7 +83,8 @@
                     //  $(".categorias").hover();
                 }
             }); 
-    }); 
+    });
+
     function show_info(id) {
         check_privacity_info(id);
         list_ranking(id);
@@ -264,12 +252,30 @@
         $.ajax({
             type: "POST",
             url: $('#src').val() + "/controllers/object/object_controller.php",
-            data: {collection_id: $('#collection_id').val(), operation: 'edit', object_id: object_id}
+            data: {collection_id: $('#collection_id').val(), operation: 'edit_default', object_id: object_id}
         }).done(function (result) {
             $('#modalImportMain').modal('hide');//escondo o modal de carregamento
             $("#container_socialdb").hide('slow');
             $("#form").hide().html(result).show('slow');
             $('#create_button').hide();
+            $('.dropdown-toggle').dropdown();
+            $('.nav-tabs').tab();
+        });
+    }
+    
+    function edit_object_item(object_id) {
+        $('#modalImportMain').modal('show');//mostro o modal de carregamento
+        $.ajax({
+            type: "POST",
+            url: $('#src').val() + "/controllers/object/object_controller.php",
+            data: {collection_id: $('#collection_id').val(), operation: 'edit', object_id: object_id}
+        }).done(function (result) {
+            hide_modal_main();
+             $("#form").html('');
+            $('#main_part').hide();
+            $('#display_view_main_page').hide();
+            $('#loader_collections').hide();
+            $('#configuration').html(result).show();
             $('.dropdown-toggle').dropdown();
             $('.nav-tabs').tab();
         });
@@ -311,8 +317,7 @@
         });
     }
 
-    function check_privacity_info(id)
-    {
+    function check_privacity_info(id) {
         $.ajax({
             url: $('#src').val() + '/controllers/collection/collection_controller.php',
             type: 'POST',
@@ -330,4 +335,28 @@
         $('#myModal').modal('show');
     }
 
+
+    /*
+    * Slideshow view Mode slider
+    * */
+
+    $('.main-slide').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        fade: true,
+        asNavFor: '.collection-slides'
+    });
+
+    $('.collection-slides').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        asNavFor: '.main-slide',
+        dots: true,
+        centerMode: true,
+        arrows: true,
+        adaptiveHeight: true,
+        autoplay: true,
+        focusOnSelect: true
+    });
 </script>

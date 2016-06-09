@@ -1,8 +1,8 @@
 <?php
 
-include_once ('../../../../../wp-config.php');
-include_once ('../../../../../wp-load.php');
-include_once ('../../../../../wp-includes/wp-db.php');
+include_once (dirname(__FILE__) . '/../../../../../../wp-config.php');
+include_once (dirname(__FILE__) . '/../../../../../../wp-load.php');
+include_once (dirname(__FILE__) . '/../../../../../../wp-includes/wp-db.php');
 require_once(dirname(__FILE__) . '../../../event/event_model.php');
 require_once(dirname(__FILE__) . '../../../property/property_model.php');
 
@@ -81,6 +81,9 @@ class EventPropertyTermCreate extends EventModel {
         // chamo a funcao do model de propriedade para fazer a insercao
         if(!$data['property_id']||empty( $data['property_id'])||!is_numeric($data['property_id'])){
             $result = json_decode($propertyModel->add_property_term($data));
+            if(isset($result->property_id)){
+                do_action('after_event_add_property_term',$result->property_id,$event_id);
+            }
         }else{
             add_term_meta($property_category_id, 'socialdb_category_property_id', $data['property_id']);
             //metadado que mostra que a 

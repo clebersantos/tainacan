@@ -289,6 +289,11 @@ $(window).load(function () {
             elem = jQuery.parseJSON(result);
             load_menu_left($('#collection_id').val());
             showAlertGeneral(elem.title, elem.msg, elem.type);
+            //se estiver em um dynatree especifico
+            if($('#category_single_add_dynatree_id').val()!==''){
+                 $("#"+$('#category_single_add_dynatree_id').val()).dynatree("getTree").reload();
+            }
+            //cabecalho da colecao
             showHeaderCollection($('#src').val());
              $("#dynatree_modal_edit").dynatree("getTree").reload();
             wpquery_clean();
@@ -340,6 +345,11 @@ $(window).load(function () {
             }
             elem = jQuery.parseJSON(result);
             $("#dynatree").dynatree("getTree").reload();
+            //se estiver em um dynatree especifico
+            if($('#category_single_edit_dynatree_id').val()!==''){
+                 $("#"+$('#category_single_edit_dynatree_id').val()).dynatree("getTree").reload();
+            }
+            //cabecalho da colecao
             showHeaderCollection($('#src').val());
             wpquery_clean();
             showAlertGeneral(elem.title, elem.msg, elem.type);
@@ -362,7 +372,7 @@ $(window).load(function () {
                 showPageTags($('#tag_page').val(), src);
             }
             elem = jQuery.parseJSON(result);
-            $("#dynatree").dynatree("getTree").reload();
+            $("#dynatree").dynatree("getTree").reload();            
             showHeaderCollection($('#src').val());
             wpquery_clean();
             showAlertGeneral(elem.title, elem.msg, elem.type);
@@ -384,6 +394,11 @@ $(window).load(function () {
             $('#modalImportMain').modal('hide');//esconde o modal de carregamento
             elem = jQuery.parseJSON(result);
             $("#dynatree").dynatree("getTree").reload();
+            //se estiver em um dynatree especifico
+            if($('#category_single_delete_dynatree_id').val()!==''){
+                 $("#"+$('#category_single_delete_dynatree_id').val()).dynatree("getTree").reload();
+            }
+            //cabecalho da colecao
             showHeaderCollection($('#src').val());
             wpquery_clean();
             showAlertGeneral(elem.title, elem.msg, elem.type);
@@ -842,7 +857,7 @@ function showSocialConfiguration(src) {
 // FIM CODIGO SAYMON
 //CODIGO EDUARDO
 // mostra a view inicial das categorias
-function showCategoriesConfiguration(src) {
+function showCategoriesConfiguration(src, is_front) {
     $.ajax({
         url: src + '/controllers/category/category_controller.php',
         type: 'POST',
@@ -850,7 +865,15 @@ function showCategoriesConfiguration(src) {
     }).done(function (result) {
         $('#main_part').hide();
         $("#form").html('');
-        $('#configuration').html(result).show();
+
+        if (is_front) {
+            $('#configuration').addClass('col-md-12').css({background: 'white', padding: "20px" }).html(result).show();
+            $("#display_view_main_page").remove();
+            $("body.home .tainacan-topo-categoria button").remove();
+        } else {
+            $('#configuration').html(result).show();
+        }
+
     });
 }
 
@@ -1049,35 +1072,45 @@ function showExport(src) {
 
 function showFormCreateURL(url){
      var src = $('#src').val();
-    $("#menu_object").hide();
+    //$("#menu_object").hide();
+    $("#form").html('');
     $.ajax({
         url: src + '/controllers/object/object_controller.php',
         type: 'POST',
-        data: {operation: 'create', collection_id: $("#collection_id").val(),has_url:url}
+        data: {operation: 'create_item_url', collection_id: $("#collection_id").val(),has_url:url}
     }).done(function (result) {
-        $("#container_socialdb").hide('slow');
-        $("#form").hide('slow');
-        $("#list").hide('slow');
-        $("#form").html(result);
-        $('#form').show('slow');
-        $('#create_button').hide();
+//        $("#container_socialdb").hide('slow');
+//        $("#form").hide('slow');
+//        $("#list").hide('slow');
+//        $("#form").html(result);
+//        $('#form').show('slow');
+//        $('#create_button').hide();
+        $('#main_part').hide();
+        $('#display_view_main_page').hide();
+        $('#loader_collections').hide();
+        $('#configuration').html(result).show(); 
     });
 }
 
 function showFormCreateURLFile(url, type){
      var src = $('#src').val();
-    $("#menu_object").hide();
+    $("#form").html('');
     $.ajax({
         url: src + '/controllers/object/object_controller.php',
         type: 'POST',
-        data: {operation: 'create', collection_id: $("#collection_id").val(),has_file:url, file_type:type}
+        data: {operation: 'create_item_url', collection_id: $("#collection_id").val(),has_file:url, file_type:type}
     }).done(function (result) {
-        $("#container_socialdb").hide('slow');
-        $("#form").hide('slow');
-        $("#list").hide('slow');
-        $("#form").html(result);
-        $('#form').show('slow');
-        $('#create_button').hide();
+        hide_modal_main();
+        //        $("#container_socialdb").hide('slow');
+//        $("#form").hide('slow');
+//        $("#list").hide('slow');
+//        $("#form").html(result);
+//        $('#form').show('slow');
+//        $('#create_button').hide();
+        $('#main_part').hide();
+        $('#display_view_main_page').hide();
+        $('#loader_collections').hide();
+        $('#configuration').html(result).show(); 
     });
 }
 /*************** LISTA COMENTARIOS DA COLECAO ************/
@@ -1185,16 +1218,29 @@ function showEventsRepository(src, collection_root_id) {
         $('#configuration').html(result);
     });
 }
-
-function showModalFilters(action,category_root_name) {
+/**
+ * 
+ * @param {type} action
+ * @param {type} category_root_name
+ * @param {type} category_root_id
+ * @param {type} dynatree_id O id do dynatree que sera recarregado
+ * @returns {undefined}
+ */
+function showModalFilters(action,category_root_name,category_root_id,dynatree_id) {
     if(!category_root_name){
         category_root_name = 'Category';
+    }
+    if(!category_root_id){
+        category_root_id = 'socialdb_category';
+    }
+    if(dynatree_id){
+        $("#category_single_add_dynatree_id").val(dynatree_id);
     }
     //
     switch (action) {
         case "add_category":
             $("#category_single_parent_name").val(category_root_name);
-            $("#category_single_parent_id").val('socialdb_category');
+            $("#category_single_parent_id").val(category_root_id);
             $('#modalAddCategoria').modal('show');
             // $('.dropdown-toggle').dropdown();
             break;
@@ -1486,6 +1532,22 @@ function showModalImportSocialNetwork() {
 function showModalImportAll() {
     $('#modalshowModalImportAll').modal('show');
 }
+
+function showAddItemURL() {
+    show_modal_main();
+    $.ajax({
+        url: $('#src').val() + '/controllers/object/object_controller.php',
+        type: 'POST',
+        data: {operation: 'showAddItemURL', collection_id: $("#collection_id").val()}
+    }).done(function (result) {
+        $('#main_part').hide();
+        $('#display_view_main_page').hide();
+        $('#loader_collections').hide();
+        //$('#collection_post').hide();
+        hide_modal_main();
+        $('#configuration').html(result).show();
+    });
+}
 // FIM CODIGO MARCUS
 
 
@@ -1493,12 +1555,14 @@ function showModalImportAll() {
 // CODIGO MARCO
 function showAdvancedSearch(src, search_term) {
     var search_term = search_term || "";
+    show_modal_main();
     $.ajax({
         url: src + '/controllers/advanced_search/advanced_search_controller.php',
         type: 'POST',
         data: {operation: 'open_page', collection_id: $("#collection_id").val(), home_search_term: search_term }
     }).done(function (result) {
         resetHomeStyleSettings();
+        hide_modal_main();
         $('#main_part').hide();
         $('#display_view_main_page').hide();
         $('#loader_collections').hide();
@@ -1923,8 +1987,7 @@ function toggleSlide(target,reverse){
 
 
 function show_field_properties(property_id,show_id){
-   $('#field_property_'+property_id+'_'+show_id).show();
-   $('#field_property_'+property_id+'_'+show_id).css('margin-bottom','15px');
+   $('#field_property_'+property_id+'_'+show_id).show().css('margin-bottom','15px');
    $('#button_property_'+property_id+'_'+show_id).show();
    $('#button_property_'+property_id+'_'+(show_id-1)).hide();
 }
@@ -1963,9 +2026,27 @@ function graphStreamPublish(message, link, picture, name, description) {
         }
     });
 }
-//--------------------------- TELA DE IMPORTACAO DE MULTIPLO ARQUIVOS --------------------------
+//************************ TELA DE ADICAO DE ITEM *******************************//
+function showAddItemText() {
+    var src = $('#src').val();
+    $("#form").html('');
+    show_modal_main();
+    $.ajax({
+        url: src + '/controllers/object/object_controller.php',
+        type: 'POST',
+        data: {operation: 'create_item_text', collection_id: $("#collection_id").val()}
+    }).done(function (result) {
+        hide_modal_main();
+        $('#main_part').hide();
+        $('#display_view_main_page').hide();
+        $('#loader_collections').hide();
+        $('#configuration').html(result).show();
+    });
+}
+//--------------------------- TELA DE IMPORTACAO DE MULTIPLO ARQUIVOS --------------------------//
 // lista os autores mais participativos
 function showViewMultipleItems() {
+    show_modal_main();
     $.ajax({
         url: $('#src').val() + '/controllers/object/object_controller.php',
         type: 'POST',
@@ -1974,8 +2055,9 @@ function showViewMultipleItems() {
         $('#main_part').hide();
         $('#display_view_main_page').hide();
         $('#loader_collections').hide();
-        $('#collection_post').hide();
-        $('#configuration').html(result).slideDown();
+        //$('#collection_post').hide();
+        hide_modal_main();
+        $('#configuration').html(result).show();
     });
 }
 
@@ -2000,6 +2082,31 @@ function setMenuContainerHeight() {
     } else {
         $( $menu_container ).css("height", "auto");
     }
+}
+
+var t = "";
+$(window).on('resize', function(ev) {
+    var window_width = $(window).width();
+    // cl("A largura atual é " + window_width );
+
+    if(window_width < 1010 && t == "done") {
+
+    }
+});
+
+
+function changeViewMode(viewMode) {
+    var concurrents = $("#collection-view-mode > div");
+    $('.viewMode-control li.'+viewMode).addClass('selected-viewMode');
+
+    $(concurrents).each(function(idx, el) {
+        var cur_id = "#" + $(el).attr("id");
+        if( cur_id == "#" + viewMode + "-viewMode" ) {
+            $(this).fadeIn();
+        } else {
+            $(this).fadeOut();
+        }
+    });
 }
 
 //********************************** FUNCIONALIDADE ACORDEON *********************/

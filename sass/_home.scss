@@ -2,6 +2,65 @@
 
 body.home {
  background: black;
+
+  .menu-ibram {
+    padding-left: 25px !important;
+  }
+
+  .ibram-home-container {
+    background: $collections-bg-color;
+    text-align: center;
+
+    .col-md-3 {
+      padding: 20px;
+
+      .ibram-box {
+        border: 3px solid $item-border;
+        background: white;
+        padding: 5px 20px 20px 20px;
+        text-align: left;
+
+        h4.title {
+          color: $brand-medium-blue;
+          border-bottom: 1px solid $brand-medium-blue;
+          padding-bottom: 10px;
+          margin-bottom: 25px;
+          a {
+            color: $brand-medium-blue;
+          }
+        }
+
+        p {
+          color: black;
+          background: lightcoral;
+          border-radius: 4px;
+          padding: 10px;
+          //text-align: left;
+
+          &:nth-child(2) {
+            background: palegoldenrod;
+          }
+          &:nth-child(3) {
+            background: lightskyblue;
+          }
+          &:nth-child(4) {
+            background: lightgreen;
+          }
+        }
+      }
+
+      /*
+      &:nth-child(2) {
+        margin: 0 20px 0 20px;
+      }
+      &:nth-child(3) {
+        margin-right: 20px;
+      }
+      */
+
+
+    }
+  }
 }
 
 #loader_collections {

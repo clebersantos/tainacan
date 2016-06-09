@@ -1,11 +1,10 @@
 <?php
-
 /**
  * Author: Eduardo Humberto
  */
-include_once ('../../../../../wp-config.php');
+//include_once ('../../../../../wp-config.php');
+//include_once ('../../../../../wp-includes/wp-db.php');
 include_once ('../../../../../wp-load.php');
-include_once ('../../../../../wp-includes/wp-db.php');
 require_once(dirname(__FILE__) . '../../general/general_model.php');
 
 class HomeModel extends Model {
@@ -17,8 +16,8 @@ class HomeModel extends Model {
 
     public function get_popular() {
         $root_id = (int) get_option('collection_root_id');
-        return get_posts( [ 'post_type' => 'socialdb_collection', 'posts_per_page' => 20, 'meta_key' => 'collection_view_count',
-                'orderby' => 'meta_value_num', 'exclude' => $root_id ] );
+        return get_posts( [ 'post_type' => 'socialdb_collection', 'posts_per_page' => 20,
+            'meta_key' => 'collection_view_count', 'orderby' => 'meta_value_num', 'exclude' => $root_id ] );
     }
 
     public function get_recent() {
@@ -47,8 +46,8 @@ class HomeModel extends Model {
      * @author: Rodrigo de Oliveira
      */
     public function get_items_of_type($type) {
-        $type_args = [ 'post_type' => 'socialdb_object', 'meta_key' => 'socialdb_object_dc_type', 'meta_value' => $type, 'posts_per_page' => 20 ];
-        return get_posts( $type_args );
+        return get_posts( [ 'post_type' => 'socialdb_object', 'meta_key' => 'socialdb_object_dc_type',
+                'meta_value' => $type, 'posts_per_page' => 20 ] );
     }
 
     /**
@@ -110,6 +109,5 @@ class HomeModel extends Model {
       $json['isAllowed'] =  verify_allowed_action($data['collection_id'], $data['action'],$data['object_id']);
       return json_encode($json);
     }
-    
 
 }

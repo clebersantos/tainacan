@@ -27,20 +27,20 @@
                         <input type="checkbox" value="use_filter" name="property_data_use_filter" class="property_data_use_filter" onchange="toggle_widget(this)"/>
                     </div>
 
-                    <div class="use-voting-filter" style="display: none">
+                    <div class="data-widget">
+                        <div class="use-voting-filter" style="display: none">
                         <div class="form-group">
                             <label for="search_data_widget"><?php _e('Widget','tainacan'); ?></label>
                             <select class="form-control" id="search_data_widget" name="search_data_widget" required="" onchange="toggle_range_submit(this)">
-                                <option value="range"><?php _e('Range','tainacan'); ?></option>
                                 <option value="from_to"><?php _e('From/To','tainacan'); ?></option>
+                                <option value="range"><?php _e('Range','tainacan'); ?></option>
                             </select>
                         </div>
                     </div>
-
-                    <div id="range_submit" style="display: none">
-                        <div id="range_form">
+                        <div id="range_submit" style="display: none;">
+                            <div id="range_form"></div>
+                            <button type="button" onclick="increase_range()"><span class="glyphicon glyphicon-plus"></span><?php _e('Add','tainacan') ?></button>
                         </div>
-                        <button type="button" onclick="increase_range()"><span class="glyphicon glyphicon-plus"></span><?php _e('Add','tainacan') ?></button>
                     </div>
 
                     <input type="hidden" name="search_data_orientation" value="left-column">

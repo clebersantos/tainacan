@@ -41,7 +41,8 @@ class OntologyRDFModel extends Model {
      */  
     public function export_simple_item() {
         $this->setItemName(str_replace('.rdf', '', $_GET['item']));
-        $this->setNamespace('collection:');
+        //$this->setNamespace('collection:');
+        $this->setNamespace('');
         $args = array(
                     'name' => str_replace('.rdf', '', $_GET['item']),
                     'post_type' => 'socialdb_object',
@@ -103,7 +104,7 @@ class OntologyRDFModel extends Model {
             $xml .= '<rdf:type rdf:resource="'.  get_permalink($this->collection->ID).'?category='.$collection_term_root->slug.'" />';
         }
         
-       // $xml .= $this->generate_rdf_properties_item($item->ID);
+       $xml .= $this->generate_rdf_properties_item($item->ID);
 //        if(get_post_meta( $item->ID, 'socialdb_object_dc_type', TRUE)=='text'&&get_post_meta( $item->ID, 'socialdb_object_content', TRUE)!='')
 //               $xml .= '<'.$this->namespace.'content rdf:datatype="http://www.w3.org/2001/XMLSchema#string" >'
 //                        .strip_tags(htmlspecialchars(get_post_meta( $item->ID, 'socialdb_object_content', TRUE)))
@@ -173,13 +174,14 @@ class OntologyRDFModel extends Model {
       */
      public function add_lines_property_data($data,$values) {
          $xml = '';
-         if(in_array($data['type'], ['numeric','number','auto-increment']))
+         if(in_array($data['type'], ['numeric','number','auto-increment','int']))
                 $datatype = 'http://www.w3.org/2001/XMLSchema#integer';
          elseif(in_array($data['type'], ['date']))
                 $datatype = 'http://www.w3.org/2001/XMLSchema#date'; 
          elseif(in_array($data['type'], ['text','textarea']))
                 $datatype = 'http://www.w3.org/2001/XMLSchema#string'; 
-         
+         else
+            $datatype = 'http://www.w3.org/2001/XMLSchema#'.$data['type']; 
          if(is_array($values)){
              foreach ($values as $value) {
                  if($value&&trim($value)!==''){
@@ -204,7 +206,7 @@ class OntologyRDFModel extends Model {
                 $value = absint($value);
                  if($value&&get_permalink($value)){
                      $link = get_the_permalink($value);
-                     $xml .= '<'.$this->namespace.''.$data['slug'].' rdf:about="'.htmlspecialchars($link).'" />';
+                     $xml .= '<'.$this->namespace.''.$data['slug'].' rdf:resource="'.htmlspecialchars($link).'" />';
                     // var_dump('<'.$this->namespace.''.$data['slug'].' rdf:about="'.get_permalink($value).'" />');
                 }
             }

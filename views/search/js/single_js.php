@@ -5,6 +5,7 @@
         // *************** Iframe Popover Collection ****************
         //$('#iframebutton').attr('data-content', 'Teste').data('bs.popover').setContent();
         $('[data-toggle="popover"]').popover();
+        $('[data-toggle="tooltip"]').tooltip(); 
         // var myPopover = $('#iframebutton').data('popover');
         // $('#iframebutton').popover('hide');
         // myPopover.options.html = true;
@@ -316,11 +317,6 @@ function submit_comment(object_id) {
             $("#list").hide('slow');
             $("#loader_objects").hide();            
             $("#form").html(result);
-            $('#form').css('background','white');
-            $('#form').css('border','3px solid #E8E8E8');
-            $('#form').css('margin-left','-3px');
-            $('#form').css('height','2000px');
-            $('#form').css('border-top','none');
             $('#form').show('slow');
             //$('#single_category_property').html(result);
             //$('#single_modal_category_property').modal('show');
@@ -369,9 +365,15 @@ function submit_comment(object_id) {
     }
 
 
-    function bindContextMenuSingle(span) {
+    function bindContextMenuSingle(span,dynatree_id) {
         // Add context menu to this node:
-        $(span).contextMenu({menu: "myMenuSingle"}, function (action, el, pos) {
+        var menu;
+        if(dynatree_id){
+            menu = 'myMenuNoList'; 
+        }else{
+            menu = 'myMenuSingle'; 
+        }
+        $(span).contextMenu({menu: menu}, function (action, el, pos) {
             // The event was bound to the <span> tag, but the node object
             // is stored in the parent <li> tag
             var node = $.ui.dynatree.getNode(el);
@@ -388,6 +390,10 @@ function submit_comment(object_id) {
                             $("#category_single_parent_id").val(node.data.key);
                             $('#modalAddCategoria').modal('show');
                             $('.dropdown-toggle').dropdown();
+                            //ativando para um dynatree especifico
+                            if(dynatree_id){
+                                $("#category_single_add_dynatree_id").val(dynatree_id);
+                            }
                         }
                     });
                     break;
@@ -405,6 +411,10 @@ function submit_comment(object_id) {
                             $("#socialdb_event_previous_name").val(node.data.title);
                             $("#category_edit_description").val('');
                             $("#category_single_edit_id").val(node.data.key);
+                            //ativando para um dynatree especifico
+                            if(dynatree_id){
+                                $("#category_single_edit_dynatree_id").val(dynatree_id);
+                            }
                             $('#modalEditCategoria').modal('show');
                             //                $("#operation").val('update');
                             $('.dropdown-toggle').dropdown();
@@ -463,6 +473,10 @@ function submit_comment(object_id) {
                         } else {
                             $("#category_single_delete_id").val(node.data.key);
                             $("#delete_category_single_name").text(node.data.title);
+                            //ativando para um dynatree especifico
+                            if(dynatree_id){
+                                $("#category_single_delete_dynatree_id").val(dynatree_id);
+                            }
                             $('#modalExcluirCategoria').modal('show');
                             $('.dropdown-toggle').dropdown();
                         }
@@ -973,7 +987,7 @@ function submit_comment(object_id) {
         // list_all_objects(selKeys.join(", "), $("#collection_id").val(), $('#collection_single_ordenation').val(), '', search_for);
     }
 
-    function backToMainPage() {
+    function backToMainPage(reload_container) {
         //wpquery_filter();
 
         var showing_breadcrumbs = $("#tainacan-breadcrumbs").attr('style');
@@ -994,7 +1008,9 @@ function submit_comment(object_id) {
         $("#list").show();
         $("#container_socialdb").show('fast');
         $('#main_part').show('slow');
-        set_containers_class($('#collection_id').val());
+        if(!reload_container){
+             set_containers_class($('#collection_id').val());
+        }
     }
 
     //apenas para a pagina de demonstracao do item
@@ -1225,7 +1241,7 @@ function submit_comment(object_id) {
             $('#main_part').hide();
             $('#display_view_main_page').hide();
             $('#loader_collections').hide();
-            $('#collection_post').hide();
+            //$('#collection_post').hide();
             $('#configuration').html(result);
             $('#configuration').slideDown();
         });
@@ -1296,8 +1312,9 @@ function submit_comment(object_id) {
                                         var any_file_type = validateAnyFile();
                                         if (any_file_type) {
                                             // É uma URL de um arquivo. Executar a importação deste arquivo.
-                                            console.log(any_file_type);
-                                            showFormCreateURLFile($('#item_url_import_all').val(), any_file_type);
+                                            show_modal_main();
+                                            //showFormCreateURLFile($('#item_url_import_all').val(), any_file_type);
+                                            import_files_url($('#item_url_import_all').val(), any_file_type);
                                             $('#item_url_import_all').val('');
                                             $("#files_import_icon").addClass("grayscale");
                                             $('#modalshowModalImportAll').modal('hide');
@@ -1305,7 +1322,9 @@ function submit_comment(object_id) {
                                             var any_url = validateAnyUrl();
                                             if (any_url) {
                                                 // É uma URL regular. Executar a importação através do Embed.ly.
-                                                showFormCreateURL($('#item_url_import_all').val());
+                                                show_modal_main();
+                                               // showFormCreateURL($('#item_url_import_all').val());
+                                                import_text($('#item_url_import_all').val());
                                                 $('#item_url_import_all').val('');
                                                 $("#sites_import_icon").addClass("grayscale");
                                                 $('#modalshowModalImportAll').modal('hide');
@@ -1455,7 +1474,7 @@ function submit_comment(object_id) {
     function validateAnyFile() {
         var url = $('#item_url_import_all').val();
         if (url != undefined || url != '') {
-            var regExp = /(?:([^:/?#]+):)?(?:\/\/([^/?#]*))?([^?#]*\.(?:jpg|jpeg|bmp|tiff|gif|png|pdf|mp4|avi|mp3))(?:\?([^#]*))?(?:#(.*))?/i;
+            var regExp = /(?:([^:/?#]+):)?(?:\/\/([^/?#]*))?([^?#]*\.(?:jpg|jpeg|bmp|tiff|gif|png|pdf|mp4|avi|flv|mkv|mp3))(?:\?([^#]*))?(?:#(.*))?/i;
             var match = url.match(regExp);
             if (match && validateAnyUrl()) {
                 var regExp_image = /(?:([^:/?#]+):)?(?:\/\/([^/?#]*))?([^?#]*\.(?:jpg|jpeg|bmp|tiff|gif|png))(?:\?([^#]*))?(?:#(.*))?/i;
@@ -1463,7 +1482,7 @@ function submit_comment(object_id) {
                 if (match_image) {
                     return 'image';
                 } else {
-                    var regExp_video = /(?:([^:/?#]+):)?(?:\/\/([^/?#]*))?([^?#]*\.(?:mp4|avi))(?:\?([^#]*))?(?:#(.*))?/i;
+                    var regExp_video = /(?:([^:/?#]+):)?(?:\/\/([^/?#]*))?([^?#]*\.(?:mp4|avi|flv|mkv))(?:\?([^#]*))?(?:#(.*))?/i;
                     var match_video = url.match(regExp_video);
                     if (match_video) {
                         return 'video';
@@ -1673,24 +1692,121 @@ function submit_comment(object_id) {
                 data: {operation: 'import_video_url',
                     video_url: youtube_video_url,
                     collectionId: collectionId},
-                success: function (response) {
-                    $('#modalImportMain').modal('hide');
-                    if (response) {
-                        showAlertGeneral('<?php _e('Success', 'tainacan'); ?>', '<?php _e('Video imported successfully', 'tainacan'); ?>', 'success');
-                        set_containers_class(collectionId);
-                        wpquery_clean();
-                    } else {
-                        showAlertGeneral('<?php _e('Error', 'tainacan'); ?>', '<?php _e('Invalid URL or Video already inserted.', 'tainacan'); ?>', 'error');
+                success: function (result) {
+                    var json = JSON.parse(result);
+                    if (json.length > 0) {
+                        showViewMultipleItemsSocialNetwork(json);
+                    }
+                    else {
+                        hide_modal_main();
+                        showAlertGeneral('<?php _e('Error', 'tainacan'); ?>', '<?php _e('Invalid Channel/Playlist or no videos to be imported', 'tainacan'); ?>', 'error');
                     }
                 }
             });
-            $('#item_url_import_all').val('');
-            $("#youtube_import_icon").addClass("grayscale");
-            $('#modalshowModalImportAll').modal('hide');
+           
         } else {
             showAlertGeneral('<?php _e('Error', 'tainacan'); ?>', '<?php _e('Necessary to inform Youtube video url', 'tainacan'); ?>', 'error');
         }
     }
+    // faz a importacao do tipo texto e joga para a tela de multiplos
+    function import_text(url){
+       var key = $('#socialdb_embed_api_id').val();
+        var ajaxurl = 'http://api.embed.ly/1/oembed?key=:' + key + '&url=' + url;
+        //div loader
+        $.getJSON(ajaxurl, {}, function (json) {
+            console.log(json);
+            var description = '', title = '';
+            if (json.title !== undefined && json.title != null && json.title != false) {
+                title = json.title;
+            }
+            else {
+                 hide_modal_main();
+                showAlertGeneral('Atenção', 'Esta URL não possui items disponíveis para importação', 'error');
+                return;
+            }
+            // se nao tiver descricao ele coloca o titulo na descricao
+            if (json.description !== undefined && json.description != null && json.description != false) {
+                description += json.description;
+            }
+            else {
+                description = title;
+            }
+            //concatena o html na descricao
+            if (json.html !== undefined && json.html != null && json.html != false) {
+                json.html = json.html.replace('width="854"', 'width="200"');
+                json.html = json.html.replace('height="480"', 'height="200"');
+                description = json.html + description;
+            }
+            //pegando a imagem
+            var img = '';
+            if (json.thumbnail_url !== undefined && json.thumbnail_url != null && json.thumbnail_url != false) {
+                 img = json.thumbnail_url;
+            }
+            // verifico se existe imagem para ser importada
+            $.ajax({
+                url: $('#src').val() + '/controllers/object/object_controller.php',
+                type: 'POST',
+                data: {
+                    operation: 'add_item_not_published',
+                    collection_id: $("#collection_id").val(),
+                    description: description,
+                    thumbnail_url: img,
+                    type: 'text',
+                    url: url,
+                    title: title}
+            }).done(function (result) {
+                var json = JSON.parse(result);
+                if (json.length > 0) {
+                    showViewMultipleItemsSocialNetwork(json);
+                }
+                else {
+                    hide_modal_main();
+                    showAlertGeneral('<?php _e('Error', 'tainacan'); ?>', '<?php _e('Invalid Channel/Playlist or no videos to be imported', 'tainacan'); ?>', 'error');
+                }
+            });
+        }).fail(function (result) {
+            // console.log('error', result, url);
+            hide_modal_main();
+            showAlertGeneral('Atenção', 'URL inexistente ou indisponível', 'error');
+        });
+    }
+ 
+    function import_files_url(url,type){
+            var title = '';
+            if(type=='image'){
+                title = '<?php _e('Image','tainacan') ?>';
+            }else if(type=='video'){
+                title = '<?php _e('Video','tainacan') ?>';
+            }else if(type=='audio'){
+                title = '<?php _e('Audio','tainacan') ?>';
+            }else if(type=='other'){
+                title = '<?php _e('Other','tainacan') ?>';
+            }else if(type=='pdf'){
+                title = '<?php _e('PDF','tainacan') ?>';
+            }
+            $.ajax({
+                url: $('#src').val() + '/controllers/object/object_controller.php',
+                type: 'POST',
+                data: {
+                    operation: 'add_item_not_published',
+                    collection_id: $("#collection_id").val(),
+                    content: url,
+                    description:'',
+                    type: type,
+                    url: url,
+                    title: title}
+            }).done(function (result) {
+                var json = JSON.parse(result);
+                if (json.length > 0) {
+                    showViewMultipleItemsSocialNetwork(json);
+                }
+                else {
+                    hide_modal_main();
+                    showAlertGeneral('<?php _e('Error', 'tainacan'); ?>', '<?php _e('Invalid Channel/Playlist or no videos to be imported', 'tainacan'); ?>', 'error');
+                }
+            });
+    }
+   
 
     function import_youtube_channel(inputIdentifierYoutube) {
         var collectionId = $('#collection_id').val();
@@ -1709,7 +1825,6 @@ function submit_comment(object_id) {
                     playlist: '',
                     collectionId: collectionId},
                 success: function (response) {
-                    $('#modalImportMain').modal('hide');
                     var json = JSON.parse(response);
                     if (json.length > 0) {
                         showViewMultipleItemsSocialNetwork(json);
@@ -1717,6 +1832,7 @@ function submit_comment(object_id) {
                         //wpquery_clean();
                     }
                     else {
+                        hide_modal_main();
                         showAlertGeneral('<?php _e('Error', 'tainacan'); ?>', '<?php _e('Invalid Channel/Playlist or no videos to be imported', 'tainacan'); ?>', 'error');
                     }
                 }
@@ -1748,7 +1864,6 @@ function submit_comment(object_id) {
                     playlist: inputIdentifierYoutube,
                     collectionId: collectionId},
                 success: function (response) {
-                    $('#modalImportMain').modal('hide');
                     var json = JSON.parse(response);
                     if (json.length > 0) {
                         showViewMultipleItemsSocialNetwork(json);
@@ -1756,6 +1871,7 @@ function submit_comment(object_id) {
                         //wpquery_clean();
                     }
                     else {
+                        hide_modal_main();
                         showAlertGeneral('<?php _e('Error', 'tainacan'); ?>', '<?php _e('Invalid Channel/Playlist or no videos to be imported', 'tainacan'); ?>', 'error');
                     }
                 }
@@ -1805,7 +1921,6 @@ function submit_comment(object_id) {
                     collectionId: collectionId},
                 success: function (response) {
                     //se a gravação no banco foi realizado, a tabela é incrementada
-                    $('#modalImportMain').modal('hide');
                     var json = JSON.parse(response);
                     if (json.length > 0) {
                         showViewMultipleItemsSocialNetwork(json);
@@ -1813,6 +1928,7 @@ function submit_comment(object_id) {
                         //wpquery_clean();
                     }
                     else {
+                        hide_modal_main();
                         showAlertGeneral('<?php _e('Error', 'tainacan'); ?>', '<?php _e('Invalid Flickr identifier or no items to be imported', 'tainacan'); ?>', 'error');
                     }
                 }
@@ -1844,7 +1960,6 @@ function submit_comment(object_id) {
                     collectionId: collectionId},
                 success: function (response) {
                     //se a gravação no banco foi realizado, a tabela é incrementada
-                    $('#modalImportMain').modal('hide');
                     var json = JSON.parse(response);
                     if (json.length > 0) {
                         showViewMultipleItemsSocialNetwork(json);
@@ -1852,6 +1967,7 @@ function submit_comment(object_id) {
                         //wpquery_clean();
                     }
                     else {
+                        hide_modal_main();
                         showAlertGeneral('<?php _e('Error', 'tainacan'); ?>', '<?php _e('Invalid Vimeo identifier or no items to be imported', 'tainacan'); ?>', 'error');
                     }
                 }
@@ -1887,5 +2003,28 @@ function submit_comment(object_id) {
         $(seletor).val(ids.join(','));
     }
 }
+/**
+* 
+
+ * @param {type} url
+ * @returns {String} */
+function get_type_url(url){
+    var fileExtension = url.replace(/^.*\./, '');     // USING JAVASCRIPT REGULAR EXPRESSIONS.
+    switch (fileExtension) {
+        case 'png': case 'jpeg': case 'jpg':case 'gif':
+            return 'image';
+            break;
+        case 'mp4': case 'wmv': case 'ogv':case 'mpg':
+             return 'video';
+        case 'pdf':
+            return 'pdf';
+            break;
+        case 'mp3': case 'wav': case 'm4a':case 'ogg':
+             return 'audio';    
+        default:
+            return 'other';
+    }
+}
     /************************************************ HELPERS **********************************************************/
+    
 </script>

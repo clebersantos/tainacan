@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: socialdb\n"
-"POT-Creation-Date: 2016-05-02 10:38-0300\n"
-"PO-Revision-Date: 2016-05-02 10:38-0300\n"
+"POT-Creation-Date: 2016-05-04 14:38-0300\n"
+"PO-Revision-Date: 2016-05-04 14:51-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -34,16 +34,17 @@ msgstr "Responder Comentário"
 #: ../../../single.php:427 ../../../single.php:464 ../../../single.php:496
 #: ../../../single.php:536 ../../../single.php:574 ../../../single.php:600
 #: ../../../single.php:657 ../../../single.php:679 ../../../single.php:829
-#: ../../../single.php:899
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1407
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1434
+#: ../../../single.php:899 ../../../modules/contest/contest.php:72
+#: ../../../modules/contest/contest.php:103
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1446
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1473
 #: ../../../views/category/list.php:131 ../../../views/category/list.php:174
 #: ../../../views/category/list.php:203
-#: ../../../views/collection/header_collection.php:147
-#: ../../../views/collection/header_collection.php:298
+#: ../../../views/collection/header_collection.php:152
+#: ../../../views/collection/header_collection.php:303
 #: ../../../views/collection/header_collection_1.php:77
-#: ../../../views/event/list.php:268 ../../../views/event/list.php:303
-#: ../../../views/event/list.php:343 ../../../views/object/edit.php:239
+#: ../../../views/event/list.php:283 ../../../views/event/list.php:318
+#: ../../../views/event/list.php:368 ../../../views/object/edit.php:239
 #: ../../../views/object/list.php:116 ../../../views/object/list.php:153
 #: ../../../views/object/list_data_table.php:78
 #: ../../../views/object/list_single_object.php:166
@@ -51,7 +52,7 @@ msgstr "Responder Comentário"
 #: ../../../views/object/list_single_object1.php:113
 #: ../../../views/object/show_insert_object_licenses.php:56
 #: ../../../views/property/list.php:354
-#: ../../../views/property/metadata_forms.php:110
+#: ../../../views/property/metadata_forms.php:115
 #: ../../../views/property/metadata/form_voting.php:81
 #: ../../../views/ranking/list.php:98
 #: ../../../views/theme_options/edit_tools.php:82
@@ -66,10 +67,10 @@ msgid "Send"
 msgstr "Enviar"
 
 #: ../../../comments.php:161 ../../../functions.php:321
-#: ../../../views/collection/header_collection.php:132
-#: ../../../views/collection/header_collection.php:140
-#: ../../../views/collection/header_collection.php:168
-#: ../../../views/collection/header_collection.php:292
+#: ../../../views/collection/header_collection.php:137
+#: ../../../views/collection/header_collection.php:145
+#: ../../../views/collection/header_collection.php:173
+#: ../../../views/collection/header_collection.php:297
 #: ../../../views/collection/header_collection_1.php:63
 #: ../../../views/collection/header_collection_1.php:70
 #: ../../../views/object/list.php:109 ../../../views/object/list.php:146
@@ -117,11 +118,11 @@ msgstr "(Painel de edição)"
 #: ../../../views/object/multiple_items/create.php:10
 #: ../../../views/object/multiple_items/editor_items.php:51
 #: ../../../views/object/multiple_social_network/editor_items.php:49
-#: ../../../views/property/metadata_forms.php:74
-#: ../../../views/property/metadata/form_filter.php:41
+#: ../../../views/property/metadata_forms.php:79
+#: ../../../views/property/metadata/form_filter.php:42
 #: ../../../views/property/metadata/form_object.php:86
 #: ../../../views/property/metadata/form_tag.php:32
-#: ../../../views/property/metadata/form_term.php:84
+#: ../../../views/property/metadata/form_term.php:99
 #: ../../../views/property/metadata/form_voting.php:56
 #: ../../../views/social_network/edit_maping_attributes.php:33
 msgid "Cancel"
@@ -129,9 +130,14 @@ msgstr "Cancelar"
 
 #: ../../../functions.php:313 ../../../header.php:194 ../../../single.php:369
 #: ../../../single.php:428 ../../../single.php:497 ../../../single.php:537
-#: ../../../single.php:830 ../../../views/category/list.php:132
-#: ../../../views/collection/edit.php:1428 ../../../views/design/edit.php:239
-#: ../../../views/event/list.php:269 ../../../views/event/list.php:304
+#: ../../../single.php:830 ../../../modules/contest/contest.php:73
+#: ../../../modules/contest/contest.php:104
+#: ../../../modules/tainacan-ontology/views/property/list.php:76
+#: ../../../modules/tainacan-ontology/views/property/list.php:132
+#: ../../../modules/tainacan-ontology/views/property/list.php:182
+#: ../../../views/category/list.php:132
+#: ../../../views/collection/edit.php:1432 ../../../views/design/edit.php:239
+#: ../../../views/event/list.php:284 ../../../views/event/list.php:319
 #: ../../../views/export/oaipmh/mapping_attributes.php:35
 #: ../../../views/import/import_configuration.php:110
 #: ../../../views/import/csv/add_mapping.php:25
@@ -143,8 +149,7 @@ msgstr "Cancelar"
 #: ../../../views/license/list.php:52 ../../../views/object/edit.php:240
 #: ../../../views/property/metadata/form_voting.php:82
 #: ../../../views/ranking/list.php:99 ../../../views/search/edit.php:102
-#: ../../../views/search/edit.php:311 ../../../views/search/layout.php:61
-#: ../../../views/theme_options/edit.php:50
+#: ../../../views/search/edit.php:315 ../../../views/theme_options/edit.php:50
 #: ../../../views/theme_options/edit.php:63
 #: ../../../views/theme_options/edit.php:79
 #: ../../../views/theme_options/edit.php:95
@@ -164,10 +169,12 @@ msgstr "Responder"
 #: ../../../single.php:788 ../../../single.php:807
 #: ../../../modules/archival-management/views/archival_management/list.php:81
 #: ../../../modules/archival-management/views/archival_management/list.php:100
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:338
 #: ../../../modules/tainacan-ontology/views/filters/filter_properties.php:81
 #: ../../../modules/tainacan-ontology/views/filters/filter_properties.php:100
-#: ../../../views/category/list.php:105 ../../../views/collection/edit.php:336
-#: ../../../views/collection/edit.php:972
+#: ../../../modules/tainacan-ontology/views/property/list.php:9
+#: ../../../views/category/list.php:105 ../../../views/collection/edit.php:340
+#: ../../../views/collection/edit.php:976
 #: ../../../views/export/index_export.php:46
 #: ../../../views/import/import_configuration.php:44
 #: ../../../views/import/import_configuration.php:96
@@ -176,7 +183,7 @@ msgstr "Responder"
 #: ../../../views/object/list_single_object1.php:94
 #: ../../../views/property/list.php:96 ../../../views/property/list.php:174
 #: ../../../views/property/list.php:259
-#: ../../../views/property/js/list_metadata_js.php:985
+#: ../../../views/property/js/list_metadata_js.php:1053
 #: ../../../views/property/metadata/form_filter.php:7
 #: ../../../views/property/metadata/form_tag.php:7
 #: ../../../views/ranking/list.php:72 ../../../views/search/edit.php:113
@@ -197,10 +204,12 @@ msgstr "Editar"
 #: ../../../controllers/category/category_controller.php:47
 #: ../../../controllers/property/property_controller.php:28
 #: ../../../controllers/tag/tag_controller.php:36
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:281
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:315
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:65
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:886
 #: ../../../views/category/js/list_js.php:266
 #: ../../../views/category/js/list_js.php:513
-#: ../../../views/event/js/list_js.php:226
+#: ../../../views/event/js/list_js.php:230
 #: ../../../views/license/js/list_js.php:139
 #: ../../../views/object/js/create_js.php:48
 #: ../../../views/object/js/create_js.php:113
@@ -213,7 +222,7 @@ msgstr "Editar"
 #: ../../../views/object/single_object/js/show_list_event_properties_js.php:130
 #: ../../../views/property/js/list_js.php:77
 #: ../../../views/property/js/list_js.php:911
-#: ../../../views/search/js/edit_js.php:330
+#: ../../../views/search/js/edit_js.php:338
 #: ../../../views/search/js/single_js.php:50
 #: ../../../views/search/js/single_js.php:81
 #: ../../../views/search/js/single_js.php:195
@@ -235,11 +244,11 @@ msgstr "Deletar este comentário?"
 
 #: ../../../functions.php:325 ../../../single.php:465 ../../../single.php:601
 #: ../../../single.php:714 ../../../single.php:742 ../../../single.php:789
-#: ../../../single.php:808 ../../../views/collection/edit.php:337
-#: ../../../views/collection/edit.php:973
-#: ../../../views/collection/header_collection.php:123
-#: ../../../views/collection/header_collection.php:148
-#: ../../../views/collection/header_collection.php:299
+#: ../../../single.php:808 ../../../views/collection/edit.php:341
+#: ../../../views/collection/edit.php:977
+#: ../../../views/collection/header_collection.php:128
+#: ../../../views/collection/header_collection.php:153
+#: ../../../views/collection/header_collection.php:304
 #: ../../../views/collection/header_collection_1.php:50
 #: ../../../views/collection/header_collection_1.php:78
 #: ../../../views/export/index_export.php:47
@@ -297,10 +306,10 @@ msgstr "Tainacan"
 
 #: ../../../functions.php:533
 msgid "All Collections"
-msgstr "Todas as ontologias"
+msgstr "Todas as coleções"
 
-#: ../../../functions.php:534 ../../../views/event/list.php:233
-#: ../../../views/event/list.php:285 ../../../views/event/list.php:321
+#: ../../../functions.php:534 ../../../views/event/list.php:248
+#: ../../../views/event/list.php:300 ../../../views/event/list.php:336
 #: ../../../views/theme_options/edit_tools.php:17
 msgid "Collection"
 msgstr "Debate"
@@ -336,7 +345,7 @@ msgstr "Nenhum debate encontrado na lixeira"
 #: ../../../functions.php:576 ../../../functions.php:577
 #: ../../../functions.php:579
 msgid "Object"
-msgstr "Indivíduo"
+msgstr "Argumento"
 
 #: ../../../functions.php:578
 msgid "All Objects"
@@ -348,15 +357,15 @@ msgstr "Adicionar Indivíduos"
 
 #: ../../../functions.php:582
 msgid "Edit Object"
-msgstr "Editar Indivíduo"
+msgstr "Editar Argumento"
 
 #: ../../../functions.php:583
 msgid "New Object"
-msgstr "Novo Indivíduo"
+msgstr "Novo Argumento"
 
 #: ../../../functions.php:584
 msgid "View Object"
-msgstr "Ver Indivíduo"
+msgstr "Ver Argumento"
 
 #: ../../../functions.php:585
 msgid "Search Object"
@@ -364,25 +373,25 @@ msgstr "Buscar Indivíduos"
 
 #: ../../../functions.php:586
 msgid "No Object Found"
-msgstr "Nenhum Indivíduo encontrado! "
+msgstr "Nenhum Argumento encontrado! "
 
 #: ../../../functions.php:587
 msgid "No Object Found in Trash"
-msgstr "Nenhum Indivíduo encontrado na lixeira"
+msgstr "Nenhum Argumento encontrado na lixeira"
 
 #: ../../../functions.php:613 ../../../functions.php:614
 #: ../../../extras/visualRDF/rdf2json.php:12
 #: ../../../helpers/view_helper.php:17
 #: ../../../models/collection/visualization_model.php:332
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:164
-#: ../../../views/collection/edit.php:342
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:165
+#: ../../../views/collection/edit.php:346
 #: ../../../views/property/metadata/form_term.php:7
 msgid "Category"
 msgstr "Classe"
 
 #: ../../../functions.php:615 ../../../single.php:389
-#: ../../../models/event/event_model.php:206
-#: ../../../views/collection/edit.php:1004
+#: ../../../models/event/event_model.php:207
+#: ../../../views/collection/edit.php:1008
 msgid "Edit Category"
 msgstr "Editar Classe"
 
@@ -400,7 +409,7 @@ msgstr "Nome da Classe"
 
 #: ../../../functions.php:619
 msgid "All Categories"
-msgstr "Todas Classes"
+msgstr "Todas Categorias"
 
 #: ../../../functions.php:620
 msgid "Search Categories"
@@ -414,7 +423,7 @@ msgstr "Classe pai"
 msgid "Parent Category:"
 msgstr "Classe pai:"
 
-#: ../../../functions.php:929 ../../../models/object/object_model.php:1471
+#: ../../../functions.php:929 ../../../models/object/object_model.php:1473
 #: ../../../models/wp_query/wp_query_model.php:993
 msgid "Recents"
 msgstr "Recentes "
@@ -433,17 +442,18 @@ msgstr "Categorias do Debate"
 
 #: ../../../functions.php:1577 ../../../functions.php:1579
 #: ../../../functions.php:1580 ../../../models/general/general_model.php:1475
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:52
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:109
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:53
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:110
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:221
 #: ../../../views/category/list.php:11 ../../../views/category/list.php:214
-#: ../../../views/collection/header_collection.php:89
+#: ../../../views/collection/header_collection.php:94
 #: ../../../views/collection/header_collection_1.php:44
 #: ../../../views/design/edit.php:134 ../../../views/search/menu_left.php:23
 #: ../../../views/theme_options/edit.php:12
 #: ../../../views/theme_options/edit_configuration.php:12
 #: ../../../views/theme_options/property/list.php:12
 msgid "Categories"
-msgstr "Classes"
+msgstr "Categorias"
 
 #: ../../../functions.php:2286
 msgid "Videos"
@@ -477,9 +487,9 @@ msgstr "Tainacan"
 msgid "Profile"
 msgstr "Perfil"
 
-#: ../../../header.php:113 ../../../views/collection/header_collection.php:309
+#: ../../../header.php:113 ../../../views/collection/header_collection.php:314
 msgid "My collections"
-msgstr "Minhas Classes"
+msgstr "Minhas Categorias"
 
 #: ../../../header.php:119
 msgid "Repository Configurations"
@@ -497,8 +507,7 @@ msgid "Configuration"
 msgstr "Configuração"
 
 #: ../../../header.php:122 ../../../single.php:295
-#: ../../../views/collection/header_collection.php:67
-#: ../../../views/collection/header_collection.php:311
+#: ../../../views/collection/header_collection.php:316
 #: ../../../views/collection/header_collection_1.php:39
 #: ../../../views/design/edit.php:12 ../../../views/object/list.php:184
 #: ../../../views/property/list.php:13
@@ -514,7 +523,9 @@ msgid "Social / API Keys"
 msgstr "Chaves de APIs / Redes Sociais"
 
 #: ../../../header.php:124 ../../../models/collection/collection_model.php:524
-#: ../../../views/collection/header_collection.php:108
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:538
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:564
+#: ../../../views/collection/header_collection.php:113
 #: ../../../views/collection/header_collection_1.php:46
 #: ../../../views/property/js/list_js.php:563
 #: ../../../views/property/js/list_js.php:589
@@ -522,9 +533,9 @@ msgstr "Chaves de APIs / Redes Sociais"
 msgid "Licenses"
 msgstr "Licenças"
 
-#: ../../../header.php:125 ../../../models/event/event_model.php:625
-#: ../../../views/collection/header_collection.php:130
-#: ../../../views/collection/header_collection.php:166
+#: ../../../header.php:125 ../../../models/event/event_model.php:626
+#: ../../../views/collection/header_collection.php:135
+#: ../../../views/collection/header_collection.php:171
 #: ../../../views/collection/header_collection_1.php:61
 #: ../../../views/event/list.php:12
 msgid "Events"
@@ -556,7 +567,7 @@ msgid "Advanced Search"
 msgstr "Busca Avançada"
 
 #: ../../../header.php:153 ../../../header.php:173
-#: ../../../models/event/event_model.php:239
+#: ../../../models/event/event_model.php:240
 #: ../../../views/theme_options/edit_configuration.php:100
 msgid "Create Collection"
 msgstr "Criar debate"
@@ -582,12 +593,13 @@ msgid "Collection object"
 msgstr "Objeto do debate"
 
 #: ../../../header.php:185 ../../../single.php:223
-#: ../../../views/collection/edit.php:473
+#: ../../../modules/contest/contest.php:39
+#: ../../../views/collection/edit.php:477
 msgid "Item"
-msgstr "Indivíduo"
+msgstr "Argumento"
 
 #: ../../../header.php:193
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:280
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:314
 #: ../../../views/event/list.php:12 ../../../views/object/create.php:14
 #: ../../../views/object/create.php:172 ../../../views/object/edit.php:22
 #: ../../../views/object/edit_object_property_form.php:64
@@ -681,7 +693,7 @@ msgstr "Selecionar arquivo"
 #: ../../../modules/archival-management/views/archival_management/list.php:10
 #: ../../../modules/tainacan-ontology/views/filters/filter_properties.php:10
 #: ../../../views/category/list.php:11
-#: ../../../views/collection/header_collection.php:113
+#: ../../../views/collection/header_collection.php:118
 #: ../../../views/collection/header_collection_1.php:47
 #: ../../../views/import/import_configuration.php:18
 #: ../../../views/import/import_configuration.php:46
@@ -704,7 +716,7 @@ msgstr "Busca avançada"
 
 #: ../../../index.php:82
 msgid "Loading Collections..."
-msgstr "Carregando ontologias..."
+msgstr "Carregando coleções..."
 
 #: ../../../single.php:166
 #: ../../../views/advanced_search/advanced_search.php:72
@@ -718,14 +730,15 @@ msgstr "Limpar busca"
 
 #: ../../../single.php:203
 msgid "Type the title or the URI to you object!"
-msgstr "Digite o título ou a URL para seu Indivíduo"
+msgstr "Digite o título ou a URL para seu Argumento"
 
 #: ../../../single.php:220 ../../../single.php:280 ../../../single.php:303
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:282
+#: ../../../modules/contest/contest.php:36
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:316
 #: ../../../views/category/list.php:104 ../../../views/object/create.php:11
 #: ../../../views/property/metadata/form_voting.php:6
 #: ../../../views/property/metadata/form_voting.php:43
-#: ../../../views/search/edit.php:285
+#: ../../../views/search/edit.php:288
 msgid "Add"
 msgstr "Adicionar"
 
@@ -755,14 +768,14 @@ msgid "Remove"
 msgstr "Remover"
 
 #: ../../../single.php:340
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:167
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:168
 msgid "Add Category"
 msgstr "Adicionar Classe"
 
 #: ../../../single.php:348 ../../../single.php:349 ../../../single.php:400
 #: ../../../single.php:401
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:357
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:375
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:396
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:414
 #: ../../../views/category/list.php:38 ../../../views/category/list.php:39
 msgid "Category name"
 msgstr "Nome da Classe"
@@ -783,7 +796,7 @@ msgstr "Descrição da Classe"
 
 #: ../../../single.php:357 ../../../single.php:411 ../../../single.php:525
 #: ../../../single.php:562
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:197
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:198
 #: ../../../views/category/list.php:47
 msgid "Optional"
 msgstr "Opcional"
@@ -807,7 +820,7 @@ msgstr "Apagar Classe"
 
 #: ../../../single.php:457 ../../../single.php:593
 #: ../../../views/category/list.php:128 ../../../views/property/list.php:351
-#: ../../../views/property/metadata_forms.php:107
+#: ../../../views/property/metadata_forms.php:112
 #: ../../../views/property/metadata/form_voting.php:78
 #: ../../../views/ranking/list.php:95
 #: ../../../views/theme_options/property/list.php:258
@@ -840,7 +853,7 @@ msgstr "Descrição "
 msgid "Describe your tag"
 msgstr "Descreve sua Tag"
 
-#: ../../../single.php:553 ../../../models/event/event_model.php:212
+#: ../../../single.php:553 ../../../models/event/event_model.php:213
 msgid "Edit Tag"
 msgstr "Editar Tag"
 
@@ -911,11 +924,13 @@ msgid "Submit"
 msgstr "Enviar"
 
 #: ../../../single.php:673
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:620
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:711
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:659
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:750
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:537
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:563
 #: ../../../views/advanced_search/advanced_search.php:54
 #: ../../../views/category/page.php:63 ../../../views/design/edit.php:113
-#: ../../../views/property/page.php:55
+#: ../../../views/property/page.php:58
 #: ../../../views/property/js/list_js.php:562
 #: ../../../views/property/js/list_js.php:588 ../../../views/tag/page.php:58
 #: ../../../views/theme_options/property/js/list_js.php:495
@@ -1136,12 +1151,12 @@ msgstr "Nome da debate inválido ou nome do item inválido"
 #: ../../../models/category/category_model.php:1140
 #: ../../../models/collection/collection_model.php:407
 #: ../../../models/collection/collection_model.php:854
-#: ../../../models/event/event_model.php:351
+#: ../../../models/event/event_model.php:352
 #: ../../../models/event/event_collection/event_collection_create_model.php:49
 #: ../../../models/event/event_collection/event_collection_delete_model.php:49
 #: ../../../models/event/event_comment/event_comment_create_model.php:51
-#: ../../../models/object/object_model.php:1553
-#: ../../../models/object/object_model.php:1626
+#: ../../../models/object/object_model.php:1555
+#: ../../../models/object/object_model.php:1628
 #: ../../../models/search/search_model.php:403
 #: ../../../models/theme_options/theme_options_model.php:186
 #: ../../../modules/archival-management/views/archival_management/js/list_js.php:52
@@ -1150,8 +1165,8 @@ msgstr "Nome da debate inválido ou nome do item inválido"
 #: ../../../modules/tainacan-ontology/views/filters/js/list_js.php:68
 #: ../../../views/collection/js/edit_js.php:38
 #: ../../../views/collection/js/edit_js.php:75
-#: ../../../views/event/js/list_js.php:148
-#: ../../../views/event/js/list_js.php:186
+#: ../../../views/event/js/list_js.php:152
+#: ../../../views/event/js/list_js.php:190
 #: ../../../views/export/js/index_export_js.php:145
 #: ../../../views/export/js/index_export_js.php:299
 #: ../../../views/export/js/index_export_js.php:351
@@ -1231,22 +1246,21 @@ msgid "General Ordenation"
 msgstr "Ordenação padrão "
 
 #: ../../../controllers/collection/collection_controller.php:105
-#: ../../../views/collection/edit.php:676 ../../../views/search/edit.php:209
+#: ../../../views/collection/edit.php:680 ../../../views/search/edit.php:209
 msgid "Property Data"
 msgstr "Atributo"
 
 #: ../../../controllers/collection/collection_controller.php:106
 #: ../../../helpers/view_helper.php:18 ../../../views/category/list.php:216
-#: ../../../views/collection/header_collection.php:83
 #: ../../../views/collection/header_collection_1.php:40
 #: ../../../views/collection/js/edit_js.php:118
 #: ../../../views/design/edit.php:13 ../../../views/design/edit.php:141
 #: ../../../views/object/list_data_table.php:94
 #: ../../../views/object/list_single_object1.php:136
 #: ../../../views/property/list.php:14 ../../../views/ranking/list.php:13
-#: ../../../views/search/edit.php:14 ../../../views/search/edit.php:244
-#: ../../../views/search/js/edit_js.php:202
-#: ../../../views/search/js/layout_js.php:67
+#: ../../../views/search/edit.php:14 ../../../views/search/edit.php:246
+#: ../../../views/search/js/edit_js.php:208
+#: ../../../views/search/js/layout_js.php:82
 #: ../../../views/theme_options/edit.php:14
 #: ../../../views/theme_options/edit_configuration.php:14
 #: ../../../views/theme_options/property/list.php:14
@@ -1292,27 +1306,27 @@ msgstr "Por favor, preencha o delimitador corretamente!"
 #: ../../../modules/tainacan-ontology/controllers/category/ontology_category_controller.php:25
 #: ../../../views/category/js/list_js.php:28
 #: ../../../views/category/js/list_js.php:457
-#: ../../../views/search/js/single_js.php:1074
-#: ../../../views/search/js/single_js.php:1081
-#: ../../../views/search/js/single_js.php:1111
-#: ../../../views/search/js/single_js.php:1121
-#: ../../../views/search/js/single_js.php:1149
-#: ../../../views/search/js/single_js.php:1157
-#: ../../../views/search/js/single_js.php:1176
-#: ../../../views/search/js/single_js.php:1205
-#: ../../../views/search/js/single_js.php:1213
-#: ../../../views/search/js/single_js.php:1330
-#: ../../../views/search/js/single_js.php:1686
-#: ../../../views/search/js/single_js.php:1694
-#: ../../../views/search/js/single_js.php:1723
-#: ../../../views/search/js/single_js.php:1733
-#: ../../../views/search/js/single_js.php:1762
-#: ../../../views/search/js/single_js.php:1772
-#: ../../../views/search/js/single_js.php:1791
-#: ../../../views/search/js/single_js.php:1819
-#: ../../../views/search/js/single_js.php:1828
-#: ../../../views/search/js/single_js.php:1858
-#: ../../../views/search/js/single_js.php:1867
+#: ../../../views/search/js/single_js.php:1071
+#: ../../../views/search/js/single_js.php:1078
+#: ../../../views/search/js/single_js.php:1108
+#: ../../../views/search/js/single_js.php:1118
+#: ../../../views/search/js/single_js.php:1146
+#: ../../../views/search/js/single_js.php:1154
+#: ../../../views/search/js/single_js.php:1173
+#: ../../../views/search/js/single_js.php:1202
+#: ../../../views/search/js/single_js.php:1210
+#: ../../../views/search/js/single_js.php:1327
+#: ../../../views/search/js/single_js.php:1683
+#: ../../../views/search/js/single_js.php:1691
+#: ../../../views/search/js/single_js.php:1720
+#: ../../../views/search/js/single_js.php:1730
+#: ../../../views/search/js/single_js.php:1759
+#: ../../../views/search/js/single_js.php:1769
+#: ../../../views/search/js/single_js.php:1788
+#: ../../../views/search/js/single_js.php:1816
+#: ../../../views/search/js/single_js.php:1825
+#: ../../../views/search/js/single_js.php:1855
+#: ../../../views/search/js/single_js.php:1864
 #: ../../../views/social_network/js/delete_js.php:38
 #: ../../../views/social_network/js/delete_js.php:85
 #: ../../../views/social_network/js/delete_js.php:133
@@ -1379,15 +1393,16 @@ msgstr "Seu usuário e/ou senha estão incorretos."
 
 #: ../../../extras/visualRDF/index_tainacan.php:64
 #: ../../../views/category/page.php:48
-#: ../../../views/collection/header_collection.php:259
+#: ../../../views/collection/header_collection.php:264
 #: ../../../views/object/list_single_object.php:123
-#: ../../../views/property/page.php:42
+#: ../../../views/property/page.php:45
 msgid "Graph"
 msgstr "Grafo"
 
 #: ../../../extras/visualRDF/index_tainacan.php:66
 #: ../../../modules/archival-management/views/archival_management/list.php:13
 #: ../../../modules/tainacan-ontology/views/filters/filter_properties.php:13
+#: ../../../modules/tainacan-ontology/views/property/list.php:10
 #: ../../../views/category/list.php:12 ../../../views/category/page.php:57
 #: ../../../views/collection/comments.php:26
 #: ../../../views/collection/edit.php:45 ../../../views/design/edit.php:48
@@ -1395,8 +1410,8 @@ msgstr "Grafo"
 #: ../../../views/import/import_configuration.php:19
 #: ../../../views/license/list.php:14 ../../../views/property/list.php:34
 #: ../../../views/property/list.php:39
-#: ../../../views/property/list_metadata.php:46
-#: ../../../views/property/page.php:51 ../../../views/ranking/list.php:29
+#: ../../../views/property/list_metadata.php:90
+#: ../../../views/property/page.php:54 ../../../views/ranking/list.php:29
 #: ../../../views/search/edit.php:50 ../../../views/search/edit.php:53
 #: ../../../views/social_network/list.php:24 ../../../views/tag/page.php:53
 #: ../../../views/theme_options/common/redirect_button.php:11
@@ -1412,35 +1427,35 @@ msgstr "Esconder Propriedades"
 msgid "Hide predicates"
 msgstr "Esconder predicados"
 
-#: ../../../extras/visualRDF/index_tainacan.php:110
+#: ../../../extras/visualRDF/index_tainacan.php:111
 msgid "Usage"
 msgstr "Modo de uso"
 
-#: ../../../extras/visualRDF/index_tainacan.php:114
+#: ../../../extras/visualRDF/index_tainacan.php:115
 msgid "Scroll"
 msgstr "Rolagem"
 
-#: ../../../extras/visualRDF/index_tainacan.php:117
+#: ../../../extras/visualRDF/index_tainacan.php:118
 msgid "Drag node"
 msgstr "Arrastar nó"
 
-#: ../../../extras/visualRDF/index_tainacan.php:118
+#: ../../../extras/visualRDF/index_tainacan.php:119
 msgid "Move node"
 msgstr "Mover nó"
 
-#: ../../../extras/visualRDF/index_tainacan.php:119
+#: ../../../extras/visualRDF/index_tainacan.php:120
 msgid "Drag background"
 msgstr "Arrastar fundo da imagem"
 
-#: ../../../extras/visualRDF/index_tainacan.php:120
+#: ../../../extras/visualRDF/index_tainacan.php:121
 msgid "Move graph"
 msgstr "Mover Grafo"
 
-#: ../../../extras/visualRDF/index_tainacan.php:155
+#: ../../../extras/visualRDF/index_tainacan.php:156
 msgid "Property"
 msgstr "Propriedade"
 
-#: ../../../extras/visualRDF/index_tainacan.php:155
+#: ../../../extras/visualRDF/index_tainacan.php:156
 msgid "Value"
 msgstr "Valor"
 
@@ -1448,6 +1463,7 @@ msgstr "Valor"
 #: ../../../models/collection/collection_model.php:994
 #: ../../../models/collection/visualization_model.php:442
 #: ../../../models/ranking/ranking_model.php:268
+#: ../../../modules/tainacan-ontology/views/property/list.php:50
 #: ../../../views/object/create.php:32
 #: ../../../views/object/data_property_form.php:17
 #: ../../../views/object/edit.php:39
@@ -1465,8 +1481,9 @@ msgid "Long text"
 msgstr "Texto longo"
 
 #: ../../../helpers/view_helper.php:13
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:593
-#: ../../../views/event/list.php:61 ../../../views/event/list.php:140
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:632
+#: ../../../modules/tainacan-ontology/views/property/list.php:52
+#: ../../../views/event/list.php:61 ../../../views/event/list.php:155
 #: ../../../views/object/data_property_form.php:19
 #: ../../../views/object/edit_data_property_form.php:20
 #: ../../../views/object/single_object/single_data_property_form.php:19
@@ -1477,6 +1494,7 @@ msgid "Date"
 msgstr "Data"
 
 #: ../../../helpers/view_helper.php:14
+#: ../../../modules/tainacan-ontology/views/property/list.php:53
 #: ../../../views/object/edit_data_property_form.php:21
 #: ../../../views/object/single_object/single_data_property_form.php:20
 #: ../../../views/object/single_object/single_edit_data_property_form.php:20
@@ -1486,6 +1504,7 @@ msgid "Numeric"
 msgstr "Numérico"
 
 #: ../../../helpers/view_helper.php:15
+#: ../../../modules/tainacan-ontology/views/property/list.php:54
 #: ../../../views/object/edit_data_property_form.php:22
 #: ../../../views/object/show_list_event_properties.php:72
 #: ../../../views/object/single_object/single_data_property_form.php:21
@@ -1515,16 +1534,16 @@ msgstr "Veja mais"
 
 #: ../../../models/category/category_model.php:300
 msgid "User Categories"
-msgstr "Classes do Usuário"
+msgstr "Categorias do Usuário"
 
 #: ../../../models/category/category_model.php:331
 msgid "Shared Categories"
-msgstr "Classes Compartilhadas"
+msgstr "Categorias Compartilhadas"
 
 #: ../../../models/category/category_model.php:363
 #: ../../../views/category/js/list_js.php:265
 msgid "Public Categories"
-msgstr "Classes Públicas"
+msgstr "Categorias Públicas"
 
 #: ../../../models/category/category_model.php:981
 msgid "Xml unformated"
@@ -1596,8 +1615,8 @@ msgstr "Arquivo corrompido"
 #: ../../../models/mapping/mapping_model.php:58
 #: ../../../models/mapping/mapping_model.php:465
 #: ../../../models/object/object_model.php:697
-#: ../../../models/object/object_model.php:1549
-#: ../../../models/object/object_model.php:1622
+#: ../../../models/object/object_model.php:1551
+#: ../../../models/object/object_model.php:1624
 #: ../../../models/object/object_multiple_model.php:47
 #: ../../../models/object/object_multiple_model.php:368
 #: ../../../models/search/search_model.php:59
@@ -1654,15 +1673,15 @@ msgstr "Arquivo corrompido"
 #: ../../../views/object/multiple_social_network/js/editor_items_js.php:697
 #: ../../../views/object/multiple_social_network/js/editor_items_js.php:775
 #: ../../../views/object/multiple_social_network/js/editor_items_js.php:779
-#: ../../../views/search/js/single_js.php:1070
-#: ../../../views/search/js/single_js.php:1107
-#: ../../../views/search/js/single_js.php:1145
-#: ../../../views/search/js/single_js.php:1201
-#: ../../../views/search/js/single_js.php:1682
-#: ../../../views/search/js/single_js.php:1719
-#: ../../../views/search/js/single_js.php:1758
-#: ../../../views/search/js/single_js.php:1815
-#: ../../../views/search/js/single_js.php:1854
+#: ../../../views/search/js/single_js.php:1067
+#: ../../../views/search/js/single_js.php:1104
+#: ../../../views/search/js/single_js.php:1142
+#: ../../../views/search/js/single_js.php:1198
+#: ../../../views/search/js/single_js.php:1679
+#: ../../../views/search/js/single_js.php:1716
+#: ../../../views/search/js/single_js.php:1755
+#: ../../../views/search/js/single_js.php:1812
+#: ../../../views/search/js/single_js.php:1851
 #: ../../../views/social_network/js/delete_js.php:34
 #: ../../../views/social_network/js/delete_js.php:81
 #: ../../../views/social_network/js/delete_js.php:129
@@ -1681,7 +1700,7 @@ msgstr "selecionado com sucesso!"
 
 #: ../../../models/category/category_model.php:1008
 msgid "This category has no category children"
-msgstr "Esta Classe não tem Classes filhas"
+msgstr "Esta Classe não tem Categorias filhas"
 
 #: ../../../models/category/category_model.php:1086
 msgid "Category name is empty."
@@ -1689,14 +1708,14 @@ msgstr "Nome da Classe está vazio"
 
 #: ../../../models/category/category_model.php:1110
 msgid "There is a category with this name and this parent"
-msgstr "Há Classes com este nome e com este pai"
+msgstr "Há Categorias com este nome e com este pai"
 
 #: ../../../models/category/category_model.php:1139
 msgid ""
 "There is a category with this name in this hierarchy, are you sure to create "
 "another? Cancel edit the category, ok creates the new one."
 msgstr ""
-"Há Classes com este nome nesta hierarquia, tem certeza que deseja criar "
+"Há Categorias com este nome nesta hierarquia, tem certeza que deseja criar "
 "outra? Cancele para visualizar esta categoria, clique ok para criar a nova."
 
 #: ../../../models/collection/collection_import_model.php:661
@@ -1707,7 +1726,7 @@ msgstr " de "
 #: ../../../models/collection/collection_model.php:77
 #: ../../../models/design/design_model.php:51
 msgid "Categories of "
-msgstr "Classes de "
+msgstr "Categorias de "
 
 #: ../../../models/collection/collection_model.php:404
 msgid "Collection removed successfully"
@@ -1722,6 +1741,8 @@ msgid "Populars"
 msgstr "Populares "
 
 #: ../../../models/collection/collection_model.php:520
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:532
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:558
 #: ../../../views/design/edit.php:106 ../../../views/license/list.php:19
 #: ../../../views/property/js/list_js.php:557
 #: ../../../views/property/js/list_js.php:583
@@ -1735,18 +1756,23 @@ msgstr "Título"
 #: ../../../models/collection/visualization_model.php:183
 #: ../../../models/collection/visualization_model.php:278
 #: ../../../models/search/search_model.php:298
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:533
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:559
 #: ../../../views/object/list_single_object.php:217
 #: ../../../views/object/ranking/list_value_ordenation.php:28
 #: ../../../views/property/js/list_js.php:558
 #: ../../../views/property/js/list_js.php:584
 #: ../../../views/search/edit.php:112 ../../../views/search/edit.php:134
 #: ../../../views/search/edit.php:157 ../../../views/search/edit.php:211
-#: ../../../views/search/edit.php:246 ../../../views/search/js/edit_js.php:197
-#: ../../../views/search/js/edit_js.php:205
-#: ../../../views/search/js/edit_js.php:556
-#: ../../../views/search/js/edit_js.php:579
-#: ../../../views/search/js/layout_js.php:62
-#: ../../../views/search/js/layout_js.php:70
+#: ../../../views/search/edit.php:248 ../../../views/search/js/edit_js.php:203
+#: ../../../views/search/js/edit_js.php:211
+#: ../../../views/search/js/edit_js.php:566
+#: ../../../views/search/js/edit_js.php:594
+#: ../../../views/search/js/layout_js.php:49
+#: ../../../views/search/js/layout_js.php:77
+#: ../../../views/search/js/layout_js.php:85
+#: ../../../views/search/js/layout_js.php:106
+#: ../../../views/search/js/layout_js.php:108
 #: ../../../views/theme_options/property/js/list_js.php:491
 #: ../../../views/theme_options/property/js/list_js.php:511
 msgid "Type"
@@ -1756,6 +1782,8 @@ msgstr "Tipo"
 #: ../../../models/collection/visualization_model.php:189
 #: ../../../models/collection/visualization_model.php:284
 #: ../../../models/search/search_model.php:294
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:534
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:560
 #: ../../../views/object/ranking/list_value_ordenation.php:33
 #: ../../../views/property/js/list_js.php:559
 #: ../../../views/property/js/list_js.php:585
@@ -1779,19 +1807,20 @@ msgstr "Indivíduos"
 #: ../../../models/collection/visualization_model.php:176
 #: ../../../models/collection/visualization_model.php:271
 #: ../../../models/export/export_model.php:81
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:628
 #: ../../../views/advanced_search/advanced_search.php:58
-#: ../../../views/collection/edit.php:599
+#: ../../../views/collection/edit.php:603
 #: ../../../views/object/list_single_object.php:434
-#: ../../../views/property/list_metadata.php:158
+#: ../../../views/property/list_metadata.php:110
 #: ../../../views/property/js/list_js.php:653
-#: ../../../views/search/edit.php:234
+#: ../../../views/search/edit.php:235
 #: ../../../views/theme_options/property/js/list_js.php:496
 msgid "Tags"
 msgstr "Tags"
 
 #: ../../../models/collection/collection_model.php:831
 msgid "Property Data Categories"
-msgstr "Atributos de Classes"
+msgstr "Atributos de Categorias"
 
 #: ../../../models/collection/collection_model.php:855
 msgid "You are not allowed to access this collection!"
@@ -1851,6 +1880,8 @@ msgstr "até"
 #: ../../../models/collection/visualization_model.php:195
 #: ../../../models/collection/visualization_model.php:290
 #: ../../../models/search/search_model.php:302
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:536
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:562
 #: ../../../views/object/list_single_object.php:189
 #: ../../../views/property/js/list_js.php:561
 #: ../../../views/property/js/list_js.php:587
@@ -1897,13 +1928,13 @@ msgstr "Noificações"
 msgid "An unexpected error ocurred"
 msgstr "Um erro não esperado ocorreu!"
 
-#: ../../../models/event/event_model.php:194
-#: ../../../views/collection/edit.php:1088
+#: ../../../models/event/event_model.php:195
+#: ../../../views/collection/edit.php:1092
 msgid "Create Object"
-msgstr "Criar Indivíduo"
+msgstr "Criar Argumento"
 
-#: ../../../models/event/event_model.php:196
-#: ../../../views/collection/edit.php:1108 ../../../views/object/list.php:84
+#: ../../../models/event/event_model.php:197
+#: ../../../views/collection/edit.php:1112 ../../../views/object/list.php:84
 #: ../../../views/object/list.php:117 ../../../views/object/list.php:129
 #: ../../../views/object/list_data_table.php:55
 #: ../../../views/object/list_data_table.php:79
@@ -1912,84 +1943,84 @@ msgstr "Criar Indivíduo"
 #: ../../../views/object/list_single_object1.php:90
 #: ../../../views/object/list_single_object1.php:114
 msgid "Delete Object"
-msgstr "Deletar Indivíduo"
+msgstr "Deletar Argumento"
 
-#: ../../../models/event/event_model.php:198
-#: ../../../views/collection/edit.php:1048
+#: ../../../models/event/event_model.php:199
+#: ../../../views/collection/edit.php:1052
 msgid "Add Classification"
 msgstr "Adicionar Classificação"
 
-#: ../../../models/event/event_model.php:200
-#: ../../../views/collection/edit.php:1068
+#: ../../../models/event/event_model.php:201
+#: ../../../views/collection/edit.php:1072
 msgid "Delete Classification"
 msgstr "Deletar Classificação"
 
-#: ../../../models/event/event_model.php:202
-#: ../../../views/collection/edit.php:1024
+#: ../../../models/event/event_model.php:203
+#: ../../../views/collection/edit.php:1028
 msgid "Delete Category"
 msgstr "Deletar Classe"
 
-#: ../../../models/event/event_model.php:204
-#: ../../../views/collection/edit.php:984
+#: ../../../models/event/event_model.php:205
+#: ../../../views/collection/edit.php:988
 msgid "Create Category"
 msgstr "Criar Classe"
 
-#: ../../../models/event/event_model.php:208
+#: ../../../models/event/event_model.php:209
 msgid "Delete Tag"
 msgstr "Deletar Tag "
 
-#: ../../../models/event/event_model.php:210
+#: ../../../models/event/event_model.php:211
 msgid "Create Tag"
 msgstr "Criar Tag"
 
-#: ../../../models/event/event_model.php:214
+#: ../../../models/event/event_model.php:215
 msgid "Delete Data Property"
 msgstr "Remover o atributo"
 
-#: ../../../models/event/event_model.php:216
+#: ../../../models/event/event_model.php:217
 msgid "Create Data Property"
 msgstr "Criar atributo"
 
-#: ../../../models/event/event_model.php:218
+#: ../../../models/event/event_model.php:219
 msgid "Edit Data Property"
 msgstr "Editar atributo"
 
-#: ../../../models/event/event_model.php:220
+#: ../../../models/event/event_model.php:221
 msgid "Edit Data Property value"
 msgstr "Editar valor do atributo"
 
-#: ../../../models/event/event_model.php:222
+#: ../../../models/event/event_model.php:223
 msgid "Delete Object Property"
 msgstr "Remover o a relação"
 
-#: ../../../models/event/event_model.php:224
+#: ../../../models/event/event_model.php:225
 msgid "Create Object Property"
 msgstr "Criar relação"
 
-#: ../../../models/event/event_model.php:226
+#: ../../../models/event/event_model.php:227
 msgid "Edit Object Property"
 msgstr "Editar relação"
 
-#: ../../../models/event/event_model.php:228
+#: ../../../models/event/event_model.php:229
 msgid "Edit Object Property value"
 msgstr "Editar valor da relação"
 
-#: ../../../models/event/event_model.php:231
+#: ../../../models/event/event_model.php:232
 msgid "Delete Property"
 msgstr "Deletar propriedade"
 
-#: ../../../models/event/event_model.php:233
+#: ../../../models/event/event_model.php:234
 msgid "Create Term Property"
 msgstr "Criar Metadado de Termo"
 
-#: ../../../models/event/event_model.php:235
+#: ../../../models/event/event_model.php:236
 msgid "Edit Term Property"
 msgstr "Editar metadado de Termo"
 
-#: ../../../models/event/event_model.php:237
-#: ../../../views/collection/header_collection.php:123
-#: ../../../views/collection/header_collection.php:148
-#: ../../../views/collection/header_collection.php:299
+#: ../../../models/event/event_model.php:238
+#: ../../../views/collection/header_collection.php:128
+#: ../../../views/collection/header_collection.php:153
+#: ../../../views/collection/header_collection.php:304
 #: ../../../views/collection/header_collection_1.php:50
 #: ../../../views/collection/header_collection_1.php:78
 #: ../../../views/object/list.php:154
@@ -1997,90 +2028,90 @@ msgstr "Editar metadado de Termo"
 msgid "Delete Collection"
 msgstr "Excluir debate"
 
-#: ../../../models/event/event_model.php:241
-#: ../../../views/collection/edit.php:1300
+#: ../../../models/event/event_model.php:242
+#: ../../../views/collection/edit.php:1304
 msgid "Create Comment"
 msgstr "Criar Comentário"
 
-#: ../../../models/event/event_model.php:243
-#: ../../../views/collection/edit.php:1320
+#: ../../../models/event/event_model.php:244
+#: ../../../views/collection/edit.php:1324
 msgid "Edit Comment"
 msgstr "Editar Comentário"
 
-#: ../../../models/event/event_model.php:245
-#: ../../../views/collection/edit.php:1335
+#: ../../../models/event/event_model.php:246
+#: ../../../views/collection/edit.php:1339
 msgid "Delete Comment"
 msgstr "Deletar Comentário"
 
-#: ../../../models/event/event_model.php:346
+#: ../../../models/event/event_model.php:347
 msgid "See item (Open a new Tab)"
 msgstr "Ver Item (Abrir uma nova aba) "
 
-#: ../../../models/event/event_model.php:349
+#: ../../../models/event/event_model.php:350
 msgid "The event was sent for approval"
 msgstr "O evento foi enviado para aprovação"
 
-#: ../../../models/event/event_model.php:354
+#: ../../../models/event/event_model.php:355
 msgid "An error happened, please try again"
 msgstr "Um erro ocorreu, por favor tente novamente"
 
-#: ../../../models/event/event_model.php:528
+#: ../../../models/event/event_model.php:529
 msgid "Event automatically verified"
 msgstr "Evento automaticamente verificado"
 
-#: ../../../models/event/event_model.php:556
+#: ../../../models/event/event_model.php:557
 msgid "Messages: Result of your event"
 msgstr "Mensagens: Resultado de seu evento"
 
-#: ../../../models/event/event_model.php:560
+#: ../../../models/event/event_model.php:561
 msgid "Event result"
 msgstr "Resultado do evento"
 
-#: ../../../models/event/event_model.php:563
+#: ../../../models/event/event_model.php:564
 msgid "Event in the collection "
 msgstr "Evento no debate  "
 
-#: ../../../models/event/event_model.php:566
-#: ../../../models/event/event_model.php:568
+#: ../../../models/event/event_model.php:567
+#: ../../../models/event/event_model.php:569
 msgid "The event "
 msgstr "O evento "
 
-#: ../../../models/event/event_model.php:566
+#: ../../../models/event/event_model.php:567
 msgid " was confirmed "
 msgstr "foi confirmado"
 
-#: ../../../models/event/event_model.php:568
+#: ../../../models/event/event_model.php:569
 msgid "was not confirmed "
 msgstr "não foi confirmado"
 
-#: ../../../models/event/event_model.php:570
+#: ../../../models/event/event_model.php:571
 msgid "Obervations by collection's moderators "
 msgstr "Observações dos moderadores do debate"
 
-#: ../../../models/event/event_model.php:607
+#: ../../../models/event/event_model.php:608
 #: ../../../views/event/js/list_js.php:57
 #: ../../../views/event/js/list_js.php:88
-#: ../../../views/event/js/list_js.php:114
+#: ../../../views/event/js/list_js.php:118
 msgid "Anonimous"
 msgstr "Anônimo"
 
-#: ../../../models/event/event_model.php:618
+#: ../../../models/event/event_model.php:619
 msgid "Warning: Event Approved"
 msgstr "Atenção: Evento aprovado"
 
-#: ../../../models/event/event_model.php:620
+#: ../../../models/event/event_model.php:621
 msgid "Warning: Event sent to Approvation"
 msgstr "Atenção: Evento enviado para aprovação"
 
-#: ../../../models/event/event_model.php:628
+#: ../../../models/event/event_model.php:629
 msgid "Event in collection "
 msgstr "Evento no debate "
 
-#: ../../../models/event/event_model.php:629
+#: ../../../models/event/event_model.php:630
 msgid "Author User"
 msgstr "usuário"
 
-#: ../../../models/event/event_model.php:633
+#: ../../../models/event/event_model.php:634
 msgid "Description: "
 msgstr "Descrição: "
 
@@ -2178,7 +2209,7 @@ msgstr "O evento foi realizado com sucesso."
 #: ../../../models/event/event_classification/event_classification_create_model.php:93
 #: ../../../models/event/event_classification/event_classification_delete_model.php:123
 msgid "Object or category invalid"
-msgstr "Indivíduo ou Classe inválida"
+msgstr "Argumento ou Classe inválida"
 
 #: ../../../models/event/event_classification/event_classification_create_model.php:122
 #: ../../../models/event/event_classification/event_classification_delete_model.php:169
@@ -2297,8 +2328,8 @@ msgstr "Deletar Comentário "
 #: ../../../models/event/event_term/event_term_delete_model.php:51
 #: ../../../models/event/event_term/event_term_edit_model.php:56
 #: ../../../views/event/js/list_js.php:29
-#: ../../../views/event/js/list_js.php:151
-#: ../../../views/event/js/list_js.php:189
+#: ../../../views/event/js/list_js.php:155
+#: ../../../views/event/js/list_js.php:193
 #: ../../../views/export/js/index_export_js.php:64
 #: ../../../views/export/js/index_export_js.php:203
 #: ../../../views/export/js/index_export_js.php:249
@@ -2345,11 +2376,11 @@ msgstr "Este comentário já foi removido"
 
 #: ../../../models/event/event_object/event_object_create_model.php:24
 msgid "Create the object "
-msgstr "Criar Indivíduo"
+msgstr "Criar Argumento"
 
 #: ../../../models/event/event_object/event_object_delete_model.php:24
 msgid "Delete the object "
-msgstr "Remover Indivíduo"
+msgstr "Remover Argumento"
 
 #: ../../../models/event/event_property_data/event_property_data_create_model.php:34
 #: ../../../models/event/event_property_data/event_property_data_create_model.php:36
@@ -2358,7 +2389,7 @@ msgstr "Criar Atributo"
 
 #: ../../../models/event/event_property_data/event_property_data_create_model.php:34
 msgid " in the category"
-msgstr "na classe"
+msgstr "na categoria"
 
 #: ../../../models/event/event_property_data/event_property_data_create_model.php:36
 msgid " in the collection"
@@ -2573,10 +2604,11 @@ msgstr "Metadado de termo "
 
 #: ../../../models/export/export_model.php:112
 #: ../../../models/social_network/social_mapping_model.php:11
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1334
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1373
 #: ../../../views/object/multiple_items/editor_items.php:35
 #: ../../../views/object/multiple_social_network/editor_items.php:33
-#: ../../../views/property/metadata/form_object.php:71
+#: ../../../views/property/metadata/form_object.php:66
+#: ../../../views/property/metadata/form_term.php:49
 msgid "Select"
 msgstr "Selecione"
 
@@ -2584,6 +2616,8 @@ msgstr "Selecione"
 #: ../../../models/export/rdf_repository_model.php:82
 #: ../../../modules/tainacan-ontology/models/export/rdf_repository_model.php:75
 #: ../../../modules/tainacan-ontology/models/export/rdf_repository_model.php:82
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:535
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:561
 #: ../../../views/property/js/list_js.php:560
 #: ../../../views/property/js/list_js.php:586
 #: ../../../views/theme_options/property/js/list_js.php:493
@@ -2597,7 +2631,7 @@ msgid "Attachment"
 msgstr "Anexos "
 
 #: ../../../models/export/rdf_repository_model.php:96
-#: ../../../models/object/object_model.php:1468
+#: ../../../models/object/object_model.php:1470
 #: ../../../models/wp_query/wp_query_model.php:990
 #: ../../../modules/tainacan-ontology/models/export/rdf_repository_model.php:96
 #: ../../../views/object/single_object/ranking/list_ranking.php:12
@@ -2654,11 +2688,11 @@ msgstr "Ontologias Recentes"
 
 #: ../../../models/import/oaipmh_model.php:144
 #: ../../../models/search/search_model.php:160
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:232
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:637
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:665
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:728
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:765
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:259
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:676
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:704
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:767
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:804
 #: ../../../views/object/multiple_items/js/editor_items_js.php:892
 #: ../../../views/object/multiple_social_network/js/editor_items_js.php:917
 #: ../../../views/search/menu_left.php:115
@@ -2694,8 +2728,8 @@ msgid "Mapping deleted successfully"
 msgstr "Mapeamento removido com sucesso"
 
 #: ../../../models/mapping/mapping_model.php:60
-#: ../../../views/event/js/list_js.php:146
-#: ../../../views/event/js/list_js.php:184
+#: ../../../views/event/js/list_js.php:150
+#: ../../../views/event/js/list_js.php:188
 #: ../../../views/import/js/import_configuration_js.php:164
 #: ../../../views/object/ranking/js/list_ranking_create_js.php:52
 #: ../../../views/object/ranking/js/list_ranking_create_js.php:54
@@ -2728,8 +2762,8 @@ msgid "Mapping not exists anymore!"
 msgstr "Este mapeamento não existe mais"
 
 #: ../../../models/mapping/mapping_model.php:64
-#: ../../../views/event/js/list_js.php:151
-#: ../../../views/event/js/list_js.php:189
+#: ../../../views/event/js/list_js.php:155
+#: ../../../views/event/js/list_js.php:193
 #: ../../../views/export/js/index_export_js.php:64
 #: ../../../views/export/js/index_export_js.php:203
 #: ../../../views/export/js/index_export_js.php:249
@@ -2808,18 +2842,18 @@ msgstr "A licença sugerida é: "
 msgid "Something went wrong! Please try again!"
 msgstr "Algo deu errado! Por favor tente novamente!"
 
-#: ../../../models/object/object_model.php:1466
+#: ../../../models/object/object_model.php:1468
 #: ../../../models/wp_query/wp_query_model.php:988
 msgid "Data property"
 msgstr "Atributos"
 
-#: ../../../models/object/object_model.php:1550
-#: ../../../models/object/object_model.php:1623
+#: ../../../models/object/object_model.php:1552
+#: ../../../models/object/object_model.php:1625
 msgid "All items removed successfully"
 msgstr "Item/itens removido(s) com sucesso!"
 
-#: ../../../models/object/object_model.php:1554
-#: ../../../models/object/object_model.php:1627
+#: ../../../models/object/object_model.php:1556
+#: ../../../models/object/object_model.php:1629
 msgid "No items added in this collection"
 msgstr "Nenhum item adicionados a esta coleção"
 
@@ -2844,7 +2878,7 @@ msgstr "Há outra propriedade com este nome!"
 #: ../../../models/property/property_model.php:312
 #: ../../../models/property/property_model.php:358
 #: ../../../models/property/property_model.php:422
-#: ../../../models/property/property_model.php:512
+#: ../../../models/property/property_model.php:513
 msgid "This property does not belong to this collection!"
 msgstr "Esta propriedade não pertence à esta coleção!"
 
@@ -2915,11 +2949,13 @@ msgstr "Faceta removida com sucesso"
 #: ../../../models/search/search_model.php:177
 #: ../../../models/search/search_model.php:183
 #: ../../../models/search/search_model.php:194
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:260
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:211
 #: ../../../views/property/js/list_js.php:232
-#: ../../../views/property/js/list_metadata_js.php:42
-#: ../../../views/property/js/list_metadata_js.php:1189
-#: ../../../views/property/js/list_metadata_js.php:1193
-#: ../../../views/property/metadata/form_filter.php:23
+#: ../../../views/property/js/list_metadata_js.php:41
+#: ../../../views/property/js/list_metadata_js.php:1256
+#: ../../../views/property/js/list_metadata_js.php:1260
+#: ../../../views/property/metadata/form_filter.php:21
 #: ../../../views/property/metadata/form_tag.php:23
 #: ../../../views/theme_options/property/js/list_js.php:171
 msgid "Tree"
@@ -2927,43 +2963,43 @@ msgstr "Árvore"
 
 #: ../../../models/search/search_model.php:167
 #: ../../../models/search/search_model.php:178
-#: ../../../views/property/js/list_metadata_js.php:1194
+#: ../../../views/property/js/list_metadata_js.php:1261
 #: ../../../views/property/metadata/form_tag.php:24
 msgid "Tag Cloud"
 msgstr "Nuvem de Tags"
 
 #: ../../../models/search/search_model.php:169
 #: ../../../models/search/search_model.php:199
-#: ../../../views/property/js/list_metadata_js.php:1188
+#: ../../../views/property/js/list_metadata_js.php:1255
 msgid "Multiple Select"
 msgstr "Seleção Múltipla "
 
 #: ../../../models/search/search_model.php:173
 #: ../../../models/search/search_model.php:188
-#: ../../../views/property/js/list_metadata_js.php:1184
-#: ../../../views/property/js/list_metadata_js.php:1381
-#: ../../../views/property/js/list_metadata_js.php:1395
+#: ../../../views/property/js/list_metadata_js.php:1251
+#: ../../../views/property/js/list_metadata_js.php:1448
+#: ../../../views/property/js/list_metadata_js.php:1462
 #: ../../../views/property/metadata/form_voting.php:34
 msgid "Range"
 msgstr "Faixa"
 
 #: ../../../models/search/search_model.php:174
 #: ../../../models/search/search_model.php:189
-#: ../../../views/property/js/list_metadata_js.php:1185
-#: ../../../views/property/js/list_metadata_js.php:1381
-#: ../../../views/property/js/list_metadata_js.php:1395
+#: ../../../views/property/js/list_metadata_js.php:1252
+#: ../../../views/property/js/list_metadata_js.php:1448
+#: ../../../views/property/js/list_metadata_js.php:1462
 #: ../../../views/property/metadata/form_voting.php:35
 msgid "From/To"
 msgstr "De/Até"
 
 #: ../../../models/search/search_model.php:176
-#: ../../../views/property/js/list_metadata_js.php:1192
+#: ../../../views/property/js/list_metadata_js.php:1259
 msgid "Search box with autocomplete"
 msgstr "Campo de busca com preenchimento automático"
 
 #: ../../../models/search/search_model.php:186
-#: ../../../views/property/js/list_metadata_js.php:1377
-#: ../../../views/property/js/list_metadata_js.php:1393
+#: ../../../views/property/js/list_metadata_js.php:1444
+#: ../../../views/property/js/list_metadata_js.php:1460
 #: ../../../views/property/metadata/form_voting.php:21
 #: ../../../views/ranking/add.php:44 ../../../views/ranking/edit.php:46
 msgid "Stars"
@@ -2971,7 +3007,7 @@ msgstr "Estrelas"
 
 #: ../../../models/search/search_model.php:195
 #: ../../../views/design/edit.php:127
-#: ../../../views/property/js/list_metadata_js.php:41
+#: ../../../views/property/js/list_metadata_js.php:40
 msgid "Menu"
 msgstr "Menu"
 
@@ -3282,22 +3318,61 @@ msgstr "Meses"
 msgid "ago"
 msgstr "atrás"
 
-#: ../../../modules/contest/contest.php:24
-msgid "Add Item"
+#: ../../../modules/contest/contest.php:40
+msgid "Question with multiple answers"
+msgstr "Pergunta com multiplas repostas"
+
+#: ../../../modules/contest/contest.php:52
+msgid "New Argument"
+msgstr "Novo Argumento"
+
+#: ../../../modules/contest/contest.php:56
+msgid "Describe a conclusion or an afirmation below"
+msgstr "Descreva uma conclusão ou uma afirmação abaixo"
+
+#: ../../../modules/contest/contest.php:57
+#: ../../../modules/contest/contest.php:92
+msgid "This field is obligate!"
+msgstr "O campo é obrigatório"
+
+#: ../../../modules/contest/contest.php:60
+msgid "Describe a positive argument (Optional) "
+msgstr "Descreva um argumento positivo (Opcional)"
+
+#: ../../../modules/contest/contest.php:61
+#: ../../../modules/contest/contest.php:65
+#: ../../../modules/contest/contest.php:96
+msgid "This field is optional!"
+msgstr "Este campo é opcional!"
+
+#: ../../../modules/contest/contest.php:64
+msgid "Describe a negative argument (Optional) "
+msgstr "Descreva um argumento negativo (Opcional)"
+
+#: ../../../modules/contest/contest.php:87
+msgid "New Question"
+msgstr "Criar Pergunta"
+
+#: ../../../modules/contest/contest.php:91
+msgid "Insert a question below"
+msgstr "Digite uma pergunta abaixo"
+
+#: ../../../modules/contest/contest.php:95
+msgid "Describe an answer (or conclusion) for the question (Optional) "
+msgstr "Digite uma resposta ( ou uma conclusão) para a pergunta (Opcional)"
+
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:153
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:184
+msgid "Add Individual"
 msgstr "Adicionar Argumento"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:152
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:183
-msgid "Add Individual"
-msgstr "Adicionar Indivíduo"
-
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:190
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:191
 msgid "Edit Individual"
-msgstr "Editar Indivíduo"
+msgstr "Editar Argumento"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:205
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:243
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:255
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:206
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:277
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:289
 #: ../../../views/advanced_search/show_object_properties.php:4
 #: ../../../views/category/list.php:215 ../../../views/category/page.php:78
 #: ../../../views/object/list_data_table.php:104
@@ -3309,397 +3384,397 @@ msgstr "Editar Indivíduo"
 msgid "Properties"
 msgstr "Propriedades"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:230
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:256
 msgid "Tree Property"
 msgstr "Árvore de Propriedades"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:268
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:302
 msgid " Or reuse a taxonomy"
 msgstr "Ou reuse um taxonomia"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:281
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:315
 msgid "Add, in this collection, the taxonomy: "
 msgstr "Adicionar, neste debate, a taxonomia: "
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:304
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:343
 msgid "Add as Equivalent"
 msgstr "Adicionar como Equivalente"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:307
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:346
 msgid "Add as Disjoint"
 msgstr "Adicionar como Disjunta"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:310
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:349
 msgid "Add as UnionOf"
 msgstr "Adicionar como União"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:313
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:352
 msgid "Add as Intersection Of"
 msgstr "Adicionar como Intersecção"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:316
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:355
 msgid "Add as Complement Of"
 msgstr "Adicionar como Complemento"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:345
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:612
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:703
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:384
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:651
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:742
 msgid "Advanced Options"
 msgstr "Opções avançadas"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:351
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:390
 msgid "Equivalent Categories"
-msgstr "Classes Equivalentes"
+msgstr "Categorias Equivalentes"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:361
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:400
 msgid "Disjoint Categories"
-msgstr "Classes Disjuntas"
+msgstr "Categorias Disjuntas"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:369
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:408
 msgid "Union Of"
 msgstr "União de"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:380
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:419
 msgid "Intersection Of"
 msgstr "Intersecção de"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:388
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:427
 msgid "Complement Of"
 msgstr "Complemento de"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:591
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:630
 msgid "String"
 msgstr ""
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:592
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:631
 msgid "Boolean"
 msgstr ""
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:594
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:633
 msgid "Datetime"
 msgstr "Datetime"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:595
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:634
 msgid "Float"
 msgstr ""
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:596
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:635
 msgid "Integer"
 msgstr "Integer"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:597
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1402
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1429
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:636
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1441
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1468
 msgid "Time"
 msgstr ""
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:621
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:712
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:660
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:751
 msgid "Describe your property"
 msgstr "Descreva sua Propriedade"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:626
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:717
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:665
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:756
 msgid "Property Parent"
 msgstr "Propriedade pai"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:627
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:718
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:666
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:757
 msgid "No parent"
 msgstr "Sem parentesco"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:634
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:638
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:725
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:729
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:673
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:677
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:764
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:768
 msgid "Cardinality"
 msgstr "Cardinalidade"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:639
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:651
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:730
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:742
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:678
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:690
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:769
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:781
 msgid "Minimum Cardinality"
 msgstr "Cardinalidade Mínima"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:640
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:652
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:731
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:743
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:679
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:691
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:770
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:782
 msgid "Maximum Cardinality"
 msgstr "Cardinalidade Máxima"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:642
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:654
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:733
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:745
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:681
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:693
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:772
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:784
 msgid "value"
 msgstr "Valor"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:660
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:758
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:699
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:797
 msgid "Restrictions"
 msgstr "Restrições"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:661
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:759
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:700
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:798
 msgid "Functional"
 msgstr "Funcional"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:666
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:766
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:705
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:805
 msgid "Equivalent Property"
 msgstr "Propriedade Equivalente"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:750
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:789
 msgid "Reverse property"
 msgstr "Propriedade Inversa"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:752
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:791
 msgid "No properties found or no range selected"
-msgstr "Nenhuma propriedade encontrada para a classe de destino selecionada"
+msgstr "Nenhuma propriedade encontrada para a categoria de destino selecionada"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:760
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:799
 msgid "Transitive"
 msgstr "Transitiva"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:761
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:800
 msgid "Simetric"
 msgstr "Simétrica"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:767
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:806
 msgid "All Values From"
 msgstr "Todos os valores de"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:768
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:807
 msgid "Some Values From"
 msgstr "Alguns valores de"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:769
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:808
 msgid "Has Value"
 msgstr "Tem valor"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1335
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1495
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1374
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1534
 msgid "True"
 msgstr "Verdadeiro"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1336
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1495
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1375
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1534
 msgid "False"
 msgstr "Falso"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1363
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1391
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1402
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1430
 msgid "Sunday"
 msgstr "Domingo"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1363
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1365
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1391
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1393
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1402
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1404
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1430
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1432
 msgid "Monday"
 msgstr "Segunda"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1363
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1391
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1402
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1430
 msgid "Tuesday"
 msgstr "Terça"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1363
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1391
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1402
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1430
 msgid "Wednesday"
 msgstr "Quarta"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1363
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1391
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1402
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1430
 msgid "Thursday"
 msgstr "Quinta"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1363
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1391
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1402
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1430
 msgid "Friday"
 msgstr "Sexta"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1363
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1391
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1402
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1430
 msgid "Saturday"
 msgstr "Sábado"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1364
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1392
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1403
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1431
 msgid "S"
 msgstr "D"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1364
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1392
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1403
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1431
 msgid "M"
 msgstr "S"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1364
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1392
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1403
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1431
 msgid "T"
 msgstr "T"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1364
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1392
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1403
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1431
 msgid "W"
 msgstr "Q"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1364
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1392
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1403
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1431
 msgid "F"
 msgstr "S"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1365
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1393
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1404
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1432
 msgid "Sun"
 msgstr "Dom"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1365
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1393
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1404
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1432
 msgid "Tue"
 msgstr "Ter"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1365
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1393
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1404
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1432
 msgid "Wed"
 msgstr "Qua"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1365
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1393
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1404
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1432
 msgid "Thu"
 msgstr "Qui"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1365
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1393
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1404
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1432
 msgid "Fri"
 msgstr "Sex"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1365
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1393
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1404
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1432
 msgid "Sat"
 msgstr "Sáb"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1366
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1394
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1405
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1433
 msgid "January"
 msgstr "Janeiro"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1366
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1394
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1405
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1433
 msgid "February"
 msgstr "Fevereiro"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1366
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1394
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1405
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1433
 msgid "March"
 msgstr "Março"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1366
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1394
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1405
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1433
 msgid "April"
 msgstr "Abril"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1366
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1367
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1394
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1395
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1405
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1406
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1433
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1434
 msgid "May"
 msgstr "Maio"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1366
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1394
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1405
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1433
 msgid "June"
 msgstr "Junho"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1366
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1394
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1405
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1433
 msgid "July"
 msgstr "Julho"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1366
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1394
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1405
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1433
 msgid "August"
 msgstr "Agosto"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1366
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1394
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1405
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1433
 msgid "September"
 msgstr "Setembro"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1366
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1394
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1405
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1433
 msgid "October"
 msgstr "Outubro"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1366
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1394
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1405
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1433
 msgid "November"
 msgstr "Novembro"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1366
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1394
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1405
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1433
 msgid "December"
 msgstr "Dezembro"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1367
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1395
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1406
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1434
 msgid "Jan"
 msgstr "Jan"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1367
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1395
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1406
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1434
 msgid "Feb"
 msgstr "Fev"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1367
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1395
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1406
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1434
 msgid "Mar"
 msgstr "Mar"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1367
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1395
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1406
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1434
 msgid "Apr"
 msgstr "Abr"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1367
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1395
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1406
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1434
 msgid "Jun"
 msgstr "Jun"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1367
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1395
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1406
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1434
 msgid "Jul"
 msgstr "Jul"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1367
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1395
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1406
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1434
 msgid "Aug"
 msgstr "Ago"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1367
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1395
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1406
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1434
 msgid "Sep"
 msgstr "Set"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1367
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1395
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1406
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1434
 msgid "Oct"
 msgstr "Out"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1367
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1395
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1406
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1434
 msgid "Nov"
 msgstr "Nov"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1367
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1395
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1406
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1434
 msgid "Dec"
 msgstr "Dez"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1368
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1396
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1407
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1435
 #: ../../../views/category/list.php:222 ../../../views/property/list.php:20
 #: ../../../views/ranking/list.php:19 ../../../views/search/edit.php:20
 #: ../../../views/theme_options/edit.php:21
@@ -3708,8 +3783,8 @@ msgstr "Dez"
 msgid "Next"
 msgstr "Próximo passo "
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1369
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1397
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1408
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1436
 #: ../../../views/category/list.php:221 ../../../views/design/edit.php:18
 #: ../../../views/property/list.php:19 ../../../views/ranking/list.php:18
 #: ../../../views/search/edit.php:19 ../../../views/theme_options/edit.php:19
@@ -3717,44 +3792,44 @@ msgstr "Próximo passo "
 msgid "Previous"
 msgstr "Anterior"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1403
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1430
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1442
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1469
 msgid "Hour"
 msgstr "Hora"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1404
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1431
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1443
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1470
 msgid "Minute"
 msgstr "Minuto"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1405
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1432
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1444
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1471
 msgid "Second"
 msgstr "Segundo"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1406
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1433
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1445
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1472
 msgid "Now"
 msgstr "Agora"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1428
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1467
 msgid "Select Time"
 msgstr "Selecionar tempo"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1495
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1534
 msgid "Required Field"
 msgstr "Campo Obrigatório"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1496
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1535
 msgid "Minimum of items neccessary"
 msgstr "Mínimo de itens ncessários"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1497
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1536
 msgid "Maximun of items nececssary"
 msgstr "Máximo de itens necessários"
 
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1500
-#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1545
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1539
+#: ../../../modules/tainacan-ontology/tainacan-ontology.php:1584
 #, php-format
 msgid "The field ( %s ) is not matching its cardinality!"
 msgstr "O campo ( %s )  não corresponde com sua cardinalidade!"
@@ -3762,6 +3837,508 @@ msgstr "O campo ( %s )  não corresponde com sua cardinalidade!"
 #: ../../../modules/tainacan-ontology/controllers/category/ontology_category_controller.php:23
 msgid "Taxonomy vinculated!"
 msgstr ""
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:14
+#: ../../../views/category/list.php:17 ../../../views/design/edit.php:52
+#: ../../../views/event/list.php:16 ../../../views/property/list.php:45
+#: ../../../views/property/list_metadata.php:57
+#: ../../../views/ranking/add.php:19 ../../../views/ranking/edit.php:20
+#: ../../../views/ranking/list.php:33 ../../../views/search/edit.php:187
+#: ../../../views/theme_options/property/list.php:36
+msgid "Operation was successful."
+msgstr "Operação realizada com sucesso."
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:19
+#: ../../../views/category/list.php:22 ../../../views/design/edit.php:56
+#: ../../../views/event/list.php:20 ../../../views/property/list.php:50
+#: ../../../views/property/list_metadata.php:62
+#: ../../../views/ranking/add.php:23 ../../../views/ranking/edit.php:24
+#: ../../../views/ranking/list.php:37 ../../../views/search/edit.php:191
+#: ../../../views/theme_options/property/list.php:40
+msgid "Error! Operation was unsuccessful."
+msgstr "Erro! Operação não realizada."
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:36
+#: ../../../views/object/data_property_form.php:11
+#: ../../../views/object/edit_data_property_form.php:12
+#: ../../../views/object/single_object/single_data_property_form.php:11
+#: ../../../views/object/single_object/single_edit_data_property_form.php:11
+#: ../../../views/property/list.php:94 ../../../views/property/list.php:123
+#: ../../../views/theme_options/property/list.php:62
+#: ../../../views/theme_options/property/list.php:79
+msgid "Property data name"
+msgstr "Nome do Atributo"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:42
+#: ../../../views/object/data_property_form.php:12
+#: ../../../views/object/edit_data_property_form.php:13
+#: ../../../views/object/single_object/single_data_property_form.php:12
+#: ../../../views/object/single_object/single_edit_data_property_form.php:12
+#: ../../../views/property/list.php:129
+#: ../../../views/theme_options/property/list.php:80
+msgid "Property Data name"
+msgstr "Nome do Atributo"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:47
+#: ../../../views/object/data_property_form.php:15
+#: ../../../views/object/edit_data_property_form.php:16
+#: ../../../views/object/single_object/single_data_property_form.php:15
+#: ../../../views/object/single_object/single_edit_data_property_form.php:15
+#: ../../../views/property/list.php:134
+#: ../../../views/theme_options/property/list.php:83
+msgid "Property data widget"
+msgstr "Tipo do Atributo"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:51
+#: ../../../views/object/data_property_form.php:18
+#: ../../../views/object/edit_data_property_form.php:19
+#: ../../../views/object/single_object/single_data_property_form.php:18
+#: ../../../views/object/single_object/single_edit_data_property_form.php:18
+#: ../../../views/property/list.php:138
+#: ../../../views/theme_options/property/list.php:86
+msgid "Textarea"
+msgstr "Área de texto"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:59
+#: ../../../views/property/list.php:146
+#: ../../../views/property/metadata_forms.php:26
+#: ../../../views/theme_options/property/list.php:93
+msgid "Property data default value"
+msgstr "Valor padrão"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:60
+#: ../../../views/property/list.php:147
+#: ../../../views/property/metadata_forms.php:27
+#: ../../../views/theme_options/property/list.php:94
+msgid "Property Data Default Value"
+msgstr "Valor padrão"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:63
+#: ../../../views/property/list.php:150
+msgid "Property data text helper"
+msgstr "Texto de ajuda do metadado"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:68
+#: ../../../views/object/data_property_form.php:28
+#: ../../../views/object/edit_data_property_form.php:31
+#: ../../../views/object/single_object/single_data_property_form.php:30
+#: ../../../views/object/single_object/single_edit_data_property_form.php:30
+#: ../../../views/property/list.php:155
+#: ../../../views/theme_options/property/list.php:97
+msgid "Property data required"
+msgstr "Atributo obrigatório"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:69
+#: ../../../modules/tainacan-ontology/views/property/list.php:109
+#: ../../../modules/tainacan-ontology/views/property/list.php:114
+#: ../../../modules/tainacan-ontology/views/property/list.php:119
+#: ../../../modules/tainacan-ontology/views/property/list.php:170
+#: ../../../views/collection/edit.php:146
+#: ../../../views/collection/edit.php:193
+#: ../../../views/collection/edit.php:213
+#: ../../../views/collection/edit.php:233
+#: ../../../views/collection/edit.php:253
+#: ../../../views/import/csv/edit_maping_attributes.php:18
+#: ../../../views/import/csv/maping_attributes.php:18
+#: ../../../views/object/data_property_form.php:24
+#: ../../../views/object/data_property_form.php:29
+#: ../../../views/object/edit_data_property_form.php:27
+#: ../../../views/object/edit_data_property_form.php:32
+#: ../../../views/object/edit_object_property_form.php:35
+#: ../../../views/object/edit_object_property_form.php:40
+#: ../../../views/object/edit_object_property_form.php:45
+#: ../../../views/object/object_property_form.php:38
+#: ../../../views/object/object_property_form.php:43
+#: ../../../views/object/object_property_form.php:48
+#: ../../../views/object/show_insert_object_licenses.php:35
+#: ../../../views/object/show_insert_object_licenses.php:44
+#: ../../../views/object/single_object/single_data_property_form.php:26
+#: ../../../views/object/single_object/single_data_property_form.php:31
+#: ../../../views/object/single_object/single_edit_data_property_form.php:26
+#: ../../../views/object/single_object/single_edit_data_property_form.php:31
+#: ../../../views/object/single_object/single_edit_object_property_form.php:34
+#: ../../../views/object/single_object/single_edit_object_property_form.php:39
+#: ../../../views/object/single_object/single_edit_object_property_form.php:44
+#: ../../../views/object/single_object/single_object_property_form.php:38
+#: ../../../views/object/single_object/single_object_property_form.php:43
+#: ../../../views/object/single_object/single_object_property_form.php:48
+#: ../../../views/property/list.php:156 ../../../views/property/list.php:225
+#: ../../../views/property/list.php:230 ../../../views/property/list.php:235
+#: ../../../views/property/list.php:309
+#: ../../../views/property/metadata_forms.php:36
+#: ../../../views/property/metadata/form_object.php:34
+#: ../../../views/property/metadata/form_object.php:39
+#: ../../../views/property/metadata/form_term.php:33
+#: ../../../views/theme_options/property/list.php:98
+#: ../../../views/theme_options/property/list.php:141
+#: ../../../views/theme_options/property/list.php:146
+#: ../../../views/theme_options/property/list.php:151
+#: ../../../views/theme_options/property/list.php:215
+msgid "Yes"
+msgstr "Sim"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:70
+#: ../../../modules/tainacan-ontology/views/property/list.php:110
+#: ../../../modules/tainacan-ontology/views/property/list.php:115
+#: ../../../modules/tainacan-ontology/views/property/list.php:120
+#: ../../../modules/tainacan-ontology/views/property/list.php:171
+#: ../../../views/collection/edit.php:139
+#: ../../../views/collection/edit.php:200
+#: ../../../views/collection/edit.php:220
+#: ../../../views/collection/edit.php:240
+#: ../../../views/collection/edit.php:260
+#: ../../../views/import/csv/edit_maping_attributes.php:21
+#: ../../../views/import/csv/maping_attributes.php:21
+#: ../../../views/object/data_property_form.php:25
+#: ../../../views/object/data_property_form.php:30
+#: ../../../views/object/edit_data_property_form.php:28
+#: ../../../views/object/edit_data_property_form.php:33
+#: ../../../views/object/edit_object_property_form.php:36
+#: ../../../views/object/edit_object_property_form.php:41
+#: ../../../views/object/edit_object_property_form.php:46
+#: ../../../views/object/object_property_form.php:39
+#: ../../../views/object/object_property_form.php:44
+#: ../../../views/object/object_property_form.php:49
+#: ../../../views/object/show_insert_object_licenses.php:38
+#: ../../../views/object/show_insert_object_licenses.php:50
+#: ../../../views/object/single_object/single_data_property_form.php:27
+#: ../../../views/object/single_object/single_data_property_form.php:32
+#: ../../../views/object/single_object/single_edit_data_property_form.php:27
+#: ../../../views/object/single_object/single_edit_data_property_form.php:32
+#: ../../../views/object/single_object/single_edit_object_property_form.php:35
+#: ../../../views/object/single_object/single_edit_object_property_form.php:40
+#: ../../../views/object/single_object/single_edit_object_property_form.php:45
+#: ../../../views/object/single_object/single_object_property_form.php:39
+#: ../../../views/object/single_object/single_object_property_form.php:44
+#: ../../../views/object/single_object/single_object_property_form.php:49
+#: ../../../views/property/list.php:157 ../../../views/property/list.php:226
+#: ../../../views/property/list.php:231 ../../../views/property/list.php:236
+#: ../../../views/property/list.php:310
+#: ../../../views/property/metadata_forms.php:37
+#: ../../../views/property/metadata/form_object.php:35
+#: ../../../views/property/metadata/form_object.php:40
+#: ../../../views/property/metadata/form_term.php:34
+#: ../../../views/theme_options/property/list.php:99
+#: ../../../views/theme_options/property/list.php:142
+#: ../../../views/theme_options/property/list.php:147
+#: ../../../views/theme_options/property/list.php:152
+#: ../../../views/theme_options/property/list.php:216
+msgid "No"
+msgstr "Não"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:85
+#: ../../../views/object/edit_object_property_form.php:12
+#: ../../../views/object/object_property_form.php:15
+#: ../../../views/object/single_object/single_edit_object_property_form.php:11
+#: ../../../views/object/single_object/single_object_property_form.php:15
+#: ../../../views/property/list.php:172 ../../../views/property/list.php:201
+#: ../../../views/theme_options/property/list.php:111
+#: ../../../views/theme_options/property/list.php:128
+msgid "Property object name"
+msgstr "Nome da Relação"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:86
+#: ../../../views/object/edit_object_property_form.php:13
+#: ../../../views/object/object_property_form.php:16
+#: ../../../views/object/single_object/single_edit_object_property_form.php:12
+#: ../../../views/object/single_object/single_object_property_form.php:16
+#: ../../../views/property/list.php:202
+#: ../../../views/property/metadata/form_object.php:15
+#: ../../../views/theme_options/property/list.php:129
+msgid "Property Object name"
+msgstr "Nome da Relação"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:91
+#: ../../../modules/tainacan-ontology/views/property/list.php:98
+#: ../../../views/object/edit_object_property_form.php:17
+#: ../../../views/object/edit_object_property_form.php:28
+#: ../../../views/object/object_property_form.php:20
+#: ../../../views/object/object_property_form.php:31
+#: ../../../views/object/single_object/single_edit_object_property_form.php:16
+#: ../../../views/object/single_object/single_edit_object_property_form.php:27
+#: ../../../views/object/single_object/single_object_property_form.php:20
+#: ../../../views/object/single_object/single_object_property_form.php:31
+#: ../../../views/property/list.php:207 ../../../views/property/list.php:214
+#: ../../../views/property/metadata/form_object.php:26
+#: ../../../views/theme_options/property/list.php:132
+msgid "Property object relationship"
+msgstr "Relação"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:103
+#: ../../../views/object/edit_object_property_form.php:29
+#: ../../../views/object/object_property_form.php:32
+#: ../../../views/object/single_object/single_edit_object_property_form.php:28
+#: ../../../views/object/single_object/single_object_property_form.php:32
+#: ../../../views/property/list.php:219
+#: ../../../views/property/metadata/form_object.php:27
+msgid "Click on the category in the tree"
+msgstr "Clique na categoria na árvore"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:108
+#: ../../../views/object/edit_object_property_form.php:34
+#: ../../../views/object/object_property_form.php:37
+#: ../../../views/object/single_object/single_edit_object_property_form.php:33
+#: ../../../views/object/single_object/single_object_property_form.php:37
+#: ../../../views/property/list.php:224
+#: ../../../views/theme_options/property/list.php:140
+msgid "Property object facet"
+msgstr "Faceta da Relação"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:113
+#: ../../../modules/tainacan-ontology/views/property/list.php:169
+#: ../../../views/object/edit_object_property_form.php:39
+#: ../../../views/object/object_property_form.php:42
+#: ../../../views/object/single_object/single_edit_object_property_form.php:38
+#: ../../../views/object/single_object/single_object_property_form.php:42
+#: ../../../views/property/list.php:229 ../../../views/property/list.php:308
+#: ../../../views/property/metadata/form_object.php:33
+#: ../../../views/theme_options/property/list.php:145
+msgid "Property object required"
+msgstr "Relação obrigatória"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:118
+#: ../../../views/object/edit_object_property_form.php:44
+#: ../../../views/object/object_property_form.php:47
+#: ../../../views/object/single_object/single_edit_object_property_form.php:43
+#: ../../../views/object/single_object/single_object_property_form.php:47
+#: ../../../views/property/list.php:234
+#: ../../../views/property/metadata/form_object.php:38
+#: ../../../views/theme_options/property/list.php:150
+msgid "Property object reverse"
+msgstr "Relação inversa"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:123
+#: ../../../views/object/edit_object_property_form.php:49
+#: ../../../views/object/object_property_form.php:52
+#: ../../../views/object/single_object/single_edit_object_property_form.php:48
+#: ../../../views/object/single_object/single_object_property_form.php:52
+#: ../../../views/property/list.php:239
+#: ../../../views/property/metadata/form_object.php:43
+#: ../../../views/theme_options/property/list.php:155
+msgid "Select the reverse property"
+msgstr "Selecione a relação inversa"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:141
+#: ../../../views/property/list.php:257 ../../../views/property/list.php:280
+#: ../../../views/property/metadata/form_term.php:17
+#: ../../../views/theme_options/property/list.php:170
+#: ../../../views/theme_options/property/list.php:187
+msgid "Property term name"
+msgstr "Nome do metadado de termo"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:142
+#: ../../../views/property/list.php:281
+#: ../../../views/property/metadata/form_term.php:18
+#: ../../../views/theme_options/property/list.php:188
+msgid "Property Term name"
+msgstr "Nome do metadado de termo"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:147
+#: ../../../views/property/list.php:286
+#: ../../../views/theme_options/property/list.php:192
+msgid "Property term cardinality"
+msgstr "Cardinalidade do metadado de termo"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:148
+#: ../../../views/property/list.php:287
+msgid "Associate with one category"
+msgstr "Atribuir um único valor"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:149
+#: ../../../views/property/list.php:288
+msgid "Associate with multiple categories"
+msgstr "Atribuir múltiplos valores"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:152
+#: ../../../views/property/list.php:291
+#: ../../../views/theme_options/property/list.php:197
+msgid "Property Term Widget"
+msgstr "Widget do metadado de termo"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:158
+#: ../../../views/property/list.php:297
+#: ../../../views/property/metadata/form_term.php:78
+#: ../../../views/theme_options/property/list.php:203
+msgid "Property Term Root Category"
+msgstr "Categoria raiz do metadado de termo"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:164
+#: ../../../views/property/list.php:303
+#: ../../../views/property/metadata/form_term.php:83
+#: ../../../views/theme_options/property/list.php:209
+msgid "Selected category"
+msgstr "Categoria selecionada"
+
+#: ../../../modules/tainacan-ontology/views/property/list.php:175
+#: ../../../views/property/list.php:321
+#: ../../../views/property/metadata/form_term.php:22
+#: ../../../views/theme_options/property/list.php:227
+msgid "Property term text helper"
+msgstr "Texto de ajuda de metadado de termo"
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:66
+#: ../../../views/property/js/list_js.php:78
+msgid "Please,select at least one relation"
+msgstr "Por favor, selecione um range para a propriedade"
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:212
+#: ../../../views/property/js/list_js.php:233
+#: ../../../views/property/js/list_metadata_js.php:42
+#: ../../../views/theme_options/property/js/list_js.php:172
+msgid "Radio"
+msgstr "Radio"
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:213
+#: ../../../views/property/js/list_js.php:234
+#: ../../../views/property/js/list_metadata_js.php:43
+#: ../../../views/theme_options/property/js/list_js.php:173
+msgid "Selectbox"
+msgstr "Selectbox"
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:218
+#: ../../../views/property/js/list_js.php:239
+#: ../../../views/property/js/list_metadata_js.php:48
+#: ../../../views/theme_options/property/js/list_js.php:178
+msgid "Checkbox"
+msgstr "Checkbox"
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:219
+#: ../../../views/property/js/list_js.php:240
+#: ../../../views/property/js/list_metadata_js.php:49
+#: ../../../views/theme_options/property/js/list_js.php:179
+msgid "Multipleselect "
+msgstr "Seleção Múltipla"
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:220
+#: ../../../views/property/js/list_js.php:241
+#: ../../../views/property/js/list_metadata_js.php:50
+#: ../../../views/theme_options/property/js/list_js.php:180
+msgid "Tree - Checkbox"
+msgstr "Árvore com checkbox"
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:239
+#: ../../../views/object/multiple_items/editor_items.php:39
+#: ../../../views/object/multiple_social_network/editor_items.php:37
+#: ../../../views/property/js/list_js.php:260
+msgid "None"
+msgstr "Nenhum "
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:249
+#: ../../../views/object/js/edit_object_property_form_js.php:58
+#: ../../../views/object/js/object_property_form_js.php:58
+#: ../../../views/object/single_object/js/edit_object_property_form_js.php:57
+#: ../../../views/object/single_object/js/object_property_form_js.php:57
+#: ../../../views/property/js/list_js.php:270
+#: ../../../views/property/js/list_metadata_js.php:626
+#: ../../../views/theme_options/property/js/list_js.php:204
+msgid "No properties added"
+msgstr "Sem metadados adicionados"
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:264
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:265
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:300
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:301
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:376
+#: ../../../views/property/js/list_js.php:286
+#: ../../../views/property/js/list_js.php:287
+#: ../../../views/property/js/list_js.php:323
+#: ../../../views/property/js/list_js.php:324
+#: ../../../views/property/js/list_js.php:401
+#: ../../../views/property/js/list_metadata_js.php:458
+#: ../../../views/property/js/list_metadata_js.php:765
+#: ../../../views/property/js/list_metadata_js.php:891
+#: ../../../views/theme_options/property/js/list_js.php:217
+#: ../../../views/theme_options/property/js/list_js.php:244
+#: ../../../views/theme_options/property/js/list_js.php:277
+msgid "Edit property"
+msgstr "Editar propriedade"
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:423
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:424
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:433
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:434
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:442
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:443
+#: ../../../views/property/list.php:115 ../../../views/property/list.php:118
+#: ../../../views/property/list.php:193 ../../../views/property/list.php:196
+#: ../../../views/property/list.php:276
+#: ../../../views/property/js/list_js.php:448
+#: ../../../views/property/js/list_js.php:449
+#: ../../../views/property/js/list_js.php:458
+#: ../../../views/property/js/list_js.php:459
+#: ../../../views/property/js/list_js.php:467
+#: ../../../views/property/js/list_js.php:468
+#: ../../../views/property/js/list_metadata_js.php:1489
+#: ../../../views/property/js/list_metadata_js.php:1495
+#: ../../../views/property/js/list_metadata_js.php:1504
+#: ../../../views/theme_options/property/list.php:75
+#: ../../../views/theme_options/property/list.php:124
+#: ../../../views/theme_options/property/list.php:183
+#: ../../../views/theme_options/property/js/list_js.php:320
+#: ../../../views/theme_options/property/js/list_js.php:326
+#: ../../../views/theme_options/property/js/list_js.php:334
+msgid "Add new property"
+msgstr "Adicionar novo metadado"
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:532
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:536
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:558
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:562
+#: ../../../views/property/js/list_js.php:557
+#: ../../../views/property/js/list_js.php:561
+#: ../../../views/property/js/list_js.php:583
+#: ../../../views/property/js/list_js.php:587
+#: ../../../views/theme_options/property/js/list_js.php:490
+#: ../../../views/theme_options/property/js/list_js.php:494
+#: ../../../views/theme_options/property/js/list_js.php:495
+#: ../../../views/theme_options/property/js/list_js.php:496
+#: ../../../views/theme_options/property/js/list_js.php:510
+#: ../../../views/theme_options/property/js/list_js.php:514
+msgid "text"
+msgstr "texto"
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:533
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:534
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:538
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:559
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:560
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:564
+#: ../../../views/property/js/list_js.php:558
+#: ../../../views/property/js/list_js.php:559
+#: ../../../views/property/js/list_js.php:563
+#: ../../../views/property/js/list_js.php:584
+#: ../../../views/property/js/list_js.php:585
+#: ../../../views/property/js/list_js.php:589
+#: ../../../views/theme_options/property/js/list_js.php:491
+#: ../../../views/theme_options/property/js/list_js.php:492
+#: ../../../views/theme_options/property/js/list_js.php:511
+#: ../../../views/theme_options/property/js/list_js.php:512
+#: ../../../views/theme_options/property/js/list_js.php:516
+msgid "radio"
+msgstr "radio"
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:535
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:537
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:561
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:563
+#: ../../../views/property/js/list_js.php:560
+#: ../../../views/property/js/list_js.php:562
+#: ../../../views/property/js/list_js.php:586
+#: ../../../views/property/js/list_js.php:588
+#: ../../../views/theme_options/property/js/list_js.php:513
+#: ../../../views/theme_options/property/js/list_js.php:515
+msgid "textarea"
+msgstr "área de texto"
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:628
+#: ../../../views/property/js/list_js.php:653
+msgid "tree"
+msgstr "árvore"
+
+#: ../../../modules/tainacan-ontology/views/property/js/list_js.php:887
+#: ../../../views/property/js/list_js.php:912
+msgid "Add the property"
+msgstr "Adicionar o metadado"
 
 #: ../../../views/advanced_search/advanced_search.php:9
 msgid "Welcome"
@@ -3812,8 +4389,8 @@ msgstr "para"
 #: ../../../views/object/show_insert_object_properties.php:49
 #: ../../../views/object/multiple_items/editor_items.php:149
 #: ../../../views/object/multiple_social_network/editor_items.php:147
-#: ../../../views/search/js/edit_js.php:193
-#: ../../../views/search/js/layout_js.php:58
+#: ../../../views/search/js/edit_js.php:199
+#: ../../../views/search/js/layout_js.php:74
 msgid "Data properties"
 msgstr "Atributos"
 
@@ -3897,33 +4474,15 @@ msgstr "Nenhum item foi adicionado a esta debate"
 
 #: ../../../views/advanced_search/js/advanced_search_js.php:94
 msgid "All Colections"
-msgstr "Todas as ontologias"
-
-#: ../../../views/category/list.php:17 ../../../views/design/edit.php:52
-#: ../../../views/event/list.php:16 ../../../views/property/list.php:45
-#: ../../../views/property/list_metadata.php:110
-#: ../../../views/ranking/add.php:19 ../../../views/ranking/edit.php:20
-#: ../../../views/ranking/list.php:33 ../../../views/search/edit.php:187
-#: ../../../views/theme_options/property/list.php:36
-msgid "Operation was successful."
-msgstr "Operação realizada com sucesso."
-
-#: ../../../views/category/list.php:22 ../../../views/design/edit.php:56
-#: ../../../views/event/list.php:20 ../../../views/property/list.php:50
-#: ../../../views/property/list_metadata.php:115
-#: ../../../views/ranking/add.php:23 ../../../views/ranking/edit.php:24
-#: ../../../views/ranking/list.php:37 ../../../views/search/edit.php:191
-#: ../../../views/theme_options/property/list.php:40
-msgid "Error! Operation was unsuccessful."
-msgstr "Erro! Operação não realizada."
+msgstr "Todas as coleções"
 
 #: ../../../views/category/list.php:32
 msgid "Add selected categories as facets"
-msgstr "Adicionar Classes  selecionadas como facetas"
+msgstr "Adicionar Categorias  selecionadas como facetas"
 
 #: ../../../views/category/list.php:54
 msgid "Category privacity"
-msgstr "Privacidade das Classes"
+msgstr "Privacidade das Categorias"
 
 #: ../../../views/category/list.php:56 ../../../views/collection/edit.php:166
 msgid "Private"
@@ -3935,7 +4494,7 @@ msgstr "Público"
 
 #: ../../../views/category/list.php:61
 msgid "Category moderators"
-msgstr "Moderadores das Classes"
+msgstr "Moderadores das Categorias"
 
 #: ../../../views/category/list.php:62
 msgid "Type the three user initial letters"
@@ -4009,7 +4568,7 @@ msgid "Confirm"
 msgstr "Confirmar"
 
 #: ../../../views/category/list.php:217
-#: ../../../views/collection/header_collection.php:103
+#: ../../../views/collection/header_collection.php:108
 #: ../../../views/collection/header_collection_1.php:45
 msgid "Social"
 msgstr "Redes Sociais"
@@ -4025,20 +4584,20 @@ msgid "Design"
 msgstr "Visual"
 
 #: ../../../views/category/page.php:37
-#: ../../../views/collection/header_collection.php:242
+#: ../../../views/collection/header_collection.php:247
 #: ../../../views/object/list_single_object.php:112
-#: ../../../views/property/page.php:31 ../../../views/tag/page.php:31
+#: ../../../views/property/page.php:34 ../../../views/tag/page.php:31
 msgid "RDF"
 msgstr "RDF "
 
 #: ../../../views/category/page.php:42
-#: ../../../views/collection/header_collection.php:247
+#: ../../../views/collection/header_collection.php:252
 #: ../../../views/object/list_single_object.php:117
-#: ../../../views/property/page.php:36 ../../../views/tag/page.php:36
+#: ../../../views/property/page.php:39 ../../../views/tag/page.php:36
 msgid "JSON"
 msgstr "JSON"
 
-#: ../../../views/category/page.php:54 ../../../views/property/page.php:48
+#: ../../../views/category/page.php:54 ../../../views/property/page.php:51
 #: ../../../views/tag/page.php:49
 msgid "Subclass of "
 msgstr "Subclasse de"
@@ -4047,12 +4606,16 @@ msgstr "Subclasse de"
 msgid "Subclass of Category"
 msgstr "Subclasse"
 
-#: ../../../views/category/page.php:70 ../../../views/property/page.php:63
+#: ../../../views/category/page.php:70 ../../../views/property/page.php:66
 #: ../../../views/tag/page.php:66
 msgid "Slug"
 msgstr "Identificador"
 
-#: ../../../views/category/page.php:91 ../../../views/property/page.php:89
+#: ../../../views/category/page.php:81
+msgid "Edit properties"
+msgstr "Editar propriedades"
+
+#: ../../../views/category/page.php:91 ../../../views/property/page.php:92
 msgid "Type "
 msgstr "Tipo "
 
@@ -4083,35 +4646,36 @@ msgid "The download will start in few seconds"
 msgstr "O download será iniciado em alguns segundos"
 
 #: ../../../views/collection/comments.php:25
-#: ../../../views/collection/edit.php:527
+#: ../../../views/collection/edit.php:531
 #: ../../../views/object/ranking/list_value_ordenation.php:38
 msgid "Comments"
 msgstr "Comentários"
 
 #: ../../../views/collection/edit.php:25
 #: ../../../views/collection/js/edit_js.php:3
-#: ../../../views/property/list_metadata.php:30
+#: ../../../views/property/list_metadata.php:14
 #: ../../../views/search/layout.php:7
 msgid "Configurations"
 msgstr "Configurações"
 
 #: ../../../views/collection/edit.php:30
-#: ../../../views/collection/header_collection.php:73
-#: ../../../views/property/list_metadata.php:35
+#: ../../../views/collection/header_collection.php:78
+#: ../../../views/property/list_metadata.php:19
 #: ../../../views/search/layout.php:12
 msgid "Metadata and Filters"
 msgstr "Metadados e Filtros"
 
 #: ../../../views/collection/edit.php:35
-#: ../../../views/collection/header_collection.php:79
-#: ../../../views/property/list_metadata.php:40
+#: ../../../views/collection/header_collection.php:84
+#: ../../../views/property/list_metadata.php:24
 #: ../../../views/search/layout.php:17
-#: ../../../views/search/js/layout_js.php:4
+#: ../../../views/search/js/layout_js.php:3
 msgid "Layout"
 msgstr ""
 
 #: ../../../views/collection/edit.php:39
-#: ../../../views/collection/edit.php:1429
+#: ../../../views/collection/edit.php:1433
+#: ../../../views/property/list_metadata.php:29
 msgid "Save & Next"
 msgstr "Salvar e Continuar"
 
@@ -4211,96 +4775,6 @@ msgstr "Objeto do debate"
 msgid "Hide Tags"
 msgstr "Esconder Tags"
 
-#: ../../../views/collection/edit.php:139
-#: ../../../views/collection/edit.php:200
-#: ../../../views/collection/edit.php:220
-#: ../../../views/collection/edit.php:240
-#: ../../../views/collection/edit.php:260
-#: ../../../views/import/csv/edit_maping_attributes.php:21
-#: ../../../views/import/csv/maping_attributes.php:21
-#: ../../../views/object/data_property_form.php:25
-#: ../../../views/object/data_property_form.php:30
-#: ../../../views/object/edit_data_property_form.php:28
-#: ../../../views/object/edit_data_property_form.php:33
-#: ../../../views/object/edit_object_property_form.php:36
-#: ../../../views/object/edit_object_property_form.php:41
-#: ../../../views/object/edit_object_property_form.php:46
-#: ../../../views/object/object_property_form.php:39
-#: ../../../views/object/object_property_form.php:44
-#: ../../../views/object/object_property_form.php:49
-#: ../../../views/object/show_insert_object_licenses.php:38
-#: ../../../views/object/show_insert_object_licenses.php:50
-#: ../../../views/object/single_object/single_data_property_form.php:27
-#: ../../../views/object/single_object/single_data_property_form.php:32
-#: ../../../views/object/single_object/single_edit_data_property_form.php:27
-#: ../../../views/object/single_object/single_edit_data_property_form.php:32
-#: ../../../views/object/single_object/single_edit_object_property_form.php:35
-#: ../../../views/object/single_object/single_edit_object_property_form.php:40
-#: ../../../views/object/single_object/single_edit_object_property_form.php:45
-#: ../../../views/object/single_object/single_object_property_form.php:39
-#: ../../../views/object/single_object/single_object_property_form.php:44
-#: ../../../views/object/single_object/single_object_property_form.php:49
-#: ../../../views/property/list.php:157 ../../../views/property/list.php:226
-#: ../../../views/property/list.php:231 ../../../views/property/list.php:236
-#: ../../../views/property/list.php:310
-#: ../../../views/property/metadata_forms.php:37
-#: ../../../views/property/metadata/form_object.php:32
-#: ../../../views/property/metadata/form_object.php:37
-#: ../../../views/property/metadata/form_object.php:42
-#: ../../../views/property/metadata/form_term.php:33
-#: ../../../views/theme_options/property/list.php:99
-#: ../../../views/theme_options/property/list.php:142
-#: ../../../views/theme_options/property/list.php:147
-#: ../../../views/theme_options/property/list.php:152
-#: ../../../views/theme_options/property/list.php:216
-msgid "No"
-msgstr "Não"
-
-#: ../../../views/collection/edit.php:146
-#: ../../../views/collection/edit.php:193
-#: ../../../views/collection/edit.php:213
-#: ../../../views/collection/edit.php:233
-#: ../../../views/collection/edit.php:253
-#: ../../../views/import/csv/edit_maping_attributes.php:18
-#: ../../../views/import/csv/maping_attributes.php:18
-#: ../../../views/object/data_property_form.php:24
-#: ../../../views/object/data_property_form.php:29
-#: ../../../views/object/edit_data_property_form.php:27
-#: ../../../views/object/edit_data_property_form.php:32
-#: ../../../views/object/edit_object_property_form.php:35
-#: ../../../views/object/edit_object_property_form.php:40
-#: ../../../views/object/edit_object_property_form.php:45
-#: ../../../views/object/object_property_form.php:38
-#: ../../../views/object/object_property_form.php:43
-#: ../../../views/object/object_property_form.php:48
-#: ../../../views/object/show_insert_object_licenses.php:35
-#: ../../../views/object/show_insert_object_licenses.php:44
-#: ../../../views/object/single_object/single_data_property_form.php:26
-#: ../../../views/object/single_object/single_data_property_form.php:31
-#: ../../../views/object/single_object/single_edit_data_property_form.php:26
-#: ../../../views/object/single_object/single_edit_data_property_form.php:31
-#: ../../../views/object/single_object/single_edit_object_property_form.php:34
-#: ../../../views/object/single_object/single_edit_object_property_form.php:39
-#: ../../../views/object/single_object/single_edit_object_property_form.php:44
-#: ../../../views/object/single_object/single_object_property_form.php:38
-#: ../../../views/object/single_object/single_object_property_form.php:43
-#: ../../../views/object/single_object/single_object_property_form.php:48
-#: ../../../views/property/list.php:156 ../../../views/property/list.php:225
-#: ../../../views/property/list.php:230 ../../../views/property/list.php:235
-#: ../../../views/property/list.php:309
-#: ../../../views/property/metadata_forms.php:36
-#: ../../../views/property/metadata/form_object.php:31
-#: ../../../views/property/metadata/form_object.php:36
-#: ../../../views/property/metadata/form_object.php:41
-#: ../../../views/property/metadata/form_term.php:32
-#: ../../../views/theme_options/property/list.php:98
-#: ../../../views/theme_options/property/list.php:141
-#: ../../../views/theme_options/property/list.php:146
-#: ../../../views/theme_options/property/list.php:151
-#: ../../../views/theme_options/property/list.php:215
-msgid "Yes"
-msgstr "Sim"
-
 #: ../../../views/collection/edit.php:152
 msgid "Collection privacy"
 msgstr "Privacidade da coleção"
@@ -4349,265 +4823,265 @@ msgstr "Aprovação Democrática (eleição por maioria)"
 msgid "Time to vote (days):"
 msgstr "Tempo de votação"
 
-#: ../../../views/collection/edit.php:317
+#: ../../../views/collection/edit.php:321
 msgid "Collection Moderators"
 msgstr "Moderadores do debate"
 
-#: ../../../views/collection/edit.php:318
+#: ../../../views/collection/edit.php:322
 msgid "Type the three first letters of the user name "
 msgstr "Digite os três primeiras letras do nome do usuário"
 
-#: ../../../views/collection/edit.php:330
-#: ../../../views/collection/edit.php:980
+#: ../../../views/collection/edit.php:334
+#: ../../../views/collection/edit.php:984
 #: ../../../views/theme_options/edit_configuration.php:96
 msgid "Permissions - Choose permissions for each of the following actions"
 msgstr "Permissões - Escolha as permissões para cada uma das ações abaixo"
 
-#: ../../../views/collection/edit.php:334
-#: ../../../views/collection/edit.php:970
+#: ../../../views/collection/edit.php:338
+#: ../../../views/collection/edit.php:974
 msgid "Entity"
 msgstr "Entidade "
 
-#: ../../../views/collection/edit.php:335
-#: ../../../views/collection/edit.php:971
+#: ../../../views/collection/edit.php:339
+#: ../../../views/collection/edit.php:975
 msgid "Create"
 msgstr "Criar "
 
-#: ../../../views/collection/edit.php:349
-#: ../../../views/collection/edit.php:373
-#: ../../../views/collection/edit.php:397
-#: ../../../views/collection/edit.php:426
-#: ../../../views/collection/edit.php:451
-#: ../../../views/collection/edit.php:480
-#: ../../../views/collection/edit.php:505
-#: ../../../views/collection/edit.php:534
-#: ../../../views/collection/edit.php:577
-#: ../../../views/collection/edit.php:606
-#: ../../../views/collection/edit.php:630
-#: ../../../views/collection/edit.php:654
-#: ../../../views/collection/edit.php:683
-#: ../../../views/collection/edit.php:707
-#: ../../../views/collection/edit.php:731
-#: ../../../views/collection/edit.php:761
-#: ../../../views/collection/edit.php:791
-#: ../../../views/collection/edit.php:815
-#: ../../../views/collection/edit.php:839
-#: ../../../views/collection/edit.php:869
-#: ../../../views/collection/edit.php:900
-#: ../../../views/collection/edit.php:924
-#: ../../../views/collection/edit.php:948
-#: ../../../views/collection/edit.php:990
-#: ../../../views/collection/edit.php:1010
-#: ../../../views/collection/edit.php:1030
-#: ../../../views/collection/edit.php:1054
-#: ../../../views/collection/edit.php:1074
-#: ../../../views/collection/edit.php:1094
-#: ../../../views/collection/edit.php:1114
-#: ../../../views/collection/edit.php:1138
-#: ../../../views/collection/edit.php:1158
-#: ../../../views/collection/edit.php:1178
-#: ../../../views/collection/edit.php:1198
-#: ../../../views/collection/edit.php:1222
-#: ../../../views/collection/edit.php:1242
-#: ../../../views/collection/edit.php:1262
-#: ../../../views/collection/edit.php:1282
-#: ../../../views/collection/edit.php:1306
-#: ../../../views/collection/edit.php:1341
-#: ../../../views/collection/edit.php:1365
-#: ../../../views/collection/edit.php:1385
-#: ../../../views/collection/edit.php:1405
+#: ../../../views/collection/edit.php:353
+#: ../../../views/collection/edit.php:377
+#: ../../../views/collection/edit.php:401
+#: ../../../views/collection/edit.php:430
+#: ../../../views/collection/edit.php:455
+#: ../../../views/collection/edit.php:484
+#: ../../../views/collection/edit.php:509
+#: ../../../views/collection/edit.php:538
+#: ../../../views/collection/edit.php:581
+#: ../../../views/collection/edit.php:610
+#: ../../../views/collection/edit.php:634
+#: ../../../views/collection/edit.php:658
+#: ../../../views/collection/edit.php:687
+#: ../../../views/collection/edit.php:711
+#: ../../../views/collection/edit.php:735
+#: ../../../views/collection/edit.php:765
+#: ../../../views/collection/edit.php:795
+#: ../../../views/collection/edit.php:819
+#: ../../../views/collection/edit.php:843
+#: ../../../views/collection/edit.php:873
+#: ../../../views/collection/edit.php:904
+#: ../../../views/collection/edit.php:928
+#: ../../../views/collection/edit.php:952
+#: ../../../views/collection/edit.php:994
+#: ../../../views/collection/edit.php:1014
+#: ../../../views/collection/edit.php:1034
+#: ../../../views/collection/edit.php:1058
+#: ../../../views/collection/edit.php:1078
+#: ../../../views/collection/edit.php:1098
+#: ../../../views/collection/edit.php:1118
+#: ../../../views/collection/edit.php:1142
+#: ../../../views/collection/edit.php:1162
+#: ../../../views/collection/edit.php:1182
+#: ../../../views/collection/edit.php:1202
+#: ../../../views/collection/edit.php:1226
+#: ../../../views/collection/edit.php:1246
+#: ../../../views/collection/edit.php:1266
+#: ../../../views/collection/edit.php:1286
+#: ../../../views/collection/edit.php:1310
+#: ../../../views/collection/edit.php:1345
+#: ../../../views/collection/edit.php:1369
+#: ../../../views/collection/edit.php:1389
+#: ../../../views/collection/edit.php:1409
 msgid "Anonymous"
 msgstr "Anônimo"
 
-#: ../../../views/collection/edit.php:354
-#: ../../../views/collection/edit.php:378
-#: ../../../views/collection/edit.php:402
-#: ../../../views/collection/edit.php:431
-#: ../../../views/collection/edit.php:456
-#: ../../../views/collection/edit.php:485
-#: ../../../views/collection/edit.php:510
-#: ../../../views/collection/edit.php:539
-#: ../../../views/collection/edit.php:558
-#: ../../../views/collection/edit.php:582
-#: ../../../views/collection/edit.php:611
-#: ../../../views/collection/edit.php:635
-#: ../../../views/collection/edit.php:659
-#: ../../../views/collection/edit.php:688
-#: ../../../views/collection/edit.php:712
-#: ../../../views/collection/edit.php:736
-#: ../../../views/collection/edit.php:766
-#: ../../../views/collection/edit.php:796
-#: ../../../views/collection/edit.php:820
-#: ../../../views/collection/edit.php:844
-#: ../../../views/collection/edit.php:874
-#: ../../../views/collection/edit.php:905
-#: ../../../views/collection/edit.php:929
-#: ../../../views/collection/edit.php:953
-#: ../../../views/collection/edit.php:995
-#: ../../../views/collection/edit.php:1015
-#: ../../../views/collection/edit.php:1035
-#: ../../../views/collection/edit.php:1059
-#: ../../../views/collection/edit.php:1079
-#: ../../../views/collection/edit.php:1099
-#: ../../../views/collection/edit.php:1119
-#: ../../../views/collection/edit.php:1143
-#: ../../../views/collection/edit.php:1163
-#: ../../../views/collection/edit.php:1183
-#: ../../../views/collection/edit.php:1203
-#: ../../../views/collection/edit.php:1227
-#: ../../../views/collection/edit.php:1247
-#: ../../../views/collection/edit.php:1267
-#: ../../../views/collection/edit.php:1287
-#: ../../../views/collection/edit.php:1311
-#: ../../../views/collection/edit.php:1326
-#: ../../../views/collection/edit.php:1346
-#: ../../../views/collection/edit.php:1370
-#: ../../../views/collection/edit.php:1390
-#: ../../../views/collection/edit.php:1410
+#: ../../../views/collection/edit.php:358
+#: ../../../views/collection/edit.php:382
+#: ../../../views/collection/edit.php:406
+#: ../../../views/collection/edit.php:435
+#: ../../../views/collection/edit.php:460
+#: ../../../views/collection/edit.php:489
+#: ../../../views/collection/edit.php:514
+#: ../../../views/collection/edit.php:543
+#: ../../../views/collection/edit.php:562
+#: ../../../views/collection/edit.php:586
+#: ../../../views/collection/edit.php:615
+#: ../../../views/collection/edit.php:639
+#: ../../../views/collection/edit.php:663
+#: ../../../views/collection/edit.php:692
+#: ../../../views/collection/edit.php:716
+#: ../../../views/collection/edit.php:740
+#: ../../../views/collection/edit.php:770
+#: ../../../views/collection/edit.php:800
+#: ../../../views/collection/edit.php:824
+#: ../../../views/collection/edit.php:848
+#: ../../../views/collection/edit.php:878
+#: ../../../views/collection/edit.php:909
+#: ../../../views/collection/edit.php:933
+#: ../../../views/collection/edit.php:957
+#: ../../../views/collection/edit.php:999
+#: ../../../views/collection/edit.php:1019
+#: ../../../views/collection/edit.php:1039
+#: ../../../views/collection/edit.php:1063
+#: ../../../views/collection/edit.php:1083
+#: ../../../views/collection/edit.php:1103
+#: ../../../views/collection/edit.php:1123
+#: ../../../views/collection/edit.php:1147
+#: ../../../views/collection/edit.php:1167
+#: ../../../views/collection/edit.php:1187
+#: ../../../views/collection/edit.php:1207
+#: ../../../views/collection/edit.php:1231
+#: ../../../views/collection/edit.php:1251
+#: ../../../views/collection/edit.php:1271
+#: ../../../views/collection/edit.php:1291
+#: ../../../views/collection/edit.php:1315
+#: ../../../views/collection/edit.php:1330
+#: ../../../views/collection/edit.php:1350
+#: ../../../views/collection/edit.php:1374
+#: ../../../views/collection/edit.php:1394
+#: ../../../views/collection/edit.php:1414
 #: ../../../views/theme_options/edit_configuration.php:102
 #: ../../../views/theme_options/edit_configuration.php:109
 msgid "Approval"
 msgstr "Aprovação"
 
-#: ../../../views/collection/edit.php:359
-#: ../../../views/collection/edit.php:383
-#: ../../../views/collection/edit.php:407
-#: ../../../views/collection/edit.php:436
-#: ../../../views/collection/edit.php:461
-#: ../../../views/collection/edit.php:490
-#: ../../../views/collection/edit.php:515
-#: ../../../views/collection/edit.php:544
-#: ../../../views/collection/edit.php:563
-#: ../../../views/collection/edit.php:587
-#: ../../../views/collection/edit.php:616
-#: ../../../views/collection/edit.php:640
-#: ../../../views/collection/edit.php:664
-#: ../../../views/collection/edit.php:693
-#: ../../../views/collection/edit.php:717
-#: ../../../views/collection/edit.php:741
-#: ../../../views/collection/edit.php:771
-#: ../../../views/collection/edit.php:801
-#: ../../../views/collection/edit.php:825
-#: ../../../views/collection/edit.php:849
-#: ../../../views/collection/edit.php:879
-#: ../../../views/collection/edit.php:910
-#: ../../../views/collection/edit.php:934
-#: ../../../views/collection/edit.php:958
-#: ../../../views/collection/edit.php:1000
-#: ../../../views/collection/edit.php:1020
-#: ../../../views/collection/edit.php:1040
-#: ../../../views/collection/edit.php:1064
-#: ../../../views/collection/edit.php:1084
-#: ../../../views/collection/edit.php:1104
-#: ../../../views/collection/edit.php:1124
-#: ../../../views/collection/edit.php:1148
-#: ../../../views/collection/edit.php:1168
-#: ../../../views/collection/edit.php:1188
-#: ../../../views/collection/edit.php:1208
-#: ../../../views/collection/edit.php:1232
-#: ../../../views/collection/edit.php:1252
-#: ../../../views/collection/edit.php:1272
-#: ../../../views/collection/edit.php:1292
-#: ../../../views/collection/edit.php:1316
-#: ../../../views/collection/edit.php:1331
-#: ../../../views/collection/edit.php:1351
-#: ../../../views/collection/edit.php:1375
-#: ../../../views/collection/edit.php:1395
-#: ../../../views/collection/edit.php:1415
+#: ../../../views/collection/edit.php:363
+#: ../../../views/collection/edit.php:387
+#: ../../../views/collection/edit.php:411
+#: ../../../views/collection/edit.php:440
+#: ../../../views/collection/edit.php:465
+#: ../../../views/collection/edit.php:494
+#: ../../../views/collection/edit.php:519
+#: ../../../views/collection/edit.php:548
+#: ../../../views/collection/edit.php:567
+#: ../../../views/collection/edit.php:591
+#: ../../../views/collection/edit.php:620
+#: ../../../views/collection/edit.php:644
+#: ../../../views/collection/edit.php:668
+#: ../../../views/collection/edit.php:697
+#: ../../../views/collection/edit.php:721
+#: ../../../views/collection/edit.php:745
+#: ../../../views/collection/edit.php:775
+#: ../../../views/collection/edit.php:805
+#: ../../../views/collection/edit.php:829
+#: ../../../views/collection/edit.php:853
+#: ../../../views/collection/edit.php:883
+#: ../../../views/collection/edit.php:914
+#: ../../../views/collection/edit.php:938
+#: ../../../views/collection/edit.php:962
+#: ../../../views/collection/edit.php:1004
+#: ../../../views/collection/edit.php:1024
+#: ../../../views/collection/edit.php:1044
+#: ../../../views/collection/edit.php:1068
+#: ../../../views/collection/edit.php:1088
+#: ../../../views/collection/edit.php:1108
+#: ../../../views/collection/edit.php:1128
+#: ../../../views/collection/edit.php:1152
+#: ../../../views/collection/edit.php:1172
+#: ../../../views/collection/edit.php:1192
+#: ../../../views/collection/edit.php:1212
+#: ../../../views/collection/edit.php:1236
+#: ../../../views/collection/edit.php:1256
+#: ../../../views/collection/edit.php:1276
+#: ../../../views/collection/edit.php:1296
+#: ../../../views/collection/edit.php:1320
+#: ../../../views/collection/edit.php:1335
+#: ../../../views/collection/edit.php:1355
+#: ../../../views/collection/edit.php:1379
+#: ../../../views/collection/edit.php:1399
+#: ../../../views/collection/edit.php:1419
 #: ../../../views/theme_options/edit_configuration.php:103
 #: ../../../views/theme_options/edit_configuration.php:110
 msgid "Members"
 msgstr "Membros"
 
-#: ../../../views/collection/edit.php:364
-#: ../../../views/collection/edit.php:388
-#: ../../../views/collection/edit.php:412
-#: ../../../views/collection/edit.php:441
-#: ../../../views/collection/edit.php:466
-#: ../../../views/collection/edit.php:495
-#: ../../../views/collection/edit.php:520
-#: ../../../views/collection/edit.php:549
-#: ../../../views/collection/edit.php:568
-#: ../../../views/collection/edit.php:592
-#: ../../../views/collection/edit.php:621
-#: ../../../views/collection/edit.php:645
-#: ../../../views/collection/edit.php:669
-#: ../../../views/collection/edit.php:698
-#: ../../../views/collection/edit.php:722
-#: ../../../views/collection/edit.php:746
-#: ../../../views/collection/edit.php:776
-#: ../../../views/collection/edit.php:806
-#: ../../../views/collection/edit.php:830
-#: ../../../views/collection/edit.php:854
-#: ../../../views/collection/edit.php:884
-#: ../../../views/collection/edit.php:915
-#: ../../../views/collection/edit.php:939
-#: ../../../views/collection/edit.php:963
+#: ../../../views/collection/edit.php:368
+#: ../../../views/collection/edit.php:392
+#: ../../../views/collection/edit.php:416
+#: ../../../views/collection/edit.php:445
+#: ../../../views/collection/edit.php:470
+#: ../../../views/collection/edit.php:499
+#: ../../../views/collection/edit.php:524
+#: ../../../views/collection/edit.php:553
+#: ../../../views/collection/edit.php:572
+#: ../../../views/collection/edit.php:596
+#: ../../../views/collection/edit.php:625
+#: ../../../views/collection/edit.php:649
+#: ../../../views/collection/edit.php:673
+#: ../../../views/collection/edit.php:702
+#: ../../../views/collection/edit.php:726
+#: ../../../views/collection/edit.php:750
+#: ../../../views/collection/edit.php:780
+#: ../../../views/collection/edit.php:810
+#: ../../../views/collection/edit.php:834
+#: ../../../views/collection/edit.php:858
+#: ../../../views/collection/edit.php:888
+#: ../../../views/collection/edit.php:919
+#: ../../../views/collection/edit.php:943
+#: ../../../views/collection/edit.php:967
 msgid "Not Allowed"
 msgstr "Não permitido"
 
-#: ../../../views/collection/edit.php:419
+#: ../../../views/collection/edit.php:423
 #: ../../../views/theme_options/edit_tools.php:48
 msgid "Classification"
 msgstr "Classificação "
 
-#: ../../../views/collection/edit.php:753
+#: ../../../views/collection/edit.php:757
 msgid "Property Data Value"
 msgstr "Valor do Atributo"
 
-#: ../../../views/collection/edit.php:784
+#: ../../../views/collection/edit.php:788
 msgid "Property Object"
 msgstr "Relação"
 
-#: ../../../views/collection/edit.php:861
+#: ../../../views/collection/edit.php:865
 msgid "Property Object Value"
 msgstr "Valor da Relação"
 
-#: ../../../views/collection/edit.php:893
+#: ../../../views/collection/edit.php:897
 msgid "Property Term"
 msgstr "Metadado de termo "
 
-#: ../../../views/collection/edit.php:1132
+#: ../../../views/collection/edit.php:1136
 msgid "Create Property Data"
 msgstr "Criar Atributo"
 
-#: ../../../views/collection/edit.php:1152
+#: ../../../views/collection/edit.php:1156
 msgid "Edit Property Data"
 msgstr "Editar Atributo"
 
-#: ../../../views/collection/edit.php:1172
+#: ../../../views/collection/edit.php:1176
 msgid "Delete Property Data"
 msgstr "Deletar Atributo"
 
-#: ../../../views/collection/edit.php:1192
+#: ../../../views/collection/edit.php:1196
 msgid "Edit Property Data Value"
 msgstr "Editar valor do Atributo"
 
-#: ../../../views/collection/edit.php:1216
+#: ../../../views/collection/edit.php:1220
 msgid "Create Property Object"
 msgstr "Criar Relação"
 
-#: ../../../views/collection/edit.php:1236
+#: ../../../views/collection/edit.php:1240
 msgid "Edit Property Object"
 msgstr "Editar Relação"
 
-#: ../../../views/collection/edit.php:1256
+#: ../../../views/collection/edit.php:1260
 msgid "Delete Property Object"
 msgstr "Deletar Relação"
 
-#: ../../../views/collection/edit.php:1276
+#: ../../../views/collection/edit.php:1280
 msgid "Edit Property Object Value"
 msgstr "Editar valor da Relação"
 
-#: ../../../views/collection/edit.php:1359
+#: ../../../views/collection/edit.php:1363
 msgid "Create Tags"
 msgstr "Criar Tags"
 
-#: ../../../views/collection/edit.php:1379
+#: ../../../views/collection/edit.php:1383
 msgid "Edit Tags"
 msgstr "Editar Tags"
 
-#: ../../../views/collection/edit.php:1399
+#: ../../../views/collection/edit.php:1403
 msgid "Delete Tags"
 msgstr "Deletar Tags"
 
@@ -4624,49 +5098,43 @@ msgstr "Minhas Ontologias"
 msgid "Administrator: "
 msgstr "Administrador: "
 
-#: ../../../views/collection/header_collection.php:82
-#: ../../../views/collection/header_collection_1.php:41
-#: ../../../views/search/edit.php:30
-msgid "Search"
-msgstr "Filtros"
-
-#: ../../../views/collection/header_collection.php:88
+#: ../../../views/collection/header_collection.php:93
 #: ../../../views/collection/header_collection_1.php:43
 msgid "Users"
 msgstr "Usuários"
 
-#: ../../../views/collection/header_collection.php:118
+#: ../../../views/collection/header_collection.php:123
 #: ../../../views/collection/header_collection_1.php:48
 #: ../../../views/export/index_export.php:18
 msgid "Export"
 msgstr "Exportação"
 
-#: ../../../views/collection/header_collection.php:123
-#: ../../../views/collection/header_collection.php:148
-#: ../../../views/collection/header_collection.php:299
+#: ../../../views/collection/header_collection.php:128
+#: ../../../views/collection/header_collection.php:153
+#: ../../../views/collection/header_collection.php:304
 #: ../../../views/collection/header_collection_1.php:50
 #: ../../../views/collection/header_collection_1.php:78
 #: ../../../views/object/list.php:129 ../../../views/object/list.php:154
 msgid "Are you sure to remove the collection: "
-msgstr "Tem certeza que deseja remover a ontologia:"
+msgstr "Tem certeza que deseja remover a coleção:"
 
-#: ../../../views/collection/header_collection.php:124
+#: ../../../views/collection/header_collection.php:129
 msgid "Clean Collection"
 msgstr "Remover todos os itens"
 
-#: ../../../views/collection/header_collection.php:124
+#: ../../../views/collection/header_collection.php:129
 msgid "Are you sure to remove all items"
 msgstr "Tem certeza que deseja remover TODOS os itens "
 
-#: ../../../views/collection/header_collection.php:143
-#: ../../../views/collection/header_collection.php:294
+#: ../../../views/collection/header_collection.php:148
+#: ../../../views/collection/header_collection.php:299
 #: ../../../views/collection/header_collection_1.php:73
 #: ../../../views/object/list.php:149
 msgid "Describe why the collection: "
-msgstr "Descreve por que a ontologia:"
+msgstr "Descreve por que a coleção:"
 
-#: ../../../views/collection/header_collection.php:143
-#: ../../../views/collection/header_collection.php:294
+#: ../../../views/collection/header_collection.php:148
+#: ../../../views/collection/header_collection.php:299
 #: ../../../views/collection/header_collection_1.php:73
 #: ../../../views/object/list.php:112 ../../../views/object/list.php:149
 #: ../../../views/object/list_data_table.php:74
@@ -4675,17 +5143,17 @@ msgstr "Descreve por que a ontologia:"
 msgid " is abusive: "
 msgstr " é abusivo:"
 
-#: ../../../views/collection/header_collection.php:182
+#: ../../../views/collection/header_collection.php:187
 msgid "Change Cover"
 msgstr "Alterar capa"
 
-#: ../../../views/collection/header_collection.php:253
+#: ../../../views/collection/header_collection.php:258
 #: ../../../views/export/index_export.php:34
 #: ../../../views/import/import_configuration.php:34
 msgid "CSV"
 msgstr "CSV"
 
-#: ../../../views/collection/header_collection.php:275
+#: ../../../views/collection/header_collection.php:280
 #: ../../../views/collection/header_collection_1.php:91
 #: ../../../views/object/data_property_form.php:38
 #: ../../../views/object/edit_data_property_form.php:43
@@ -4698,14 +5166,19 @@ msgstr "CSV"
 msgid "Clear"
 msgstr "Limpar"
 
-#: ../../../views/collection/header_collection.php:279
+#: ../../../views/collection/header_collection.php:284
 #: ../../../views/collection/header_collection_1.php:95
 msgid "Search Objects"
 msgstr "Buscar Itens"
 
 #: ../../../views/collection/header_collection_1.php:22
 msgid "Collection Settings"
-msgstr "Configurações da ontologia"
+msgstr "Configurações da coleção"
+
+#: ../../../views/collection/header_collection_1.php:41
+#: ../../../views/search/edit.php:30
+msgid "Search"
+msgstr "Filtros"
 
 #: ../../../views/collection/js/edit_js.php:38
 msgid "Please set a valid name"
@@ -4720,8 +5193,8 @@ msgid "Please set a valid address"
 msgstr "Por favor, digite um endereço válido"
 
 #: ../../../views/collection/js/edit_js.php:101
-#: ../../../views/search/js/edit_js.php:185
-#: ../../../views/search/js/layout_js.php:50
+#: ../../../views/search/js/edit_js.php:191
+#: ../../../views/search/js/layout_js.php:65
 msgid "General ordenation"
 msgstr "Ordenação padrão"
 
@@ -4739,7 +5212,7 @@ msgstr "Tem certeza"
 
 #: ../../../views/collection/js/header_js.php:182
 msgid "Delete this collection?"
-msgstr "Excluir esta ontologia"
+msgstr "Excluir esta coleção"
 
 #: ../../../views/comment/view_comments.php:30
 #: ../../../views/object/comments/view_comments.php:21
@@ -4770,7 +5243,7 @@ msgstr "Esconder Design"
 
 #: ../../../views/design/edit.php:60
 msgid "Set some colors to your collection"
-msgstr "Escolha algumas cores para sua ontologia"
+msgstr "Escolha algumas cores para sua coleção"
 
 #: ../../../views/design/edit.php:64 ../../../views/design/edit.php:65
 msgid "Board Background Color"
@@ -4831,7 +5304,7 @@ msgstr "Sucesso!"
 
 #: ../../../views/design/js/edit_js.php:57
 msgid "Your collection is configured."
-msgstr "Sua ontologia está configurada."
+msgstr "Sua coleção está configurada."
 
 #: ../../../views/event/list.php:35
 msgid "Events not verified"
@@ -4841,15 +5314,15 @@ msgstr "Eventos não verificados"
 msgid "Events verified"
 msgstr "Eventos verificados"
 
-#: ../../../views/event/list.php:62 ../../../views/event/list.php:141
+#: ../../../views/event/list.php:62 ../../../views/event/list.php:156
 msgid "Event Type"
 msgstr "Tipo do Evento"
 
-#: ../../../views/event/list.php:63 ../../../views/event/list.php:142
+#: ../../../views/event/list.php:63 ../../../views/event/list.php:157
 msgid "Event Description"
 msgstr "Descrição do Evento"
 
-#: ../../../views/event/list.php:64 ../../../views/event/list.php:143
+#: ../../../views/event/list.php:64 ../../../views/event/list.php:158
 msgid "State"
 msgstr "Estado"
 
@@ -4869,72 +5342,72 @@ msgstr "Processar"
 msgid "Not verified"
 msgstr "Não verificado"
 
-#: ../../../views/event/list.php:126 ../../../views/event/list.php:212
+#: ../../../views/event/list.php:141 ../../../views/event/list.php:227
 msgid "No events in this section"
 msgstr "Sem eventos nesta seção"
 
-#: ../../../views/event/list.php:144
+#: ../../../views/event/list.php:159
 msgid "Approval Date"
 msgstr "Data de aprovação"
 
-#: ../../../views/event/list.php:145
+#: ../../../views/event/list.php:160
 msgid "Approved by"
 msgstr "Aprovado por"
 
-#: ../../../views/event/list.php:164 ../../../views/event/list.php:175
-#: ../../../views/event/list.php:242 ../../../views/event/list.php:294
+#: ../../../views/event/list.php:179 ../../../views/event/list.php:190
+#: ../../../views/event/list.php:257 ../../../views/event/list.php:309
 msgid "Confirmed"
 msgstr "Confirmado"
 
-#: ../../../views/event/list.php:165 ../../../views/event/list.php:176
+#: ../../../views/event/list.php:180 ../../../views/event/list.php:191
 msgid "Not Confirmed"
 msgstr "Não confirmado "
 
-#: ../../../views/event/list.php:166 ../../../views/event/list.php:177
-#: ../../../views/event/list.php:186 ../../../views/event/list.php:198
+#: ../../../views/event/list.php:181 ../../../views/event/list.php:192
+#: ../../../views/event/list.php:201 ../../../views/event/list.php:213
 msgid "Invalid"
 msgstr "Inválido"
 
-#: ../../../views/event/list.php:193
+#: ../../../views/event/list.php:208
 msgid "Vote"
 msgstr "Votar"
 
-#: ../../../views/event/list.php:230 ../../../views/event/list.php:282
+#: ../../../views/event/list.php:245 ../../../views/event/list.php:297
 msgid "Verify Event"
 msgstr "Verificar Evento"
 
-#: ../../../views/event/list.php:234 ../../../views/event/list.php:286
-#: ../../../views/event/list.php:322
+#: ../../../views/event/list.php:249 ../../../views/event/list.php:301
+#: ../../../views/event/list.php:337
 msgid "Event created date"
 msgstr "Data de criação do evento"
 
-#: ../../../views/event/list.php:235 ../../../views/event/list.php:287
-#: ../../../views/event/list.php:323
+#: ../../../views/event/list.php:250 ../../../views/event/list.php:302
+#: ../../../views/event/list.php:338
 msgid "Event author"
 msgstr "Autor do Evento"
 
-#: ../../../views/event/list.php:237 ../../../views/event/list.php:289
-#: ../../../views/event/list.php:325
+#: ../../../views/event/list.php:252 ../../../views/event/list.php:304
+#: ../../../views/event/list.php:340
 msgid "Event description"
 msgstr "Descrição do evento"
 
-#: ../../../views/event/list.php:240 ../../../views/event/list.php:292
+#: ../../../views/event/list.php:255 ../../../views/event/list.php:307
 msgid "Event confirmation"
 msgstr "Confirmação do evento"
 
-#: ../../../views/event/list.php:243 ../../../views/event/list.php:295
+#: ../../../views/event/list.php:258 ../../../views/event/list.php:310
 msgid "Not confirmed"
 msgstr "Não confirmado"
 
-#: ../../../views/event/list.php:248 ../../../views/event/list.php:328
+#: ../../../views/event/list.php:263 ../../../views/event/list.php:343
 msgid "Votes"
 msgstr "Votos"
 
-#: ../../../views/event/list.php:262 ../../../views/event/list.php:297
+#: ../../../views/event/list.php:277 ../../../views/event/list.php:312
 msgid "Event observation"
 msgstr "Obersavação do Evento"
 
-#: ../../../views/event/list.php:318
+#: ../../../views/event/list.php:333
 msgid "Event Details"
 msgstr "Descrição do Evento "
 
@@ -4946,19 +5419,19 @@ msgstr "Ocorreu algum erro, este evento não existe"
 msgid "Event confirmed successfuly"
 msgstr "Evento confirmado com sucesso"
 
-#: ../../../views/event/js/list_js.php:146
-#: ../../../views/event/js/list_js.php:184
+#: ../../../views/event/js/list_js.php:150
+#: ../../../views/event/js/list_js.php:188
 msgid "Vote successfully"
 msgstr "Votação adicionada com sucesso "
 
-#: ../../../views/event/js/list_js.php:146
+#: ../../../views/event/js/list_js.php:150
 #: ../../../views/object/ranking/js/list_ranking_create_js.php:105
 #: ../../../views/object/ranking/js/list_ranking_js.php:105
 #: ../../../views/object/ranking/js/list_ranking_update_js.php:105
 msgid "Your like was computed"
 msgstr "Sua curtida foi computada"
 
-#: ../../../views/event/js/list_js.php:148
+#: ../../../views/event/js/list_js.php:152
 #: ../../../views/object/ranking/js/list_ranking_create_js.php:80
 #: ../../../views/object/ranking/js/list_ranking_create_js.php:107
 #: ../../../views/object/ranking/js/list_ranking_js.php:80
@@ -4968,8 +5441,8 @@ msgstr "Sua curtida foi computada"
 msgid "You already liked this item"
 msgstr "Você já curtiu este item"
 
-#: ../../../views/event/js/list_js.php:148
-#: ../../../views/event/js/list_js.php:186
+#: ../../../views/event/js/list_js.php:152
+#: ../../../views/event/js/list_js.php:190
 #: ../../../views/object/ranking/js/list_ranking_create_js.php:80
 #: ../../../views/object/ranking/js/list_ranking_create_js.php:107
 #: ../../../views/object/ranking/js/list_ranking_create_js.php:134
@@ -4982,8 +5455,8 @@ msgstr "Você já curtiu este item"
 msgid "info"
 msgstr "info"
 
-#: ../../../views/event/js/list_js.php:151
-#: ../../../views/event/js/list_js.php:189
+#: ../../../views/event/js/list_js.php:155
+#: ../../../views/event/js/list_js.php:193
 #: ../../../views/object/ranking/js/list_ranking_create_js.php:57
 #: ../../../views/object/ranking/js/list_ranking_create_js.php:83
 #: ../../../views/object/ranking/js/list_ranking_create_js.php:110
@@ -5003,21 +5476,21 @@ msgstr "info"
 msgid "You must sign up first to vote"
 msgstr "É necessário logar primeiro antes de votar"
 
-#: ../../../views/event/js/list_js.php:184
+#: ../../../views/event/js/list_js.php:188
 #: ../../../views/object/ranking/js/list_ranking_create_js.php:132
 #: ../../../views/object/ranking/js/list_ranking_js.php:132
 #: ../../../views/object/ranking/js/list_ranking_update_js.php:132
 msgid "Your not like was computed"
 msgstr "Não gostei computado com sucesso"
 
-#: ../../../views/event/js/list_js.php:186
+#: ../../../views/event/js/list_js.php:190
 #: ../../../views/object/ranking/js/list_ranking_create_js.php:134
 #: ../../../views/object/ranking/js/list_ranking_js.php:134
 #: ../../../views/object/ranking/js/list_ranking_update_js.php:134
 msgid "You already not liked this item"
 msgstr "Você já votou como Não gostei"
 
-#: ../../../views/event/js/list_js.php:227
+#: ../../../views/event/js/list_js.php:231
 msgid "Proccess all events selected?"
 msgstr "Processar todos eventos selecionados? "
 
@@ -5233,7 +5706,7 @@ msgstr "URL inválida ou indisponível"
 
 #: ../../../views/license/list.php:13
 msgid "Collection Licenses"
-msgstr "Licenças da ontologia"
+msgstr "Licenças da coleção"
 
 #: ../../../views/license/list.php:20
 #: ../../../views/theme_options/licenses/edit.php:16
@@ -5260,7 +5733,7 @@ msgid "Type a License Description"
 msgstr "Digite a Descrição da Licença"
 
 #: ../../../views/license/js/list_js.php:140
-#: ../../../views/search/js/edit_js.php:331
+#: ../../../views/search/js/edit_js.php:339
 #: ../../../views/social_network/js/delete_js.php:16
 #: ../../../views/social_network/js/delete_js.php:63
 #: ../../../views/social_network/js/delete_js.php:111
@@ -5325,46 +5798,8 @@ msgid "The set of tags may be inserted by comma"
 msgstr "Um grupo de tags pode ser inserido separado por vírgulas"
 
 #: ../../../views/object/create.php:163
-#, fuzzy
 msgid "Loading Properties..."
-msgstr "Carregando itens..."
-
-#: ../../../views/object/data_property_form.php:11
-#: ../../../views/object/edit_data_property_form.php:12
-#: ../../../views/object/single_object/single_data_property_form.php:11
-#: ../../../views/object/single_object/single_edit_data_property_form.php:11
-#: ../../../views/property/list.php:94 ../../../views/property/list.php:123
-#: ../../../views/theme_options/property/list.php:62
-#: ../../../views/theme_options/property/list.php:79
-msgid "Property data name"
-msgstr "Nome do Atributo"
-
-#: ../../../views/object/data_property_form.php:12
-#: ../../../views/object/edit_data_property_form.php:13
-#: ../../../views/object/single_object/single_data_property_form.php:12
-#: ../../../views/object/single_object/single_edit_data_property_form.php:12
-#: ../../../views/property/list.php:129
-#: ../../../views/theme_options/property/list.php:80
-msgid "Property Data name"
-msgstr "Nome do Atributo"
-
-#: ../../../views/object/data_property_form.php:15
-#: ../../../views/object/edit_data_property_form.php:16
-#: ../../../views/object/single_object/single_data_property_form.php:15
-#: ../../../views/object/single_object/single_edit_data_property_form.php:15
-#: ../../../views/property/list.php:134
-#: ../../../views/theme_options/property/list.php:83
-msgid "Property data widget"
-msgstr "Tipo do Atributo"
-
-#: ../../../views/object/data_property_form.php:18
-#: ../../../views/object/edit_data_property_form.php:19
-#: ../../../views/object/single_object/single_data_property_form.php:18
-#: ../../../views/object/single_object/single_edit_data_property_form.php:18
-#: ../../../views/property/list.php:138
-#: ../../../views/theme_options/property/list.php:86
-msgid "Textarea"
-msgstr "Área de texto"
+msgstr "Carregando propriedades..."
 
 #: ../../../views/object/data_property_form.php:23
 #: ../../../views/object/edit_data_property_form.php:26
@@ -5372,15 +5807,6 @@ msgstr "Área de texto"
 #: ../../../views/object/single_object/single_edit_data_property_form.php:25
 msgid "Property data column ordenation"
 msgstr "Atributo como coluna de ordenação"
-
-#: ../../../views/object/data_property_form.php:28
-#: ../../../views/object/edit_data_property_form.php:31
-#: ../../../views/object/single_object/single_data_property_form.php:30
-#: ../../../views/object/single_object/single_edit_data_property_form.php:30
-#: ../../../views/property/list.php:155
-#: ../../../views/theme_options/property/list.php:97
-msgid "Property data required"
-msgstr "Atributo obrigatório"
 
 #: ../../../views/object/delete.php:9
 msgid "Confirm the exclusion of the object: "
@@ -5429,93 +5855,9 @@ msgstr "Digite a legenda da imagem"
 msgid "Editing the property: "
 msgstr "Editar metadado: "
 
-#: ../../../views/object/edit_object_property_form.php:12
-#: ../../../views/object/object_property_form.php:15
-#: ../../../views/object/single_object/single_edit_object_property_form.php:11
-#: ../../../views/object/single_object/single_object_property_form.php:15
-#: ../../../views/property/list.php:172 ../../../views/property/list.php:201
-#: ../../../views/theme_options/property/list.php:111
-#: ../../../views/theme_options/property/list.php:128
-msgid "Property object name"
-msgstr "Nome da Relação"
-
-#: ../../../views/object/edit_object_property_form.php:13
-#: ../../../views/object/object_property_form.php:16
-#: ../../../views/object/single_object/single_edit_object_property_form.php:12
-#: ../../../views/object/single_object/single_object_property_form.php:16
-#: ../../../views/property/list.php:202
-#: ../../../views/property/metadata/form_object.php:13
-#: ../../../views/theme_options/property/list.php:129
-msgid "Property Object name"
-msgstr "Nome da Relação"
-
-#: ../../../views/object/edit_object_property_form.php:17
-#: ../../../views/object/edit_object_property_form.php:28
-#: ../../../views/object/object_property_form.php:20
-#: ../../../views/object/object_property_form.php:31
-#: ../../../views/object/single_object/single_edit_object_property_form.php:16
-#: ../../../views/object/single_object/single_edit_object_property_form.php:27
-#: ../../../views/object/single_object/single_object_property_form.php:20
-#: ../../../views/object/single_object/single_object_property_form.php:31
-#: ../../../views/property/list.php:207 ../../../views/property/list.php:214
-#: ../../../views/property/metadata/form_object.php:24
-#: ../../../views/theme_options/property/list.php:132
-msgid "Property object relationship"
-msgstr "Relação"
-
-#: ../../../views/object/edit_object_property_form.php:29
-#: ../../../views/object/object_property_form.php:32
-#: ../../../views/object/single_object/single_edit_object_property_form.php:28
-#: ../../../views/object/single_object/single_object_property_form.php:32
-#: ../../../views/property/list.php:219
-#: ../../../views/property/metadata/form_object.php:25
-msgid "Click on the category in the tree"
-msgstr "Clique na categoria na árvore"
-
-#: ../../../views/object/edit_object_property_form.php:34
-#: ../../../views/object/object_property_form.php:37
-#: ../../../views/object/single_object/single_edit_object_property_form.php:33
-#: ../../../views/object/single_object/single_object_property_form.php:37
-#: ../../../views/property/list.php:224
-#: ../../../views/property/metadata/form_object.php:30
-#: ../../../views/theme_options/property/list.php:140
-msgid "Property object facet"
-msgstr "Faceta da Relação"
-
-#: ../../../views/object/edit_object_property_form.php:39
-#: ../../../views/object/object_property_form.php:42
-#: ../../../views/object/single_object/single_edit_object_property_form.php:38
-#: ../../../views/object/single_object/single_object_property_form.php:42
-#: ../../../views/property/list.php:229 ../../../views/property/list.php:308
-#: ../../../views/property/metadata/form_object.php:35
-#: ../../../views/property/metadata/form_term.php:31
-#: ../../../views/theme_options/property/list.php:145
-msgid "Property object required"
-msgstr "Relação obrigatória"
-
-#: ../../../views/object/edit_object_property_form.php:44
-#: ../../../views/object/object_property_form.php:47
-#: ../../../views/object/single_object/single_edit_object_property_form.php:43
-#: ../../../views/object/single_object/single_object_property_form.php:47
-#: ../../../views/property/list.php:234
-#: ../../../views/property/metadata/form_object.php:40
-#: ../../../views/theme_options/property/list.php:150
-msgid "Property object reverse"
-msgstr "Relação inversa"
-
-#: ../../../views/object/edit_object_property_form.php:49
-#: ../../../views/object/object_property_form.php:52
-#: ../../../views/object/single_object/single_edit_object_property_form.php:48
-#: ../../../views/object/single_object/single_object_property_form.php:52
-#: ../../../views/property/list.php:239
-#: ../../../views/property/metadata/form_object.php:45
-#: ../../../views/theme_options/property/list.php:155
-msgid "Select the reverse property"
-msgstr "Selecione a relação inversa"
-
 #: ../../../views/object/list.php:18
 msgid "Showing collections:"
-msgstr "Exibindo ontologias:"
+msgstr "Exibindo coleções:"
 
 #: ../../../views/object/list.php:18
 msgid "Showing Items:"
@@ -5558,7 +5900,7 @@ msgstr "Nenhum item encontrado!"
 #: ../../../views/object/list.php:213
 #: ../../../views/object/list_advanced_search.php:86
 msgid "This collection is empty, create the first item!"
-msgstr "Esta ontologia está vazia, crie seu primeiro item!"
+msgstr "Esta coleção está vazia, crie seu primeiro item!"
 
 #: ../../../views/object/list.php:214
 #: ../../../views/object/list_advanced_search.php:87
@@ -5567,11 +5909,11 @@ msgstr "Clique aqui para adicionar um novo item"
 
 #: ../../../views/object/list.php:219
 msgid "This repository is empty, create the first collection!"
-msgstr "Este repositório está vazio, crie sua primeira ontologia!"
+msgstr "Este repositório está vazio, crie sua primeira coleção!"
 
 #: ../../../views/object/list.php:220
 msgid "Click here to add a new collection"
-msgstr "Clique aqui para adicionar um nova ontologia! "
+msgstr "Clique aqui para adicionar um nova coleção! "
 
 #: ../../../views/object/list.php:251
 msgid "Items per page:"
@@ -5825,7 +6167,7 @@ msgstr "Sem metadados adicionados!"
 #: ../../../views/object/multiple_social_network/editor_items.php:127
 #: ../../../views/search/menu_left.php:82
 msgid "Type the three first letters of the object of this collection "
-msgstr "Digite as três primeiras letras do Indivíduo desta ontologia"
+msgstr "Digite as três primeiras letras do Argumento desta coleção"
 
 #: ../../../views/object/file/list_file.php:15
 msgid "View slideshow"
@@ -5877,16 +6219,6 @@ msgstr "O arquivo é muito grande, o tamanho máximo de arquivo neste servidor �
 #: ../../../views/object/js/edit_js.php:231
 msgid "This URL not contains availables items for importation"
 msgstr "Esta URL não contém item disponíveis para importação"
-
-#: ../../../views/object/js/edit_object_property_form_js.php:58
-#: ../../../views/object/js/object_property_form_js.php:58
-#: ../../../views/object/single_object/js/edit_object_property_form_js.php:57
-#: ../../../views/object/single_object/js/object_property_form_js.php:57
-#: ../../../views/property/js/list_js.php:270
-#: ../../../views/property/js/list_metadata_js.php:595
-#: ../../../views/theme_options/property/js/list_js.php:204
-msgid "No properties added"
-msgstr "Sem metadados adicionados"
 
 #: ../../../views/object/js/list_js.php:48
 msgid ""
@@ -5970,12 +6302,6 @@ msgstr " Inserir mais arquivos "
 #: ../../../views/object/multiple_social_network/editor_items.php:36
 msgid "All"
 msgstr "Todos "
-
-#: ../../../views/object/multiple_items/editor_items.php:39
-#: ../../../views/object/multiple_social_network/editor_items.php:37
-#: ../../../views/property/js/list_js.php:260
-msgid "None"
-msgstr "Nenhum "
 
 #: ../../../views/object/multiple_items/editor_items.php:46
 #: ../../../views/object/multiple_social_network/editor_items.php:44
@@ -6289,95 +6615,15 @@ msgstr "Tipo de Atributo"
 msgid "No Properties added"
 msgstr "Nenhum Atributo adicionado"
 
-#: ../../../views/property/list.php:115 ../../../views/property/list.php:118
-#: ../../../views/property/list.php:193 ../../../views/property/list.php:196
-#: ../../../views/property/list.php:276
-#: ../../../views/property/js/list_js.php:448
-#: ../../../views/property/js/list_js.php:449
-#: ../../../views/property/js/list_js.php:458
-#: ../../../views/property/js/list_js.php:459
-#: ../../../views/property/js/list_js.php:467
-#: ../../../views/property/js/list_js.php:468
-#: ../../../views/property/js/list_metadata_js.php:1422
-#: ../../../views/property/js/list_metadata_js.php:1428
-#: ../../../views/property/js/list_metadata_js.php:1437
-#: ../../../views/theme_options/property/list.php:75
-#: ../../../views/theme_options/property/list.php:124
-#: ../../../views/theme_options/property/list.php:183
-#: ../../../views/theme_options/property/js/list_js.php:320
-#: ../../../views/theme_options/property/js/list_js.php:326
-#: ../../../views/theme_options/property/js/list_js.php:334
-msgid "Add new property"
-msgstr "Adicionar novo metadado"
-
-#: ../../../views/property/list.php:146
-#: ../../../views/property/metadata_forms.php:26
-#: ../../../views/theme_options/property/list.php:93
-msgid "Property data default value"
-msgstr "Valor padrão"
-
-#: ../../../views/property/list.php:147
-#: ../../../views/property/metadata_forms.php:27
-#: ../../../views/theme_options/property/list.php:94
-msgid "Property Data Default Value"
-msgstr "Valor padrão"
-
-#: ../../../views/property/list.php:150
-msgid "Property data text helper"
-msgstr "Texto de ajuda do metadado"
-
 #: ../../../views/property/list.php:173
 #: ../../../views/theme_options/property/list.php:112
 msgid "Property object type"
 msgstr "Tipo da Relação"
 
-#: ../../../views/property/list.php:257 ../../../views/property/list.php:280
-#: ../../../views/property/metadata/form_term.php:16
-#: ../../../views/theme_options/property/list.php:170
-#: ../../../views/theme_options/property/list.php:187
-msgid "Property term name"
-msgstr "Nome do metadado de termo"
-
 #: ../../../views/property/list.php:258
 #: ../../../views/theme_options/property/list.php:171
 msgid "Property term type"
 msgstr "Tipo do metadado de termo"
-
-#: ../../../views/property/list.php:281
-#: ../../../views/property/metadata/form_term.php:17
-#: ../../../views/theme_options/property/list.php:188
-msgid "Property Term name"
-msgstr "Nome do metadado de termo"
-
-#: ../../../views/property/list.php:286
-#: ../../../views/theme_options/property/list.php:192
-msgid "Property term cardinality"
-msgstr "Cardinalidade do metadado de termo"
-
-#: ../../../views/property/list.php:287
-msgid "Associate with one category"
-msgstr "Atribuir um único valor"
-
-#: ../../../views/property/list.php:288
-msgid "Associate with multiple categories"
-msgstr "Atribuir múltiplos valores"
-
-#: ../../../views/property/list.php:291
-#: ../../../views/theme_options/property/list.php:197
-msgid "Property Term Widget"
-msgstr "Widget do metadado de termo"
-
-#: ../../../views/property/list.php:297
-#: ../../../views/property/metadata/form_term.php:63
-#: ../../../views/theme_options/property/list.php:203
-msgid "Property Term Root Category"
-msgstr "Categoria raiz do metadado de termo"
-
-#: ../../../views/property/list.php:303
-#: ../../../views/property/metadata/form_term.php:68
-#: ../../../views/theme_options/property/list.php:209
-msgid "Selected category"
-msgstr "Categoria selecionada"
 
 #: ../../../views/property/list.php:316
 #: ../../../views/theme_options/property/list.php:222
@@ -6389,29 +6635,23 @@ msgstr "Valor padrão do metadado de termo"
 msgid "Property Term Default Value"
 msgstr "Valor de padrão metadado de termo"
 
-#: ../../../views/property/list.php:321
-#: ../../../views/property/metadata/form_term.php:21
-#: ../../../views/theme_options/property/list.php:227
-msgid "Property term text helper"
-msgstr "Texto de ajuda de metadado de termo"
-
 #: ../../../views/property/list.php:348
-#: ../../../views/property/metadata_forms.php:103
+#: ../../../views/property/metadata_forms.php:108
 #: ../../../views/theme_options/property/list.php:255
 msgid "Removing property"
 msgstr "Removendo metadado"
 
 #: ../../../views/property/list.php:355
-#: ../../../views/property/metadata_forms.php:111
+#: ../../../views/property/metadata_forms.php:116
 #: ../../../views/theme_options/property/list.php:262
 msgid "Salve"
 msgstr "Salve"
 
-#: ../../../views/property/list_metadata.php:52
+#: ../../../views/property/list_metadata.php:34
 msgid "Properties of "
 msgstr "Propriedades de "
 
-#: ../../../views/property/list_metadata.php:123
+#: ../../../views/property/list_metadata.php:70
 #: ../../../views/property/metadata_forms.php:13
 #: ../../../views/property/metadata/form_object.php:6
 msgid "Add Property"
@@ -6419,7 +6659,7 @@ msgstr "Adicionar propriedade"
 
 #: ../../../views/property/metadata_forms.php:21
 #: ../../../views/property/metadata_forms.php:22
-#: ../../../views/property/metadata/form_object.php:12
+#: ../../../views/property/metadata/form_object.php:14
 msgid "Property name"
 msgstr "Nome da propriedade"
 
@@ -6431,148 +6671,57 @@ msgstr "Texto de ajuda"
 msgid "Required"
 msgstr "Obrigatório"
 
-#: ../../../views/property/metadata_forms.php:45
+#: ../../../views/property/metadata_forms.php:48
 #: ../../../views/property/metadata/form_filter.php:14
-#: ../../../views/property/metadata/form_object.php:64
+#: ../../../views/property/metadata/form_object.php:59
 #: ../../../views/property/metadata/form_tag.php:14
-#: ../../../views/property/metadata/form_term.php:38
+#: ../../../views/property/metadata/form_term.php:39
 #: ../../../views/property/metadata/form_voting.php:26
 msgid "Use as a filter"
 msgstr "Usar como filtro"
 
-#: ../../../views/property/metadata_forms.php:50
-#: ../../../views/property/metadata/form_filter.php:21
-#: ../../../views/property/metadata/form_object.php:69
+#: ../../../views/property/metadata_forms.php:53
+#: ../../../views/property/metadata/form_filter.php:19
+#: ../../../views/property/metadata/form_object.php:64
 #: ../../../views/property/metadata/form_tag.php:21
 msgid "Filter type"
 msgstr "Tipo de filtro"
 
-#: ../../../views/property/metadata_forms.php:57
-#: ../../../views/property/metadata/form_filter.php:27
-#: ../../../views/property/metadata/form_object.php:74
-#: ../../../views/search/edit.php:258 ../../../views/search/edit.php:271
+#: ../../../views/property/metadata_forms.php:60
+#: ../../../views/property/metadata/form_filter.php:25
+#: ../../../views/property/metadata/form_object.php:69
+#: ../../../views/property/metadata/form_term.php:53
+#: ../../../views/search/edit.php:261 ../../../views/search/edit.php:274
 msgid "Set the facet color"
 msgstr "Setar a cor da faceta"
 
-#: ../../../views/property/metadata_forms.php:76
-#: ../../../views/property/metadata/form_filter.php:43
+#: ../../../views/property/metadata_forms.php:81
+#: ../../../views/property/metadata/form_filter.php:44
 #: ../../../views/property/metadata/form_object.php:88
 #: ../../../views/property/metadata/form_tag.php:34
-#: ../../../views/property/metadata/form_term.php:86
+#: ../../../views/property/metadata/form_term.php:101
 #: ../../../views/property/metadata/form_voting.php:58
 msgid "Continue"
 msgstr "Continuar"
 
-#: ../../../views/property/page.php:48
+#: ../../../views/property/page.php:51
 msgid "Subclass of Property"
 msgstr "Subclasse de Propriedade"
 
-#: ../../../views/property/page.php:71
+#: ../../../views/property/page.php:74
 msgid "Property Origin"
 msgstr "Propriedade de Origem"
 
-#: ../../../views/property/page.php:84
+#: ../../../views/property/page.php:87
 msgid "Property Destiny"
 msgstr "Propriedade de Destino"
 
-#: ../../../views/property/js/list_js.php:78
-msgid "Please,select at least one relation"
-msgstr "Por favor, selecione um range para a propriedade"
-
-#: ../../../views/property/js/list_js.php:233
-#: ../../../views/property/js/list_metadata_js.php:43
-#: ../../../views/theme_options/property/js/list_js.php:172
-msgid "Radio"
-msgstr "Radio"
-
-#: ../../../views/property/js/list_js.php:234
-#: ../../../views/property/js/list_metadata_js.php:44
-#: ../../../views/theme_options/property/js/list_js.php:173
-msgid "Selectbox"
-msgstr "Selectbox"
-
-#: ../../../views/property/js/list_js.php:239
-#: ../../../views/property/js/list_metadata_js.php:49
-#: ../../../views/theme_options/property/js/list_js.php:178
-msgid "Checkbox"
-msgstr "Checkbox"
-
-#: ../../../views/property/js/list_js.php:240
-#: ../../../views/property/js/list_metadata_js.php:50
-#: ../../../views/theme_options/property/js/list_js.php:179
-msgid "Multipleselect "
-msgstr "Seleção Múltipla"
-
-#: ../../../views/property/js/list_js.php:241
-#: ../../../views/property/js/list_metadata_js.php:51
-#: ../../../views/theme_options/property/js/list_js.php:180
-msgid "Tree - Checkbox"
-msgstr "Árvore com checkbox"
-
-#: ../../../views/property/js/list_js.php:286
-#: ../../../views/property/js/list_js.php:287
-#: ../../../views/property/js/list_js.php:323
-#: ../../../views/property/js/list_js.php:324
-#: ../../../views/property/js/list_js.php:401
-#: ../../../views/property/js/list_metadata_js.php:441
-#: ../../../views/property/js/list_metadata_js.php:727
-#: ../../../views/property/js/list_metadata_js.php:841
-#: ../../../views/theme_options/property/js/list_js.php:217
-#: ../../../views/theme_options/property/js/list_js.php:244
-#: ../../../views/theme_options/property/js/list_js.php:277
-msgid "Edit property"
-msgstr "Editar propriedade"
-
-#: ../../../views/property/js/list_js.php:557
-#: ../../../views/property/js/list_js.php:561
-#: ../../../views/property/js/list_js.php:583
-#: ../../../views/property/js/list_js.php:587
-#: ../../../views/theme_options/property/js/list_js.php:490
-#: ../../../views/theme_options/property/js/list_js.php:494
-#: ../../../views/theme_options/property/js/list_js.php:495
-#: ../../../views/theme_options/property/js/list_js.php:496
-#: ../../../views/theme_options/property/js/list_js.php:510
-#: ../../../views/theme_options/property/js/list_js.php:514
-msgid "text"
-msgstr "texto"
-
-#: ../../../views/property/js/list_js.php:558
-#: ../../../views/property/js/list_js.php:559
-#: ../../../views/property/js/list_js.php:563
-#: ../../../views/property/js/list_js.php:584
-#: ../../../views/property/js/list_js.php:585
-#: ../../../views/property/js/list_js.php:589
-#: ../../../views/theme_options/property/js/list_js.php:491
-#: ../../../views/theme_options/property/js/list_js.php:492
-#: ../../../views/theme_options/property/js/list_js.php:511
-#: ../../../views/theme_options/property/js/list_js.php:512
-#: ../../../views/theme_options/property/js/list_js.php:516
-msgid "radio"
-msgstr "radio"
-
-#: ../../../views/property/js/list_js.php:560
-#: ../../../views/property/js/list_js.php:562
-#: ../../../views/property/js/list_js.php:586
-#: ../../../views/property/js/list_js.php:588
-#: ../../../views/theme_options/property/js/list_js.php:513
-#: ../../../views/theme_options/property/js/list_js.php:515
-msgid "textarea"
-msgstr "área de texto"
-
-#: ../../../views/property/js/list_js.php:653
-msgid "tree"
-msgstr "árvore"
-
-#: ../../../views/property/js/list_js.php:912
-msgid "Add the property"
-msgstr "Adicionar o metadado"
-
-#: ../../../views/property/js/list_metadata_js.php:1053
-#: ../../../views/search/js/edit_js.php:426
+#: ../../../views/property/js/list_metadata_js.php:1120
+#: ../../../views/search/js/edit_js.php:434
 msgid "Something went wrong. Try again later."
 msgstr "Algo ocorreu inesperado. Por favor tente novamente. "
 
-#: ../../../views/property/metadata/form_object.php:17
+#: ../../../views/property/metadata/form_object.php:19
 msgid "Property relationship"
 msgstr "Relacionamento do metadado"
 
@@ -6580,29 +6729,33 @@ msgstr "Relacionamento do metadado"
 msgid "Add metadata"
 msgstr "Adicionar Propriedade"
 
-#: ../../../views/property/metadata/form_term.php:26
+#: ../../../views/property/metadata/form_term.php:27
 msgid "Elements Quantity:"
 msgstr "Quantidade de elementos:"
 
-#: ../../../views/property/metadata/form_term.php:27
+#: ../../../views/property/metadata/form_term.php:28
 msgid "Unic value"
 msgstr "Valor único"
 
-#: ../../../views/property/metadata/form_term.php:28
+#: ../../../views/property/metadata/form_term.php:29
 msgid "Multiple values"
 msgstr "Múltiplos valores"
 
-#: ../../../views/property/metadata/form_term.php:43
+#: ../../../views/property/metadata/form_term.php:32
+msgid "Required property"
+msgstr "Propriedade obrigatória"
+
+#: ../../../views/property/metadata/form_term.php:46
 msgid "Property Widget"
 msgstr "Widget da propriedade"
 
-#: ../../../views/property/metadata/form_term.php:49
-#: ../../../views/search/edit.php:298
+#: ../../../views/property/metadata/form_term.php:64
+#: ../../../views/search/edit.php:301
 msgid "Select Menu Style"
 msgstr "Selecionar Estilo do Menu"
 
-#: ../../../views/property/metadata/form_term.php:51
-#: ../../../views/search/edit.php:300
+#: ../../../views/property/metadata/form_term.php:66
+#: ../../../views/search/edit.php:303
 msgid "Select the style for your facet"
 msgstr "Selecionar o estilo de sua faceta"
 
@@ -6627,7 +6780,7 @@ msgid "Binary"
 msgstr "Binário"
 
 #: ../../../views/property/metadata/form_voting.php:32
-#: ../../../views/search/edit.php:253
+#: ../../../views/search/edit.php:256
 msgid "Widget"
 msgstr "Widget"
 
@@ -6638,7 +6791,7 @@ msgstr "Removendo votações"
 
 #: ../../../views/ranking/list.php:50
 msgid "Create a voting for the items in the collection"
-msgstr "Criar uma votação para os itens na ontologia "
+msgstr "Criar uma votação para os itens na coleção "
 
 #: ../../../views/ranking/list.php:51
 msgid "Use standard vote"
@@ -6668,7 +6821,7 @@ msgstr "Nome da votação"
 msgid "Ranking type"
 msgstr "Tipo da votação"
 
-#: ../../../views/ranking/list.php:79 ../../../views/search/edit.php:312
+#: ../../../views/ranking/list.php:79 ../../../views/search/edit.php:316
 msgid "Add New"
 msgstr "Adicionar novo"
 
@@ -6716,7 +6869,7 @@ msgstr "Ascendente"
 msgid "Facets"
 msgstr "Faceta"
 
-#: ../../../views/search/edit.php:106 ../../../views/search/edit.php:293
+#: ../../../views/search/edit.php:106 ../../../views/search/edit.php:296
 msgid "Horizontal"
 msgstr "Horizontal"
 
@@ -6735,13 +6888,13 @@ msgstr "Ordem"
 msgid "Priority"
 msgstr "Prioridade"
 
-#: ../../../views/search/edit.php:128 ../../../views/search/edit.php:291
-#: ../../../views/search/edit.php:360
+#: ../../../views/search/edit.php:128 ../../../views/search/edit.php:294
+#: ../../../views/search/edit.php:364
 msgid "Left Column"
 msgstr "Coluna esquerda"
 
-#: ../../../views/search/edit.php:151 ../../../views/search/edit.php:292
-#: ../../../views/search/edit.php:365
+#: ../../../views/search/edit.php:151 ../../../views/search/edit.php:295
+#: ../../../views/search/edit.php:369
 msgid "Right Column"
 msgstr "Coluna direita"
 
@@ -6763,7 +6916,7 @@ msgstr "Opções padrões"
 
 #: ../../../views/search/edit.php:205
 msgid "Hierarchy of collections"
-msgstr "Hierarquia de ontologias"
+msgstr "Hierarquia de coleções"
 
 #: ../../../views/search/edit.php:206
 msgid "Category root: "
@@ -6773,47 +6926,47 @@ msgstr "Categoria raiz:"
 msgid "License Type"
 msgstr "Tipo de licença"
 
-#: ../../../views/search/edit.php:228
+#: ../../../views/search/edit.php:229
 msgid "Term Properties"
 msgstr "Metadado de termo"
 
-#: ../../../views/search/edit.php:239
+#: ../../../views/search/edit.php:241
 msgid "Property Term: "
 msgstr "Metadado de termo:"
 
-#: ../../../views/search/edit.php:289
+#: ../../../views/search/edit.php:292
 msgid "Orientation"
 msgstr "Orientação"
 
-#: ../../../views/search/edit.php:320
+#: ../../../views/search/edit.php:324
 msgid "Default Tree Widget Configuration"
 msgstr "Configuração Padrão do Widget de Árvore"
 
-#: ../../../views/search/edit.php:324
+#: ../../../views/search/edit.php:328
 msgid "Default Tree Widget"
 msgstr "Widget padrão de árvore"
 
-#: ../../../views/search/edit.php:329
+#: ../../../views/search/edit.php:333
 msgid "Dynatree"
 msgstr "Dynatree"
 
-#: ../../../views/search/edit.php:334
+#: ../../../views/search/edit.php:338
 msgid "Hypertree"
 msgstr "Hypertree"
 
-#: ../../../views/search/edit.php:339
+#: ../../../views/search/edit.php:343
 msgid "Spacetree"
 msgstr "Spacetree"
 
-#: ../../../views/search/edit.php:344
+#: ../../../views/search/edit.php:348
 msgid "Treemap"
 msgstr "Spacetree"
 
-#: ../../../views/search/edit.php:349
+#: ../../../views/search/edit.php:353
 msgid "RGraph"
 msgstr "RGraph"
 
-#: ../../../views/search/edit.php:355
+#: ../../../views/search/edit.php:359
 msgid "Default Tree Widget Orientation"
 msgstr "Orientação padrão do widget de árvore"
 
@@ -6822,13 +6975,13 @@ msgstr "Orientação padrão do widget de árvore"
 msgid "%1$d days ago"
 msgstr "Há  %1$d dia(s) atrás"
 
-#: ../../../views/search/layout.php:62
+#: ../../../views/search/layout.php:61
 msgid "Go to collection"
-msgstr "Ir para a ontologia "
+msgstr "Ir para a coleção "
 
 #: ../../../views/search/menu_left.php:7
-msgid "Expand all"
-msgstr "Expandir todos"
+msgid "Collapse all"
+msgstr ""
 
 #: ../../../views/search/menu_left.php:59
 msgid "From"
@@ -6838,8 +6991,9 @@ msgstr "De"
 msgid "Filter"
 msgstr "Filtros "
 
-#: ../../../views/search/js/edit_js.php:561
-#: ../../../views/search/js/edit_js.php:584
+#: ../../../views/search/js/edit_js.php:576
+#: ../../../views/search/js/edit_js.php:599
+#: ../../../views/search/js/layout_js.php:112
 msgid "No data properties inserted"
 msgstr "Nenhum metadado de dado adicionado"
 
@@ -6866,81 +7020,81 @@ msgstr "Este item foi removido, redirecionando para página da coleção!"
 msgid "This action was configured as \"NOT ALLOWED\" by moderators!"
 msgstr "Esta ação foi configurada com  não permitida pelos moderadores"
 
-#: ../../../views/search/js/single_js.php:1070
-#: ../../../views/search/js/single_js.php:1682
+#: ../../../views/search/js/single_js.php:1067
+#: ../../../views/search/js/single_js.php:1679
 msgid "Video imported successfully"
 msgstr "Vídeos importados com sucesso"
 
-#: ../../../views/search/js/single_js.php:1074
-#: ../../../views/search/js/single_js.php:1686
+#: ../../../views/search/js/single_js.php:1071
+#: ../../../views/search/js/single_js.php:1683
 msgid "Invalid URL or Video already inserted."
 msgstr "URL Inválida ou vídeo já inserido."
 
-#: ../../../views/search/js/single_js.php:1081
-#: ../../../views/search/js/single_js.php:1694
+#: ../../../views/search/js/single_js.php:1078
+#: ../../../views/search/js/single_js.php:1691
 msgid "Necessary to inform Youtube video url"
 msgstr "Necessário informar a url do vídeo do Youtube"
 
-#: ../../../views/search/js/single_js.php:1107
-#: ../../../views/search/js/single_js.php:1145
-#: ../../../views/search/js/single_js.php:1201
-#: ../../../views/search/js/single_js.php:1719
-#: ../../../views/search/js/single_js.php:1758
-#: ../../../views/search/js/single_js.php:1815
-#: ../../../views/search/js/single_js.php:1854
+#: ../../../views/search/js/single_js.php:1104
+#: ../../../views/search/js/single_js.php:1142
+#: ../../../views/search/js/single_js.php:1198
+#: ../../../views/search/js/single_js.php:1716
+#: ../../../views/search/js/single_js.php:1755
+#: ../../../views/search/js/single_js.php:1812
+#: ../../../views/search/js/single_js.php:1851
 msgid "OK"
 msgstr "OK"
 
-#: ../../../views/search/js/single_js.php:1111
-#: ../../../views/search/js/single_js.php:1723
-#: ../../../views/search/js/single_js.php:1762
+#: ../../../views/search/js/single_js.php:1108
+#: ../../../views/search/js/single_js.php:1720
+#: ../../../views/search/js/single_js.php:1759
 msgid "Invalid Channel/Playlist or no videos to be imported"
 msgstr "Canal/Lista de Execução inválid@ ou nenhum vídeo a ser importado "
 
-#: ../../../views/search/js/single_js.php:1121
-#: ../../../views/search/js/single_js.php:1733
-#: ../../../views/search/js/single_js.php:1772
+#: ../../../views/search/js/single_js.php:1118
+#: ../../../views/search/js/single_js.php:1730
+#: ../../../views/search/js/single_js.php:1769
 #: ../../../views/social_network/js/insert_js.php:44
 msgid "Necessary to inform Youtube channel identifier"
 msgstr "Necessário informar o identificador do canal do Youtube"
 
-#: ../../../views/search/js/single_js.php:1149
-#: ../../../views/search/js/single_js.php:1819
+#: ../../../views/search/js/single_js.php:1146
+#: ../../../views/search/js/single_js.php:1816
 msgid "Invalid Flickr identifier or no items to be imported"
 msgstr "Identificador do Flickr inválido ou nenhum item a ser importado "
 
-#: ../../../views/search/js/single_js.php:1157
-#: ../../../views/search/js/single_js.php:1828
+#: ../../../views/search/js/single_js.php:1154
+#: ../../../views/search/js/single_js.php:1825
 msgid "Necessary to inform Flickr identifier"
 msgstr "Necessário informar o identificador do canal do Flickr "
 
-#: ../../../views/search/js/single_js.php:1176
+#: ../../../views/search/js/single_js.php:1173
 msgid "Necessary to inform Instagram identifier"
 msgstr "Necessário informar o identificador do canal do identifier"
 
-#: ../../../views/search/js/single_js.php:1205
-#: ../../../views/search/js/single_js.php:1858
+#: ../../../views/search/js/single_js.php:1202
+#: ../../../views/search/js/single_js.php:1855
 msgid "Invalid Vimeo identifier or no items to be imported"
 msgstr "Identificador Vimeo inválido ou nenhum item a ser i"
 
-#: ../../../views/search/js/single_js.php:1213
-#: ../../../views/search/js/single_js.php:1867
+#: ../../../views/search/js/single_js.php:1210
+#: ../../../views/search/js/single_js.php:1864
 msgid "Necessary to inform Vimeo identifier"
 msgstr "Necessário Informar o identificador do Vimeo"
 
-#: ../../../views/search/js/single_js.php:1317
+#: ../../../views/search/js/single_js.php:1314
 msgid "Alert"
 msgstr "Alerta "
 
-#: ../../../views/search/js/single_js.php:1317
+#: ../../../views/search/js/single_js.php:1314
 msgid "Please, insert a valid URL"
 msgstr "Por favor, digite uma URL válida"
 
-#: ../../../views/search/js/single_js.php:1330
+#: ../../../views/search/js/single_js.php:1327
 msgid "Necessary to inform something"
 msgstr "Necessário informar algo "
 
-#: ../../../views/search/js/single_js.php:1791
+#: ../../../views/search/js/single_js.php:1788
 msgid "Necessary to inform Instagram URL with user identifier"
 msgstr "Necessário informar a URL do Instagram com identificador do usuário"
 
@@ -7112,16 +7266,16 @@ msgstr "Descrição da Ontologia"
 
 #: ../../../views/theme_options/edit_configuration.php:76
 msgid "Collection templates"
-msgstr "Modelos de ontologia"
+msgstr "Modelos de coleção"
 
 #: ../../../views/theme_options/edit_configuration.php:79
 #: ../../../views/theme_options/edit_tools.php:20
 msgid "Type the collection name"
-msgstr "Digite o nome da ontologia"
+msgstr "Digite o nome da coleção"
 
 #: ../../../views/theme_options/edit_configuration.php:88
 msgid "Disable Empty Collection"
-msgstr "Desativar ontologia em branco"
+msgstr "Desativar coleção em branco"
 
 #: ../../../views/theme_options/edit_email.php:10
 msgid "Welcome Email Configuration"
@@ -7168,7 +7322,7 @@ msgstr "Número de níveis: "
 
 #: ../../../views/theme_options/edit_tools.php:36
 msgid "Total of Categories"
-msgstr "Total de Classes "
+msgstr "Total de Categorias "
 
 #: ../../../views/theme_options/edit_tools.php:40
 msgid "Items per category"
@@ -7192,7 +7346,7 @@ msgstr "Número de documentos inseridos"
 
 #: ../../../views/theme_options/edit_tools.php:78
 msgid "Number of categories"
-msgstr "Número de Classes "
+msgstr "Número de Categorias "
 
 #: ../../../views/theme_options/common/redirect_button.php:4
 msgid "Back to Home Page"
@@ -7200,7 +7354,7 @@ msgstr "Voltar para Home"
 
 #: ../../../views/theme_options/js/edit_configuration_js.php:40
 msgid "Add the collection"
-msgstr "Adicionar a ontologia"
+msgstr "Adicionar a coleção"
 
 #: ../../../views/theme_options/js/edit_configuration_js.php:40
 msgid "as a template"
@@ -7208,7 +7362,7 @@ msgstr "como um modelo "
 
 #: ../../../views/theme_options/js/edit_configuration_js.php:76
 msgid "Removing the template"
-msgstr "Removendo a ontologia modelo"
+msgstr "Removendo a coleção modelo"
 
 #: ../../../views/theme_options/js/edit_js.php:6
 #: ../../../views/theme_options/js/edit_js.php:26
@@ -7286,6 +7440,12 @@ msgstr "Data de registro"
 #: ../../../views/user/profile.php:61
 msgid "Change Password"
 msgstr "Alterar Senha"
+
+#~ msgid "Add Item"
+#~ msgstr "Adicionar Argumento"
+
+#~ msgid "Expand all"
+#~ msgstr "Expandir todos"
 
 #~ msgid "days"
 #~ msgstr "dias"

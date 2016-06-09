@@ -8,7 +8,6 @@
  */
 //############## #1 Funcoes a serem executadas no inicio do modulo ############# 
 $(window).load(function () {
-//silence is gold
 });
 //############################################################################## 
 

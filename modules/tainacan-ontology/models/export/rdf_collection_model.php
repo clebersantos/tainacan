@@ -69,8 +69,8 @@ class OntologyRDFCollectionModel extends OntologyRDFModel {
      */
      public function generate_rdf_properties_collection() {
          //$xml = '';
-         $data_xml = '<!-- Propriedades de dado da ontologia -->';
-         $objeto_xml = '<!-- Propriedades de objeto da ontologia -->';
+         $data_xml = '<!-- Ontology data properties -->';
+         $objeto_xml = '<!-- Ontology object properties -->';
         $filters = new FiltersModel;
         $facets_id = array_filter(array_unique((get_post_meta($this->collection->ID, 'socialdb_collection_facets'))?get_post_meta($this->collection->ID, 'socialdb_collection_facets'):[]));
         $properties = [];
@@ -310,7 +310,7 @@ class OntologyRDFCollectionModel extends OntologyRDFModel {
             $xml .= '</owl:Ontology>';
         endif;
         
-         $xml .= '<!-- Classes da ontologia -->';
+         $xml .= '<!-- Ontology Classes -->';
         //category_root
 //        $parent = get_term_by('id', $this->category_root->parent, 'socialdb_category_type');
 //         $xml .= '<owl:Class rdf:about="'. $this->category_root_url.'"  >';
@@ -338,7 +338,7 @@ class OntologyRDFCollectionModel extends OntologyRDFModel {
         $content .= $this->generate_rdf_properties_collection();
         $items = $this->get_collection_posts($this->collection->ID);
         if($items&&!empty($items)){
-            $content .= '<!-- Indivíduos da ontologia  -->';
+            $content .= '<!-- Individuals  -->';
             $this->setNamespace('');
             foreach ($items as $item) {
                 $this->setItemName($item->post_name);
@@ -352,7 +352,7 @@ class OntologyRDFCollectionModel extends OntologyRDFModel {
       * @return xml Com todas as taxonomias participantes desta colecao 
       */
      public function generate_rdf_taxonomies(){
-        //$xml = '<!-- TAXONOMIAS -->'; 
+        //$xml = '<!-- TAXONOMIES -->'; 
         $terms_id = [];
         $root_category = $this->get_category_root_of($this->collection->ID);
         //$all_properties_id = array_unique($this->get_parent_properties($root_category, [],$root_category));
@@ -393,7 +393,8 @@ class OntologyRDFCollectionModel extends OntologyRDFModel {
             $xml .= "<rdfs:label>{$term->name}</rdfs:label>";
             $xml .= $this->get_restrictions_rdf($term->term_id);
             $xml .= $this->others_restrictions_classes($term->term_id);
-            $xml .= '<rdfs:subClassOf rdf:resource="'.get_permalink($this->collection->ID).'?category='.$parent->slug.'" />';
+            if($parent->slug!=='socialdb_category')
+                $xml .= '<rdfs:subClassOf rdf:resource="'.get_permalink($this->collection->ID).'?category='.$parent->slug.'" />';
             $xml .= '</owl:Class>';
         }
         $children = $this->get_category_children($parent_id);

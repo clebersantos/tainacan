@@ -29,6 +29,10 @@
             $('#change_collection_images').val('');
         }
 
+        $('#add_watermark').click(function () {
+            $("#uploadWatermark").toggle(this.checked);
+        });
+
         //$('.combobox').combobox({bsVersion: '3'});
         var src = $('#src').val();
         // $('#my-wizard').wizard(); //wizard para navegacao
@@ -85,7 +89,7 @@
     function showModerationDays() {
         if ($('#socialdb_collection_moderation_type').val() == 'democratico') {
             $('#div_moderation_days').fadeIn();
-        }else{
+        } else {
             $('#div_moderation_days').fadeOut();
         }
     }

@@ -7,6 +7,7 @@ include_once (dirname(__FILE__) . '/../../../../../../../wp-load.php');
 include_once (dirname(__FILE__) . '/../../../../../../../wp-includes/wp-db.php');
 include_once(dirname(__FILE__) . '/../../../../models/general/general_model.php');
 include_once(dirname(__FILE__) . '/../../../../models/object/object_model.php');
+include_once(dirname(__FILE__) . '/../../../../models/collection/visualization_model.php');
 
 class FiltersModel extends Model {
     
@@ -24,7 +25,16 @@ class FiltersModel extends Model {
         $facets_id = array_filter(array_unique((get_post_meta($collection_id, 'socialdb_collection_facets'))?get_post_meta($collection_id, 'socialdb_collection_facets'):[]));
         $properties = [];
         $this->get_collection_properties($properties,0,$facets_id);
-         $properties = array_unique($properties);
+        $properties = array_unique($properties);
+        //busco as propriedades sem domain
+        $properties_with_no_domain = $this->list_properties_by_collection($collection_id);
+        if($properties_with_no_domain&&is_array($properties_with_no_domain)){
+            foreach ($properties_with_no_domain as $property_with_no_domain) {
+                if(!in_array($property_with_no_domain->term_id, $properties)){
+                    $properties[] = $property_with_no_domain->term_id;
+                }
+            }
+        }
         if($properties&&  is_array($properties)){
             foreach ($properties as $property) {
                  // busco o objeto da propriedade
@@ -35,22 +45,22 @@ class FiltersModel extends Model {
                  $children = $this->getChildren($propertyObject->term_id);
                  if (count($children) > 0) {
                     $dynatree[] = array(
-                            'title' => ucfirst(Words($propertyObject->name, 30)), 
+                            'title' => Words($propertyObject->name, 30), 
                             'key' => $propertyObject->term_id,  
                             'expand' => true, 
                             'hideCheckbox' => $hide_checkbox, 
-                            'children' => $this->childrenDynatreePropertiesFilter($propertyObject->term_id, 'color4'),
-                            'addClass' => 'color4');      
+                            'children' => $this->childrenDynatreePropertiesFilter($propertyObject->term_id, 'color_property4'),
+                            'addClass' => 'color_property4');      
                  }else{
                      $dynatree[] = array(
-                            'title' => ucfirst(Words($propertyObject->name, 30)), 
+                            'title' => Words($propertyObject->name, 30), 
                             'key' => $propertyObject->term_id,  
                             'hideCheckbox' => $hide_checkbox, 
-                            'addClass' => 'color4'); 
+                            'addClass' => 'color_property4'); 
                  }
             }
         }
-        
+       $this->sortDynatree($dynatree);
         return json_encode($dynatree);
     }
     
@@ -83,6 +93,14 @@ class FiltersModel extends Model {
         }
         return $dynatree;
     }
+    
+    public function initDynatreeIndividues($collection_id) {
+        $model = new VisualizationModel;
+        $property = ['id'=>0,'metas'=>['socialdb_property_object_category_id'=>  $this->get_category_root_of($collection_id)]];
+        $dynatree = $model->getPropertyRelDynatree($property, [], 'individue');
+        return json_encode( isset($dynatree['children'])?$dynatree['children']:[]);
+    }
+    
     /**
      * 
      * @global type $wpdb
@@ -107,4 +125,12 @@ class FiltersModel extends Model {
             return false;
         }                
     }
+    
+    
+    
+    
+}
+
+function sortByOrder($a, $b) {
+    return $a['title'] - $b['title'];
 }

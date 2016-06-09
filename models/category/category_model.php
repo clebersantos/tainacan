@@ -282,9 +282,9 @@ class CategoryModel extends Model {
         if (!isset($data['hide_checkbox']) || $data['hide_checkbox'] == 'false') {
             $hide_checkbox = false;
         }
-        $dynatree = $this->generate_user_categories_dynatree($data, $dynatree, $hide_checkbox);
-        $dynatree = $this->generate_shared_categories_dynatree($data, $dynatree, $hide_checkbox);
-        $dynatree = $this->generate_public_categories_dynatree($data, $dynatree, $hide_checkbox);
+        $dynatree = $this->generate_user_categories_dynatree($data, $dynatree, $hide_checkbox, false);
+        $dynatree = $this->generate_shared_categories_dynatree($data, $dynatree, $hide_checkbox, false);
+        $dynatree = $this->generate_public_categories_dynatree($data, $dynatree, $hide_checkbox, false);
         return json_encode($dynatree);
     }
 

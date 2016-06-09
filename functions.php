@@ -259,7 +259,7 @@ if (!current_user_can('manage_options')) {
 /**
  * Função responsavel pelas respostas dos comentários 
  * * */
-function mytheme_comment($comment, $args, $depth) {
+function tainacan_comments($comment, $args, $depth) {
     global $global_collection_id;
     global $global_term_id;
     $object = get_post(get_the_ID());
@@ -281,65 +281,108 @@ function mytheme_comment($comment, $args, $depth) {
     }
     ?>
     <<?php echo $tag ?> <?php comment_class(empty($args['has_children']) ? '' : 'parent' ) ?> id="comment-<?php comment_ID() ?>">
-    <?php if ('div' != $args['style']) : ?>
-        <div id="div-comment-<?php comment_ID() ?>" class="comment-body">
-        <?php endif; ?>
-        <div class="comment-author vcard">
-            <?php if ($args['avatar_size'] != 0) echo get_avatar($comment, $args['avatar_size']); ?>
-            <?php printf(__('<cite class="fn">%s</cite> <span class="says">says:</span>', 'tainacan'), get_comment_author_link()); ?>
-        </div>
-        <?php if ($comment->comment_approved == '0') : ?>
-            <em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.', 'tainacan'); ?></em>
-            <br />
-        <?php endif; ?>
 
-        <div class="comment-meta commentmetadata"><a href="#"><!-- < ?php echo htmlspecialchars(get_comment_link($comment->comment_ID)); ?> -->
-                <?php
-                /* translators: 1: date, 2: time */
-                printf(__('%1$s at %2$s'), get_comment_date(), get_comment_time());
-                ?></a><?php edit_comment_link(__('(Painel Edit )', 'tainacan'), '  ', '');
-                ?>
-        </div>
-        <div id="comment_text_<?php comment_ID(); ?>">
-            <?php comment_text(); ?>
-        </div>    
-        <div style="display:none"  id="comment_edit_field_<?php comment_ID(); ?>">
-            <form class="form-inline">
-                <div class="form-group">
-                    <textarea id="edit_field_value_<?php comment_ID(); ?>" class="form-control" id="exampleInputEmail3">
-                    </textarea>    
-                </div>
-                <button type="button" onclick="cancelEditComment('<?php comment_ID(); ?>')"  class="btn btn-default"><?php _e('Cancel', 'tainacan') ?></button>
-                <button type="button" onclick="submitEditComment('<?php comment_ID(); ?>')"  class="btn btn-default"><?php _e('Save', 'tainacan') ?></button>
-            </form>
-        </div>
 
-        <div class="reply" id="reply_<?php comment_ID(); ?>">
-            <a href="#div-comment-<?php comment_ID(); ?>" onclick="showModalReply('<?php comment_ID(); ?>');"><b><?php _e("Reply", 'tainacan'); ?></b></a>&nbsp;&nbsp;
-            <?php if (!CollectionModel::is_moderator($global_collection_id, get_current_user_id()) && get_userdata(get_current_user_id())->display_name !== get_comment_author()): ?>
-                <?php if (verify_allowed_action($global_collection_id, 'socialdb_collection_permission_delete_comment')): ?>
-                    <a href="#div-comment-<?php comment_ID(); ?>" onclick="showModalReportAbuseComment('<?php comment_ID(); ?>');"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;<?php _e("Report Abuse", 'tainacan'); ?></a>
-                <?php endif; ?>
-            <?php else: ?>
-                <a href="#div-comment-<?php comment_ID(); ?>" onclick="showEditComment('<?php comment_ID(); ?>');"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<?php _e("Edit", 'tainacan'); ?></a>&nbsp;
-                <a href="#div-comment-<?php comment_ID(); ?>" onclick="showAlertDeleteComment('<?php comment_ID(); ?>', '<?php _e('Attention!') ?>', '<?php _e('Delete this comment?', 'tainacan') ?>', '<?php echo mktime(); ?>');"><span class="glyphicon glyphicon-remove"></span>&nbsp;<?php _e("Delete", 'tainacan'); ?></a>
-            <?php endif; ?>
-            <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=<?php echo get_the_permalink($global_collection_id) . '?item=' . $object->post_name; ?>&amp;p[images][0]=<?php echo wp_get_attachment_url(get_post_thumbnail_id($object->ID)); ?>&amp;p[title]=<?php _e("Comment", 'tainacan'); ?> - <?php echo htmlentities($object->post_title); ?>&amp;p[summary]=<?php comment_text(); ?>">
-                <img src="<?php echo get_template_directory_uri() ?>/libraries/images/icon_facebook.png" style="max-width: 32px;" />
-            </a>
-            <!-- ******************** GOOGLE PLUS ******************** -->
-            <a target="_blank" href="https://plus.google.com/share?url=<?php echo get_the_permalink($global_collection_id) . '?item=' . $object->post_name; ?>"><img src="<?php echo get_template_directory_uri() ?>/libraries/images/icon_googleplus.png" style="max-width: 32px;" /></a>
-            <!-- ******************** TWITTER ******************** -->
-            <a target="_blank" href="https://twitter.com/intent/tweet?url=<?php echo get_the_permalink($global_collection_id) . '?item=' . $object->post_name; ?>&amp;text=<?php echo strip_tags(get_comment_text()); ?>&amp;via=socialdb"><img src="<?php echo get_template_directory_uri() ?>/libraries/images/icon_twitter.png" style="max-width: 32px;" /></a>
-            <!--?php comment_reply_link(array_merge($args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))); ?-->
-            <!-- ******************** MAIL ******************** 
-            <a href="mailto:email@email.com?subject=<?php _e("Comment", 'tainacan'); ?>&amp;body=<?php _e("Link:", 'tainacan'); ?>%20<?php echo get_the_permalink($global_collection_id) . '?item=' . $object->post_name; ?>"><img src="<?php echo get_template_directory_uri() ?>/libraries/images/icon_mail.png" style="max-width: 32px;" /></a>
-            -->
-        </div><br>
+    <div class="col-md-12 comment-box-container">
 
         <?php if ('div' != $args['style']) : ?>
+            <div id="div-comment-<?php comment_ID() ?>" class="comment-body">
+        <?php endif; ?>
+
+        <div class="col-md-1">
+            <?php if ($args['avatar_size'] != 0) echo get_avatar($comment, $args['avatar_size']); ?>
         </div>
-    <?php endif; ?>
+
+        <div class="col-md-11">
+            <div class="row">
+                <div class="comment-author vcard" style="font-weight: bolder">
+                    <?php printf(__('<span class="fn">%s</span>', 'tainacan'), get_comment_author_link()); ?>
+                </div>
+                <?php if ($comment->comment_approved == '0') : ?>
+                    <em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.', 'tainacan'); ?></em>
+                    <br />
+                <?php endif; ?>
+                <div class="comment-meta commentmetadata">
+                    <a href="javascript:void(0)"> <?php printf(__('%1$s at %2$s'), get_comment_date(), get_comment_time()); ?> </a>
+                    <?php edit_comment_link(__('(Painel Edit )', 'tainacan'), '  ', ''); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="comment_text_<?php comment_ID(); ?>">
+                    <?php comment_text(); ?>
+                </div>
+                <div style="display:none"  id="comment_edit_field_<?php comment_ID(); ?>">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <textarea id="edit_field_value_<?php comment_ID(); ?>" class="form-control" id="exampleInputEmail3">
+                            </textarea>
+                        </div>
+                        <button type="button" onclick="cancelEditComment('<?php comment_ID(); ?>')"  class="btn btn-default"><?php _e('Cancel', 'tainacan') ?></button>
+                        <button type="button" onclick="submitEditComment('<?php comment_ID(); ?>')"  class="btn btn-default"><?php _e('Save', 'tainacan') ?></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row reply" id="reply_<?php comment_ID(); ?>">
+
+                <div class="col-md-12 left">
+                    <div class="col-md-1 no-padding">
+                        <a href="#div-comment-<?php comment_ID(); ?>" onclick="showModalReply('<?php comment_ID(); ?>');"><b><?php _e("Reply", 'tainacan'); ?></b></a>&nbsp;&nbsp;
+                    </div>
+
+                    <?php if (!CollectionModel::is_moderator($global_collection_id, get_current_user_id()) && get_userdata(get_current_user_id())->display_name !== get_comment_author()): ?>
+                        <?php if (verify_allowed_action($global_collection_id, 'socialdb_collection_permission_delete_comment')): ?>
+                            <div class="col-md-1 no-padding">
+                                <a href="#div-comment-<?php comment_ID(); ?>" onclick="showModalReportAbuseComment('<?php comment_ID(); ?>');"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;<?php _e("Report Abuse", 'tainacan'); ?></a>
+                            </div>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <div class="col-md-1 no-padding">
+                            <a href="#div-comment-<?php comment_ID(); ?>" onclick="showEditComment('<?php comment_ID(); ?>');"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<?php _e("Edit", 'tainacan'); ?></a>&nbsp;
+                        </div>
+                        <div class="col-md-1 no-padding">
+                            <a href="#div-comment-<?php comment_ID(); ?>" onclick="showAlertDeleteComment('<?php comment_ID(); ?>', '<?php _e('Attention!') ?>', '<?php _e('Delete this comment?', 'tainacan') ?>', '<?php echo mktime(); ?>');"><span class="glyphicon glyphicon-remove"></span>&nbsp;<?php _e("Delete", 'tainacan'); ?></a>
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="col-md-2 no-padding">
+                        <a href="#" id="resources_collection_button" class="dropdown-toggle"  data-toggle="dropdown" role="button" aria-expanded="false" style="display:inline-block;">
+                            <div style="display: inline-block">
+                                <div style="font-size:1em; cursor:pointer;" data-icon="&#xe00b;"></div>
+                            </div>
+                            <span> <?php _e('Share', 'tainacan')?> </span>
+                        </a>
+                        <ul id="resources_collection_dropdown" class="dropdown-menu" role="menu">
+                            <li>
+                                <!-- ******************** FACEBOOK ******************** -->
+                                <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=<?php echo get_the_permalink($global_collection_id) . '?item=' . $object->post_name; ?>&amp;p[images][0]=<?php echo wp_get_attachment_url(get_post_thumbnail_id($object->ID)); ?>&amp;p[title]=<?php _e("Comment", 'tainacan'); ?> - <?php echo htmlentities($object->post_title); ?>&amp;p[summary]=<?php comment_text(); ?>">
+                                    <img src="<?php echo get_template_directory_uri() ?>/libraries/images/icon_facebook.png" style="max-width: 32px;" />
+                                </a>
+                            </li>
+                            <li>
+                                <!-- ******************** GOOGLE PLUS ******************** -->
+                                <a target="_blank" href="https://plus.google.com/share?url=<?php echo get_the_permalink($global_collection_id) . '?item=' . $object->post_name; ?>">
+                                    <img src="<?php echo get_template_directory_uri() ?>/libraries/images/icon_googleplus.png" style="max-width: 32px;" />
+                                </a>
+                            </li>
+                            <li>
+                                <!-- ******************** TWITTER ******************** -->
+                                <a target="_blank" href="https://twitter.com/intent/tweet?url=<?php echo get_the_permalink($global_collection_id) . '?item=' . $object->post_name; ?>&amp;text=<?php echo strip_tags(get_comment_text()); ?>&amp;via=socialdb">
+                                    <img src="<?php echo get_template_directory_uri() ?>/libraries/images/icon_twitter.png" style="max-width: 32px;" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>    
+
+        <?php if ('div' != $args['style']) : ?>
+            </div>
+        <?php endif; ?>
+    </div>
     <?php
 }
 
@@ -857,6 +900,7 @@ function create_collection_terms() {
     create_metas($collection_root_term['term_id'], 'socialdb_collection_metas', 'socialdb_collection_address', 'socialdb_collection_address');
     create_metas($collection_root_term['term_id'], 'socialdb_collection_metas', 'socialdb_collection_mapping_exportation_active', 'socialdb_collection_mapping_exportation_active');
     create_metas($collection_root_term['term_id'], 'socialdb_collection_metas', 'socialdb_collection_allow_hierarchy', 'socialdb_collection_allow_hierarchy');
+    create_metas($collection_root_term['term_id'], 'socialdb_collection_metas', 'socialdb_collection_download_control', 'socialdb_collection_download_control');
     create_metas($collection_root_term['term_id'], 'socialdb_collection_metas', 'socialdb_collection_parent', 'socialdb_collection_parent');
     create_metas($collection_root_term['term_id'], 'socialdb_collection_metas', 'socialdb_collection_license_pattern', 'socialdb_collection_license_pattern');
     create_metas($collection_root_term['term_id'], 'socialdb_collection_metas', 'socialdb_collection_license_enabled', 'socialdb_collection_license_enabled');
@@ -912,10 +956,10 @@ function create_tag_terms() {
 function create_property_terms() {
     $property_root_term = create_register('socialdb_property', 'socialdb_property_type');
     create_metas($property_root_term['term_id'], 'socialdb_property_metas', 'socialdb_property_required', 'socialdb_property_required');
-    create_metas($property_root_term['term_id'], 'socialdb_property_metas', 'socialdb_property_term_cardinality', 'socialdb_property_term_cardinality');
     create_metas($property_root_term['term_id'], 'socialdb_property_metas', 'socialdb_property_default_value', 'socialdb_property_default_value');
     create_metas($property_root_term['term_id'], 'socialdb_property_metas', 'socialdb_property_help', 'socialdb_property_help');
     create_metas($property_root_term['term_id'], 'socialdb_property_metas', 'socialdb_property_created_category', 'socialdb_property_created_category');
+    create_metas($property_root_term['term_id'], 'socialdb_property_metas', 'socialdb_property_collection_id', 'socialdb_property_collection_id');
     create_metas($property_root_term['term_id'], 'socialdb_property_metas', 'socialdb_property_used_by_categories', 'socialdb_property_used_by_categories');
     //action para adicao de metadados para a propriedade
     do_action('add_new_metas_property', $property_root_term);
@@ -923,6 +967,7 @@ function create_property_terms() {
     $property_data_term = create_register('socialdb_property_data', 'socialdb_property_type', array('parent' => $property_root_term['term_id']));
     create_metas($property_data_term['term_id'], 'socialdb_property_data_metas', 'socialdb_property_data_column_ordenation', 'socialdb_property_data_column_ordenation');
     create_metas($property_data_term['term_id'], 'socialdb_property_data_metas', 'socialdb_property_data_widget', 'socialdb_property_data_widget');
+    create_metas($property_data_term['term_id'], 'socialdb_property_data_metas', 'socialdb_property_data_cardinality', 'socialdb_property_data_cardinality');
     //action para adicao de metadados para a propriedade de dados
     do_action('add_new_metas_property_data', $property_data_term);
     /* Criando a propriedade recentes para ordenacao da colecao */
@@ -934,14 +979,16 @@ function create_property_terms() {
     create_metas($property_object_term['term_id'], 'socialdb_property_object_metas', 'socialdb_property_object_is_facet', 'socialdb_property_object_is_facet');
     create_metas($property_object_term['term_id'], 'socialdb_property_object_metas', 'socialdb_property_object_is_reverse', 'socialdb_property_object_is_reverse');
     create_metas($property_object_term['term_id'], 'socialdb_property_object_metas', 'socialdb_property_object_reverse', 'socialdb_property_object_reverse');
+    create_metas($property_object_term['term_id'], 'socialdb_property_object_metas', 'socialdb_property_object_cardinality', 'socialdb_property_object_cardinality');
     //action para adicao de metadados para a propriedade de objeto
     do_action('add_new_metas_property_object', $property_object_term);
 
 
     $property_term_term = create_register('socialdb_property_term', 'socialdb_property_type', array('parent' => $property_root_term['term_id']));
-    create_metas($property_term_term['term_id'], 'socialdb_property_object_metas', 'socialdb_property_term_root', 'socialdb_property_term_root');
-    create_metas($property_term_term['term_id'], 'socialdb_property_object_metas', 'socialdb_property_term_widget', 'socialdb_property_term_widget');
-
+    create_metas($property_term_term['term_id'], 'socialdb_property_term_metas', 'socialdb_property_term_root', 'socialdb_property_term_root');
+    create_metas($property_term_term['term_id'], 'socialdb_property_term_metas', 'socialdb_property_term_widget', 'socialdb_property_term_widget');
+    create_metas($property_root_term['term_id'], 'socialdb_property_term_metas', 'socialdb_property_term_cardinality', 'socialdb_property_term_cardinality');    
+    
     $property_ranking_term = create_register('socialdb_property_ranking', 'socialdb_property_type', array('parent' => $property_root_term['term_id']));
     create_metas($property_ranking_term['term_id'], 'socialdb_property_ranking_metas', 'socialdb_property_ranking_vote', 'socialdb_property_ranking_vote');
     /* sub-subfilhos */
@@ -1058,6 +1105,7 @@ function create_event_terms() {
     create_metas($event_delete_term['term_id'], 'socialdb_event_term_delete_metas', 'socialdb_event_term_id', 'socialdb_event_term_id');
     /*     * property data* */
     $event_property_data_term = create_register('socialdb_event_property_data', 'socialdb_event_type', array('parent' => $event_root_term['term_id']));
+    create_metas($event_property_data_term['term_id'], 'socialdb_event_property_data_metas', 'socialdb_event_property_used_by_categories', 'socialdb_event_property_used_by_categories');
     ####### action para adicao de metadados no eventos de propriedade de dados ######
     do_action('add_new_metas_event_property_data', $event_property_data_term, 'socialdb_event_property_data_metas');
     ############################################################################
@@ -1069,6 +1117,7 @@ function create_event_terms() {
     create_metas($event_create_property_data['term_id'], 'socialdb_event_property_data_create_metas', 'socialdb_event_property_data_create_required', 'socialdb_event_property_data_create_required');
     create_metas($event_create_property_data['term_id'], 'socialdb_event_property_data_create_metas', 'socialdb_property_default_value', 'socialdb_property_default_value');
     create_metas($event_create_property_data['term_id'], 'socialdb_event_property_data_create_metas', 'socialdb_event_property_data_create_help', 'socialdb_event_property_data_create_help');
+    create_metas($event_create_property_data['term_id'], 'socialdb_event_property_data_create_metas', 'socialdb_event_property_data_create_cardinality', 'socialdb_event_property_data_create_cardinality');
     create_metas($event_create_property_data['term_id'], 'socialdb_event_property_data_create_metas', 'socialdb_event_property_data_create_category_root_id', 'socialdb_event_property_data_create_category_root_id');
     $event_edit_property_data = create_register('socialdb_event_property_data_edit', 'socialdb_event_type', array('parent' => $event_property_data_term['term_id']));
     create_metas($event_edit_property_data['term_id'], 'socialdb_event_property_data_edit_metas', 'socialdb_event_property_data_edit_id', 'socialdb_event_property_data_edit_id');
@@ -1078,6 +1127,7 @@ function create_event_terms() {
     create_metas($event_edit_property_data['term_id'], 'socialdb_event_property_data_edit_metas', 'socialdb_event_property_data_edit_required', 'socialdb_event_property_data_edit_required');
     create_metas($event_edit_property_data['term_id'], 'socialdb_event_property_data_edit_metas', 'socialdb_property_default_value', 'socialdb_property_default_value');
     create_metas($event_edit_property_data['term_id'], 'socialdb_event_property_data_edit_metas', 'socialdb_event_property_data_edit_help', 'socialdb_event_property_data_edit_help');
+    create_metas($event_edit_property_data['term_id'], 'socialdb_event_property_data_edit_metas', 'socialdb_event_property_data_edit_cardinality', 'socialdb_event_property_data_edit_cardinality');
     $event_delete_property_data = create_register('socialdb_event_property_data_delete', 'socialdb_event_type', array('parent' => $event_property_data_term['term_id']));
     create_metas($event_delete_property_data['term_id'], 'socialdb_event_property_data_delete_metas', 'socialdb_event_property_data_delete_id', 'socialdb_event_property_data_delete_id');
     create_metas($event_delete_property_data['term_id'], 'socialdb_event_property_data_delete_metas', 'socialdb_event_property_data_delete_category_root_id', 'socialdb_event_property_data_delete_category_root_id');
@@ -1087,6 +1137,7 @@ function create_event_terms() {
     create_metas($event_edit_property_data_value['term_id'], 'socialdb_event_property_data_edit_value_metas', 'socialdb_event_property_data_edit_value_attribute_value', 'socialdb_event_property_data_edit_value_attribute_value');
     /*     * property object* */
     $event_property_object_term = create_register('socialdb_event_property_object', 'socialdb_event_type', array('parent' => $event_root_term['term_id']));
+     create_metas($event_property_object_term['term_id'], 'socialdb_event_property_object_metas', 'socialdb_event_property_used_by_categories', 'socialdb_event_property_used_by_categories');
     ####### action para adicao de metadados no eventos de propriedade de object ######
     do_action('add_new_metas_event_property_object', $event_property_object_term, 'socialdb_event_property_object_metas');
     ############################################################################
@@ -1099,6 +1150,7 @@ function create_event_terms() {
     create_metas($event_create_property_object['term_id'], 'socialdb_event_property_object_create_metas', 'socialdb_event_property_object_create_reverse', 'socialdb_event_property_object_create_reverse');
     create_metas($event_create_property_object['term_id'], 'socialdb_event_property_object_create_metas', 'socialdb_event_property_object_create_required', 'socialdb_event_property_object_create_required');
     create_metas($event_create_property_object['term_id'], 'socialdb_event_property_object_create_metas', 'socialdb_event_property_object_create_category_root_id', 'socialdb_event_property_object_create_category_root_id');
+    create_metas($event_create_property_object['term_id'], 'socialdb_event_property_object_create_metas', 'socialdb_event_property_object_create_cardinality', 'socialdb_event_property_object_create_cardinality');
     $event_edit_property_object = create_register('socialdb_event_property_object_edit', 'socialdb_event_type', array('parent' => $event_property_object_term['term_id']));
     create_metas($event_edit_property_object['term_id'], 'socialdb_event_property_object_edit_metas', 'socialdb_event_property_object_edit_id', 'socialdb_event_property_object_edit_id');
     create_metas($event_edit_property_object['term_id'], 'socialdb_event_property_object_edit_metas', 'socialdb_event_property_object_edit_name', 'socialdb_event_property_object_edit_name');
@@ -1107,6 +1159,7 @@ function create_event_terms() {
     create_metas($event_edit_property_object['term_id'], 'socialdb_event_property_object_edit_metas', 'socialdb_event_property_object_edit_is_reverse', 'socialdb_event_property_object_edit_is_reverse');
     create_metas($event_edit_property_object['term_id'], 'socialdb_event_property_object_edit_metas', 'socialdb_event_property_object_edit_reverse', 'socialdb_event_property_object_edit_reverse');
     create_metas($event_edit_property_object['term_id'], 'socialdb_event_property_object_edit_metas', 'socialdb_event_property_object_edit_required', 'socialdb_event_property_object_edit_required');
+    create_metas($event_edit_property_object['term_id'], 'socialdb_event_property_object_edit_metas', 'socialdb_event_property_object_edit_cardinality', 'socialdb_event_property_object_edit_cardinality');
     $event_delete_property_object = create_register('socialdb_event_property_object_delete', 'socialdb_event_type', array('parent' => $event_property_object_term['term_id']));
     create_metas($event_delete_property_object['term_id'], 'socialdb_event_property_object_delete_metas', 'socialdb_event_property_object_delete_id', 'socialdb_event_property_object_delete_id');
     create_metas($event_delete_property_object['term_id'], 'socialdb_event_property_object_delete_metas', 'socialdb_event_property_object_delete_category_root_id', 'socialdb_event_property_object_delete_category_root_id');
@@ -1116,6 +1169,7 @@ function create_event_terms() {
     create_metas($event_edit_property_object_value['term_id'], 'socialdb_event_property_object_edit_value_metas', 'socialdb_event_property_object_edit_value_suggested_value', 'socialdb_event_property_object_edit_value_suggested_value');
     /* Property Term* */
     $event_property_term_term = create_register('socialdb_event_property_term', 'socialdb_event_type', array('parent' => $event_root_term['term_id']));
+     create_metas($event_property_term_term['term_id'], 'socialdb_event_property_term_metas', 'socialdb_event_property_used_by_categories', 'socialdb_event_property_used_by_categories');
     $event_create_property_term = create_register('socialdb_event_property_term_create', 'socialdb_event_type', array('parent' => $event_property_term_term['term_id']));
     create_metas($event_create_property_term['term_id'], 'socialdb_event_property_term_create_metas', 'socialdb_event_property_term_create_id', 'socialdb_event_property_term_create_id');
     create_metas($event_create_property_term['term_id'], 'socialdb_event_property_term_create_metas', 'socialdb_event_property_term_create_name', 'socialdb_event_property_term_create_name');
@@ -1303,14 +1357,17 @@ if (!function_exists("theme_js")) {
         wp_register_script("slick", get_template_directory_uri() . '/libraries/js/slick/slick.min.js', array('jquery'));
         /* Time Picker */
         wp_register_script("timepicker", get_template_directory_uri() .'/libraries/js/timepicker/timepicker.js', array('jquery'));
-
         /* Croppic */
         wp_register_script("croppic", get_template_directory_uri() . '/libraries/js/croppic/croppic.js', array('jquery'));
+        /* jsPDF */
+        wp_register_script("jsPDF", get_template_directory_uri() . '/libraries/js/jspdf/jspdf.min.js', array('jquery'));
+        /* jsPDF Auto Table */
+        wp_register_script("jsPDF_auto_table", get_template_directory_uri() . '/libraries/js/jspdf/jspdf.plugin.autotable.js', array('jquery'));
 
         $js_files = ['jqueryUi', 'bootstrap.min', 'JitJs', 'JitExcanvasJs', 'my-script', 'DynatreeJs', 'ckeditorjs',
             'contextMenu', 'ColorPicker', 'SweetAlert', 'SweetAlertJS', 'jquerydataTablesmin', 'data_table', 'raty',
             'jqpagination', 'dropzone', 'croppic', 'bootstrap-combobox', 'FacebookJS', 'row-sorter', 'maskedInput',
-            'montage', 'prettyphoto', 'select2', 'slick','timepicker', 'jqcloud', 'toastrjs'
+            'montage', 'prettyphoto', 'select2', 'slick','timepicker', 'jqcloud', 'toastrjs', 'jsPDF', 'jsPDF_auto_table'
         ];
 
         // $home_js = ['jqueryUi','bootstrap.min', 'my-script', 'FacebookJS', 'maskedInput', 'prettyphoto', 'slick'];
@@ -1565,6 +1622,9 @@ function create_root_collection_category($collection_id, $category_name) {
     // }
     //}
     create_initial_property($category_root->term_id, $collection_id);
+    if(has_action('insert_default_properties_collection')){
+        do_action('insert_default_properties_collection', $category_root->term_id,$collection_id);
+    }
 }
 
 /**
@@ -1888,12 +1948,12 @@ function socialdb_insert_object($post_title, $post_date = null) {
  * @param string $taxonomy A taxonomia dos termos que serao vinculados.
  * @return void.
  */
-function socialdb_insert_object_socialnetwork($post_title, $post_status = 'publish') {
+function socialdb_insert_object_socialnetwork($post_title, $post_status = 'publish',$post_content = '') {
     $post_author = get_current_user_id();
     $post = array(
         'post_author' => $post_author,
         'post_title' => $post_title[0],
-        'post_content' => "",
+        'post_content' => $post_content,
         'post_status' => $post_status,
         'post_type' => 'socialdb_object'
     );
@@ -1933,8 +1993,18 @@ function socialdb_insert_object_csv($post_title) {
 function get_item_thumbnail_default($object_id) {
     $type = get_post_meta($object_id, 'socialdb_object_dc_type', true);
     $icon = ( in_array($type, ['audio', 'video', 'pdf', 'text']) ) ? $type : "image";
-
-    return get_template_directory_uri() . "/libraries/images/${icon}.png";
+    if(get_post($object_id)->post_type=='socialdb_collection'){
+            if(has_filter('alter_thumbnail_collections')){
+                 return apply_filters( 'alter_thumbnail_collections', $icon) ;
+            }else{
+               return get_template_directory_uri() . "/libraries/images/${icon}.png"; 
+            } 
+    }else if(has_filter('alter_thumbnail_items')){
+        return apply_filters( 'alter_thumbnail_items', $icon) ;
+    }else{
+       return get_template_directory_uri() . "/libraries/images/${icon}.png"; 
+    }    
+    
 }
 
 /**
@@ -2296,7 +2366,7 @@ function format_item_text_source($source) {
         return '--';
     else:
         if (filter_var($source, FILTER_VALIDATE_URL) != false) {
-            return '<a class="btn btn-primary" href="' . $source . '" target="_blank">' . __('Visit original page', 'tainacan') . '</a>';
+            return '<a class="btn btn-default" href="' . $source . '" target="_blank">' . __('Visit original page', 'tainacan') . '</a>';
         } else {
             return $source;
         }
@@ -2350,9 +2420,9 @@ function get_item_click_event($collection_id, $item_id) {
     }
 }
 
-function get_item_thumb_image($item_id) {
-    if (get_the_post_thumbnail($item_id, 'thumbnail')) {
-        return wp_get_attachment_image(get_post_thumbnail_id($item_id), 'thumbnail', false, array('class' => 'img-responsive'));
+function get_item_thumb_image($item_id, $size="thumbnail") {
+    if (get_the_post_thumbnail($item_id, $size)) {
+        return wp_get_attachment_image(get_post_thumbnail_id($item_id), $size, false, array('class' => 'img-responsive'));
     } else {
         return '<img src="' . get_item_thumbnail_default($item_id) . '" class="img-responsive">';
     }
@@ -2439,6 +2509,13 @@ function instantiate_modules() {
         load_theme_textdomain("tainacan", dirname(__FILE__) . "/languages");
     }
 }
+
+require_once('wp_bootstrap_navwalker.php');
+function register_ibram_menu() {
+    register_nav_menu('menu-ibram', __('Enable reduced menu', 'tainacan') );
+}
+
+add_action('init', 'register_ibram_menu');
 
 ################# INSTANCIA OS MODULOS SE ESTIVEREM ATIVADOS#################
 instantiate_modules();

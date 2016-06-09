@@ -124,6 +124,24 @@
   }
 }
 
-@media all and (max-width: 1200px) {
+@media all and (max-width: 1177px) {
+  #list-viewMode {
+    .list-view-container {
+      height: auto !important;
+    }
+  }
+}
 
+// responsivo da home da coleção
+@media all and (max-width: 1009px) {
+  #div_left {
+    .expand-all {
+      margin-bottom: 2% !important;
+    }
+  }
+
+  #container_three_columns #div_central #menu_object .search-top-container .box-left {
+    width: auto !important;
+    margin-bottom: 10px;
+  }
 }

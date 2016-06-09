@@ -1,8 +1,7 @@
 <?php
-
-include_once ('../../../../../wp-config.php');
-include_once ('../../../../../wp-load.php');
-include_once ('../../../../../wp-includes/wp-db.php');
+include_once (dirname(__FILE__) . '/../../../../../wp-config.php');
+include_once (dirname(__FILE__) . '/../../../../../wp-load.php');
+include_once (dirname(__FILE__) . '/../../../../../wp-includes/wp-db.php');
 require_once(dirname(__FILE__) . '../../general/general_model.php');
 require_once(dirname(__FILE__) . '../../property/property_model.php');
 require_once(dirname(__FILE__) . '../../license/license_model.php');
@@ -352,7 +351,7 @@ class VisualizationModel extends CollectionModel {
                 //$dynatree['children'][] = array('title' => $child->post_title.' ('.$this->count_metadata_by_value('socialdb_property_'.$properties['id'], $child->ID).')', 'key' => $child->ID . "_" . $properties['id'], 'addClass' => $classCss);
                 $dynatree['children'][] = array('title' => $child->post_title . '', 'key' => $child->ID . "_" . $properties['id'], 'addClass' => $classCss);
                 $counter++;
-                if ($counter > 9) {
+                if ($counter > 29) {
                     $dynatree['children'][] = array('title' => __('See more', 'tainacan'), 'hideCheckbox' => true, 'key' => $properties['metas']['socialdb_property_object_category_id'] . '_moreoptionsproperty' . $properties['id'], 'isLazy' => true, 'addClass' => 'more');
                     break;
                 }
@@ -439,22 +438,25 @@ class VisualizationModel extends CollectionModel {
     /* Author: Eduardo */
 
     public function getTypeDynatree($collection_id, $dynatree, $classCss) {
-        $dynatree['children'][] = array('title' => __('Text', 'tainacan') . ' (' . $this->count_metadata_defaults_by_value('socialdb_object_dc_type', 'text', $this->get_collection_category_root($collection_id)) . ')',
+//         $dynatree['children'][] = array('title' => __('Text', 'tainacan') . ' (' . $this->count_metadata_defaults_by_value('socialdb_object_dc_type', 'text', $this->get_collection_category_root($collection_id)) . ')',
+//            'key' => "text_type",
+//            'addClass' => $classCss);
+        $dynatree['children'][] = array('title' => __('Text', 'tainacan'),
             'key' => "text_type",
             'addClass' => $classCss);
-        $dynatree['children'][] = array('title' => __('Image', 'tainacan') . ' (' . $this->count_metadata_defaults_by_value('socialdb_object_dc_type', 'image', $this->get_collection_category_root($collection_id)) . ')',
+        $dynatree['children'][] = array('title' => __('Image', 'tainacan') ,
             'key' => "image_type",
             'addClass' => $classCss);
-        $dynatree['children'][] = array('title' => __('Video', 'tainacan') . ' (' . $this->count_metadata_defaults_by_value('socialdb_object_dc_type', 'video', $this->get_collection_category_root($collection_id)) . ')',
+        $dynatree['children'][] = array('title' => __('Video', 'tainacan') ,
             'key' => "video_type",
             'addClass' => $classCss);
-        $dynatree['children'][] = array('title' => __('PDF', 'tainacan') . ' (' . $this->count_metadata_defaults_by_value('socialdb_object_dc_type', 'pdf', $this->get_collection_category_root($collection_id)) . ')',
+        $dynatree['children'][] = array('title' => __('PDF', 'tainacan') ,
             'key' => "pdf_type",
             'addClass' => $classCss);
-        $dynatree['children'][] = array('title' => __('Audio', 'tainacan') . ' (' . $this->count_metadata_defaults_by_value('socialdb_object_dc_type', 'audio', $this->get_collection_category_root($collection_id)) . ')',
+        $dynatree['children'][] = array('title' => __('Audio', 'tainacan'),
             'key' => "audio_type",
             'addClass' => $classCss);
-        $dynatree['children'][] = array('title' => __('Other', 'tainacan') . ' (' . $this->count_metadata_defaults_by_value('socialdb_object_dc_type', 'other', $this->get_collection_category_root($collection_id)) . ')',
+        $dynatree['children'][] = array('title' => __('Other', 'tainacan'),
             'key' => "other_type",
             'addClass' => $classCss);
 
@@ -467,10 +469,18 @@ class VisualizationModel extends CollectionModel {
     /* Author: Eduardo */
 
     public function getFormatDynatree($collection_id, $dynatree, $classCss) {
-        $dynatree['children'][] = array('title' => __('Internal', 'tainacan') . ' (' . $this->count_metadata_defaults_by_value('socialdb_object_from', 'internal', $this->get_collection_category_root($collection_id)) . ')',
+//        $dynatree['children'][] = 
+//           array('title' => __('Internal', 'tainacan') . ' (' . $this->count_metadata_defaults_by_value('socialdb_object_from', 'internal', $this->get_collection_category_root($collection_id)) . ')',
+//            'key' => "internal_format",
+//            'addClass' => $classCss);
+//        $dynatree['children'][] = array('title' => __('External', 'tainacan') . ' (' . $this->count_metadata_defaults_by_value('socialdb_object_from', 'external', $this->get_collection_category_root($collection_id)) . ')',
+//            'key' => "external_format",
+//            'addClass' => $classCss);
+        $dynatree['children'][] = 
+           array('title' => __('Internal', 'tainacan'),
             'key' => "internal_format",
             'addClass' => $classCss);
-        $dynatree['children'][] = array('title' => __('External', 'tainacan') . ' (' . $this->count_metadata_defaults_by_value('socialdb_object_from', 'external', $this->get_collection_category_root($collection_id)) . ')',
+        $dynatree['children'][] = array('title' => __('External', 'tainacan'),
             'key' => "external_format",
             'addClass' => $classCss);
         return $dynatree;
@@ -486,7 +496,7 @@ class VisualizationModel extends CollectionModel {
         $counter = 0;
         if (count($metas) > 0) {
             foreach ($metas as $post_id => $meta_value) {
-                $dynatree['children'][] = array('title' => $meta_value . ' (' . $this->count_metadata_defaults_by_value('socialdb_object_dc_source', $meta_value, $this->get_collection_category_root($collection_id)) . ')',
+                $dynatree['children'][] = array('title' => $meta_value ,
                     'key' => $post_id . '_source',
                     'addClass' => $classCss);
                 $counter++;
@@ -799,8 +809,8 @@ class VisualizationModel extends CollectionModel {
         $class = get_post_meta($collection_id, 'socialdb_collection_facet_' . $array[1] . '_color', true);
         if (count($objects) > 0 && count($objects) < 50) {
             foreach ($objects as $object) {
-                if ($counter > 9) {
-                    $dynatree[] = array('title' => $object->post_title, 'key' => $object->ID . "_" . $array[1], 'addClass' => $class);
+                if ($counter > 19) {
+                    $dynatree[] = array('title' => $object->post_title, 'key' => $object->ID . "_" . $array[1], 'addClass' => ($class)?($class):'default');
                 }
                 $counter++;
             }
@@ -907,7 +917,7 @@ class VisualizationModel extends CollectionModel {
         $class = get_post_meta($array[0], 'socialdb_collection_facet_' . $data['property_id'] . '_color', true);
         if (count($objects) > 0) {
             foreach ($objects as $object) {
-                $dynatree[] = array('title' => $object->post_title, 'key' => $object->ID . "_" . $data['property_id'], 'addClass' => $class);
+                $dynatree[] = array('title' => $object->post_title, 'key' => $object->ID . "_" . $data['property_id'], 'addClass' => ($class)?$class:'default');
             }
         }
         return $dynatree;
